@@ -728,7 +728,7 @@ input[type=radio]:disabled{opacity:.5;cursor:not-allowed}
 .gs-text small{font-size:10px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .gs-empty{padding:12px 8px;font-size:12px;color:var(--text-muted);text-align:center}
 .search.has-text > span:last-child{display:none}
-.search-clear:hover{background:var(--surface-alt);color:var(--text-strong)}
+.search-clear:hover{background:none;color:var(--text-primary)}
 .search-clear:focus-visible{box-shadow:0 0 0 2px var(--primary)}
 .search svg{margin-inline-end:8px;color:var(--text-faint)}
 .search:focus-within,.toolbar .search.big:focus-within{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-softer)}
@@ -991,6 +991,10 @@ td.cell-icon,th.cell-icon{padding:8px;text-overflow:clip}
 .modal{width:min(440px,100%);max-height:calc(100% - 32px);overflow:auto;background:var(--surface);border-radius:8px;box-shadow:var(--shadow-pop);padding:20px}
 .modal h2{margin:0;font-size:14px;line-height:20px;font-weight:600;color:var(--text-strong)}
 .modal p.msg{margin:10px 0 0;font-size:12px;line-height:20px;color:var(--text)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.modal-x{flex:none;display:grid;place-items:center;width:24px;height:24px;margin:-2px 0;border-radius:4px;color:var(--text-muted)}
+.modal-x:hover{color:var(--text-primary)}
+.modal-x:focus-visible{box-shadow:var(--focus)}
 .modal-actions{display:flex;gap:8px;justify-content:flex-start;margin-top:20px}
 .modal-actions .btn{min-width:96px}
 .form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
@@ -1734,12 +1738,13 @@ $('#tableWrap').addEventListener('scroll',e=>{closePop();e.target.classList.togg
 
 /* ---------- modal ---------- */
 let modalClose=null;
-function openModal({title,body='',actions=[],onOpen}){
+function openModal({title,body='',actions=[],onOpen,closeBtn=false}){
   const prev=document.activeElement;
   const ov=document.createElement('div');ov.className='overlay';
-  ov.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle"><h2 id="mTitle">${title}</h2>${body}<div class="modal-actions"></div></div>`;
+  ov.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">${closeBtn?`<div class="modal-head"><h2 id="mTitle">${title}</h2><button type="button" class="modal-x" aria-label="بستن" title="بستن">${icon('x',16)}</button></div>`:`<h2 id="mTitle">${title}</h2>`}${body}<div class="modal-actions"></div></div>`;
   const acts=ov.querySelector('.modal-actions');
   const close=()=>{ov.remove();document.removeEventListener('keydown',key);modalClose=null;prev&&prev.focus&&prev.focus()};
+  const xb=ov.querySelector('.modal-x');if(xb)xb.addEventListener('click',close);
   actions.forEach(a=>{const b=document.createElement('button');b.className='btn '+(a.kind||'btn-ghost');b.textContent=a.label;b.onclick=()=>{if(a.onClick&&a.onClick(ov)===false)return;close()};acts.appendChild(b)});
   const key=e=>{
     if(e.key==='Escape'){e.preventDefault();close()}
@@ -1763,6 +1768,7 @@ function employeeForm(e){
   e=e||{name:'',role:'طراح',roleFull:'',team:'تیم طراحی',seniority:'جونیور',contract:'رسمی',salary:200000000,insurance:true,mobile:'',start:'1405/08/09',contractEnd:'1406/08/09',nationalId:'',idNumber:'',issuedFrom:'تهران',residence:'تهران'};
   const opt=(arr,v)=>arr.map(x=>`<option ${x===v?'selected':''}>${x}</option>`).join('');
   openModal({
+    closeBtn:true,
     title:isNew?'افزودن کارمند':'ویرایش اطلاعات کارمند',
     body:`<form class="form" id="empForm" novalidate>
       <div class="field full"><label for="f-name">نام و نام خانوادگی</label><input id="f-name" name="name" value="${esc(e.name)}" required><span class="err"></span></div>
@@ -2154,7 +2160,7 @@ function scopeRows(scope){
 const rawVal=(e,k)=>k==='salary'?e.salary:['mobile','start','nationalId','idNumber','contractEnd'].includes(k)?e[k]:cellText(e,k);
 function scopeChooser(name){
   const list=visible();const pageN=Math.min(state.pageSize,Math.max(0,list.length-(state.page-1)*state.pageSize));const selN=state.checked.size;
-  const opt=(v,l,n,dis,chk)=>`<label class="xo-opt${dis?' dis':''}"><input type="radio" name="${name}" value="${v}" ${chk?'checked':''} ${dis?'disabled':''}><span class="xo-t">${l}</span><span class="xo-n">${fa(n)} ردیف</span></label>`;
+  const opt=(v,l,n,dis,chk)=>`<label class="xo-opt${dis?' dis':''}"><input type="radio" name="${name}" value="${v}" ${chk?'checked':''} ${dis?'disabled':''}><span class="xo-t">${l}</span><span class="xo-n">${fa(n)} کارمند</span></label>`;
   return `<div class="xo-group" role="radiogroup" aria-label="محدوده"><div class="xo-cap">محدوده</div>
     ${opt('page','صفحه فعلی',pageN,!pageN,!selN)}${opt('all','همه نتایج'+(filterCount()||state.query?' (با فیلتر فعلی)':''),list.length,!list.length,false)}${opt('selected','کارمندان انتخاب‌شده',selN,!selN,!!selN)}</div>`;
 }
@@ -2178,16 +2184,16 @@ function doPrint(rows){
   try{
     const fr=document.createElement('iframe');fr.setAttribute('aria-hidden','true');fr.style.cssText='position:fixed;width:0;height:0;border:0;left:-9999px';
     document.body.appendChild(fr);
-    fr.onload=()=>{setTimeout(()=>{try{fr.contentWindow.focus();fr.contentWindow.print()}catch(e){toast('چاپ مستقیم در این نما ممکن نیست؛ «دریافت نسخه چاپی» را بزنید')}setTimeout(()=>fr.remove(),60000)},400)};
+    fr.onload=()=>{setTimeout(()=>{try{fr.contentWindow.focus();fr.contentWindow.print()}catch(e){toast('چاپ مستقیم در این نما ممکن نیست؛ «دانلود نسخه چاپی» را بزنید')}setTimeout(()=>fr.remove(),60000)},400)};
     fr.srcdoc=html;
-  }catch(e){toast('چاپ مستقیم در این نما ممکن نیست؛ «دریافت نسخه چاپی» را بزنید')}
+  }catch(e){toast('چاپ مستقیم در این نما ممکن نیست؛ «دانلود نسخه چاپی» را بزنید')}
 }
 $('#printBtn').addEventListener('click',ev=>{
-  openPop(ev.currentTarget,`<div class="xo"><h4>چاپ جدول</h4>${scopeChooser('pscope')}
-    <div class="xo-acts"><button class="btn btn-primary" data-x="print">${icon('printer',14)}چاپ</button><button class="btn btn-ghost" data-x="html">دریافت نسخه چاپی</button></div>
-    <p class="xo-note">اگر پنجره چاپ باز نشد، نسخه چاپی را دریافت و در مرورگر چاپ کنید.</p></div>`,
+  openPop(ev.currentTarget,`<h4 class="th-head">چاپ جدول</h4><div class="xo">${scopeChooser('pscope')}
+    <div class="xo-acts"><button class="btn btn-primary" data-x="print">${icon('printer',14)}چاپ</button><button class="btn btn-ghost" data-x="html">دانلود نسخه چاپی</button></div>
+    <p class="xo-note">اگر پنجره چاپ باز نشد، نسخه چاپی را دانلود و در مرورگر چاپ کنید.</p></div>`,
     p=>p.addEventListener('click',async e=>{const b=e.target.closest('[data-x]');if(!b)return;
-      const sc=p.querySelector('input[name=pscope]:checked');if(!sc){toast('ردیفی برای چاپ وجود ندارد');return}
+      const sc=p.querySelector('input[name=pscope]:checked');if(!sc){toast('کارمندی برای چاپ وجود ندارد');return}
       const rows=scopeRows(sc.value);closePop(true);
       if(b.dataset.x==='print')doPrint(rows);
       else{const r=await saveFile('karmandan-print.html',printableHtml(rows),'text/html;charset=utf-8');if(r==='saved')toast('نسخه چاپی ذخیره شد')}
@@ -2202,12 +2208,12 @@ function loadXlsx(){
 }
 $('#exportBtn').addEventListener('click',ev=>{
   const fmt=(v,l,d,chk)=>`<label class="xo-opt"><input type="radio" name="xfmt" value="${v}" ${chk?'checked':''}><span class="xo-t">${l}</span><span class="xo-n" dir="ltr">${d}</span></label>`;
-  openPop(ev.currentTarget,`<div class="xo"><h4>خروجی گرفتن</h4>
+  openPop(ev.currentTarget,`<h4 class="th-head">خروجی گرفتن</h4><div class="xo">
     <div class="xo-group" role="radiogroup" aria-label="فرمت"><div class="xo-cap">فرمت فایل</div>${fmt('xlsx','اکسل','.xlsx',true)}${fmt('csv','CSV','.csv',false)}</div>
     ${scopeChooser('xscope')}
     <div class="xo-acts"><button class="btn btn-primary" data-x="export">${icon('export',14)}دریافت فایل</button></div></div>`,
     p=>p.addEventListener('click',async e=>{const b=e.target.closest('[data-x]');if(!b)return;
-      const sc=p.querySelector('input[name=xscope]:checked');if(!sc){toast('ردیفی برای خروجی وجود ندارد');return}
+      const sc=p.querySelector('input[name=xscope]:checked');if(!sc){toast('کارمندی برای خروجی وجود ندارد');return}
       const f=p.querySelector('input[name=xfmt]:checked').value;const rows=scopeRows(sc.value);closePop(true);
       if(f==='csv'){
         const q=s=>`"${String(s).replace(/"/g,'""')}"`;
@@ -2539,7 +2545,7 @@ const MOD_ROUTES={
   hr:{main:'list',dash:'dashboard',nav:'لیست'},
   tasks:{main:'tasks',dash:'tasks-dash',nav:'لیست'},
   invest:{main:'invest',dash:'invest-dash',nav:'صندوق'},
-  proc:{main:'proc',dash:'proc-dash',nav:'لیست'},
+  proc:{main:'proc',dash:'proc-dash',nav:'فرایندساز'},
   form:{main:'forms',dash:'forms-dash',nav:'فرم‌ساز'},
   acl:{main:'acl',dash:'acl-dash',nav:'مدیریت'}
 };
