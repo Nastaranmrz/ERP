@@ -137,6 +137,8 @@ svg.i{display:block;flex:none}
 .m-label{font-size:11px;color:var(--text-strong);margin:14px 0 6px;display:block}
 .m-input{width:100%;height:30px;border:1px solid var(--border);border-radius:4px;padding:0 8px;background:var(--surface);font-size:11px;color:var(--text-strong)}
 .m-input::placeholder{color:var(--placeholder)}
+.form select:has(option[value=""]:checked){color:var(--placeholder)}
+.form select option{color:var(--text-strong)}
 .m-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
 .m-field .dd{height:30px;font-size:11px}
 .dash-mod{padding:24px 16px;overflow:auto;background:var(--surface);flex:1}
@@ -647,7 +649,9 @@ body:not([data-mod="hr"]) .bulkbar{display:none}
   font-size:10px;line-height:14px;font-weight:600;color:var(--primary);white-space:nowrap}
 .af-add svg{color:var(--primary)}
 .af-add:hover{background:var(--primary-softer);border-color:var(--primary-light)}
-@media (max-width:860px){.fp.wide{width:calc(100vw - 16px)}.af-row{flex-wrap:wrap}.af-ctl{flex:1 1 140px}.fp-gen{flex-direction:column}.fp-cats{width:auto}.fp-div{display:none}}
+@media (max-width:860px){.fp.wide{width:calc(100vw - 16px)}.af-row{flex-wrap:wrap}
+/* phone: connector sits above its row instead of reserving a side column */
+@media (max-width:560px){.af-line{flex-direction:column;gap:6px}.af-line>.af-row{width:100%}.af-conn-sp{display:none}.af-conn{width:auto}.af-conn.static{width:24px;margin-inline-end:0}.af-adds,.af-group>.af-adds{padding-inline-start:0}.af-group{margin-inline-end:0;padding:12px;padding-top:36px}.af-gdel{left:6px;top:6px}}.af-ctl{flex:1 1 140px}.fp-gen{flex-direction:column}.fp-cats{width:auto}.fp-div{display:none}}
 .xo{width:260px;padding:4px}
 .xo h4{margin:4px 4px 10px}
 .xo-group{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
@@ -960,19 +964,28 @@ td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
 
 .chart-card{padding:12px 13px 10px}
 .chart-head{display:flex;align-items:center;gap:4px}
-.chart-total{margin-inline-start:auto;font-size:10px;line-height:16px;font-weight:400;color:var(--text-muted);background:var(--primary-softer);padding:0 6px;border-radius:4px;white-space:nowrap}
-.chart-total b{color:var(--primary-strong);font-weight:600}
+.chart-head .month-sel{margin-inline-start:auto;height:24px;padding:0 6px;border:1px solid var(--border-soft);border-radius:6px;color:var(--text-strong)}
+.chart-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 0}
+.chart-kpis>div{padding:8px 10px;border:1px solid var(--border-soft);border-radius:8px}
+.chart-kpis .ck-ic{grid-row:1/3;display:grid;place-items:center;width:32px;height:32px;border-radius:8px;color:var(--primary);background:var(--primary-softer)}
+.chart-kpis dt{font-size:10px;line-height:14px;color:var(--text-muted);font-weight:400;white-space:nowrap}
+.chart-kpis dd{margin:1px 0 0;font-size:10px;line-height:20px;font-weight:400;color:var(--text-muted)}
+.chart-kpis .ck-of{white-space:nowrap}
+.chart-kpis dd b{font-size:14px;font-weight:700;color:var(--text-strong);margin-inline-end:2px}
+.bar{position:relative}
+.over-mk{position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:0;height:0;border:4px solid transparent;border-top:0;border-bottom:5px solid var(--bar-ot)}
+.chart-legend i.lg-over{width:0;height:0;border-radius:0;border:4px solid transparent;border-top:0;border-bottom:5px solid var(--bar-ot)}
 .chart-head h3{white-space:nowrap;margin:0;font-size:11px;line-height:16px;font-weight:500;color:var(--text-strong)}
 .month-sel{border:0;background:transparent;font-size:10px;line-height:16px;color:var(--text-muted);font-weight:400;padding:0 2px;border-radius:3px;cursor:pointer}
 .month-sel:hover{color:var(--primary-strong)}
 .chart{position:relative;margin-top:14px;direction:ltr}
 .chart .axis-y-label,.chart .axis-x-label{position:absolute;font-size:9px;line-height:12px;color:var(--text-muted);font-weight:400}
-.chart .axis-y-label{top:122px;left:-6px;transform:translateY(-50%) rotate(-90deg);transform-origin:center}
+.chart .axis-y-label{top:78px;left:-6px;transform:translateY(-50%) rotate(-90deg);transform-origin:center}
 .chart .axis-x-label{bottom:0;left:0}
 .plot-wrap{display:flex;gap:4px;padding-top:8px;padding-left:12px}
-.yticks{position:relative;width:14px;height:220px;flex:none}
+.yticks{position:relative;width:14px;height:140px;flex:none}
 .yticks span{position:absolute;right:0;transform:translateY(50%);font-size:8px;line-height:10px;color:var(--text-muted);font-weight:400}
-.plot{position:relative;flex:1;height:220px;display:flex;align-items:flex-end;justify-content:space-between;outline:none;border-radius:2px;box-shadow:inset 0 -1px 0 var(--border)}
+.plot{position:relative;flex:1;height:140px;display:flex;align-items:flex-end;justify-content:space-between;outline:none;border-radius:2px;box-shadow:inset 0 -1px 0 var(--border)}
 .plot:focus-visible{box-shadow:var(--focus)}
 .bar-col{flex:1;height:100%;display:flex;align-items:flex-end;justify-content:center;cursor:crosshair}
 .gridl{position:absolute;left:0;right:0;height:0;border-top:1px solid var(--border-soft);pointer-events:none}
@@ -988,11 +1001,13 @@ td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
 .off{width:4px;height:4px;margin-bottom:1px;border-radius:50%;background:color-mix(in srgb,var(--text-faint) 70%,transparent)}
 .plot.hovering .bar-col:not(.on) .bar{opacity:.35}
 .bar-col.on .bar{width:5px}
-.chart-legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:8px;direction:rtl;font-size:10px;line-height:14px;color:var(--text-muted);font-weight:400}
-.chart-legend span{display:inline-flex;align-items:center;gap:5px}
+.chart-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 10px;margin-top:8px;padding-top:9px;border-top:1px solid var(--border-soft);direction:rtl;font-size:10px;line-height:14px;color:var(--text-muted);font-weight:400}
+.chart-legend span{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .chart-legend b{color:var(--text-strong);font-weight:600}
 .chart-legend i{width:8px;height:8px;border-radius:2px;flex:none}
 .lg-reg{background:var(--bar-reg)}.lg-ot{background:var(--bar-ot)}
+.bar-col.hol{background:color-mix(in srgb,var(--text-faint) 14%,transparent);border-radius:2px}
+.chart-legend i.lg-hol{background:color-mix(in srgb,var(--text-faint) 28%,transparent)}
 .chart-legend i.lg-off{width:5px;height:5px;border-radius:50%;background:color-mix(in srgb,var(--text-faint) 70%,transparent)}
 .tip .tip-ot{display:flex;align-items:center;justify-content:center;gap:4px;font-size:9px}
 .tip .tip-ot::before{content:"";width:6px;height:6px;border-radius:1px;background:var(--bar-ot)}
@@ -1067,7 +1082,7 @@ td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
 .emp-actions .btn-ghost{order:2}
 .photo-preview svg{color:var(--text-faint)}
 .modal-actions .btn{min-width:96px}
-.modal-actions:not(.emp-actions){display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:max-content;max-width:100%;margin-left:auto;margin-right:0}
+.modal-actions:not(.emp-actions){display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:max-content;max-width:100%;margin-left:0;margin-right:auto}
 .form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px}
 /* stepper: numbered nodes joined by a progress line */
 .wizard-progress{display:flex;align-items:center;width:100%;margin-top:14px;padding:14px 16px;border-radius:10px;background:var(--surface-sunken)}
@@ -1188,8 +1203,8 @@ td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
 .toast{position:fixed;z-index:70;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;
   background:var(--text-strong);color:var(--surface);padding:9px 14px;border-radius:6px;font-size:12px;box-shadow:var(--shadow-pop);transition:opacity .2s,transform .2s;max-width:calc(100% - 32px)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
-.toast{display:flex;align-items:center;gap:8px;padding:6px;padding-inline-end:14px;pointer-events:none}
-.toast:has(.t-undo:not([hidden])){min-width:340px;max-width:calc(100vw - 32px);gap:12px;padding:8px}
+.toast{display:flex;align-items:center;gap:8px;padding:6px;padding-inline-end:14px;pointer-events:none;width:280px;max-width:calc(100vw - 24px)}
+.toast:has(.t-undo:not([hidden])){width:360px;gap:12px;padding:8px}
 .toast .t-close{order:-1}
 .toast .t-undo{order:1}
 .toast.on{pointer-events:auto}
@@ -1283,11 +1298,16 @@ body.has-bulk .toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 }
 /* ---- tablet & phone: details panel becomes a bottom sheet ---- */
 .sheet-head{display:none}
+.card.profile{position:relative}
+.pf-close{position:absolute;top:8px;inset-inline-end:8px;display:grid;place-items:center;width:26px;height:26px;border-radius:6px;color:var(--text-muted)}
+.pf-close:hover{background:var(--surface-alt);color:var(--text-strong)}
+.pf-close:focus-visible{outline:none;box-shadow:var(--focus)}
 @media (max-width:860px){
   .side{position:fixed;inset:0;z-index:70;display:none;align-items:flex-end;justify-content:center;background:rgba(15,23,42,.42);overflow:hidden}
   body.sheet-open .side:not([hidden]){display:flex;animation:sheetFade .18s ease-out}
   body.sheet-open{overflow:hidden}
   .side-scroll{position:relative;width:100%;max-width:560px;height:auto;max-height:calc(100dvh - 40px);overflow-y:auto;padding:0 16px 20px;background:var(--app-bg);border-radius:16px 16px 0 0;box-shadow:0 -8px 30px rgba(15,23,42,.18);animation:sheetUp .22s cubic-bezier(.2,.8,.2,1)}
+  .pf-close{display:none}
   .sheet-head{display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:3;margin:0 -16px 4px;padding:16px 16px 10px;background:var(--app-bg);font-size:13px;color:var(--text-strong)}
   .side-card{max-width:none;margin:0}
   .side-scroll>.side-empty{display:none}
@@ -1312,7 +1332,7 @@ body.has-bulk .toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
   .main{grid-column:1/-1;grid-row:2}
   .header{grid-column:2}
   .table-box{max-height:none}
-  .toast{min-width:0!important;width:calc(100vw - 24px);max-width:420px}
+  .toast{max-width:calc(100vw - 24px)}
   .fp,.fp.wide{left:8px!important;right:8px;width:auto!important;max-width:none;top:56px!important;bottom:8px;max-height:none!important}
 }
 body.nd-open{overflow:hidden}
@@ -1853,7 +1873,10 @@ function renderPager(pages){
 }
 
 /* ---------- side panel ---------- */
-const MONTHS=[{n:'آبان ۱۴۰۵',d:30},{n:'مهر ۱۴۰۵',d:30},{n:'شهریور ۱۴۰۵',d:31},{n:'مرداد ۱۴۰۵',d:31}];
+const MONTHS=[{n:'آبان ۱۴۰۵',d:30,w:5},{n:'مهر ۱۴۰۵',d:30,w:3},{n:'شهریور ۱۴۰۵',d:31,w:0},{n:'مرداد ۱۴۰۵',d:31,w:4}];
+/* w = weekday of day 1 (0=Sun … 4=Thu, 5=Fri, 6=Sat); Thursday and Friday are holidays */
+const isHol=(m,i)=>{const w=(MONTHS[m].w+i)%7;return w===4||w===5};
+const holName=(m,i)=>(MONTHS[m].w+i)%7===4?'پنج‌شنبه':'جمعه';
 const DESIGN_HOURS=[12,6,8.5,10,12,6,8.5,6.5,8.5,6,8.5,11,1.5,6,8.5,8.5,6,8.5,11,1.5,6,1.5,6,8.5,8.5,6,8.5,11,1.5,6];
 function hoursFor(e,m){
   if(e.id===1&&m===0)return DESIGN_HOURS;
@@ -1871,6 +1894,7 @@ function renderPanel(){
   card.className='side-card';
   card.innerHTML=`
     <div class="card profile">
+      <button type="button" class="pf-close" id="pfClose" aria-label="بستن جزئیات کارمند" title="بستن">${icon('x',14)}</button>
       <div class="pf-avatar">
         ${(e.photo!==undefined?e.photo:PHOTOS[e.id])?`<img class="avatar avatar-img" src="${e.photo!==undefined?e.photo:PHOTOS[e.id]}" alt="">`:`<div class="avatar" aria-hidden="true">${esc(initials(e.name))}</div>`}
         <span class="pf-badge ${e.terminated?'off':''}" title="${e.terminated?'قرارداد فسخ شده':'قرارداد فعال'}">${icon(e.terminated?'x':'check',10)}</span>
@@ -1894,11 +1918,11 @@ function renderPanel(){
     </div>
     <div class="card chart-card">
       <div class="chart-head">
-        <h3 id="chartTitle">تعداد ساعات کاری</h3>
+        <h3 id="chartTitle">ساعات کاری</h3>
         <label class="sr-only" for="monthSel">ماه</label>
         <select class="month-sel" id="monthSel">${MONTHS.map((m,i)=>`<option value="${i}" ${i===state.month?'selected':''}>${m.n}</option>`).join('')}</select>
-        <span class="chart-total" id="chartTotal"></span>
       </div>
+      <dl class="chart-kpis" id="chartTotal"></dl>
       <div id="chart"></div>
     </div>
     <div class="stats">
@@ -1906,13 +1930,14 @@ function renderPanel(){
       <div class="card stat"><p>پروژه‌های تکمیل‌شده</p><strong>${fa(e.completed)}</strong></div>
     </div>`;
   renderChart(e);
+  $('#pfClose').addEventListener('click',()=>{const id=state.selectedId;select(null,id)});
 }
 function renderChart(e){
-  const MAX=12,H=220;const data=hoursFor(e,state.month);
-  const total=data.reduce((a,b)=>a+b,0);const worked=data.filter(Boolean).length;
-  const ct=$('#chartTotal');if(ct){ct.innerHTML=`<b>${fa(String(total).replace('.','٫'))}</b> ساعت`;ct.setAttribute('data-tip',`مجموع ساعات کاری ${MONTHS[state.month].n} در ${fa(worked)} روز کاری`);ct.setAttribute('aria-label',`مجموع ${fa(total)} ساعت`)}
-  const STD=8,yt=[0,4,8,12].map(v=>`<span style="bottom:${v/MAX*H}px"${v===STD?` class="std"`:""}>${fa(v)}</span>`).join('');
-  const otDays=data.filter(h=>h>STD).length,offDays=data.filter(h=>!h).length;
+  const MAX=16,H=140,STD=8,m=state.month;const hol=Array.from({length:MONTHS[m].d},(_,i)=>isHol(m,i));const data=hoursFor(e,m).map((h,i)=>hol[i]?0:h);
+  const total=data.reduce((a,b)=>a+b,0);const worked=data.filter(Boolean).length;const allowDays=hol.filter(x=>!x).length,allowHrs=allowDays*STD;
+  const ct=$('#chartTotal');const n1=v=>fa(String(Math.round(v*10)/10).replace('.','٫'));if(ct)ct.innerHTML=`<div><dt>مجموع ساعات</dt><dd><b>${n1(total)}</b> <span class="ck-of">از ${fa(allowHrs)} ساعت</span></dd></div><div><dt>روز کاری</dt><dd><b>${fa(worked)}</b> <span class="ck-of">از ${fa(allowDays)} روز</span></dd></div>`;
+  const yt=[0,4,8,12,16].map(v=>`<span style="bottom:${v/MAX*H}px"${v===STD?` class="std"`:""}>${fa(v)}</span>`).join('');
+  const otDays=data.filter(h=>h>STD).length,offDays=data.filter((h,i)=>!h&&!hol[i]).length,holDays=data.length-allowDays,overDays=data.filter(h=>h>MAX).length;
   const marks=[1,5,10,15,20,25,30].filter(d=>d<=data.length);
   $('#chart').innerHTML=`
     <div class="chart">
@@ -1920,9 +1945,9 @@ function renderChart(e){
       <div class="plot-wrap">
         <div class="yticks" aria-hidden="true">${yt}</div>
         <div class="plot" id="plot" tabindex="0" role="img" aria-labelledby="chartTitle" aria-describedby="chartSum">
-          <div class="gridl" style="bottom:${4/MAX*H}px"></div><div class="gridl" style="bottom:${H}px"></div>
+          <div class="gridl" style="bottom:${4/MAX*H}px"></div><div class="gridl" style="bottom:${12/MAX*H}px"></div><div class="gridl" style="bottom:${H}px"></div>
           <div class="refl" style="bottom:${STD/MAX*H}px"></div>
-          ${data.map((h,i)=>{const reg=Math.min(h,STD),ot=Math.max(0,h-STD);return `<div class="bar-col" data-i="${i}">${h?`<div class="bar">${ot?`<i class="ot" style="height:${ot/MAX*H-2}px"></i>`:''}<i class="reg" style="height:${Math.max(2,reg/MAX*H)}px"></i></div>`:'<span class="off"></span>'}</div>`}).join('')}
+          ${data.map((h,i)=>{const reg=Math.min(h,STD),ot=Math.max(0,Math.min(h,MAX)-STD);return `<div class="bar-col${h>MAX?' over':''}${hol[i]?' hol':''}" data-i="${i}">${hol[i]?'':h?`<div class="bar">${h>MAX?'<b class="over-mk" aria-hidden="true"></b>':''}${ot?`<i class="ot" style="height:${ot/MAX*H-2}px"></i>`:''}<i class="reg" style="height:${Math.max(2,reg/MAX*H)}px"></i></div>`:'<span class="off"></span>'}</div>`}).join('')}
           <div class="guide" id="guide"></div>
           <div class="tip" id="tip"></div>
         </div>
@@ -1930,8 +1955,8 @@ function renderChart(e){
       <div class="xticks" aria-hidden="true" id="xticks"></div>
       <span class="axis-x-label">روز</span>
     </div>
-    <div class="chart-legend"><span><i class="lg-reg"></i>ساعات عادی</span><span><i class="lg-ot"></i>اضافه‌کار <b>${fa(otDays)} روز</b></span><span><i class="lg-off"></i>مرخصی <b>${fa(offDays)} روز</b></span></div>
-    <p class="chart-sum sr-only" id="chartSum">جمع ${fa(String(total).replace('.','٫'))} ساعت در ${fa(worked)} روز کاری</p>`;
+    <div class="chart-legend" title="تعداد روزها"><span><i class="lg-reg"></i>عادی</span><span><i class="lg-ot"></i>اضافه‌کار <b>${fa(otDays)}</b></span><span><i class="lg-off"></i>مرخصی <b>${fa(offDays)}</b></span><span><i class="lg-hol"></i>تعطیل <b>${fa(holDays)}</b></span>${overDays?`<span><i class="lg-over"></i>بیش از ${fa(MAX)} ساعت <b>${fa(overDays)}</b></span>`:''}</div>
+    <p class="chart-sum sr-only" id="chartSum">جمع ${fa(String(total).replace('.','٫'))} ساعت از ${fa(allowHrs)} ساعت مجاز در ${fa(worked)} روز از ${fa(allowDays)} روز مجاز</p>`;
   const plot=$('#plot');const cols=[...plot.querySelectorAll('.bar-col')];
   requestAnimationFrame(()=>{
     const pr=plot.getBoundingClientRect();
@@ -1943,11 +1968,11 @@ function renderChart(e){
     const g=$('#guide'),t=$('#tip');
     if(i<0){g.style.display='none';t.style.display='none';plot.classList.remove('hovering');active=-1;return}
     active=i;const c=cols[i];c.classList.add('on');
-    const h=data[i]/MAX*H;const x=c.offsetLeft+c.offsetWidth/2;
+    const h=Math.min(data[i],MAX)/MAX*H;const x=c.offsetLeft+c.offsetWidth/2;
     g.style.display='block';g.style.top=(H-h)+'px';g.style.width=x+'px';
     t.style.display='block';t.style.left=Math.min(Math.max(x,34),plot.clientWidth-34)+'px';t.style.top=(H-h)+'px';
     plot.classList.add('hovering');
-    const ot=Math.max(0,data[i]-STD);t.innerHTML=`<b>${data[i]?fa(String(data[i]).replace('.','٫'))+' ساعت':'مرخصی'}</b>${ot?`<span class="tip-ot">${fa(String(ot).replace('.','٫'))} ساعت اضافه‌کار</span>`:''}روز ${fa(i+1)}`;
+    const ot=Math.max(0,data[i]-STD);t.innerHTML=hol[i]?`<b>تعطیل</b>${holName(m,i)} ${fa(i+1)}`:`<b>${data[i]?fa(String(data[i]).replace('.','٫'))+' ساعت':'مرخصی'}</b>${ot?`<span class="tip-ot">${fa(String(ot).replace('.','٫'))} ساعت اضافه‌کار</span>`:''}روز ${fa(i+1)}`;
   };
   plot.addEventListener('pointermove',ev=>{const c=ev.target.closest('.bar-col');if(c)show(+c.dataset.i)});
   plot.addEventListener('pointerleave',()=>show(-1));
@@ -2053,7 +2078,9 @@ function openModal({title,body='',actions=[],onOpen,closeBtn=true,beforeClose}){
   const close=()=>{if(beforeClose&&beforeClose(forceClose)===false)return;forceClose()};
   const isTop=()=>{const all=document.querySelectorAll('.overlay');return all[all.length-1]===ov};
   const xb=ov.querySelector('.modal-x');if(xb)xb.addEventListener('click',close);
-  actions.forEach(a=>{const b=document.createElement('button');b.className='btn '+(a.kind||'btn-ghost');b.textContent=a.label;b.onclick=()=>{if(a.onClick&&a.onClick(ov)===false)return;(a.kind&&a.kind!=='btn-ghost'?forceClose:close)()};acts.appendChild(b)});
+  /* button order (RTL): secondary actions first (right), the primary/danger action last (left) */
+  const rk=a=>a.kind==='btn-primary'||a.kind==='btn-danger'?1:0;
+  [...actions].sort((x,y)=>rk(x)-rk(y)).forEach(a=>{const b=document.createElement('button');b.className='btn '+(a.kind||'btn-ghost');b.textContent=a.label;b.onclick=()=>{if(a.onClick&&a.onClick(ov)===false)return;(a.kind&&a.kind!=='btn-ghost'?forceClose:close)()};acts.appendChild(b)});
   const key=e=>{
     if(!isTop())return;
     if(e.key==='Escape'){e.preventDefault();close()}
@@ -2078,7 +2105,7 @@ const NAME_ERR='نام و نام خانوادگی را با حروف فارسی 
 const DATE_ERR='تاریخ معتبر را به شکل سال/ماه/روز وارد کنید.';
 const WORK_MODES=['حضوری','دورکاری','ترکیبی'];
 const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const EMP_STEPS=[['name','nationalId','idNumber','birthDate'],['mobile','email'],['salary','workMode','start','contractEnd']];
+const EMP_STEPS=[['name','nationalId','idNumber','birthDate'],['mobile','email'],['role','team','contract','workMode','salary','insurance','start','contractEnd']];
 const fixFa=s=>String(s==null?'':s).replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/\s+/g,' ').trim();
 function validPersonName(v){
   const parts=fixFa(v).split(/[\s\u200c-]+/).filter(Boolean);
@@ -2136,7 +2163,7 @@ function nidChecksumOk(v){
 }
 function employeeForm(e){
   const isNew=!e;
-  e=e||{name:'',role:'طراح',roleFull:'',team:'تیم طراحی',seniority:'',contract:'رسمی',salary:200000000,insurance:true,mobile:'',start:TODAY,contractEnd:addJalaliMonths(TODAY,12),nationalId:'',idNumber:'',issuedFrom:'',birthCity:'',residence:''};
+  e=e||{name:'',role:'',roleFull:'',team:'',seniority:'',contract:'',salary:'',insurance:null,mobile:'',start:TODAY,contractEnd:addJalaliMonths(TODAY,12),nationalId:'',idNumber:'',issuedFrom:'',birthCity:'',residence:''};
   // list of options; keeps a legacy value that is no longer in the list instead of silently replacing it
   const opt=(arr,v)=>(v&&!arr.includes(v)?[v,...arr]:arr).map(x=>`<option ${x===v?'selected':''}>${esc(x)}</option>`).join('');
   const label=(id,text,required)=>`<label for="${id}"><span>${text}${required?'<i class="required-star" aria-hidden="true">*</i><span class="sr-only"> (ضروری)</span>':'<i class="field-need optional">(اختیاری)</i>'}</span></label>`;
@@ -2191,6 +2218,10 @@ function employeeForm(e){
       if(a>1000000000)return 'حقوق بیشتر از حداکثر مجاز است؛ حداکثر ۱٬۰۰۰٬۰۰۰٬۰۰۰ ریال.';
       return '';
     },
+    role:()=>g('role')?'':'سمت شغلی را انتخاب کنید.',
+    team:()=>g('team')?'':'تیم را انتخاب کنید.',
+    contract:()=>g('contract')?'':'نوع قرارداد را انتخاب کنید.',
+    insurance:()=>g('insurance')?'':'وضعیت بیمه را انتخاب کنید.',
     workMode:()=>WORK_MODES.includes(g('workMode'))?'':'نوع حضور را انتخاب کنید.',
     start:()=>bad.start?BAD_MSG.start:dateErr(g('start'),'تاریخ شروع به کار',true),
     contractEnd:()=>{
@@ -2257,29 +2288,29 @@ function employeeForm(e){
         actions:[{label:'ادامه ویرایش',kind:'btn-primary'},{label:'بستن بدون ذخیره',kind:'btn-danger-outline',onClick:()=>{forceClose()}}]});
       return false;
     },
-    body:`<div class="wizard-progress" aria-label="مراحل ثبت کارمند"><div class="wizard-step-label active" data-step-label="0" aria-current="step"><span class="ws-hit"><b>۱</b><span class="ws-txt"><small>مرحله یک</small>اطلاعات هویتی</span></span></div><div class="wizard-step-label" data-step-label="1"><span class="ws-hit"><b>۲</b><span class="ws-txt"><small>مرحله دو</small>اطلاعات تماس</span></span></div><div class="wizard-step-label" data-step-label="2"><span class="ws-hit"><b>۳</b><span class="ws-txt"><small>مرحله سه</small>اطلاعات شغلی</span></span></div></div><form class="form" id="empForm" novalidate autocomplete="off">
+    body:`<div class="wizard-progress" aria-label="مراحل ثبت کارمند"><div class="wizard-step-label active" data-step-label="0" aria-current="step"><span class="ws-hit"><b>۱</b><span class="ws-txt"><small>مرحله یک</small>اطلاعات هویتی</span></span></div><div class="wizard-step-label" data-step-label="1"><span class="ws-hit"><b>۲</b><span class="ws-txt"><small>مرحله دو</small>اطلاعات تماس</span></span></div><div class="wizard-step-label" data-step-label="2"><span class="ws-hit"><b>۳</b><span class="ws-txt"><small>مرحله سه</small>اطلاعات شغلی</span></span></div></div><form class="form" id="empForm" novalidate autocomplete="on">
       <section class="wizard-step" data-step="0">
       <div class="field full photo-control">${label('f-photo','عکس پروفایل',false)}<div class="photo-field"><div class="photo-preview-wrap"><span class="photo-preview" id="photoPreview">${initialPhoto?`<img src="${esc(initialPhoto)}" alt="">`:(e.name?esc(initials(e.name)):AVATAR_ICON)}</span></div><div class="photo-actions"><p class="photo-note" id="photoNote" role="status"><bdi dir="ltr">PNG</bdi>، <bdi dir="ltr">JPG</bdi> یا <bdi dir="ltr">WebP</bdi> · حداکثر ۱۰ مگابایت</p><div class="photo-btns"><label for="f-photo" class="photo-pick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.33634 2.92144C10.2183 2.87408 11.1065 2.8501 12.0001 2.8501C12.8937 2.8501 13.7819 2.87408 14.6639 2.92144C15.6822 2.97612 16.5879 3.53697 17.1155 4.38253L17.9368 5.69854C18.1514 6.04258 18.5177 6.27888 18.9407 6.339C19.3273 6.39393 19.7124 6.45339 20.096 6.51732C21.6037 6.76855 22.6501 8.08819 22.6501 9.57412V18.0001C22.6501 19.7398 21.2398 21.1501 19.5001 21.1501H4.5001C2.7604 21.1501 1.3501 19.7398 1.3501 18.0001V9.57412C1.3501 8.08818 2.3965 6.76854 3.90416 6.51731C4.28778 6.45338 4.6729 6.39393 5.05947 6.33899C5.48252 6.27887 5.84876 6.04257 6.06345 5.69854L6.88466 4.38253C7.4123 3.53697 8.31798 2.97612 9.33634 2.92144ZM12.0001 4.6501C11.1387 4.6501 10.2827 4.67321 9.43286 4.71885C9.02342 4.74084 8.64105 4.96796 8.41173 5.33545L7.59052 6.65145C7.08304 7.46469 6.24023 7.98928 5.31273 8.12108C4.9404 8.174 4.56948 8.23126 4.20002 8.29283C3.60193 8.39249 3.1501 8.92526 3.1501 9.57412V18.0001C3.1501 18.7457 3.75451 19.3501 4.5001 19.3501H19.5001C20.2457 19.3501 20.8501 18.7457 20.8501 18.0001V9.57412C20.8501 8.92527 20.3983 8.3925 19.8002 8.29283C19.4307 8.23127 19.0598 8.174 18.6875 8.12109C17.76 7.98928 16.9172 7.4647 16.4097 6.65146L15.5885 5.33545C15.3591 4.96796 14.9768 4.74084 14.5673 4.71885C13.7175 4.67321 12.8615 4.6501 12.0001 4.6501ZM12.0001 9.1501C10.0119 9.1501 8.4001 10.7619 8.4001 12.7501C8.4001 14.7383 10.0119 16.3501 12.0001 16.3501C13.9883 16.3501 15.6001 14.7383 15.6001 12.7501C15.6001 10.7619 13.9883 9.1501 12.0001 9.1501ZM6.6001 12.7501C6.6001 9.76776 9.01776 7.3501 12.0001 7.3501C14.9824 7.3501 17.4001 9.76776 17.4001 12.7501C17.4001 15.7324 14.9824 18.1501 12.0001 18.1501C9.01776 18.1501 6.6001 15.7324 6.6001 12.7501ZM17.8501 10.5001C17.8501 10.003 18.253 9.6001 18.7501 9.6001H18.7576C19.2547 9.6001 19.6576 10.003 19.6576 10.5001V10.5076C19.6576 11.0047 19.2547 11.4076 18.7576 11.4076H18.7501C18.253 11.4076 17.8501 11.0047 17.8501 10.5076V10.5001Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/></svg><span id="photoPickText">${initialPhoto?'تغییر تصویر':'انتخاب تصویر'}</span></label><button type="button" class="text-btn danger photo-remove" id="removePhoto" ${initialPhoto?'':'hidden'}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>حذف</button></div><input id="f-photo" type="file" accept="image/png,image/jpeg,image/webp"></div></div></div>
-      <div class="field full">${label('f-name','نام و نام خانوادگی',true)}<input id="f-name" name="name" maxlength="60" autocomplete="off" placeholder="نام و نام خانوادگی کارمند را وارد کنید" value="${esc(e.name)}" required><span class="err"></span></div>
+      <div class="field full">${label('f-name','نام و نام خانوادگی',true)}<input id="f-name" name="name" maxlength="60" autocomplete="name" placeholder="نام و نام خانوادگی کارمند را وارد کنید" value="${esc(e.name)}" required><span class="err"></span></div>
       <div class="field">${label('f-nid','کد ملی',true)}<input id="f-nid" name="nationalId" inputmode="numeric" maxlength="10" class="ltr" dir="ltr" placeholder="کد ملی کارمند را وارد کنید" value="${fa(e.nationalId||'')}" required><span class="err"></span></div>
       <div class="field">${label('f-idn','شماره شناسنامه',false)}<input id="f-idn" name="idNumber" inputmode="numeric" maxlength="10" class="ltr" dir="ltr" placeholder="شماره شناسنامه کارمند را وارد کنید" value="${fa(e.idNumber||'')}"><span class="err"></span></div>
       <div class="field">${label('f-bcity','صادره از',false)}<div class="city-picker"><input id="f-bcity" name="birthCity" data-city-picker autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" placeholder="شهر محل تولد را وارد کنید" value="${esc(e.birthCity||'')}"><div class="city-options" role="listbox" hidden></div></div><span class="err"></span></div>
       <div class="field">${label('f-birth','تاریخ تولد',false)}<div class="date-input-wrap"><input id="f-birth" name="birthDate" class="ltr" dir="ltr" inputmode="numeric" maxlength="10" placeholder="سال/ماه/روز" value="${fa(e.birthDate||'')}"></div><span class="err"></span></div>
       </section>
       <section class="wizard-step" data-step="1" hidden>
-      <div class="field">${label('f-mob','شماره موبایل',true)}<input id="f-mob" name="mobile" inputmode="tel" maxlength="14" class="ltr" dir="ltr" placeholder="۰۹۱۲۳۴۵۶۷۸۹" value="${fa(e.mobile||'')}" required><span class="err"></span></div>
-      <div class="field">${label('f-email','ایمیل',false)}<input id="f-email" name="email" type="email" inputmode="email" maxlength="100" class="ltr" dir="ltr" placeholder="name@example.com" value="${esc(e.email||'')}"><span class="err"></span></div>
+      <div class="field">${label('f-mob','شماره موبایل',true)}<input id="f-mob" name="mobile" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="14" class="ltr" dir="ltr" placeholder="۰۹۱۲۳۴۵۶۷۸۹" value="${fa(e.mobile||'')}" required><span class="err"></span></div>
+      <div class="field">${label('f-email','ایمیل',false)}<input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="100" class="ltr" dir="ltr" placeholder="name@example.com" value="${esc(e.email||'')}"><span class="err"></span></div>
       <div class="field">${label('f-res','محل سکونت',false)}<div class="city-picker"><input id="f-res" name="residence" data-city-picker autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" placeholder="شهر محل سکونت کارمند را وارد کنید" value="${esc(e.residence||'')}"><div class="city-options" role="listbox" hidden></div></div><span class="err"></span></div>
       </section>
       <section class="wizard-step" data-step="2" hidden>
-      <div class="field">${label('f-role','سمت شغلی',true)}<select id="f-role" name="role">${opt(ROLE_OPTIONS,e.role)}</select></div>
-      <div class="field">${label('f-team','تیم',true)}<select id="f-team" name="team">${opt(TEAM_OPTIONS,e.team)}</select></div>
+      <div class="field">${label('f-role','سمت شغلی',true)}<select id="f-role" name="role"><option value="" ${!e.role?'selected':''}>انتخاب کنید</option>${opt(ROLE_OPTIONS,e.role)}</select><span class="err"></span></div>
+      <div class="field">${label('f-team','تیم',true)}<select id="f-team" name="team"><option value="" ${!e.team?'selected':''}>انتخاب کنید</option>${opt(TEAM_OPTIONS,e.team)}</select><span class="err"></span></div>
       <div class="field full">${label('f-full','عنوان کامل سمت',false)}<input id="f-full" name="roleFull" maxlength="60" value="${esc(e.roleFull||'')}" placeholder="مثلاً طراح رابط و تجربه کاربری"></div>
       <div class="field">${label('f-sen','سطح',false)}<select id="f-sen" name="seniority"><option value="" ${!e.seniority?'selected':''}>انتخاب کنید</option>${opt(SENIOR,e.seniority)}</select></div>
-      <div class="field">${label('f-con','نوع قرارداد',true)}<select id="f-con" name="contract">${opt(['رسمی','غیر رسمی'],e.contract)}</select></div>
+      <div class="field">${label('f-con','نوع قرارداد',true)}<select id="f-con" name="contract"><option value="" ${!e.contract?'selected':''}>انتخاب کنید</option>${opt(['رسمی','غیر رسمی'],e.contract)}</select><span class="err"></span></div>
       <div class="field">${label('f-mode','نوع حضور',true)}<select id="f-mode" name="workMode"><option value="" ${!e.workMode?'selected':''}>انتخاب کنید</option>${opt(WORK_MODES,e.workMode)}</select><span class="err"></span></div>
-      <div class="field">${label('f-sal','حقوق دریافتی',true)}<div class="unit-input"><input id="f-sal" name="salary" inputmode="numeric" class="ltr" dir="ltr" maxlength="17" value="${money(e.salary)}" aria-describedby="f-sal-unit" required><span class="unit" id="f-sal-unit">ریال</span></div><span class="err"></span></div>
-      <div class="field">${label('f-ins','بیمه',true)}<select id="f-ins" name="insurance">${opt(['دارد','ندارد'],e.insurance?'دارد':'ندارد')}</select></div>
+      <div class="field">${label('f-sal','حقوق دریافتی',true)}<div class="unit-input"><input id="f-sal" name="salary" inputmode="numeric" class="ltr" dir="ltr" maxlength="17" value="${e.salary?money(e.salary):''}" placeholder="مثلاً ۲۰۰٬۰۰۰٬۰۰۰" aria-describedby="f-sal-unit" required><span class="unit" id="f-sal-unit">ریال</span></div><span class="err"></span></div>
+      <div class="field">${label('f-ins','بیمه',true)}<select id="f-ins" name="insurance"><option value="" ${e.insurance==null?'selected':''}>انتخاب کنید</option>${opt(['دارد','ندارد'],e.insurance==null?'':e.insurance?'دارد':'ندارد')}</select><span class="err"></span></div>
       <div class="field">${label('f-start','تاریخ شروع به کار',true)}<div class="date-input-wrap"><input id="f-start" name="start" class="ltr" dir="ltr" inputmode="numeric" maxlength="10" placeholder="سال/ماه/روز" value="${fa(e.start||'')}" required><button class="date-fill" type="button" data-date-fill="today">امروز</button></div><span class="err"></span></div>
       <div class="field">${label('f-end','تاریخ پایان قرارداد',true)}<div class="date-input-wrap"><input id="f-end" name="contractEnd" class="ltr" dir="ltr" inputmode="numeric" maxlength="10" placeholder="سال/ماه/روز" value="${fa(e.contractEnd||'')}" required><button class="date-fill" type="button" data-date-fill="year">یک سال بعد</button></div><span class="err"></span></div>
       </section>
@@ -2401,7 +2432,7 @@ function employeeForm(e){
         if(name==='start'&&dirty.has('contractEnd'))validate('contractEnd');
         if(name==='contractEnd'&&dirty.has('start'))validate('start');
       });
-      form.addEventListener('change',ev=>{touched=true;if(ev.target.name==='workMode'){dirty.add('workMode');validate('workMode')}});
+      form.addEventListener('change',ev=>{touched=true;const n=ev.target.name;if(['workMode','role','team','contract','insurance'].includes(n)){dirty.add(n);validate(n)}});
       form.addEventListener('focusout',ev=>{const n=ev.target.name;if(bad[n])bad[n]=false;if(dirty.has(n))validate(n)});
       // Enter moves forward / saves (a form without a submit button does nothing on Enter)
       form.addEventListener('keydown',ev=>{
@@ -2541,14 +2572,14 @@ $('#tbody').addEventListener('click',ev=>{
   if(cb){const id=+cb.dataset.check;cb.checked?state.checked.add(id):state.checked.delete(id);renderTable();$(`[data-check="${id}"]`).focus();return}
   const k=ev.target.closest('[data-menu]');
   if(k){openRowMenu(k,byId(+k.dataset.menu));return}
-  const tr=ev.target.closest('tr[data-id]');if(tr){const id=+tr.dataset.id;select(id===state.selectedId?null:id);const r=$(`#tbody tr[data-id="${id}"]`);r&&r.focus({preventScroll:true})}
+  const tr=ev.target.closest('tr[data-id]');if(tr){const id=+tr.dataset.id;if(id!==state.selectedId)select(id);const r=$(`#tbody tr[data-id="${id}"]`);r&&r.focus({preventScroll:true})}
 });
 $('#tbody').addEventListener('keydown',ev=>{
   const tr=ev.target.closest('tr[data-id]');if(!tr||ev.target!==tr)return;
   const rows=[...$('#tbody').rows];const i=rows.indexOf(tr);
   if(ev.key==='ArrowDown'&&rows[i+1]){ev.preventDefault();select(+rows[i+1].dataset.id,true)}
   else if(ev.key==='ArrowUp'&&rows[i-1]){ev.preventDefault();select(+rows[i-1].dataset.id,true)}
-  else if(ev.key==='Enter'){ev.preventDefault();const id=+tr.dataset.id;select(id===state.selectedId?null:id,id)}
+  else if(ev.key==='Enter'){ev.preventDefault();const id=+tr.dataset.id;if(id!==state.selectedId)select(id,id)}
   else if(ev.key==='Escape'&&state.selectedId!=null){ev.preventDefault();select(null,+tr.dataset.id)}
   else if(ev.key===' '){ev.preventDefault();const id=+tr.dataset.id;state.checked.has(id)?state.checked.delete(id):state.checked.add(id);renderTable();$(`#tbody tr[data-id="${id}"]`).focus()}
 });
@@ -2648,7 +2679,6 @@ function renderGeneral(){
   const opts=cat.opts().filter(o=>!fpOptQ||norm(o.t).includes(norm(fpOptQ))||(o.g&&norm(o.g).includes(norm(fpOptQ))));
   return `<div class="fp-gen">
     <div class="fp-col fp-cats">
-      <label class="fp-search"><span class="sr-only">جستجو در دسته‌ها</span><input data-q="cat" type="search" placeholder="جستجو" value="${esc(fpCatQ)}" autocomplete="off">${fpSearchEnd('cat',fpCatQ)}</label>
       <div class="fp-cat-list" role="tablist" aria-orientation="vertical">${cats.map(c=>{const n=G[c.k].size;return `<button class="fp-cat" role="tab" data-cat="${c.k}" aria-selected="${c.k===cat.k}">
         <span>${c.t}</span>${n?`<span class="fp-n">${fa(n)}</span>`:''}${icon('chevLs',12)}</button>`}).join('')||'<div class="fp-none">موردی پیدا نشد</div>'}</div>
     </div>
