@@ -629,6 +629,9 @@ body:not([data-mod="hr"]) .bulkbar{display:none}
 .af-row{display:flex;align-items:center;gap:8px;flex:1;min-width:0;justify-content:flex-start}
 .af-ctl{display:flex;align-items:stretch;height:24px;border:1px solid var(--border);border-radius:4px;background:var(--surface);flex:0 1 189px;min-width:0;overflow:hidden}
 .af-ctl.op{flex-basis:133px}
+.af-row:has(.af-err){flex-wrap:wrap;row-gap:4px}
+.af-err{flex-basis:100%;font-size:10px;line-height:14px;color:var(--danger)}
+.af-ctl.bad{border-color:var(--danger)}
 .af-ctl:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
 .af-lab{display:grid;place-items:center;width:37px;flex:none;background:var(--surface-sunken);border-inline-end:1px solid var(--border);font-size:11px;line-height:16px;font-weight:500;color:var(--text-muted)}
 .af-ctl .dd{height:100%;border:0;border-radius:0;font-size:11px;font-weight:500;color:var(--text-strong);padding:0 8px 0 7px;background:transparent}
@@ -704,7 +707,7 @@ input[type=radio]:disabled{opacity:.5;cursor:not-allowed}
 .np-item:not(.read):hover{background:color-mix(in srgb,var(--primary-softer) 65%,var(--primary-light))}
 .np-item.read .np-body b{font-weight:500}
 .np-dot{position:absolute;top:8px;left:8px;width:5px;height:5px;border-radius:50%;background:var(--danger);box-shadow:0 0 0 1.5px var(--surface)}
-.np-all{margin-inline-start:auto;height:20px;padding:0 8px;border-radius:4px;font-size:10px;color:var(--primary-strong)}
+.np-all{margin-inline-start:auto;margin-inline-end:-8px;height:20px;padding:0 8px;border-radius:4px;font-size:10px;color:var(--primary-strong)}
 .np-all:hover{background:var(--primary-softer)}
 .np-item{display:flex;align-items:flex-start;gap:10px;padding:10px 8px;border-radius:6px;text-align:right}
 .np-item:hover{background:var(--surface-alt)}
@@ -747,13 +750,16 @@ input[type=radio]:disabled{opacity:.5;cursor:not-allowed}
 .gs-empty{padding:12px 8px;font-size:12px;color:var(--text-muted);text-align:center}
 .search.has-text > span:last-child{display:none}
 .search-clear:hover{background:none;color:var(--text-primary)}
+.search .search-clear svg,.fp-search .search-clear svg{color:inherit}
+.search,.m-search,.tk-search,.fp-search,.m-input,.field input,.field textarea{transition:border-color .15s}
+.search:hover:not(:focus-within),.m-search:hover:not(:focus-within),.tk-search:hover:not(:focus-within),.fp-search:hover:not(:focus-within),.m-input:hover:not(:focus),.field input:hover:not(:focus),.field textarea:hover:not(:focus){border-color:var(--text-faint)}
 .search-clear:focus-visible{box-shadow:0 0 0 2px var(--primary)}
 .search svg{margin-inline-end:8px;color:var(--text-faint)}
 .search:focus-within,.toolbar .search.big:focus-within{border-color:var(--primary);background:var(--surface);box-shadow:0 0 0 3px var(--primary-softer)}
 .search > svg,.search > span:last-child svg{pointer-events:none}
 .head-actions{justify-self:end;display:flex;align-items:center;gap:4px}
 .round-btn{position:relative;width:28px;height:28px;border-radius:58px;display:grid;place-items:center;color:var(--text-muted)}
-.round-btn:hover{background:var(--surface-alt)}
+.round-btn:hover,.round-btn[aria-expanded="true"]{background:var(--surface-alt)}
 .round-btn .dot{position:absolute;top:5px;right:9px;width:5px;height:5px;border-radius:50%;background:var(--danger);box-shadow:0 0 0 1.5px var(--surface)}
 .vsep{width:1px;height:24px;background:var(--border-soft);margin:0 4px}
 .me{display:flex;align-items:center;gap:8px;padding:4px 6px;border-radius:6px;text-align:right;transition:background .15s}
@@ -826,12 +832,13 @@ input[type=radio]:disabled{opacity:.5;cursor:not-allowed}
 .toolbar{display:flex;align-items:center;gap:12px;margin-top:16px}
 .toolbar .search.big{width:357px;max-width:100%;height:32px;background:transparent;border-color:var(--border-soft)}
 .toolbar .search.big input{font-size:11px}
+.toolbar .search.big:hover:not(:focus-within){border-color:var(--text-faint)}
 .tools{display:flex;gap:8px;margin-inline-start:auto}
 .icon-btn{position:relative;width:32px;height:32px;border-radius:4px;display:grid;place-items:center;background:var(--surface-alt);border:.5px solid var(--border);color:var(--text-muted)}
 .icon-btn:hover{background:var(--primary-softer);color:var(--primary-strong);border-color:var(--primary-light)}
 .icon-btn.primary{color:var(--primary)}
 .tools .icon-btn:not(:hover):not([aria-expanded="true"]){background:transparent}
-.icon-btn[aria-expanded="true"]{background:var(--primary-softer);border-color:var(--primary)}
+.icon-btn[aria-expanded="true"]{background:var(--primary-softer);color:var(--primary-strong);border-color:var(--primary-light)}
 .icon-btn .badge{position:absolute;top:-3px;left:-3px;width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 2px var(--surface)}
 .text-btn{height:24px;padding:0 8px;border-radius:4px;font-size:11px;color:var(--text-muted)}
 .text-btn:hover{background:var(--surface-alt)}
@@ -899,6 +906,7 @@ td.terminated{color:var(--danger)}
 td.terminated .chip{--c:var(--danger)}
 
 td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
+td.cell-icon .cb,th.cell-icon .cb{width:16px;height:16px;border-radius:4px}
 .cb{appearance:none;-webkit-appearance:none;width:16px;height:16px;margin:0;display:block;border:1px solid var(--border);border-radius:2px;background:var(--surface);cursor:pointer;position:relative}
 .cb:checked,.cb:indeterminate{background:var(--primary);border-color:var(--primary)}
 .cb:checked::after{content:"";position:absolute;inset:0;background:var(--on-primary);
@@ -1048,7 +1056,7 @@ td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
 .dash-wip{display:flex;flex-direction:column;flex:1;min-height:100%;background:var(--surface);padding:24px 16px;box-sizing:border-box}
 .wip-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px 0;color:var(--text-muted);font-size:12px}
 .wip-body b{font-size:15px;color:var(--text-strong);font-weight:600}
-.wip-art{width:200px;max-width:100%;height:auto}
+.wip-art{width:207px;max-width:100%;height:auto}
 .pop{position:fixed;z-index:50;min-width:180px;background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;box-shadow:var(--shadow-pop);padding:6px}
 .pop h4{margin:6px 8px 4px;font-size:11px;font-weight:600;color:var(--text-muted)}
 .pop .th-head{margin:0 0 6px;padding:4px 8px 8px;border-bottom:1px solid var(--border-soft)}
@@ -1068,19 +1076,25 @@ td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
 .notif small{display:block;color:var(--text-faint);font-size:10px}
 
 .overlay{position:fixed;inset:0;z-index:60;background:var(--overlay);display:grid;place-items:center;padding:16px}
-.modal{width:min(440px,100%);max-height:calc(100% - 32px);overflow:auto;background:var(--surface);border-radius:8px;box-shadow:var(--shadow-pop);padding:20px}
+.modal{width:min(440px,100%);max-height:calc(100% - 32px);overflow-y:auto;overflow-x:hidden;background:var(--surface);border-radius:8px;box-shadow:var(--shadow-pop);padding:20px}
 .modal h2{margin:0;font-size:14px;line-height:20px;font-weight:600;color:var(--text-strong)}
 .modal p.msg{margin:10px 0 0;font-size:12px;line-height:20px;color:var(--text)}
 .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .modal-x{flex:none;display:grid;place-items:center;width:24px;height:24px;margin:-2px 0;border-radius:4px;color:var(--text-muted)}
 .modal-x:hover{color:var(--text-primary)}
 .modal-x:focus-visible{box-shadow:var(--focus)}
+/* confirm dialogs: centred title, message and buttons */
+.modal:has(>.cm-msg) .modal-head{position:relative;justify-content:center;padding:0 32px}
+.modal:has(>.cm-msg) .modal-x{position:absolute;left:0;top:50%;margin:0;transform:translateY(-50%)}
+.modal:has(>.cm-msg) .cm-msg{text-align:center}
+.modal:has(>.cm-msg)>.modal-actions{margin-left:auto;margin-right:auto}
 .modal-actions{display:flex;gap:8px;justify-content:flex-start;margin-top:20px}
 .modal-actions.emp-actions{direction:ltr;justify-content:space-between}
 .modal-actions.emp-actions .btn{direction:rtl}
 .emp-actions .btn-primary{order:1}
 .emp-actions .btn-ghost{order:2}
-.photo-preview svg{color:var(--text-faint)}
+.photo-preview svg{color:var(--border)}
+.photo-preview svg.av-ph{width:100%;height:100%}
 .modal-actions .btn{min-width:96px}
 .modal-actions:not(.emp-actions){display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:max-content;max-width:100%;margin-left:0;margin-right:auto}
 .form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px}
@@ -1152,15 +1166,27 @@ td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
 .dd:hover{border-color:var(--text-faint)}
 .dd:focus-visible,.dd[aria-expanded="true"]{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
 .dd-val{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dd-val.ph{font-size:10px;color:var(--text-muted)}
 .dd svg{flex:none;color:var(--text-muted);transition:transform .15s}
 .dd[aria-expanded="true"] svg{transform:rotate(180deg);color:var(--primary)}
 .dd.compact{width:auto;height:20px;padding:0 4px;gap:2px;border-color:transparent;background:transparent;font-size:10px;color:var(--text-muted);font-weight:400}
 .dd.compact:hover{color:var(--primary-strong);background:var(--surface-alt)}
 .dd.compact:focus-visible,.dd.compact[aria-expanded="true"]{box-shadow:0 0 0 2px var(--primary-softer);border-color:var(--primary-light)}
-.dd-list{position:fixed;z-index:90;min-width:140px;max-height:240px;overflow:auto;padding:4px;margin:0;list-style:none;background:var(--surface);
+.dd-list{position:fixed;z-index:90;min-width:140px;max-height:240px;overflow-y:auto;overflow-x:hidden;padding:4px;margin:0;list-style:none;background:var(--surface);
   border:1px solid var(--border-soft);border-radius:8px;box-shadow:var(--shadow-pop)}
 .dd-opt{display:flex;align-items:center;justify-content:space-between;gap:8px;height:32px;padding:0 8px;border-radius:4px;font-size:12px;color:var(--text-strong);cursor:pointer;white-space:nowrap}
 .dd-opt.active{background:var(--surface-alt)}
+.dd-opt[hidden],.dd-empty[hidden],.dd-grp[hidden]{display:none}
+.dd-grp{padding:10px 8px 4px;font-size:10px;line-height:14px;font-weight:500;color:var(--placeholder);user-select:none;cursor:default}
+.dd-search{position:sticky;top:-4px;z-index:1;margin:-4px -4px 4px;padding:6px 6px 6px;background:var(--surface);border-bottom:1px solid var(--border-soft)}
+.dd-search label{display:flex;align-items:center;gap:6px;height:28px;padding:0 8px;border:1px solid var(--border);border-radius:4px;background:var(--surface)}
+.dd-search label:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
+.dd-search svg{flex:none;color:var(--text-faint)}
+.dd-search input{flex:1;min-width:0;border:0;background:transparent;font-size:11px;color:var(--text-strong);outline:none}
+.dd-search input:focus-visible{box-shadow:none}
+.dd-search input::placeholder{color:var(--placeholder)}
+.dd-search input::-webkit-search-cancel-button{display:none}
+.dd-empty{padding:12px 8px;font-size:11px;color:var(--text-muted);text-align:center}
 .dd-opt[aria-selected="true"]{color:var(--primary-strong);background:var(--primary-softer);font-weight:500}
 .dd-opt svg{color:var(--primary);visibility:hidden}
 .dd-opt[aria-selected="true"] svg{visibility:visible}
@@ -1171,22 +1197,118 @@ td.cell-icon,th.cell-icon{padding:7px 8px;text-overflow:clip}
 .field .err{font-size:10px;color:var(--danger);min-height:12px;line-height:12px}
 .field input[aria-invalid="true"]{border-color:var(--danger)}
 .field select[aria-invalid="true"]{border-color:var(--danger)}
-.wizard-step-label.done{cursor:pointer}
-.wizard-step-label.done:focus-visible{outline:none;box-shadow:none}
+.wizard-step-label.done,.wizard-step-label.nav{cursor:pointer}
+.wizard-step-label.done:focus-visible,.wizard-step-label.nav:focus-visible{outline:none;box-shadow:none}
+.wizard-step-label.nav:focus-visible .ws-hit{box-shadow:var(--focus)}
+.wizard-step-label.nav:not(.done):hover b{border-color:var(--primary);color:var(--primary)}
 .wizard-step-label.done .ws-txt{transition:color .15s}
-.wizard-step-label.done:hover .ws-txt{color:var(--primary)}
+.wizard-step-label.done:hover .ws-txt,.wizard-step-label.nav:hover .ws-txt{color:var(--primary)}
 .wizard-step-label.done:hover b{background:var(--primary-softer)}
 .photo-actions:has(input:focus-visible) .photo-pick{box-shadow:var(--focus)}
 .photo-note.bad{color:var(--danger)}
 /* employee modal: fixed size on every step, equal-size controls, scroll inside the form only */
 .modal.emp-modal{width:min(520px,100%);height:min(640px,calc(100% - 32px));display:flex;flex-direction:column;overflow:hidden}
 .modal.emp-modal>*{flex:none}
-.modal.emp-modal>.form{flex:1 1 auto;min-height:0;overflow:auto;align-content:start;direction:ltr;margin-inline:-6px;padding:6px}
+.modal.emp-modal>.form{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;align-content:start;direction:ltr;margin-inline:-6px;padding:6px}
 .modal.emp-modal>.form>*{direction:rtl}
 .modal.emp-modal>.modal-actions{margin-top:16px}
+.mail-to{display:flex;align-items:center;justify-content:space-between;gap:8px;height:36px;padding:0 12px;border-radius:6px;background:var(--surface-alt);font-size:12px;color:var(--text-strong)}
+.mail-to bdi{color:var(--text-muted);font-size:11px}
+/* inline section edit */
+.ev-form .form{margin-top:0}
+.ev-form .field{position:relative;min-width:0}
+/* inline edit keeps the tile look: each field is a tile, its control is borderless text */
+.ev-form .wizard-step{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ev-form .field{gap:4px;padding:8px 10px;border:.5px solid var(--border-soft);border-radius:8px;background:var(--surface);transition:border-color .15s,box-shadow .15s}
+.ev-form .field:not(.photo-control):hover{border-color:var(--border)}
+.ev-form .field:not(.photo-control):focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
+.ev-form .field:not(.photo-control):has([aria-invalid="true"]){border-color:var(--danger)}
+.ev-form .field:not(.photo-control):has([aria-invalid="true"]):focus-within{box-shadow:0 0 0 3px var(--danger-soft)}
+.ev-form .field label{font-size:10px;line-height:16px;font-weight:400;color:var(--text-muted)}
+.ev-form .field input:not([type="file"]),.ev-form .field select,.ev-form .field .dd,.ev-form .field .date3{height:28px!important;min-height:0;padding:0 8px!important;border:0!important;border-radius:4px;background:var(--surface-alt)!important;box-shadow:none!important;font-size:12px;line-height:28px;font-weight:600;color:#1e293b}
+.ev-form .field input.ltr{text-align:right}
+.ev-form .field input::placeholder{font-weight:400}
+.ev-form .field .dd-val.ph{font-weight:400}
+.ev-form .unit-input input{padding-left:36px!important}
+.ev-form .unit-input .unit{font-size:10px;font-weight:400}
+.ev-form .field .date3{width:100%;justify-content:flex-end;gap:0}
+.ev-form .field .date3 input[data-d3]{flex:none;width:20px;height:28px!important;padding:0!important;background:transparent!important;text-align:center}
+.ev-form .field .date3 input[data-d3="0"]{width:32px}
+.ev-form .field .date3 .date-fill{height:20px;margin:0 auto 0 0;padding:0 6px;font-size:10px}
+.ev-form .field .date3:has(.date-fill){padding:0 8px 0 4px!important}
+.ev-form .field.photo-control{padding:0;border:0}
+.ev-form .photo-field{padding:10px 12px;border:.5px solid var(--border-soft);border-style:solid}
+.ev-form .modal-actions{display:flex;direction:rtl;justify-content:flex-end;gap:8px;width:auto;margin:16px 0 0}
+.ev-form .modal-actions .btn{min-width:72px;height:28px;font-size:10px;order:0}
+.ev-sec.editing .ev-edit{visibility:hidden}
+.ev-edit:disabled,.ev-modal>.modal-actions .btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.modal.emp-modal.emp-sec{height:min(560px,calc(100% - 32px))}
+/* employee view: read-only groups with an edit button each */
+.modal.ev-modal{width:min(520px,100%);height:min(640px,calc(100% - 32px));display:flex;flex-direction:column;overflow:hidden}
+.ev{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;padding:2px 0;display:flex;flex-direction:column;gap:16px;margin-top:16px}
+.ev-tabs{position:sticky;top:-2px;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:4px;background:var(--surface)}
+.ev-tablist{display:flex;flex:1;gap:4px;min-width:0;padding:3px;border:1px solid var(--border-soft);border-radius:10px;background:var(--surface)}
+.ev-tab{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:1 1 0;min-width:0;height:28px;padding:0 10px;border:0;border-radius:7px;font-size:11px;font-weight:500;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s,background .15s,box-shadow .15s}
+.ev-tab:hover:not([aria-selected="true"]):not(:disabled){color:var(--text-strong)}
+.ev-tab[aria-selected="true"]{background:var(--primary-softer);color:var(--primary);font-weight:600}
+.ev-tab:hover:not([aria-selected="true"]):not(:disabled){background:var(--surface-sunken)}
+.ev-tab:focus-visible{box-shadow:var(--focus)}
+.ev-tab svg{flex:none}
+.ev-tab span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.ev-tabs .ev-edit{display:inline-flex;align-items:center;gap:6px;flex:none;width:auto;height:36px;padding:0 12px;border-radius:10px;font-size:11px;font-weight:500}
+.ev-tab:disabled{opacity:.4;cursor:not-allowed}
+.ev-sec{padding:12px;border:1px solid var(--border-soft);border-radius:10px;background:var(--surface)}
+.ev-sec[hidden]{display:none}
+.ev-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ev-head h3{display:flex;align-items:center;gap:8px;margin:0;font-size:12px;line-height:20px;font-weight:600;color:var(--text-strong)}
+.ev-head h3::before{content:"";width:3px;height:14px;border-radius:2px;background:var(--primary)}
+.ev.is-editing .ev-sec:not(.editing){opacity:.4;filter:grayscale(1);pointer-events:none}
+.ev-head .ev-edit{width:28px;height:28px;border-radius:7px}
+.ev-edit{display:grid;place-items:center;width:24px;height:24px;border-radius:6px;background:var(--surface);border:1px solid var(--border-soft);color:var(--primary);transition:background .15s,border-color .15s}
+.ev-edit:hover{background:var(--primary-softer);border-color:var(--primary-light)}
+.ev-edit:focus-visible{box-shadow:var(--focus)}
+.ev-body{margin-top:0}
+.ev-body[hidden]{display:none}
+.ev-who{display:flex;align-items:center;gap:12px;margin-bottom:8px;padding:8px 10px;border-radius:8px;border:1px solid var(--border-soft);background:var(--surface-sunken)}
+.ev-who img,.ev-av{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;box-shadow:0 0 0 2px var(--surface),0 0 0 3px var(--primary-light)}
+.ev-av{display:grid;place-items:center;background:var(--primary-soft);color:var(--primary);font-size:12px;font-weight:600}
+.ev-id{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ev-who b{font-size:11px;line-height:20px;font-weight:600;color:#1e293b}
+.ev-who small{font-size:10px;line-height:16px;color:var(--text-muted)}
+.ev-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0}
+.ev-grid>.ev-row.full{grid-column:1/-1}
+.ev-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2px 12px;min-width:0;min-height:36px;padding:8px 12px;border-radius:8px;border:1px solid var(--border-soft);background:var(--surface-sunken)}
+.ev-row dt::after{content:"";flex:1;min-width:12px;height:1px;background:repeating-linear-gradient(to left,var(--border) 0 2px,transparent 2px 4px)}
+.ev-row dt{flex:1 1 auto;display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:10px;line-height:16px;font-weight:400;color:var(--text-muted)}
+.ev-row.clip{flex-wrap:nowrap}.ev-row.clip dd{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev-row dd{margin:0;font-size:11px;line-height:20px;font-weight:600;color:#1e293b;overflow-wrap:anywhere;text-align:left;min-width:0}
+.ev-none{color:var(--text-faint)}
+@media (max-width:560px){.ev-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.ev-grid{grid-template-columns:minmax(0,1fr)}
+  .ev-tabs .ev-edit{width:36px;padding:0;justify-content:center}.ev-tabs .ev-edit span{display:none}
+  .ev-tab{height:auto;min-height:28px;padding:4px;line-height:14px}.ev-tab span{white-space:normal;text-align:center}}
+@media (max-width:560px){.ev-form .wizard-step{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.ev-form .wizard-step{grid-template-columns:minmax(0,1fr)}}
 .field{min-width:0}
 .field input:not([type="file"]),.field select{width:100%;min-width:0;height:32px}
 .date-input-wrap{position:relative}
+.date3{position:relative;display:flex;align-items:center;width:100%;height:32px;direction:ltr;border:1px solid var(--border);border-radius:4px;background:var(--surface);transition:border-color .15s}
+.date3:hover:not(:focus-within){border-color:var(--text-faint)}
+.date3:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
+.date3:has(input[aria-invalid="true"]){border-color:var(--danger)}
+.field .date3 input[data-d3]{flex:1 1 0;min-width:0;height:100%;border:0;border-radius:4px;padding:0 4px;background:transparent;text-align:center;box-shadow:none}
+.field .date3 input[data-d3]:hover{border:0}
+.field .date3 input[data-d3]:focus{box-shadow:none;background:transparent}
+.field .date3 input[data-d3="0"]{flex-grow:1.4}
+.d3-sep{flex:none;color:var(--text-faint);font-size:12px;user-select:none}
+.date3 .date-fill{position:static;transform:none;flex:none;height:24px;margin:0 4px;display:inline-flex;align-items:center;gap:2px}
+.d3-menu{position:absolute;left:0;bottom:calc(100% + 4px);z-index:5;min-width:120px;padding:4px;direction:rtl;background:var(--surface);border:1px solid var(--border-soft);border-radius:8px;box-shadow:var(--shadow-pop)}
+.d3-menu[hidden]{display:none}
+.d3-menu .menu-item{font-size:11px;padding:6px 8px}
+.d3-menu .menu-item[aria-checked="true"]{background:var(--primary-softer);color:var(--primary-strong);font-weight:600}
+.sal-hint{font-size:10px;line-height:12px;color:var(--text-muted)}
+.sal-hint:empty{display:none}
+.field .date3 input.d3-val{position:absolute;width:1px;height:1px;padding:0;border:0;opacity:0;pointer-events:none}
 .date-input-wrap:has(.date-fill) input{padding-left:76px}
 .date-fill{position:absolute;left:4px;top:50%;transform:translateY(-50%);height:24px;padding:0 8px}
 .wizard-step-label.done b svg{display:block}
@@ -1246,12 +1368,26 @@ body.has-bulk .toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 .bulk-close:hover{background:var(--b-hover);color:inherit}
 @media (max-width:560px){.bulk-act{font-size:0;gap:0}.bulk-act svg{width:18px;height:18px}.bulk-count{width:auto;flex:1}}
 .sq-btn{position:relative}
+.sq-btn.is-off{color:var(--text-muted)}
+.sq-dot{position:absolute;top:-3px;left:-3px;width:8px;height:8px;border-radius:50%;background:var(--danger);box-shadow:0 0 0 2px var(--surface)}
+.np-tabs{margin:2px 8px 6px}
+.np-tabs button{flex:1;width:auto}
+.np .np-list{padding:0}
+.np .np-empty{padding:20px 8px}
+.np-tab-body{display:grid}
+.np-pane{grid-area:1/1;display:flex;flex-direction:column}
+.np-pane[inert]{visibility:hidden}
+.np-pane .np-empty{flex:1;justify-content:center}
+.np-pane .np-empty svg{color:var(--text-faint)}
 .sq-count{position:absolute;top:-6px;left:-6px;min-width:16px;height:16px;padding:0 3px;border-radius:8px;background:var(--primary);color:var(--on-primary);font-size:10px;line-height:16px;font-weight:600;box-shadow:0 0 0 2px var(--surface)}
-.phone-pop{padding:4px 6px 6px;min-width:220px}
+.phone-pop{padding:4px 6px 6px;width:200px;box-sizing:border-box}
 .phone-pop h4{margin:4px 2px 8px}
-.phone-num{font-size:18px;line-height:26px;font-weight:600;color:var(--text-strong);text-align:center;padding:8px;border-radius:6px;background:var(--surface-alt);user-select:all;letter-spacing:.5px}
-.phone-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.phone-acts .btn{text-decoration:none}
+.phone-num{font-size:14px;line-height:22px;font-weight:500;color:var(--text-strong);text-align:center;padding:8px;border-radius:6px;background:var(--surface-alt);user-select:all;letter-spacing:.5px}
+.pp-acts{display:flex;gap:8px;margin-top:10px}
+.pp-call{flex:1;text-decoration:none;gap:6px}
+.pp-copy{display:grid;place-items:center;width:32px;height:32px;box-sizing:border-box;flex:none;border-radius:6px;border:.5px solid var(--border);background:var(--surface);color:var(--text-muted)}
+.pp-copy:hover{background:var(--surface-alt);color:var(--primary)}
+.pp-copy.ok{color:var(--success)}
 .np{width:280px;max-width:calc(100vw - 32px)}
 .np h4{margin:6px 8px 6px}
 .np-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px;border-radius:6px;cursor:pointer}
@@ -1306,6 +1442,8 @@ body.has-bulk .toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
   .side{position:fixed;inset:0;z-index:70;display:none;align-items:flex-end;justify-content:center;background:rgba(15,23,42,.42);overflow:hidden}
   body.sheet-open .side:not([hidden]){display:flex;animation:sheetFade .18s ease-out}
   body.sheet-open{overflow:hidden}
+  .overlay{z-index:80}
+  .toast{z-index:82}
   .side-scroll{position:relative;width:100%;max-width:560px;height:auto;max-height:calc(100dvh - 40px);overflow-y:auto;padding:0 16px 20px;background:var(--app-bg);border-radius:16px 16px 0 0;box-shadow:0 -8px 30px rgba(15,23,42,.18);animation:sheetUp .22s cubic-bezier(.2,.8,.2,1)}
   .pf-close{display:none}
   .sheet-head{display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:3;margin:0 -16px 4px;padding:16px 16px 10px;background:var(--app-bg);font-size:13px;color:var(--text-strong)}
@@ -1386,7 +1524,7 @@ body.nd-open{overflow:hidden}
     </div>
     <label class="search">
       <span class="sr-only">جستجو در کارمندان</span>
-      <input id="globalSearch" type="search" placeholder="جستجو" autocomplete="off">
+      <input id="globalSearch" type="search" placeholder="جست‌وجو" autocomplete="off">
       <button type="button" class="search-clear" data-clear="globalSearch" aria-label="پاک کردن متن جستجو" title="پاک کردن" hidden><span data-icon="x" data-size="14"></span></button>
       <span data-icon="search" data-size="16"></span>
     </label>
@@ -1417,7 +1555,7 @@ body.nd-open{overflow:hidden}
       <div class="toolbar">
         <label class="search big">
           <span class="sr-only">جستجو در جدول</span>
-          <input id="tableSearch" type="search" placeholder="جستجو" autocomplete="off">
+          <input id="tableSearch" type="search" placeholder="جست‌وجو در نام، کد ملی، موبایل…" autocomplete="off">
       <button type="button" class="search-clear" data-clear="tableSearch" aria-label="پاک کردن متن جستجو" title="پاک کردن" hidden><span data-icon="x" data-size="14"></span></button>
           <span data-icon="search" data-size="16"></span>
         </label>
@@ -1476,6 +1614,7 @@ body.nd-open{overflow:hidden}
 <script>
 /* Heroicons v2.1.5 (MIT), the icon set used in the Figma file */
 const ICONS={"trash": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z\" clip-rule=\"evenodd\"/>"}, "bellAlert": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M4.214 3.227a.75.75 0 0 0-1.156-.955 8.97 8.97 0 0 0-1.856 3.825.75.75 0 0 0 1.466.316 7.47 7.47 0 0 1 1.546-3.186ZM16.942 2.272a.75.75 0 0 0-1.157.955 7.47 7.47 0 0 1 1.547 3.186.75.75 0 0 0 1.466-.316 8.971 8.971 0 0 0-1.856-3.825Z\"/> <path fill-rule=\"evenodd\" d=\"M10 2a6 6 0 0 0-6 6c0 1.887-.454 3.665-1.257 5.234a.75.75 0 0 0 .515 1.076 32.91 32.91 0 0 0 3.256.508 3.5 3.5 0 0 0 6.972 0 32.903 32.903 0 0 0 3.256-.508.75.75 0 0 0 .515-1.076A11.448 11.448 0 0 1 16 8a6 6 0 0 0-6-6Zm0 14.5a2 2 0 0 1-1.95-1.557 33.54 33.54 0 0 0 3.9 0A2 2 0 0 1 10 16.5Z\" clip-rule=\"evenodd\"/>"}, "pencil": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z\"/> <path d=\"M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z\"/>"}, "phone": {"vb": "0 0 24 24", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z\" clip-rule=\"evenodd\"/>"}, "chat": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902.848.137 1.705.248 2.57.331v3.443a.75.75 0 0 0 1.28.53l3.58-3.579a.78.78 0 0 1 .527-.224 41.202 41.202 0 0 0 5.183-.5c1.437-.232 2.43-1.49 2.43-2.903V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0 0 10 2Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM8 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z\" clip-rule=\"evenodd\"/>"}, "check": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z\" clip-rule=\"evenodd\"/>"}, "dots": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M10 3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM10 8.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM11.5 15.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z\"/>"}, "search": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z\" clip-rule=\"evenodd\"/>"}, "home": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z\" clip-rule=\"evenodd\"/>"}, "stack": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"m3.196 12.87-.825.483a.75.75 0 0 0 0 1.294l7.25 4.25a.75.75 0 0 0 .758 0l7.25-4.25a.75.75 0 0 0 0-1.294l-.825-.484-5.666 3.322a2.25 2.25 0 0 1-2.276 0L3.196 12.87Z\"/> <path d=\"m3.196 8.87-.825.483a.75.75 0 0 0 0 1.294l7.25 4.25a.75.75 0 0 0 .758 0l7.25-4.25a.75.75 0 0 0 0-1.294l-.825-.484-5.666 3.322a2.25 2.25 0 0 1-2.276 0L3.196 8.87Z\"/> <path d=\"M10.38 1.103a.75.75 0 0 0-.76 0l-7.25 4.25a.75.75 0 0 0 0 1.294l7.25 4.25a.75.75 0 0 0 .76 0l7.25-4.25a.75.75 0 0 0 0-1.294l-7.25-4.25Z\"/>"}, "export": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15\"/>"}, "printer": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z\"/>"}, "funnel": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z\"/>"}, "plus": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 4.5v15m7.5-7.5h-15\"/>"}, "apps": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z\"/>"}, "bell": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0\"/>"}, "cog": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z\"/> <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"/>"}, "chevL": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z\" clip-rule=\"evenodd\"/>"}, "chevR": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\"/>"}, "sort": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M10.53 3.47a.75.75 0 0 0-1.06 0L6.22 6.72a.75.75 0 0 0 1.06 1.06L10 5.06l2.72 2.72a.75.75 0 1 0 1.06-1.06l-3.25-3.25Zm-4.31 9.81 3.25 3.25a.75.75 0 0 0 1.06 0l3.25-3.25a.75.75 0 1 0-1.06-1.06L10 14.94l-2.72-2.72a.75.75 0 0 0-1.06 1.06Z\" clip-rule=\"evenodd\"/>"}, "x": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z\"/>"}, "eye": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z\"/> <path fill-rule=\"evenodd\" d=\"M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z\" clip-rule=\"evenodd\"/>"}, "chevUp": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z\" clip-rule=\"evenodd\"/>"}, "chevDown": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\"/>"}};
+ICONS.mail={vb:'0 0 20 20',o:false,p:'<path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z"/><path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z"/>'};
 Object.assign(ICONS,{"renew": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M15.312 11.424a5.5 5.5 0 0 1-9.201 2.466l-.312-.311h2.433a.75.75 0 0 0 0-1.5H3.989a.75.75 0 0 0-.75.75v4.242a.75.75 0 0 0 1.5 0v-2.43l.31.31a7 7 0 0 0 11.712-3.138.75.75 0 0 0-1.449-.39Zm1.23-3.723a.75.75 0 0 0 .219-.53V2.929a.75.75 0 0 0-1.5 0V5.36l-.31-.31A7 7 0 0 0 3.239 8.188a.75.75 0 1 0 1.448.389A5.5 5.5 0 0 1 13.89 6.11l.311.31h-2.432a.75.75 0 0 0 0 1.5h4.243a.75.75 0 0 0 .53-.219Z\" clip-rule=\"evenodd\"/>"}, "copy": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M7 3.5A1.5 1.5 0 0 1 8.5 2h3.879a1.5 1.5 0 0 1 1.06.44l3.122 3.12A1.5 1.5 0 0 1 17 6.622V12.5a1.5 1.5 0 0 1-1.5 1.5h-1v-3.379a3 3 0 0 0-.879-2.121L10.5 5.379A3 3 0 0 0 8.379 4.5H7v-1Z\"/> <path d=\"M4.5 6A1.5 1.5 0 0 0 3 7.5v9A1.5 1.5 0 0 0 4.5 18h7a1.5 1.5 0 0 0 1.5-1.5v-5.879a1.5 1.5 0 0 0-.44-1.06L9.44 6.439A1.5 1.5 0 0 0 8.378 6H4.5Z\"/>"}, "bellOff": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M4 8c0-.26.017-.517.049-.77l7.722 7.723a33.56 33.56 0 0 1-3.722-.01 2 2 0 0 0 3.862.15l1.134 1.134a3.5 3.5 0 0 1-6.53-1.409 32.91 32.91 0 0 1-3.257-.508.75.75 0 0 1-.515-1.076A11.448 11.448 0 0 0 4 8ZM17.266 13.9a.756.756 0 0 1-.068.116L6.389 3.207A6 6 0 0 1 16 8c.001 1.887.455 3.665 1.258 5.234a.75.75 0 0 1 .01.666ZM3.28 2.22a.75.75 0 0 0-1.06 1.06l14.5 14.5a.75.75 0 1 0 1.06-1.06L3.28 2.22Z\"/>"}});
 Object.assign(ICONS,{"mUsers": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z\"/>"}, "mMoney": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z\"/>"}, "mBrief": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z\"/>"}, "mDoc": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z\"/>"}, "mChart": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z\"/>"}, "chevLs": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z\" clip-rule=\"evenodd\"/>"}, "chevRs": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\"/>"}});
 Object.assign(ICONS,{"plusS": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z\"/>"}});
@@ -1648,6 +1787,17 @@ state.employees.forEach(e=>{if(!e.nationalId)Object.assign(e,extraFor(e.id))});
 if(saved&&saved.currency!=='rial')state.employees.forEach(e=>{e.salary=Math.round(e.salary*10)});
 state.employees.forEach(e=>{if(!e.notifs)e.notifs={contract:true,insurance:true,hours:false,anniversary:false};delete e.reminder});
 const notifOn=e=>NOTIF_TYPES.filter(n=>e.notifs[n.k]).length;
+/* active notifications for one employee (only for enabled types) */
+function personNotifs(e){const out=[],N=e.notifs||{};if(e.terminated)return out;
+  if(N.contract){const s=contractState(e);if(s==='expired')out.push({c:'rose',i:'nDocMinus',t:'قرارداد منقضی‌شده',d:`قرارداد در ${fa(e.contractEnd)} به پایان رسیده است.`});
+    else if(s==='soon')out.push({c:'amber',i:'nCal',t:'پایان قرارداد نزدیک',d:`قرارداد در ${fa(e.contractEnd)} تمام می‌شود.`})}
+  if(N.insurance){if(!e.insurance)out.push({c:'violet',i:'nShield',t:'بدون بیمه',d:'بیمه این کارمند فعال نیست.'});
+    else if(e.insuranceEnd&&e.insuranceEnd<=addDays(TODAY,30))out.push({c:'violet',i:'nShield',t:'سررسید بیمه نزدیک',d:`پوشش بیمه در ${fa(e.insuranceEnd)} تمام می‌شود.`})}
+  if(N.hours){const m=0,data=hoursFor(e,m).map((h,i)=>isHol(m,i)?0:h),tot=data.reduce((a,b)=>a+b,0),allow=data.filter((_,i)=>!isHol(m,i)).length*8;
+    if(tot<allow)out.push({c:'blue',i:'nClock',t:'کسری ساعات کاری',d:`${fa(Math.round(allow-tot))} ساعت کسری در ${MONTHS[m].n}`})}
+  if(N.anniversary&&e.start&&e.start.slice(5)===TODAY.slice(5)&&e.start<TODAY)out.push({c:'green',i:'nCal',t:'سالگرد استخدام',d:`امروز سالگرد شروع به کار (${fa(e.start.slice(0,4))}) است.`});
+  return out}
+const notifBtnInner=e=>icon(notifOn(e)?'bellAlert':'bellOff',16)+(personNotifs(e).length?'<span class="sq-dot" aria-hidden="true"></span><span class="sr-only">، اعلان جدید</span>':'');
 const byId=id=>state.employees.find(e=>e.id===id);
 
 /* ---------- columns ---------- */
@@ -1751,11 +1901,21 @@ const afGroup=()=>({id:'g'+(++afSeq),kind:'group',op:'and',children:[afRow()]});
 function freshFilters(){const g={};FCATS.forEach(c=>g[c.k]=new Set());return {general:g,advanced:afGroup()}}
 state.filters=freshFilters();
 function resetFilters(){state.filters=freshFilters()}
-const afComplete=r=>r.field&&r.op&&String(r.value).trim()!=='';
+const afDate=v=>toEn(String(v||'')).trim().split('/').map((p,i)=>i?p.padStart(2,'0'):p).join('/');
+/* a row counts only when it is fully usable: numbers need digits, dates need a real full date */
+const afComplete=r=>{if(!(r.field&&r.op&&String(r.value).trim()!==''))return false;const f=AF_FIELDS.find(x=>x.k===r.field);if(!f)return false;
+  if(f.type==='number')return /\d/.test(toEn(r.value));if(f.type==='date')return afDateOk(r.value);return true};
+/* a date value may be a full date, a year (۱۳۷۴) or a year/month (۱۳۷۴/۰۵) */
+function afDateOk(v){const d=afDate(v);return validJalaliDate(d)||/^1[34]\d{2}$/.test(d)||/^1[34]\d{2}\/(0[1-9]|1[0-2])$/.test(d)}
 function afTest(e,r){
   const f=AF_FIELDS.find(x=>x.k===r.field);let a=f.get(e),b=r.value;
+  /* an empty field never satisfies a positive condition */
+  if(a==null||String(a).trim()==='')return r.op==='ne'||r.op==='nhas';
   if(f.type==='number'){a=+a;b=+toEn(b).replace(/[^\d]/g,'')}
-  else if(f.type==='date'){a=String(a);b=toEn(b).trim().split('/').map((p,i)=>i?p.padStart(2,'0'):p).join('/')}
+  else if(f.type==='date'){a=afDate(a);b=afDate(b);
+    /* year or year/month means the whole period: "برابر" = inside it, "بعد از" = after its end, "قبل از" = before its start */
+    if(r.op==='eq')return a.startsWith(b);if(r.op==='ne')return !a.startsWith(b);if(r.op==='gt')return a>b&&!a.startsWith(b)}
+  else if(f.k==='mobile'){a=normMobile(a);b=normMobile(b)}
   else {a=norm(a);b=norm(b)}
   switch(r.op){case 'eq':return a===b;case 'ne':return a!==b;case 'has':return a.includes(b);case 'nhas':return !a.includes(b);case 'sw':return a.startsWith(b);
     case 'gt':return a>b;case 'gte':return a>=b;case 'lt':return a<b;case 'lte':return a<=b}
@@ -1767,6 +1927,16 @@ function afEval(e,g){
   const res=parts.map(c=>c.kind==='group'?afEval(e,c):afTest(e,c));
   return g.op==='and'?res.every(Boolean):res.some(Boolean);
 }
+/* what is missing in a row (for the inline error shown when adding another row) */
+let afErr=null;
+function afMissing(r){const f=AF_FIELDS.find(x=>x.k===r.field);
+  if(!f)return {part:'field',msg:'فیلد را انتخاب کنید.'};
+  if(!r.op)return {part:'op',msg:'شرط را انتخاب کنید.'};
+  if(String(r.value).trim()==='')return {part:'value',msg:f.type==='enum'?'مقدار را انتخاب کنید.':'مقدار را وارد کنید.'};
+  if(f.type==='number'&&!/\d/.test(toEn(r.value)))return {part:'value',msg:'مقدار باید عدد باشد.'};
+  if(f.type==='date'&&!afDateOk(r.value))return {part:'value',msg:'تاریخ معتبر نیست؛ سال (۱۳۷۴)، سال و ماه (۱۳۷۴/۰۵) یا تاریخ کامل وارد کنید.'};
+  return null}
+function afFirstIncomplete(g){for(const c of g.children){const r=c.kind==='group'?afFirstIncomplete(c):afMissing(c)?c:null;if(r)return r}return null}
 const afActive=g=>g.children.some(c=>c.kind==='group'?afActive(c):afComplete(c));
 const afCountRows=g=>g.children.reduce((n,c)=>n+(c.kind==='group'?afCountRows(c):afComplete(c)?1:0),0);
 function visible(){
@@ -1903,10 +2073,10 @@ function renderPanel(){
       <p class="pf-role">${esc(e.roleFull)}<b aria-hidden="true">·</b><span class="sr-only">، </span>${esc(e.team)}<b aria-hidden="true">·</b><span class="sr-only">، </span>${esc(e.seniority)}</p>
       ${e.terminated?'<span class="pf-status">قرارداد فسخ شده</span>':''}
       <div class="pf-actions">
-        <button class="sq-btn" data-act="chat" aria-label="ارسال پیام به ${esc(e.name)}" title="ارسال پیام">${icon('chat',16)}</button>
+        <button class="sq-btn" data-act="chat" aria-label="ارسال ایمیل به ${esc(e.name)}" title="ارسال ایمیل">${icon('mail',16)}</button>
         <button class="sq-btn" data-act="call" aria-haspopup="dialog" aria-expanded="false" aria-label="شماره تماس ${esc(e.name)}" title="شماره تماس">${icon('phone',16)}</button>
         <button class="sq-btn" data-act="edit" aria-label="ویرایش ${esc(e.name)}" title="ویرایش">${icon('pencil',16)}</button>
-        <button class="sq-btn" data-act="notifs" aria-haspopup="dialog" aria-expanded="false" aria-label="اعلان‌های ${esc(e.name)}" title="اعلان‌ها">${icon(notifOn(e)?'bellAlert':'bellOff',16)}${notifOn(e)?`<span class="sq-count">${fa(notifOn(e))}</span>`:''}</button>
+        <button class="sq-btn${notifOn(e)?'':' is-off'}" data-act="notifs" aria-haspopup="dialog" aria-expanded="false" aria-label="اعلان‌های ${esc(e.name)}" title="اعلان‌ها">${notifBtnInner(e)}</button>
         <button class="sq-btn danger" data-act="delete" aria-label="حذف ${esc(e.name)}" title="حذف">${icon('trash',16)}</button>
       </div>
       <div class="pf-buttons">
@@ -1987,7 +2157,7 @@ function renderChart(e){
 }
 
 /* ---------- dashboard ---------- */
-const WIP_ART='<svg class="wip-art" viewBox="0 0 250 160" fill="none" aria-hidden="true" focusable="false" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 50h24M10 50h3M34 32h18M60 32h4M200 38h26M192 38h4M208 20h14M222 72h12" style="stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><path d="M14 132h222" style="stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><path d="M8 132h2" style="stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><rect x="48" y="26" width="154" height="98" rx="9" style="fill:var(--primary-softer);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M48 44h154" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M60 35h3M69 35h3M78 35h3" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><rect x="150" y="31" width="42" height="9" rx="4.5" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><rect x="58" y="52" width="24" height="62" rx="5" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><rect x="63" y="58" width="14" height="10" rx="3" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M63 77h14M63 85h14M63 93h9" style="stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><rect x="90" y="52" width="34" height="20" rx="4" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M96 59h12M96 65h20" style="stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><rect x="130" y="52" width="34" height="20" rx="4" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M136 59h12M136 65h20" style="stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><rect x="170" y="52" width="24" height="20" rx="4" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))" stroke-dasharray="3 4"/><rect x="90" y="80" width="74" height="34" rx="4" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><path d="M96 106l12-10 10 5 14-14 12 8 12-9" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><circle cx="156" cy="91" r="3" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><rect x="170" y="80" width="24" height="34" rx="4" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))" stroke-dasharray="3 4"/><path d="M176 108V98M182 108V90M188 108V102" style="stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><g transform="translate(60 124)"><circle r="19" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><path d="M12.8 -2.0 L16.9 -1.6 L16.9 1.6 L12.8 2.0 L10.5 7.6 L13.1 10.8 L10.8 13.1 L7.6 10.5 L2.0 12.8 L1.6 16.9 L-1.6 16.9 L-2.0 12.8 L-7.6 10.5 L-10.8 13.1 L-13.1 10.8 L-10.5 7.6 L-12.8 2.0 L-16.9 1.6 L-16.9 -1.6 L-12.8 -2.0 L-10.5 -7.6 L-13.1 -10.8 L-10.8 -13.1 L-7.6 -10.5 L-2.0 -12.8 L-1.6 -16.9 L1.6 -16.9 L2.0 -12.8 L7.6 -10.5 L10.8 -13.1 L13.1 -10.8 L10.5 -7.6Z" style="fill:var(--primary-softer);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><circle r="5" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/></g><g transform="translate(198 112) rotate(40)"><rect x="-5" y="-30" width="10" height="42" rx="2" style="fill:var(--primary-softer);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M-5 -22h10" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M-5 12l5 10 5-10z" style="fill:var(--surface);stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M-1.5 19.5l1.5 2.5 1.5-2.5" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/></g><path d="M222 100v8M218 104h8" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M30 92v6M27 95h6" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M26 118h3" style="stroke:color-mix(in srgb,var(--primary) 22%,var(--surface))"/><circle cx="232" cy="52" r="2.5" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/><path d="M26 132h20M54 132h4M214 132h10" style="stroke:color-mix(in srgb,var(--primary) 50%,var(--surface))"/></svg>';
+const WIP_ART='<svg class="wip-art" viewBox="0 0 207 132" fill="none" aria-hidden="true" focusable="false" stroke-width="2.475" stroke-linecap="round" stroke-linejoin="round"><path d="M36 46h9a6 6 0 0 1 11-4 5 5 0 0 1 8 4h2a3 3 0 0 1 0 6H32M26 52h2" style="stroke:var(--illo-light)"/><path d="M146 34h8a6 6 0 0 1 11-4 5 5 0 0 1 8 4h2a3 3 0 0 1 0 6H142M136 40h2" style="stroke:var(--illo-light)"/><path d="M14 101H199M7 101h3" style="stroke:var(--illo-light)"/><path d="M54 101l5.5-23q1.5-2 3 0l5.5 23Z" style="fill:var(--illo-light);stroke:var(--illo-dark)"/><path d="M57.1 88h7.8l1.2 5H55.9Z" style="fill:var(--surface);stroke:var(--illo-dark)"/><rect x="50" y="101" width="22" height="5" rx="1.5" style="fill:var(--illo-light);stroke:var(--illo-dark)"/><path d="M84 99l9.5-43q2.5-4 5 0l9.5 43Z" style="fill:var(--illo-light);stroke:var(--illo-dark)"/><path d="M90.4 70h11.2l1.8 8H88.6ZM87.1 85h17.8l1.8 8H85.3Z" style="fill:var(--surface);stroke:var(--illo-dark)"/><rect x="76" y="99" width="40" height="7" rx="2" style="fill:var(--illo-light);stroke:var(--illo-dark)"/><path d="M96 46v-5M88 49l-3-3M104 49l3-3" style="stroke:var(--illo-dark)"/><path d="M140 82l-6 24M140 82l6 24M176 82l-6 24M176 82l6 24" style="stroke:var(--illo-dark)"/><rect x="128" y="68" width="60" height="14" rx="3" style="fill:var(--illo-light);stroke:var(--illo-dark)"/><path d="M142 70l-6 10M156 70l-6 10M170 70l-6 10M184 70l-6 10" style="stroke:var(--illo-dark)"/><path d="M158 68v-2" style="stroke:var(--illo-dark)"/><circle cx="158" cy="61" r="4" style="fill:var(--illo-light);stroke:var(--illo-dark)"/><path d="M158 52v-3M151 55l-2-2M165 55l2-2" style="stroke:var(--illo-dark)"/><path d="M26 106H173M178 106h4" style="stroke:var(--illo-dark)"/></svg>';
 function dashWip(title,host){
   host.innerHTML=`<div class="dash-wip"><h1 class="page-title" id="dashTitle">${title}</h1><div class="wip-body">${WIP_ART}<b>در حال طراحی</b><span>این داشبورد به‌زودی در دسترس خواهد بود.</span></div></div>`;
 }
@@ -2068,13 +2238,13 @@ $('#tableWrap').addEventListener('scroll',e=>{closePop();e.target.classList.togg
 
 /* ---------- modal ---------- */
 let modalClose=null;
-function openModal({title,body='',actions=[],onOpen,closeBtn=true,beforeClose}){
+function openModal({title,body='',actions=[],onOpen,closeBtn=true,beforeClose,onClose}){
   const prev=document.activeElement;
   const ov=document.createElement('div');ov.className='overlay';
   ov.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">${closeBtn?`<div class="modal-head"><h2 id="mTitle">${title}</h2><button type="button" class="modal-x" aria-label="بستن" title="بستن">${icon('x',16)}</button></div>`:`<h2 id="mTitle">${title}</h2>`}${body}<div class="modal-actions"></div></div>`;
   const acts=ov.querySelector('.modal-actions');
   let closed=false;
-  const forceClose=()=>{if(closed)return;closed=true;ov.remove();document.removeEventListener('keydown',key);modalClose=document.querySelector('.overlay')?(()=>{}):null;prev&&prev.focus&&prev.focus()};
+  const forceClose=()=>{if(closed)return;closed=true;ov.remove();document.removeEventListener('keydown',key);modalClose=document.querySelector('.overlay')?(()=>{}):null;prev&&prev.focus&&prev.focus();onClose&&onClose()};
   const close=()=>{if(beforeClose&&beforeClose(forceClose)===false)return;forceClose()};
   const isTop=()=>{const all=document.querySelectorAll('.overlay');return all[all.length-1]===ov};
   const xb=ov.querySelector('.modal-x');if(xb)xb.addEventListener('click',close);
@@ -2095,12 +2265,12 @@ function openModal({title,body='',actions=[],onOpen,closeBtn=true,beforeClose}){
   return close;
 }
 function confirmModal(title,msg,label,onYes){
-  openModal({title,body:`<p class="msg">${msg}</p>`,actions:[{label,kind:'btn-danger',onClick:onYes},{label:'انصراف'}]});
+  openModal({title,body:`<p class="msg cm-msg">${msg}</p>`,actions:[{label,kind:'btn-danger',onClick:onYes},{label:'انصراف'}]});
 }
 
 /* ---------- employee form ---------- */
 const CHECK_ICON='<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.4 6.3l2.3 2.3 4.9-5.2"/></svg>';
-const AVATAR_ICON='<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>';
+const AVATAR_ICON='<svg class="av-ph" width="64" height="64" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><circle cx="32" cy="25" r="11"/><ellipse cx="32" cy="62" rx="22" ry="20"/></svg>';
 const NAME_ERR='نام و نام خانوادگی را با حروف فارسی و در دو بخش یا بیشتر وارد کنید.';
 const DATE_ERR='تاریخ معتبر را به شکل سال/ماه/روز وارد کنید.';
 const WORK_MODES=['حضوری','دورکاری','ترکیبی'];
@@ -2161,13 +2331,55 @@ function nidChecksumOk(v){
   let s=0;for(let i=0;i<9;i++)s+=+v[i]*(10-i);
   const r=s%11,c=+v[9];return r<2?c===r:c===11-r;
 }
-function employeeForm(e){
-  const isNew=!e;
-  e=e||{name:'',role:'',roleFull:'',team:'',seniority:'',contract:'',salary:'',insurance:null,mobile:'',start:TODAY,contractEnd:addJalaliMonths(TODAY,12),nationalId:'',idNumber:'',issuedFrom:'',birthCity:'',residence:''};
+/* read-only view of an employee, grouped like the add form; each group has its own edit button */
+const EMP_SECTIONS=['اطلاعات هویتی','اطلاعات تماس','اطلاعات شغلی'];
+const SEC_KEYS=[['photo','name','nationalId','idNumber','birthCity','birthDate'],['mobile','email','residence'],['role','team','roleFull','seniority','contract','workMode','salary','insurance','start','contractEnd']];
+/* renders a form (same options as openModal) inside an element instead of a dialog */
+function mountInline(host,o){
+  host.innerHTML=`<div class="ev-form">${o.body}<div class="modal-actions"></div></div>`;
+  const acts=host.querySelector('.modal-actions');let done=false;
+  const finish=()=>{if(done)return;done=true;o.onClose&&o.onClose()};
+  const rk=a=>a.kind==='btn-primary'?1:0;
+  [...(o.actions||[])].sort((x,y)=>rk(x)-rk(y)).forEach(a=>{const btn=document.createElement('button');btn.type='button';btn.className='btn '+(a.kind||'btn-ghost');btn.textContent=a.label;
+    btn.onclick=()=>{if(a.onClick&&a.onClick(host)===false)return;if(a.kind)return finish();if(o.beforeClose&&o.beforeClose(finish)===false)return;finish()};acts.appendChild(btn)});
+  o.onOpen&&o.onOpen(host);
+  const first=host.querySelector('.wizard-step:not([hidden]) input:not([type="file"]):not([hidden]):not(.d3-val),.wizard-step:not([hidden]) select');first&&first.focus({preventScroll:true});
+}
+function employeeView(e){
+  let tab=0;const inner=()=>employeeViewHtml(e,tab);let editing=null;
+  openModal({title:'اطلاعات کارمند',body:`<div class="ev">${inner()}</div>`,actions:[{label:'بستن'}],
+    /* closing with an unsaved section edit asks first */
+    beforeClose:forceClose=>{if(!editing||!editing())return true;
+      openModal({title:'بستن فرم؟',body:'<p class="msg">تغییراتی که وارد کرده‌اید ذخیره نشده است و با بستن از بین می‌رود.</p>',
+        actions:[{label:'ادامه ویرایش',kind:'btn-primary'},{label:'بستن بدون ذخیره',kind:'btn-danger-outline',onClick:()=>{forceClose()}}]});
+      return false},
+    onOpen:ov=>{ov.querySelector('.modal').classList.add('ev-modal');const box=ov.querySelector('.ev');
+      box.addEventListener('click',ev=>{
+        const b=ev.target.closest('[data-sec]');if(!b||editing)return;const i=+b.dataset.sec,secEl=box.querySelector('#ev-s'+i),body=secEl.querySelector('.ev-body');
+        body.hidden=false;secEl.classList.add('editing');box.classList.add('is-editing');
+        box.querySelectorAll('.ev-edit,.ev-tab').forEach(x=>x.disabled=true);
+        const foot=ov.querySelectorAll('.modal>.modal-actions .btn');foot.forEach(x=>x.disabled=true);
+        editing=employeeForm(e,i,()=>{editing=null;box.classList.remove('is-editing');foot.forEach(x=>x.disabled=false);if(!ov.isConnected)return;box.innerHTML=inner();box.querySelector(`[data-sec="${i}"]`)?.focus()},body)})}});
+}
+function employeeViewHtml(e,a=0){
+  const v=x=>x||x===0?x:'<span class="ev-none">—</span>';
+  const row=(l,val,ltr,full,tip)=>`<div class="ev-row${full?' full':''}${tip?' clip':''}"><dt>${l}</dt><dd${ltr?' dir="ltr"':''}${tip?` title="${tip}"`:''}>${v(val)}</dd></div>`;
+  const photo=e.photo!==undefined?e.photo:PHOTOS[e.id];
+  const secs=[
+    `<div class="ev-who">${photo?`<img src="${esc(photo)}" alt="">`:`<span class="ev-av">${esc(initials(e.name))}</span>`}<span class="ev-id"><b>${esc(e.name)}</b>${e.roleFull||e.role?`<small>${esc(e.roleFull||e.role)}</small>`:''}</span></div>`+
+    `<dl class="ev-grid">${row('کد ملی',e.nationalId&&fa(e.nationalId))}${row('شماره شناسنامه',e.idNumber&&fa(e.idNumber))}${row('صادره از',e.birthCity&&esc(e.birthCity))}${row('تاریخ تولد',e.birthDate&&fa(e.birthDate))}</dl>`,
+    `<dl class="ev-grid">${row('شماره موبایل',e.mobile&&fa(e.mobile))}${row('ایمیل',e.email&&esc(e.email))}${row('محل سکونت',e.residence&&esc(e.residence))}</dl>`,
+    `<dl class="ev-grid">${row('سمت شغلی',e.role&&esc(e.role))}${row('تیم',e.team&&esc(e.team))}${row('عنوان کامل سمت',e.roleFull&&esc(e.roleFull),0,0,e.roleFull&&esc(e.roleFull))}${row('سطح',e.seniority&&esc(e.seniority))}${row('نوع قرارداد',e.contract&&esc(e.contract))}${row('نوع حضور',e.workMode&&esc(e.workMode))}${row('حقوق دریافتی',e.salary?money(e.salary)+' ریال':'')}${row('بیمه',e.insurance==null?'':e.insurance?'دارد':'ندارد')}${row('تاریخ شروع به کار',e.start&&fa(e.start))}${row('تاریخ پایان قرارداد',e.contractEnd&&fa(e.contractEnd))}</dl>`
+  ];
+  return secs.map((s,i)=>`<section class="ev-sec" id="ev-s${i}" aria-labelledby="ev-h${i}"><div class="ev-head"><h3 id="ev-h${i}">${EMP_SECTIONS[i]}</h3><button type="button" class="ev-edit" data-sec="${i}" aria-label="ویرایش ${EMP_SECTIONS[i]}">${icon('pencil',14)}</button></div><div class="ev-body">${s}</div></section>`).join('');
+}
+function employeeForm(e,only,onDone,host){
+  const isNew=!e,sec=only!=null;
+  e=e||{name:'',role:'',roleFull:'',team:'',seniority:'',contract:'',salary:'',insurance:null,mobile:'',start:TODAY,contractEnd:'',nationalId:'',idNumber:'',issuedFrom:'',birthCity:'',residence:''};
   // list of options; keeps a legacy value that is no longer in the list instead of silently replacing it
   const opt=(arr,v)=>(v&&!arr.includes(v)?[v,...arr]:arr).map(x=>`<option ${x===v?'selected':''}>${esc(x)}</option>`).join('');
   const label=(id,text,required)=>`<label for="${id}"><span>${text}${required?'<i class="required-star" aria-hidden="true">*</i><span class="sr-only"> (ضروری)</span>':'<i class="field-need optional">(اختیاری)</i>'}</span></label>`;
-  let step=0,photoData=e.photo||'',photoRemoved=false,touched=false,teamTouched=!isNew;
+  let step=sec?only:0,reached=isNew?0:2,photoData=e.photo||'',photoRemoved=false,touched=false,teamTouched=!isNew;
   let modalEl,form,primaryBtn,backBtn,cancelBtn;
   const initialPhoto=e.photo!==undefined?e.photo:PHOTOS[e.id];
   const dirty=new Set();
@@ -2246,20 +2458,21 @@ function employeeForm(e){
     return first;
   }
   function showStep(i,focusFirst=true){
-    step=i;
+    step=i;reached=Math.max(reached,i);
     form.querySelectorAll('.wizard-step').forEach((s,k)=>s.hidden=k!==step);
     modalEl.querySelectorAll('[data-step-label]').forEach((l,k)=>{
-      l.classList.toggle('active',k===step);l.classList.toggle('done',k<step);
-      l.querySelector('b').innerHTML=k<step?CHECK_ICON:fa(k+1);
-      const cap=l.querySelector('small');if(cap)cap.textContent=k<step?'تکمیل شد':'مرحله '+['یک','دو','سه'][k];
+      const dn=k!==step&&k<reached,nav=k!==step&&k<=reached;
+      l.classList.toggle('active',k===step);l.classList.toggle('done',dn);l.classList.toggle('nav',nav);
+      l.querySelector('b').innerHTML=dn?CHECK_ICON:fa(k+1);
+      const cap=l.querySelector('small');if(cap)cap.textContent=dn?'تکمیل شد':'مرحله '+['یک','دو','سه'][k];
       if(k===step)l.setAttribute('aria-current','step');else l.removeAttribute('aria-current');
-      if(k<step){l.setAttribute('role','button');l.tabIndex=0;l.setAttribute('aria-label','بازگشت به مرحله '+fa(k+1))}
+      if(nav){l.setAttribute('role','button');l.tabIndex=0;l.setAttribute('aria-label','رفتن به مرحله '+fa(k+1))}
       else{l.removeAttribute('role');l.removeAttribute('tabindex');l.removeAttribute('aria-label')}
     });
-    backBtn.hidden=step===0;
-    if(cancelBtn)cancelBtn.hidden=step!==0;
-    primaryBtn.textContent=step<2?'ادامه':(isNew?'افزودن':'ذخیره تغییرات');
-    modalEl.querySelector('.modal').scrollTop=0;
+    backBtn.hidden=sec||step===0;
+    if(cancelBtn)cancelBtn.hidden=!sec&&step!==0;
+    primaryBtn.textContent=host?'ذخیره':sec?'ذخیره تغییرات':step<2?'ادامه':(isNew?'افزودن':'ذخیره تغییرات');
+    {const md=modalEl.querySelector('.modal');if(md)md.scrollTop=0}
     if(focusFirst){const f=form.querySelector(`[data-step="${step}"] input:not([type="file"]):not([hidden]),[data-step="${step}"] select`);f&&f.focus()}
   }
   const sanitize=(el,re,max)=>{
@@ -2278,9 +2491,12 @@ function employeeForm(e){
     if(out!==raw){el.value=out;let p=out.length,cnt=0;for(;p>0&&cnt<after;p--){if(/[۰-۹]/.test(out[p-1]))cnt++}try{el.setSelectionRange(p,p)}catch(_){}}
   };
 
-  openModal({
+  const d3=(id,name,val,lbl,extra='')=>{const p=(val||'').split('/'),seg=(i,ph,ml)=>`<input${i?'':` id="${id}-y"`} data-d3="${i}" inputmode="numeric" maxlength="${ml}" placeholder="${ph}" aria-label="${ph} ${lbl}" autocomplete="off" value="${fa(p[i]||'')}">`,sep='<span class="d3-sep" aria-hidden="true">/</span>';
+    return `<div class="date3" role="group" aria-label="تاریخ ${lbl}">${extra}${seg(0,'سال',4)}${sep}${seg(1,'ماه',2)}${sep}${seg(2,'روز',2)}<input id="${id}" name="${name}" class="d3-val" tabindex="-1" aria-hidden="true" value="${fa(val||'')}"></div>`};
+  (host?o=>mountInline(host,o):openModal)({
     closeBtn:true,
-    title:isNew?'افزودن کارمند':'ویرایش اطلاعات کارمند',
+    title:sec?'ویرایش '+EMP_SECTIONS[only]:isNew?'افزودن کارمند':'ویرایش اطلاعات کارمند',
+    onClose:onDone,
     /* closing with unsaved input (backdrop click, Esc, X, cancel) asks first instead of silently dropping everything */
     beforeClose:forceClose=>{
       if(!touched)return true;
@@ -2288,14 +2504,14 @@ function employeeForm(e){
         actions:[{label:'ادامه ویرایش',kind:'btn-primary'},{label:'بستن بدون ذخیره',kind:'btn-danger-outline',onClick:()=>{forceClose()}}]});
       return false;
     },
-    body:`<div class="wizard-progress" aria-label="مراحل ثبت کارمند"><div class="wizard-step-label active" data-step-label="0" aria-current="step"><span class="ws-hit"><b>۱</b><span class="ws-txt"><small>مرحله یک</small>اطلاعات هویتی</span></span></div><div class="wizard-step-label" data-step-label="1"><span class="ws-hit"><b>۲</b><span class="ws-txt"><small>مرحله دو</small>اطلاعات تماس</span></span></div><div class="wizard-step-label" data-step-label="2"><span class="ws-hit"><b>۳</b><span class="ws-txt"><small>مرحله سه</small>اطلاعات شغلی</span></span></div></div><form class="form" id="empForm" novalidate autocomplete="on">
+    body:`${sec?'':`<div class="wizard-progress" aria-label="مراحل ثبت کارمند"><div class="wizard-step-label active" data-step-label="0" aria-current="step"><span class="ws-hit"><b>۱</b><span class="ws-txt"><small>مرحله یک</small>اطلاعات هویتی</span></span></div><div class="wizard-step-label" data-step-label="1"><span class="ws-hit"><b>۲</b><span class="ws-txt"><small>مرحله دو</small>اطلاعات تماس</span></span></div><div class="wizard-step-label" data-step-label="2"><span class="ws-hit"><b>۳</b><span class="ws-txt"><small>مرحله سه</small>اطلاعات شغلی</span></span></div></div>`}<form class="form" id="empForm" novalidate autocomplete="on">
       <section class="wizard-step" data-step="0">
       <div class="field full photo-control">${label('f-photo','عکس پروفایل',false)}<div class="photo-field"><div class="photo-preview-wrap"><span class="photo-preview" id="photoPreview">${initialPhoto?`<img src="${esc(initialPhoto)}" alt="">`:(e.name?esc(initials(e.name)):AVATAR_ICON)}</span></div><div class="photo-actions"><p class="photo-note" id="photoNote" role="status"><bdi dir="ltr">PNG</bdi>، <bdi dir="ltr">JPG</bdi> یا <bdi dir="ltr">WebP</bdi> · حداکثر ۱۰ مگابایت</p><div class="photo-btns"><label for="f-photo" class="photo-pick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.33634 2.92144C10.2183 2.87408 11.1065 2.8501 12.0001 2.8501C12.8937 2.8501 13.7819 2.87408 14.6639 2.92144C15.6822 2.97612 16.5879 3.53697 17.1155 4.38253L17.9368 5.69854C18.1514 6.04258 18.5177 6.27888 18.9407 6.339C19.3273 6.39393 19.7124 6.45339 20.096 6.51732C21.6037 6.76855 22.6501 8.08819 22.6501 9.57412V18.0001C22.6501 19.7398 21.2398 21.1501 19.5001 21.1501H4.5001C2.7604 21.1501 1.3501 19.7398 1.3501 18.0001V9.57412C1.3501 8.08818 2.3965 6.76854 3.90416 6.51731C4.28778 6.45338 4.6729 6.39393 5.05947 6.33899C5.48252 6.27887 5.84876 6.04257 6.06345 5.69854L6.88466 4.38253C7.4123 3.53697 8.31798 2.97612 9.33634 2.92144ZM12.0001 4.6501C11.1387 4.6501 10.2827 4.67321 9.43286 4.71885C9.02342 4.74084 8.64105 4.96796 8.41173 5.33545L7.59052 6.65145C7.08304 7.46469 6.24023 7.98928 5.31273 8.12108C4.9404 8.174 4.56948 8.23126 4.20002 8.29283C3.60193 8.39249 3.1501 8.92526 3.1501 9.57412V18.0001C3.1501 18.7457 3.75451 19.3501 4.5001 19.3501H19.5001C20.2457 19.3501 20.8501 18.7457 20.8501 18.0001V9.57412C20.8501 8.92527 20.3983 8.3925 19.8002 8.29283C19.4307 8.23127 19.0598 8.174 18.6875 8.12109C17.76 7.98928 16.9172 7.4647 16.4097 6.65146L15.5885 5.33545C15.3591 4.96796 14.9768 4.74084 14.5673 4.71885C13.7175 4.67321 12.8615 4.6501 12.0001 4.6501ZM12.0001 9.1501C10.0119 9.1501 8.4001 10.7619 8.4001 12.7501C8.4001 14.7383 10.0119 16.3501 12.0001 16.3501C13.9883 16.3501 15.6001 14.7383 15.6001 12.7501C15.6001 10.7619 13.9883 9.1501 12.0001 9.1501ZM6.6001 12.7501C6.6001 9.76776 9.01776 7.3501 12.0001 7.3501C14.9824 7.3501 17.4001 9.76776 17.4001 12.7501C17.4001 15.7324 14.9824 18.1501 12.0001 18.1501C9.01776 18.1501 6.6001 15.7324 6.6001 12.7501ZM17.8501 10.5001C17.8501 10.003 18.253 9.6001 18.7501 9.6001H18.7576C19.2547 9.6001 19.6576 10.003 19.6576 10.5001V10.5076C19.6576 11.0047 19.2547 11.4076 18.7576 11.4076H18.7501C18.253 11.4076 17.8501 11.0047 17.8501 10.5076V10.5001Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/></svg><span id="photoPickText">${initialPhoto?'تغییر تصویر':'انتخاب تصویر'}</span></label><button type="button" class="text-btn danger photo-remove" id="removePhoto" ${initialPhoto?'':'hidden'}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>حذف</button></div><input id="f-photo" type="file" accept="image/png,image/jpeg,image/webp"></div></div></div>
       <div class="field full">${label('f-name','نام و نام خانوادگی',true)}<input id="f-name" name="name" maxlength="60" autocomplete="name" placeholder="نام و نام خانوادگی کارمند را وارد کنید" value="${esc(e.name)}" required><span class="err"></span></div>
       <div class="field">${label('f-nid','کد ملی',true)}<input id="f-nid" name="nationalId" inputmode="numeric" maxlength="10" class="ltr" dir="ltr" placeholder="کد ملی کارمند را وارد کنید" value="${fa(e.nationalId||'')}" required><span class="err"></span></div>
       <div class="field">${label('f-idn','شماره شناسنامه',false)}<input id="f-idn" name="idNumber" inputmode="numeric" maxlength="10" class="ltr" dir="ltr" placeholder="شماره شناسنامه کارمند را وارد کنید" value="${fa(e.idNumber||'')}"><span class="err"></span></div>
       <div class="field">${label('f-bcity','صادره از',false)}<div class="city-picker"><input id="f-bcity" name="birthCity" data-city-picker autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" placeholder="شهر محل تولد را وارد کنید" value="${esc(e.birthCity||'')}"><div class="city-options" role="listbox" hidden></div></div><span class="err"></span></div>
-      <div class="field">${label('f-birth','تاریخ تولد',false)}<div class="date-input-wrap"><input id="f-birth" name="birthDate" class="ltr" dir="ltr" inputmode="numeric" maxlength="10" placeholder="سال/ماه/روز" value="${fa(e.birthDate||'')}"></div><span class="err"></span></div>
+      <div class="field">${label('f-birth-y','تاریخ تولد',false)}${d3('f-birth','birthDate',e.birthDate,'تولد')}<span class="err"></span></div>
       </section>
       <section class="wizard-step" data-step="1" hidden>
       <div class="field">${label('f-mob','شماره موبایل',true)}<input id="f-mob" name="mobile" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="14" class="ltr" dir="ltr" placeholder="۰۹۱۲۳۴۵۶۷۸۹" value="${fa(e.mobile||'')}" required><span class="err"></span></div>
@@ -2309,14 +2525,14 @@ function employeeForm(e){
       <div class="field">${label('f-sen','سطح',false)}<select id="f-sen" name="seniority"><option value="" ${!e.seniority?'selected':''}>انتخاب کنید</option>${opt(SENIOR,e.seniority)}</select></div>
       <div class="field">${label('f-con','نوع قرارداد',true)}<select id="f-con" name="contract"><option value="" ${!e.contract?'selected':''}>انتخاب کنید</option>${opt(['رسمی','غیر رسمی'],e.contract)}</select><span class="err"></span></div>
       <div class="field">${label('f-mode','نوع حضور',true)}<select id="f-mode" name="workMode"><option value="" ${!e.workMode?'selected':''}>انتخاب کنید</option>${opt(WORK_MODES,e.workMode)}</select><span class="err"></span></div>
-      <div class="field">${label('f-sal','حقوق دریافتی',true)}<div class="unit-input"><input id="f-sal" name="salary" inputmode="numeric" class="ltr" dir="ltr" maxlength="17" value="${e.salary?money(e.salary):''}" placeholder="مثلاً ۲۰۰٬۰۰۰٬۰۰۰" aria-describedby="f-sal-unit" required><span class="unit" id="f-sal-unit">ریال</span></div><span class="err"></span></div>
+      <div class="field">${label('f-sal','حقوق دریافتی',true)}<div class="unit-input"><input id="f-sal" name="salary" inputmode="numeric" class="ltr" dir="ltr" maxlength="17" value="${e.salary?money(e.salary):''}" placeholder="مثلاً ۲۰۰٬۰۰۰٬۰۰۰" aria-describedby="f-sal-unit" required><span class="unit" id="f-sal-unit">ریال</span></div><span class="sal-hint" id="f-sal-hint" aria-live="polite"></span><span class="err"></span></div>
       <div class="field">${label('f-ins','بیمه',true)}<select id="f-ins" name="insurance"><option value="" ${e.insurance==null?'selected':''}>انتخاب کنید</option>${opt(['دارد','ندارد'],e.insurance==null?'':e.insurance?'دارد':'ندارد')}</select><span class="err"></span></div>
-      <div class="field">${label('f-start','تاریخ شروع به کار',true)}<div class="date-input-wrap"><input id="f-start" name="start" class="ltr" dir="ltr" inputmode="numeric" maxlength="10" placeholder="سال/ماه/روز" value="${fa(e.start||'')}" required><button class="date-fill" type="button" data-date-fill="today">امروز</button></div><span class="err"></span></div>
-      <div class="field">${label('f-end','تاریخ پایان قرارداد',true)}<div class="date-input-wrap"><input id="f-end" name="contractEnd" class="ltr" dir="ltr" inputmode="numeric" maxlength="10" placeholder="سال/ماه/روز" value="${fa(e.contractEnd||'')}" required><button class="date-fill" type="button" data-date-fill="year">یک سال بعد</button></div><span class="err"></span></div>
+      <div class="field">${label('f-start-y','تاریخ شروع به کار',true)}${d3('f-start','start',e.start,'شروع به کار')}<span class="err"></span></div>
+      <div class="field">${label('f-end-y','تاریخ پایان قرارداد',true)}${d3('f-end','contractEnd',e.contractEnd,'پایان قرارداد',`<button class="date-fill d3-dur" type="button" aria-haspopup="true" aria-expanded="false"><span class="d3-dur-l">مدت</span>${icon('chevDownS',12)}</button><div class="d3-menu" role="menu" hidden>${[[3,'سه ماهه'],[6,'شش ماهه'],[12,'یک ساله'],[24,'دو ساله']].map(([m,t])=>`<button type="button" class="menu-item" role="menuitemradio" aria-checked="false" data-dur="${m}">${t}</button>`).join('')}</div>`)}<span class="err"></span></div>
       </section>
     </form>`,
     onOpen:ov=>{
-      modalEl=ov;form=ov.querySelector('#empForm');ov.querySelector('.modal').classList.add('emp-modal');
+      modalEl=ov;form=ov.querySelector('#empForm');{const md=ov.querySelector('.modal');if(md){md.classList.add('emp-modal');if(sec)md.classList.add('emp-sec')}}
       const actions=ov.querySelector('.modal-actions');primaryBtn=ov.querySelector('.modal-actions .btn-primary');
       backBtn=document.createElement('button');
       actions.classList.add('emp-actions');
@@ -2334,9 +2550,11 @@ function employeeForm(e){
 
       /* wizard header: finished steps are clickable */
       const prog=ov.querySelector('.wizard-progress');
-      const goLabel=ev=>{const l=ev.target.closest('[data-step-label]');if(!l)return;const i=+l.dataset.stepLabel;if(i<step)showStep(i)};
-      prog.addEventListener('click',goLabel);
-      prog.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();goLabel(ev)}});
+      const goLabel=ev=>{const l=ev.target.closest('[data-step-label]');if(!l)return;const i=+l.dataset.stepLabel;if(i===step||i>reached)return;
+        if(i>step)for(let k=step;k<i;k++){const bad=validateStep(k);if(bad){if(k!==step)showStep(k,false);bad.focus();return}}
+        showStep(i)};
+      if(prog)prog.addEventListener('click',goLabel);
+      if(prog)prog.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();goLabel(ev)}});
 
       /* photo */
       const file=ov.querySelector('#f-photo'),preview=ov.querySelector('#photoPreview'),remove=ov.querySelector('#removePhoto'),note=ov.querySelector('#photoNote');
@@ -2397,17 +2615,53 @@ function employeeForm(e){
       });
 
       /* quick date buttons */
-      ov.querySelectorAll('[data-date-fill]').forEach(b=>b.addEventListener('click',()=>{
-        const field=form.elements[b.dataset.dateFill==='today'?'start':'contractEnd'];
-        if(b.dataset.dateFill==='today')field.value=fa(TODAY);
-        else{const st=toEn(form.elements.start.value.trim());field.value=fa(addJalaliMonths(validJalaliDate(st)?st:TODAY,12))}
-        field.dispatchEvent(new Event('input',{bubbles:true}));field.focus();field.setSelectionRange(field.value.length,field.value.length);
-      }));
+      const startBase=()=>{const st=toEn(form.elements.start.value.trim());return validJalaliDate(st)?st:TODAY};
+      {const dur=ov.querySelector('.d3-dur'),menu=ov.querySelector('.d3-menu');
+        const close=(back)=>{if(menu.hidden)return;menu.hidden=true;dur.setAttribute('aria-expanded','false');document.removeEventListener('pointerdown',outside,true);if(back)dur.focus()};
+        const outside=ev=>{if(!menu.contains(ev.target)&&!dur.contains(ev.target))close()};
+        dur.addEventListener('click',()=>{if(!menu.hidden)return close();menu.hidden=false;dur.setAttribute('aria-expanded','true');document.addEventListener('pointerdown',outside,true);menu.querySelector('button').focus()});
+        menu.addEventListener('keydown',ev=>{const it=[...menu.querySelectorAll('button')],i=it.indexOf(document.activeElement);
+          if(ev.key==='Escape'){ev.preventDefault();ev.stopPropagation();close(true)}
+          else if(ev.key==='ArrowDown'){ev.preventDefault();it[(i+1)%it.length].focus()}
+          else if(ev.key==='ArrowUp'){ev.preventDefault();it[(i-1+it.length)%it.length].focus()}});
+        menu.addEventListener('click',ev=>{const b=ev.target.closest('[data-dur]');if(!b)return;sel=+b.dataset.dur;form.elements.contractEnd._set(fa(addJalaliMonths(startBase(),sel)));close(true)});
+        /* selected duration: shown on the button and in the menu; follows the start date */
+        let sel=0;const lbl=dur.querySelector('.d3-dur-l');
+        const mark=()=>{const end=toEn(form.elements.contractEnd.value.trim()),st=startBase();
+          sel=[3,6,12,24].find(n=>addJalaliMonths(st,n)===end)||0;
+          menu.querySelectorAll('[data-dur]').forEach(b=>b.setAttribute('aria-checked',String(+b.dataset.dur===sel)));
+          const on=menu.querySelector('[aria-checked="true"]');lbl.textContent=on?on.textContent:'مدت';dur.classList.toggle('on',!!on)};
+        form.elements.contractEnd.addEventListener('input',mark);
+        form.elements.start.addEventListener('input',()=>{if(!validJalaliDate(toEn(form.elements.start.value.trim())))return;if(sel)form.elements.contractEnd._set(fa(addJalaliMonths(startBase(),sel)));else mark()});
+        setTimeout(mark);
+      }
 
       /* role -> team suggestion (only until the team is chosen by hand) */
       const roleSel=form.elements.role,teamSel=form.elements.team;
       teamSel.addEventListener('change',()=>{teamTouched=true});
       roleSel.addEventListener('change',()=>{if(teamTouched)return;const r=ROLES.find(x=>x.role===roleSel.value);if(r&&[...teamSel.options].some(o=>o.value===r.team||o.text===r.team))teamSel.value=r.team});
+
+      /* dates: three segments (year / month / day) feeding a hidden field */
+      ov.querySelectorAll('.date3').forEach(box=>{const parts=[...box.querySelectorAll('[data-d3]')],hid=box.querySelector('.d3-val'),LEN=[4,2,2];
+        const sync=()=>{const v=parts.map(p=>toEn(p.value));
+          hid.value=v.every(x=>!x)?'':fa(v[0]+(v[1]||v[2]?'/'+v[1]:'')+(v[2]?'/'+v[2]:''));
+          hid.dispatchEvent(new Event('input',{bubbles:true}))};
+        hid._set=val=>{const p=toEn(val).split('/');parts.forEach((x,i)=>x.value=fa(p[i]||''));sync()};
+        parts.forEach((p,i)=>{
+          p.addEventListener('input',ev=>{ev.stopPropagation();sanitize(p,/[^0-9]/g,LEN[i]);const d=toEn(p.value);if(i&&d.length===1&&+d>(i===1?1:3))p.value=fa('0'+d);sync();if(toEn(p.value).length===LEN[i]&&parts[i+1]&&ev.inputType!=='deleteContentBackward')parts[i+1].focus()});
+          p.addEventListener('keydown',ev=>{if(ev.key==='Backspace'&&!p.value&&parts[i-1]){ev.preventDefault();parts[i-1].focus()}});
+          p.addEventListener('blur',()=>{if(i&&toEn(p.value).length===1){p.value=fa('0'+toEn(p.value));sync()}});
+        });
+        hid.addEventListener('focus',()=>(parts.find(p=>!p.value)||parts[0]).focus());
+        new MutationObserver(()=>parts.forEach(p=>p.setAttribute('aria-invalid',hid.getAttribute('aria-invalid')||'false'))).observe(hid,{attributes:true,attributeFilter:['aria-invalid']});
+      });
+
+      /* salary: show the amount in toman while typing */
+      {const sal=form.elements.salary,hint=ov.querySelector('#f-sal-hint');
+        const words=t=>{const u=[[1e12,'هزار میلیارد'],[1e9,'میلیارد'],[1e6,'میلیون'],[1e3,'هزار'],[1,'']],out=[];for(const [v,n] of u){const q=Math.floor(t/v);if(q){out.push(fa(q)+(n?' '+n:''));t-=q*v}}return out.join(' و ')};
+        const upd=()=>{const r=+toEn(sal.value).replace(/[^0-9]/g,'');const t=Math.floor(r/10);hint.textContent=t?'معادل '+words(t)+' تومان':''};
+        sal.addEventListener('input',upd);upd();
+      }
 
       /* typing: sanitise, format, live-validate */
       form.addEventListener('input',ev=>{
@@ -2416,8 +2670,8 @@ function employeeForm(e){
         if(BAD_RE[name])bad[name]=BAD_RE[name].test(toEn(el.value));
         if(name==='nationalId')sanitize(el,/\D/g,10);
         else if(name==='idNumber')sanitize(el,/\D/g,10);
-        else if(name==='mobile')sanitize(el,/[^\d+]/g,14);
-        else if(['birthDate','start','contractEnd'].includes(name))fmtDate(el);
+        else if(name==='mobile'){const v=toEn(el.value).replace(/[^0-9+]/g,'');sanitize(el,/[^\d+]/g,v.startsWith('+')?13:v.startsWith('00')?14:v.startsWith('0')?11:v.startsWith('98')?12:10)}
+        else if(['birthDate','start','contractEnd'].includes(name)&&!el.classList.contains('d3-val'))fmtDate(el);
         else if(name==='salary')fmtSalary(el);
         if(!checks[name])return;
         dirty.add(name);
@@ -2439,15 +2693,16 @@ function employeeForm(e){
         if(ev.key!=='Enter'||ev.defaultPrevented||ev.target.tagName!=='INPUT'||ev.target.type==='file')return;
         ev.preventDefault();primaryBtn.click();
       });
-      showStep(0,false);
+      showStep(sec?only:0,false);
     },
-    actions:[{label:'انصراف'},{label:isNew?'افزودن کارمند':'ذخیره تغییرات',kind:'btn-primary',onClick:()=>{
-      if(step<2){
+    actions:[{label:'انصراف'},{label:host?'ذخیره':isNew?'افزودن کارمند':'ذخیره تغییرات',kind:'btn-primary',onClick:()=>{
+      if(sec){const bad=validateStep(only);if(bad){bad.focus();return false}}
+      else if(step<2){
         const bad=validateStep(step);
         if(bad){bad.focus();return false}
         showStep(step+1);return false;
       }
-      for(let i=0;i<3;i++){const bad=validateStep(i);if(bad){showStep(i,false);bad.focus();return false}}
+      if(!sec)for(let i=0;i<3;i++){const bad=validateStep(i);if(bad){showStep(i,false);bad.focus();return false}}
       const name=fixFa(g('name'));
       const data={
         contractEnd:toEn(g('contractEnd')).trim(),nationalId:toEn(g('nationalId')).replace(/\D/g,''),idNumber:toEn(g('idNumber')).replace(/\s/g,''),
@@ -2463,13 +2718,14 @@ function employeeForm(e){
         state.sort.key=null;state.page=1;
         // an active filter would hide the new row and make it look like nothing happened
         if(!visible().some(x=>x.id===emp.id)){resetFilters();filtersCleared=true}
-      }else{Object.assign(e,data)}
+      }else if(sec){SEC_KEYS[only].forEach(k=>e[k]=data[k])}else{Object.assign(e,data)}
       const saved=persist();
       renderHead();renderTable();renderPanel();
       const msg=isNew?`${name} به فهرست اضافه شد${filtersCleared?' (فیلترها برای نمایش او پاک شد)':''}`:'تغییرات ذخیره شد';
       toast(saved===false?msg+' — اما ذخیره در مرورگر انجام نشد (حافظه پر است)؛ از عکس‌های کم‌حجم‌تر استفاده کنید.':msg,{undo:true});
     }}]
   });
+  return ()=>touched;
 }
 
 /* ---------- actions ---------- */
@@ -2492,10 +2748,22 @@ function removeEmployees(ids){
 }
 function act(name,e){
   switch(name){
-    case 'edit':employeeForm(e);break;
+    case 'edit':employeeView(e);break;
     case 'delete':confirmModal('حذف کارمند',`«${esc(e.name)}» از فهرست کارمندان حذف می‌شود.`,'حذف',()=>{removeEmployees([e.id]);toast(`${e.name} حذف شد`,{undo:true})});break;
-    case 'chat':openModal({title:`پیام به ${esc(e.name)}`,body:`<div class="form"><div class="field full"><label for="msgBody">متن پیام</label><textarea id="msgBody"></textarea><span class="err"></span></div></div>`,
-      actions:[{label:'ارسال پیام',kind:'btn-primary',onClick:ov=>{const t=ov.querySelector('#msgBody');if(!t.value.trim()){t.nextElementSibling.textContent='متن پیام خالی است.';t.focus();return false}toast(`پیام برای ${e.name} ارسال شد`)}},{label:'انصراف'}]});break;
+    case 'chat':{
+      if(!e.email){toast('برای این کارمند ایمیلی ثبت نشده است؛ ابتدا ایمیل را در اطلاعات تماس وارد کنید.');break}
+      openModal({title:'ارسال ایمیل',body:`<div class="form">
+        <div class="field full"><label>گیرنده</label><div class="mail-to"><span>${esc(e.name)}</span><bdi dir="ltr">${esc(e.email)}</bdi></div></div>
+        <div class="field full"><label for="mailSub">موضوع</label><input id="mailSub" maxlength="120" placeholder="موضوع ایمیل"><span class="err"></span></div>
+        <div class="field full"><label for="mailBody">متن ایمیل</label><textarea id="mailBody" rows="6" placeholder="متن ایمیل را بنویسید"></textarea><span class="err"></span></div></div>`,
+        onOpen:ov=>ov.querySelectorAll('#mailSub,#mailBody').forEach(x=>x.addEventListener('input',()=>{x.removeAttribute('aria-invalid');x.nextElementSibling.textContent=''})),
+        actions:[{label:'ارسال ایمیل',kind:'btn-primary',onClick:ov=>{
+          const sub=ov.querySelector('#mailSub'),body=ov.querySelector('#mailBody');let bad=null;
+          if(!body.value.trim()){body.setAttribute('aria-invalid','true');body.nextElementSibling.textContent='متن ایمیل را بنویسید.';bad=body}
+          if(!sub.value.trim()){sub.setAttribute('aria-invalid','true');sub.nextElementSibling.textContent='موضوع ایمیل را بنویسید.';bad=sub}
+          if(bad){bad.focus();return false}
+          location.href='mailto:'+encodeURIComponent(e.email)+'?subject='+encodeURIComponent(sub.value.trim())+'&body='+encodeURIComponent(body.value.trim());
+          toast(`ایمیل برای ${e.name} در برنامهٔ ایمیل شما آماده ارسال شد`)}},{label:'انصراف'}]});break}
     case 'renew':openModal({title:'تمدید قرارداد',body:`<p class="msg">مدت تمدید قرارداد «${esc(e.name)}» را انتخاب کنید.</p>
       <div class="radio-row" role="radiogroup" aria-label="مدت تمدید"><label><input type="radio" name="dur" value="۶ ماه" checked><span>۶ ماه</span></label><label><input type="radio" name="dur" value="۱ سال"><span>۱ سال</span></label><label><input type="radio" name="dur" value="۲ سال"><span>۲ سال</span></label></div>`,
       actions:[{label:'تمدید قرارداد',kind:'btn-primary',onClick:ov=>{const d=ov.querySelector('input[name=dur]:checked').value,months=d==='۶ ماه'?6:d==='۱ سال'?12:24,base=e.contractEnd>TODAY?e.contractEnd:TODAY;e.contractEnd=addJalaliMonths(base,months);e.terminated=false;persist();renderTable();renderPanel();toast(`قرارداد ${e.name} تا ${fa(e.contractEnd)} تمدید شد (${d})`,{undo:true})}},{label:'انصراف'}]});break;
@@ -2506,27 +2774,36 @@ function act(name,e){
 
 function openPhone(btn,e){
   openPop(btn,`<div class="phone-pop">
-    <h4>شماره تماس ${esc(e.name)}</h4>
+    <h4>شماره موبایل ${esc(e.name)}</h4>
     <div class="phone-num" dir="ltr">${fa(e.mobile.replace(/^(\d{4})(\d{3})(\d{4})$/,'$1 $2 $3'))}</div>
-    <div class="phone-acts">
-      <a class="btn btn-primary" href="tel:${esc(e.mobile)}">${icon('phone',14)}تماس</a>
-      <button class="btn btn-ghost" data-copy>${icon('copy',14)}کپی شماره</button>
-    </div></div>`,
+    <div class="pp-acts"><a class="btn btn-primary pp-call" href="tel:${esc(e.mobile)}">${icon('phone',14)}تماس</a><button type="button" class="pp-copy" data-copy aria-label="کپی شماره" data-tip="کپی شماره">${icon('copy',16)}</button></div>
+    </div>`,
     p=>p.querySelector('[data-copy]').addEventListener('click',async ev=>{
-      let ok=false;
+      let ok=false;const cb=ev.currentTarget;
       try{await navigator.clipboard.writeText(e.mobile);ok=true}catch(err){
         try{const ta=document.createElement('textarea');ta.value=e.mobile;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();ok=document.execCommand('copy');ta.remove()}catch(_){}}
       toast(ok?'شماره کپی شد':'کپی انجام نشد؛ شماره را دستی انتخاب کنید');
+      if(ok){cb.innerHTML=icon('check',16);cb.classList.add('ok');setTimeout(()=>{cb.innerHTML=icon('copy',16);cb.classList.remove('ok')},1500)}
     }));
 }
 function openNotifs(btn,e){
-  const render=()=>`<div class="np"><h4>اعلان‌های ${esc(e.name)}</h4>`+NOTIF_TYPES.map(n=>`
+  let tab=personNotifs(e).length?'list':'set';
+  const setHtml=()=>NOTIF_TYPES.map(n=>`
     <label class="np-row"><span class="np-text"><b>${n.t}</b><small>${n.d}</small></span>
     <input type="checkbox" role="switch" class="switch" data-n="${n.k}" ${e.notifs[n.k]?'checked':''} aria-label="${n.t}"></label>`).join('')+
-    `<div class="np-foot"><button class="text-btn" data-all="1">فعال کردن همه</button><button class="text-btn" data-all="0">غیرفعال کردن همه</button></div></div>`;
-  const refreshBtn=()=>{const n=notifOn(e);const b=$('#side [data-act="notifs"]');if(!b)return;
-    b.innerHTML=icon(n?'bellAlert':'bellOff',16)+(n?`<span class="sq-count">${fa(n)}</span>`:'')};
+    `<div class="np-foot"><button class="text-btn" data-all="1">فعال کردن همه</button><button class="text-btn" data-all="0">غیرفعال کردن همه</button></div>`;
+  const listHtml=()=>{const L=personNotifs(e);return L.length?`<div class="np-list">${L.map(x=>`<div class="np-item read"><span class="np-ic c-${x.c}">${icon(x.i,18)}</span><span class="np-body"><b>${x.t}</b><span>${x.d}</span></span></div>`).join('')}</div>`
+    :`<div class="np-empty">${icon('bell',20)}اعلانی برای این کارمند وجود ندارد.</div>`};
+  /* both panels share one grid cell, so the box keeps the height of the taller (settings) one */
+  const render=()=>`<div class="np"><h4>اعلان‌های ${esc(e.name)}</h4>
+    <div class="fp-tabs np-tabs" role="tablist"><button role="tab" data-ntab="list" aria-selected="${tab==='list'}">اعلان‌ها</button><button role="tab" data-ntab="set" aria-selected="${tab==='set'}">تنظیمات</button></div>
+    <div class="np-tab-body"><div class="np-pane" role="tabpanel" data-pane="set"${tab==='set'?'':' inert'}>${setHtml()}</div><div class="np-pane" role="tabpanel" data-pane="list"${tab==='list'?'':' inert'}>${listHtml()}</div></div></div>`;
+  const refreshBtn=()=>{const b=$('#side [data-act="notifs"]');if(!b)return;b.classList.toggle('is-off',!notifOn(e));b.innerHTML=notifBtnInner(e)};
   openPop(btn,render(),p=>{
+    p.addEventListener('click',ev=>{const t=ev.target.closest('[data-ntab]');if(!t||t.dataset.ntab===tab)return;tab=t.dataset.ntab;
+      p.querySelectorAll('[data-ntab]').forEach(x=>x.setAttribute('aria-selected',String(x.dataset.ntab===tab)));
+      p.querySelector('[data-pane="list"]').innerHTML=listHtml();
+      p.querySelectorAll('[data-pane]').forEach(x=>x.inert=x.dataset.pane!==tab)});
     p.addEventListener('change',ev=>{const c=ev.target.closest('[data-n]');if(!c)return;
       e.notifs[c.dataset.n]=c.checked;persist();refreshBtn();
       const n=NOTIF_TYPES.find(x=>x.k===c.dataset.n);toast(`اعلان «${n.t}» ${c.checked?'فعال':'غیرفعال'} شد`,{undo:true})});
@@ -2629,7 +2906,7 @@ function renderGs(){
     ? `<div class="gs-head">کارمندان</div>`+gsHits.map(e=>`<button class="gs-item" role="option" data-gs="${e.id}">
         ${PHOTOS[e.id]?`<img class="avatar-img" src="${PHOTOS[e.id]}" width="24" height="24" alt="">`:`<span class="avatar" style="width:24px;height:24px;font-size:10px" aria-hidden="true">${esc(initials(e.name))}</span>`}
         <span class="gs-text"><b>${esc(e.name)}</b><small>${esc(e.roleFull)} | ${esc(e.team)}</small></span></button>`).join('')
-    : `<div class="gs-empty">کارمندی با «${esc(inp.value.trim())}» پیدا نشد.</div>`;
+    : `<div class="gs-empty">موردی با این مشخصات پیدا نشد.</div>`;
   inp.setAttribute('aria-expanded','true');
 }
 function pickGs(id){
@@ -2671,12 +2948,17 @@ function applyFilters(){state.page=1;renderTable()}
 function fpSearchEnd(q,val){
   return val?`<button type="button" class="search-clear" data-fpclear="${q}" aria-label="پاک کردن متن جستجو" title="پاک کردن">${icon('x',14)}</button>`:icon('search',16);
 }
+/* options of a filter category, narrowed by the city search (several cities may be typed at once) */
+function fpOpts(cat){const hasQ=cat.k==='birthCity'||cat.k==='residence';
+  const qs=hasQ?String(fpOptQ||'').split(/[\s,،]+/).map(norm).filter(Boolean):[];
+  return cat.opts().filter(o=>!qs.length||qs.some(q=>norm(o.t).includes(q)||(qs.length===1&&o.g&&norm(o.g).includes(q))))}
 function fpClearQ(q){if(q==='cat')fpCatQ='';else fpOptQ='';renderFp(false);const i=fpEl&&fpEl.querySelector(`[data-q="${q}"]`);i&&i.focus()}
 function renderGeneral(){
   const G=state.filters.general;
   const cats=FCATS.filter(c=>!fpCatQ||norm(c.t).includes(norm(fpCatQ)));
   const cat=FCATS.find(c=>c.k===fpCat)||FCATS[0];
-  const opts=cat.opts().filter(o=>!fpOptQ||norm(o.t).includes(norm(fpOptQ))||(o.g&&norm(o.g).includes(norm(fpOptQ))));
+  const hasQ=cat.k==='birthCity'||cat.k==='residence';
+  const opts=fpOpts(cat);
   return `<div class="fp-gen">
     <div class="fp-col fp-cats">
       <div class="fp-cat-list" role="tablist" aria-orientation="vertical">${cats.map(c=>{const n=G[c.k].size;return `<button class="fp-cat" role="tab" data-cat="${c.k}" aria-selected="${c.k===cat.k}">
@@ -2684,25 +2966,27 @@ function renderGeneral(){
     </div>
     <div class="fp-div" aria-hidden="true"></div>
     <div class="fp-col fp-opts" role="tabpanel" aria-label="${cat.t}">
-      <label class="fp-search"><span class="sr-only">جستجو در گزینه‌های ${cat.t}</span><input data-q="opt" type="search" placeholder="جستجو" value="${esc(fpOptQ)}" autocomplete="off">${fpSearchEnd('opt',fpOptQ)}</label>
+      ${hasQ?`<label class="fp-search"><span class="sr-only">جست‌وجو در گزینه‌های ${cat.t}</span><input data-q="opt" type="search" placeholder="جست‌وجو" value="${esc(fpOptQ)}" autocomplete="off">${fpSearchEnd('opt',fpOptQ)}</label>`:''}
       <div class="fp-opt-list">${opts.length?(()=>{const n=opts.filter(o=>G[cat.k].has(o.k)).length;return `<label class="fp-opt fp-all"><input type="checkbox" class="cb" data-optall ${n===opts.length?'checked':''} ${n&&n<opts.length?'data-ind="1"':''}><span>انتخاب همه${fpOptQ?' نتایج':''}</span><span class="fp-all-n">${n?fa(n)+' از '+fa(opts.length):''}</span></label>`})():''}${opts.map((o,i)=>`${o.g&&o.g!==opts[i-1]?.g?`<div class="fp-grp" role="presentation">${esc(o.g)}</div>`:''}<label class="fp-opt"><input type="checkbox" class="cb" data-opt="${esc(o.k)}" ${G[cat.k].has(o.k)?'checked':''}><span>${esc(o.t)}</span></label>`).join('')||'<div class="fp-none">موردی پیدا نشد</div>'}</div>
     </div>
   </div>
   <div class="fp-foot"><button class="fp-btn" data-act="clear-general">حذف همه</button></div>`;
 }
-function afSel(name,id,opts,val,ph){return `<select data-af="${name}" data-id="${id}" aria-label="${ph}"><option value="" ${val?'':'selected'}>انتخاب</option>${opts.map(o=>`<option value="${esc(o.k)}" ${o.k===val?'selected':''}>${esc(o.t)}</option>`).join('')}</select>`}
+function afSel(name,id,opts,val,ph,extra=''){return `<select data-af="${name}" data-id="${id}" aria-label="${ph}"${extra}><option value="" ${val?'':'selected'}>انتخاب</option>${opts.map(o=>`<option value="${esc(o.k)}" ${o.k===val?'selected':''}>${esc(o.t)}</option>`).join('')}</select>`}
 function renderRow(r,parent,idx){
   const f=AF_FIELDS.find(x=>x.k===r.field);
   const ops=f?AF_OPS[f.type]:[];
   let valCtl;
-  if(f&&f.type==='enum')valCtl=afSel('value',r.id,f.opts().map(o=>({k:o,t:o})),r.value,'مقدار');
-  else valCtl=`<input data-af="value" data-id="${r.id}" ${f?'':'disabled'} value="${esc(r.value)}" placeholder="${!f?'انتخاب':f.type==='number'?'مثلاً ۳۰۰٬۰۰۰٬۰۰۰ ریال':f.type==='date'?'۱۴۰۴/۰۱/۰۱':'متن'}" ${f&&(f.type==='number'||f.type==='date')?'inputmode="numeric" class="ltr"':''} aria-label="مقدار">`;
+  if(f&&f.type==='enum')valCtl=afSel('value',r.id,f.opts().map(o=>({k:o,t:o})),r.value,'مقدار',f.k==='birthCity'||f.k==='residence'?' data-search':'');
+  else valCtl=`<input data-af="value" data-id="${r.id}" ${f?'':'disabled'} value="${esc(r.value)}" placeholder="${!f?'انتخاب':f.type==='number'?'مثلاً ۳۰۰٬۰۰۰٬۰۰۰ ریال':f.type==='date'?'تاریخ':'متن'}" ${f&&(f.type==='number'||f.type==='date')?'inputmode="numeric" class="ltr"':''} aria-label="مقدار">`;
+  const er=afErr&&afErr.id===r.id?afErr:null,bad=p=>er&&er.part===p?' bad':'';
   return `<div class="af-line">${connector(parent,idx)}
     <div class="af-row" data-node="${r.id}">
-      <div class="af-ctl"><span class="af-lab">فیلد</span>${afSel('field',r.id,AF_FIELDS.map(x=>({k:x.k,t:x.t})),r.field,'فیلد')}</div>
-      <div class="af-ctl op"><span class="af-lab">شرط</span>${f?afSel('op',r.id,ops,r.op,'شرط'):`<select disabled data-af="op" aria-label="شرط"><option>انتخاب</option></select>`}</div>
-      <div class="af-ctl"><span class="af-lab">مقدار</span>${valCtl}</div>
+      <div class="af-ctl${bad('field')}"><span class="af-lab">فیلد</span>${afSel('field',r.id,AF_FIELDS.map(x=>({k:x.k,t:x.t})),r.field,'فیلد')}</div>
+      <div class="af-ctl op${bad('op')}"><span class="af-lab">شرط</span>${f?afSel('op',r.id,ops,r.op,'شرط'):`<select disabled data-af="op" aria-label="شرط"><option>انتخاب</option></select>`}</div>
+      <div class="af-ctl${bad('value')}"><span class="af-lab">مقدار</span>${valCtl}</div>
       <button class="af-del" data-act="del" data-id="${r.id}" aria-label="حذف ردیف" title="حذف ردیف">${icon('trashO',16)}</button>
+      ${er?`<span class="af-err" role="alert">${er.msg}</span>`:''}
     </div></div>`;
 }
 function connector(parent,idx){
@@ -2720,7 +3004,7 @@ function renderGroup(g,parent,idx,root){
 }
 function renderAdvanced(){
   return `<div class="fp-adv">${renderGroup(state.filters.advanced,null,0,true)}</div>
-  <div class="fp-foot"><button class="fp-btn" data-act="clear-adv">حذف همه</button><span class="fp-hint">${afCountRows(state.filters.advanced)?fa(afCountRows(state.filters.advanced))+' شرط فعال':'ردیف‌های ناقص در فیلتر اعمال نمی‌شوند'}</span></div>`;
+  <div class="fp-foot"><button class="fp-btn" data-act="clear-adv">حذف همه</button><span class="fp-hint">${afCountRows(state.filters.advanced)?fa(afCountRows(state.filters.advanced))+' شرط فعال':''}</span></div>`;
 }
 function renderFp(keepFocus){
   if(!fpEl)return;
@@ -2778,17 +3062,22 @@ function openFp(){
     switch(b.dataset.act){
       case 'fp-close':closeFp(true);break;
       case 'clear-general':FCATS.forEach(c=>state.filters.general[c.k].clear());applyFilters();renderFp();break;
-      case 'clear-adv':state.filters.advanced=afGroup();applyFilters();renderFp(false);break;
+      case 'clear-adv':afErr=null;state.filters.advanced=afGroup();applyFilters();renderFp(false);break;
+      case 'add-row':case 'add-group':{const bad=afFirstIncomplete(A);if(!bad)break;const m=afMissing(bad);afErr={id:bad.id,...m};renderFp(false);
+        const c=fpEl.querySelector(`[data-af="${m.part}"][data-id="${bad.id}"]`);if(c)(c.tagName==='SELECT'?c.nextElementSibling:c)?.focus();return}
+    }
+    switch(b.dataset.act){
       case 'add-row':{const g=afFind(A,b.dataset.id).node;const r=afRow();g.children.push(r);renderFp(false);const s=fpEl.querySelector(`[data-af="field"][data-id="${r.id}"]`);s&&s.nextElementSibling.focus();break}
       case 'add-group':{const g=afFind(A,b.dataset.id).node;const ng=afGroup();g.children.push(ng);renderFp(false);const s=fpEl.querySelector(`[data-af="field"][data-id="${ng.children[0].id}"]`);s&&s.nextElementSibling.focus();break}
-      case 'del':{const r=afFind(A,b.dataset.id);if(!r||!r.parent)break;r.parent.children.splice(r.parent.children.indexOf(r.node),1);
+      case 'del':{const r=afFind(A,b.dataset.id);if(!r||!r.parent)break;afErr=null;r.parent.children.splice(r.parent.children.indexOf(r.node),1);
+        const prune=g=>{g.children=g.children.filter(c=>c.kind!=='group'||(prune(c),c.children.length))};prune(A);
         if(!A.children.length)A.children.push(afRow());applyFilters();renderFp(false);break}
     }
   });
   fpEl.addEventListener('change',e=>{
     const el=e.target;
     if(el.dataset.optall!==undefined){const cat=FCATS.find(c=>c.k===fpCat);const s=state.filters.general[fpCat];
-      cat.opts().filter(o=>!fpOptQ||norm(o.t).includes(norm(fpOptQ))||(o.g&&norm(o.g).includes(norm(fpOptQ)))).forEach(o=>el.checked?s.add(o.k):s.delete(o.k));applyFilters();renderFp();return}
+      fpOpts(cat).forEach(o=>el.checked?s.add(o.k):s.delete(o.k));applyFilters();renderFp();return}
     if(el.dataset.opt!==undefined){const s=state.filters.general[fpCat];el.checked?s.add(el.dataset.opt):s.delete(el.dataset.opt);applyFilters();renderFp();return}
     if(!el.dataset.af)return;
     const A=state.filters.advanced;const node=afFind(A,el.dataset.id)?.node;if(!node)return;
@@ -2797,14 +3086,21 @@ function openFp(){
     else if(el.dataset.af==='op'){node.op=el.value}
     else if(el.dataset.af==='value'&&el.tagName==='SELECT'){node.value=el.value}
     else return;
+    if(afErr&&afErr.id===node.id)afErr=null;
     applyFilters();renderFp();
   });
   fpEl.addEventListener('input',e=>{
     const el=e.target;
     if(el.dataset.q){if(el.dataset.q==='cat')fpCatQ=el.value;else fpOptQ=el.value;renderFp();return}
     /* (filter search boxes behave like the page search: × replaces the magnifier while there is text; Esc clears) */
-    if(el.dataset.af==='value'&&el.tagName==='INPUT'){const node=afFind(state.filters.advanced,el.dataset.id)?.node;if(node){node.value=el.value;applyFilters();
-      const h=fpEl.querySelector('.fp-hint');if(h){const n=afCountRows(state.filters.advanced);h.textContent=n?fa(n)+' شرط فعال':'ردیف‌های ناقص در فیلتر اعمال نمی‌شوند'}}}
+    if(el.dataset.af==='value'&&el.tagName==='INPUT'){const node=afFind(state.filters.advanced,el.dataset.id)?.node;if(node){
+      /* numbers: digits only with separators; dates: digits with slashes added as you type */
+      const ft=AF_FIELDS.find(x=>x.k===node.field)?.type;
+      if(ft==='number'){const d=toEn(el.value).replace(/\D/g,'').replace(/^0+(?=\d)/,'').slice(0,12);const out=d?money(d):'';if(out!==el.value)el.value=out}
+      else if(ft==='date'){const d=toEn(el.value).replace(/\D/g,'').slice(0,8);const out=fa(d.length<=4?d:d.length<=6?d.slice(0,4)+'/'+d.slice(4):d.slice(0,4)+'/'+d.slice(4,6)+'/'+d.slice(6));if(out!==el.value&&!(e.inputType||'').startsWith('delete'))el.value=out}
+      node.value=el.value;applyFilters();
+      const h=fpEl.querySelector('.fp-hint');if(h){const n=afCountRows(state.filters.advanced);h.textContent=n?fa(n)+' شرط فعال':''}
+      if(afErr&&afErr.id===node.id){afErr=null;const row=el.closest('.af-row');row.querySelector('.af-err')?.remove();row.querySelectorAll('.af-ctl.bad').forEach(c=>c.classList.remove('bad'))}}}
   });
 }
 $('#filterBtn').addEventListener('click',()=>{fpEl?closeFp():openFp()});
@@ -2907,7 +3203,7 @@ function applyTheme(){if(state.theme==='system')document.documentElement.removeA
 $('#settingsBtn').addEventListener('click',ev=>{
   const TI={light:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',dark:'<path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/>',system:'<rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M8.5 20h7M12 16.5V20"/>'};
   const t=(v,l)=>`<button class="menu-item" role="menuitemradio" aria-checked="${state.theme===v}" data-theme-v="${v}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${TI[v]}</svg>${l}</button>`;
-  openPop(ev.currentTarget,`<h4 class="th-head">پوسته</h4><div class="th-opts">${t('light','روشن')}${t('dark','تیره')}${t('system','مطابق سیستم')}</div><hr><button class="menu-item danger" id="resetData">${icon('trash',16)}بازگردانی داده‌های نمونه</button>`,
+  openPop(ev.currentTarget,`<h4 class="th-head">پوسته</h4><div class="th-opts">${t('light','روشن')}${t('dark','تیره')}${t('system','مطابق سیستم')}</div><hr><button class="menu-item danger" id="resetData">${icon('renew',16)}بازگردانی داده‌های نمونه</button>`,
     p=>p.addEventListener('click',e=>{
       const b=e.target.closest('[data-theme-v]');
       if(b){state.theme=b.dataset.themeV;applyTheme();persist();p.querySelectorAll('[data-theme-v]').forEach(x=>x.setAttribute('aria-checked',x===b))}
@@ -3097,27 +3393,53 @@ function enhanceSelect(sel){
   btn.setAttribute('aria-haspopup','listbox');btn.setAttribute('aria-expanded','false');
   const lab=sel.id&&document.querySelector(`label[for="${sel.id}"]`);
   if(lab){lab.htmlFor=uid;if(!lab.id)lab.id=uid+'-l';btn.setAttribute('aria-labelledby',lab.id+' '+uid)}
-  const sync=()=>{btn.innerHTML=`<span class="dd-val">${esc(sel.options[sel.selectedIndex]?.text||'')}</span>${icon('chevDown',compact?12:16)}`};
+  const sync=()=>{btn.innerHTML=`<span class="dd-val${sel.value===''&&!compact?' ph':''}">${esc(sel.options[sel.selectedIndex]?.text||'')}</span>${icon('chevDown',compact?12:16)}`};
   sync();sel.classList.add('dd-native');sel.tabIndex=-1;sel.setAttribute('aria-hidden','true');sel.after(btn);
   const choose=i=>{if(sel.selectedIndex!==i){sel.selectedIndex=i;sel.dispatchEvent(new Event('change',{bubbles:true}))}sync()};
   function open(){
     closePop();closeDd();
     const list=document.createElement('ul');list.className='dd-list';list.setAttribute('role','listbox');list.id=uid+'-lb';
     if(lab)list.setAttribute('aria-labelledby',lab.id);
-    [...sel.options].forEach((o,i)=>{const li=document.createElement('li');li.className='dd-opt';li.id=uid+'-o'+i;li.setAttribute('role','option');
+    const srch=sel.dataset.search!==undefined;
+    if(srch){const li=document.createElement('li');li.className='dd-search';li.setAttribute('role','presentation');
+      li.innerHTML=`<label>${icon('search',14)}<input type="search" placeholder="جست‌وجو" autocomplete="off" aria-label="جست‌وجو در گزینه‌ها" aria-controls="${uid}-lb"></label>`;list.appendChild(li)}
+    let lastG=null;
+    [...sel.options].forEach((o,i)=>{
+      /* city lists: province headings, like the general filter */
+      const g=srch&&o.value?CITY_PROV[o.value]||'':'';
+      if(g&&g!==lastG){lastG=g;const h=document.createElement('li');h.className='dd-grp';h.setAttribute('role','presentation');h.dataset.g=g;h.textContent=g;list.appendChild(h)}
+      const li=document.createElement('li');li.className='dd-opt';li.id=uid+'-o'+i;li.setAttribute('role','option');if(g)li.dataset.g=g;
       li.setAttribute('aria-selected',i===sel.selectedIndex);li.innerHTML=`<span>${esc(o.text)}</span>${icon('check',14)}`;li.dataset.i=i;list.appendChild(li)});
     document.body.appendChild(list);
     const r=btn.getBoundingClientRect();list.style.minWidth=Math.max(r.width,compact?140:0)+'px';
+    /* inline employee edit: the list is exactly as wide as its field */
+    if(btn.closest('.ev-form')){list.style.minWidth='0';list.style.width=r.width+'px'}
     const lr=list.getBoundingClientRect();
     let top=r.bottom+4;if(top+lr.height>innerHeight-8)top=Math.max(8,r.top-lr.height-4);
     let left=r.right-lr.width;if(left<8)left=8;
     list.style.top=top+'px';list.style.left=left+'px';
     btn.setAttribute('aria-expanded','true');btn.setAttribute('aria-controls',list.id);
     let act=sel.selectedIndex;
-    const setAct=i=>{act=i;list.querySelectorAll('.dd-opt').forEach((li,j)=>li.classList.toggle('active',j===i));const li=list.children[i];if(li){btn.setAttribute('aria-activedescendant',li.id);li.scrollIntoView({block:'nearest'})}};
+    const setAct=i=>{act=i;list.querySelectorAll('.dd-opt').forEach((li,j)=>li.classList.toggle('active',j===i));const li=list.querySelector(`.dd-opt[data-i="${i}"]`);if(li){btn.setAttribute('aria-activedescendant',li.id);li.scrollIntoView({block:'nearest'})}};
     setAct(act);
     list.addEventListener('pointermove',e=>{const li=e.target.closest('.dd-opt');if(li)setAct(+li.dataset.i)});
-    list.addEventListener('pointerdown',e=>e.preventDefault());
+    list.addEventListener('pointerdown',e=>{if(!e.target.closest('.dd-search'))e.preventDefault()});
+    /* searchable list (cities): single choice, so the whole text is one search term */
+    if(srch){const inp=list.querySelector('.dd-search input');list.style.height=list.getBoundingClientRect().height+'px';
+      const vis=()=>[...list.querySelectorAll('.dd-opt:not([hidden])')].map(li=>+li.dataset.i);
+      const empty=document.createElement('li');empty.className='dd-empty';empty.setAttribute('role','presentation');empty.textContent='موردی پیدا نشد';empty.hidden=true;list.appendChild(empty);
+      inp.addEventListener('input',()=>{const q=norm(inp.value);
+        /* a city shows when its own name or its province matches */
+        list.querySelectorAll('.dd-opt').forEach(li=>{li.hidden=!!q&&(sel.options[+li.dataset.i].value===''||!(norm(li.textContent).includes(q)||(li.dataset.g&&norm(li.dataset.g).includes(q))))});
+        list.querySelectorAll('.dd-grp').forEach(h=>{h.hidden=!list.querySelector(`.dd-opt[data-g="${h.dataset.g}"]:not([hidden])`)});
+        const v=vis();empty.hidden=v.length>0;list.scrollTop=0;if(v.length)setAct(v[0])});
+      inp.addEventListener('keydown',e=>{const v=vis(),k=v.indexOf(act);
+        if(e.key==='ArrowDown'){e.preventDefault();if(v.length)setAct(v[Math.min(v.length-1,k+1)])}
+        else if(e.key==='ArrowUp'){e.preventDefault();if(v.length)setAct(v[Math.max(0,k-1)])}
+        else if(e.key==='Enter'){e.preventDefault();if(v.includes(act)){choose(act);closeDd(true)}}
+        else if(e.key==='Escape'){e.preventDefault();e.stopPropagation();closeDd(true)}});
+      setTimeout(()=>inp.focus());
+    }
     list.addEventListener('click',e=>{const li=e.target.closest('.dd-opt');if(!li)return;choose(+li.dataset.i);closeDd(true)});
     const onDoc=e=>{if(!list.contains(e.target)&&e.target!==btn&&!btn.contains(e.target))closeDd()};
     document.addEventListener('pointerdown',onDoc,true);
@@ -3156,7 +3478,7 @@ $('#meBtn').addEventListener('click',ev=>{
   openPop(ev.currentTarget,`<div class="me-pop">
     <div class="me-top"><img src="${img}" alt="" width="52" height="52"><div class="me-id"><b>${ME.name}</b><span>${ME.role}</span><span class="me-unit">${pfi('building',13)}${ME.unit}</span></div></div>
     <div class="me-card">
-      ${row('id','کد پرسنلی',ME.code)}${row('phone','موبایل',ME.phone,true,true)}${row('mail','ایمیل',ME.email,true,true)}${row('shield','سطح دسترسی',ME.access)}${row('clock','آخرین ورود',ME.last)}
+      ${row('id','کد پرسنلی',ME.code)}${row('phone','موبایل',ME.phone,true,true)}${row('mail','ایمیل',ME.email,true,true)}${row('shield','سطح دسترسی',ME.access)}
     </div>
     <div class="me-acts"><button class="menu-item" data-me="settings">${pfi('cog')}تنظیمات</button><button class="menu-item danger" data-me="logout">${pfi('logout')}خروج از حساب</button></div>
   </div>`,p=>p.addEventListener('click',e=>{const cpb=e.target.closest('[data-copy]');if(cpb){copyText(cpb.dataset.copy);return}const b=e.target.closest('[data-me]');if(!b)return;closePop();
