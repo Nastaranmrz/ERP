@@ -614,6 +614,8 @@ body:not([data-mod="hr"]) .bulkbar{display:none}
 .fp-btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;height:24px;min-width:93px;padding:0 12px;border:1px solid var(--border);border-radius:4px;
   font-size:10px;line-height:14px;font-weight:500;color:var(--primary);background:var(--surface);white-space:nowrap}
 .fp-btn:hover{background:var(--primary-softer);border-color:var(--primary-light)}
+.fp-btn.fp-show{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.fp-btn.fp-show:hover{background:var(--primary-strong);border-color:var(--primary-strong)}
 .fp-btn.ghost{min-width:0;color:var(--text);padding:0 10px}
 .fp-btn.ghost svg{color:var(--primary)}
 .fp-adv{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0;overflow-y:auto}
@@ -633,6 +635,11 @@ body:not([data-mod="hr"]) .bulkbar{display:none}
 .af-err{flex-basis:100%;font-size:10px;line-height:14px;color:var(--danger)}
 .af-ctl.bad{border-color:var(--danger)}
 .af-ctl:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
+.af-ctl.bad,.af-ctl.bad:focus-within{border-color:var(--danger)}
+.af-d3{display:flex;align-items:center;flex:1;min-width:0;direction:ltr;padding:0 6px}
+.af-ctl .af-d3 input{flex:1 1 0;min-width:0;padding:0;text-align:center}
+.af-ctl .af-d3 input[data-afd="0"]{flex-grow:1.4}
+.af-ctl.bad:focus-within{box-shadow:0 0 0 3px var(--danger-soft)}
 .af-lab{display:grid;place-items:center;width:37px;flex:none;background:var(--surface-sunken);border-inline-end:1px solid var(--border);font-size:11px;line-height:16px;font-weight:500;color:var(--text-muted)}
 .af-ctl .dd{height:100%;border:0;border-radius:0;font-size:11px;font-weight:500;color:var(--text-strong);padding:0 8px 0 7px;background:transparent}
 .af-ctl select:has(option[value=""]:checked) + .dd{color:var(--placeholder)}
@@ -723,6 +730,7 @@ input[type=radio]:disabled{opacity:.5;cursor:not-allowed}
 .drop:hover,.drop.over{border-color:var(--primary);background:var(--primary-softer)}
 .drop:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
 .drop-ic{color:var(--primary)}
+.msg:has(+.drop){font-size:11px;line-height:18px}
 .drop b{font-size:12px;font-weight:500;color:var(--text-strong)}
 .drop span{font-size:11px;color:var(--text-muted)}
 #impTpl{display:inline-flex;align-items:center;gap:4px;margin-top:8px;color:var(--primary)}
@@ -1090,7 +1098,7 @@ td.cell-icon .cb,th.cell-icon .cb{width:16px;height:16px;border-radius:4px}
 .emp-actions .btn-primary{order:1}
 .emp-actions .btn-ghost{order:2}
 .photo-preview svg{color:var(--border)}
-.photo-preview svg.av-ph{width:100%;height:100%}
+.photo-preview svg.av-ph{width:32px;height:32px}
 .modal-actions .btn{min-width:96px}
 .modal-actions:not(.emp-actions){display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:max-content;max-width:100%;margin-left:0;margin-right:auto}
 .form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px}
@@ -1645,8 +1653,8 @@ button,a,.btn,.sq-btn,input,select{transition:background-color .15s var(--ease-o
           <button class="icon-btn primary" id="addBtn" aria-label="افزودن کارمند" title="افزودن کارمند" data-icon="plus" data-size="16"></button>
           <button class="icon-btn" id="filterBtn" aria-label="فیلتر" title="فیلتر" aria-haspopup="dialog" aria-expanded="false"><span data-icon="funnel" data-size="16"></span><span class="badge" id="filterBadge" hidden></span></button>
           <button class="icon-btn" id="printBtn" aria-label="چاپ" title="چاپ" data-icon="printer" data-size="16"></button>
-          <button class="icon-btn" id="importBtn" aria-label="ایمپورت لیست کارمندان" data-tip="ایمپورت لیست کارمندان" data-icon="importI" data-size="16"></button>
-          <button class="icon-btn" id="exportBtn" aria-label="خروجی CSV" title="خروجی CSV" data-icon="export" data-size="16"></button>
+          <button class="icon-btn" id="importBtn" aria-label="ایمپورت لیست کارمندان" data-tip="ایمپورت لیست کارمندان" data-icon="trayDown" data-size="16"></button>
+          <button class="icon-btn" id="exportBtn" aria-label="خروجی CSV" title="خروجی CSV" data-icon="trayUp" data-size="16"></button>
         </div>
       </div>
 
@@ -1686,7 +1694,7 @@ button,a,.btn,.sq-btn,input,select{transition:background-color .15s var(--ease-o
 <div class="bulkbar" id="bulk" role="region" aria-label="عملیات گروهی">
   <span class="bulk-count" id="bulkText" aria-live="polite"></span>
   <span class="bulk-sep" aria-hidden="true"></span>
-  <button class="bulk-act blue" id="bulkMsg"><span data-icon="chat" data-size="16"></span>ارسال پیام</button>
+  <button class="bulk-act blue" id="bulkMsg"><span data-icon="mail" data-size="16"></span>ارسال ایمیل</button>
   <button class="bulk-act green" id="bulkRenew"><span data-icon="renew" data-size="16"></span>تمدید قرارداد</button>
   <button class="bulk-act red" id="bulkDelete"><span data-icon="trash" data-size="16"></span>حذف</button>
   <button class="bulk-close" id="bulkClear" aria-label="لغو انتخاب" title="لغو انتخاب"><span data-icon="x" data-size="16"></span></button>
@@ -1697,7 +1705,11 @@ button,a,.btn,.sq-btn,input,select{transition:background-color .15s var(--ease-o
 /* Heroicons v2.1.5 (MIT), the icon set used in the Figma file */
 const ICONS={"trash": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z\" clip-rule=\"evenodd\"/>"}, "bellAlert": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M4.214 3.227a.75.75 0 0 0-1.156-.955 8.97 8.97 0 0 0-1.856 3.825.75.75 0 0 0 1.466.316 7.47 7.47 0 0 1 1.546-3.186ZM16.942 2.272a.75.75 0 0 0-1.157.955 7.47 7.47 0 0 1 1.547 3.186.75.75 0 0 0 1.466-.316 8.971 8.971 0 0 0-1.856-3.825Z\"/> <path fill-rule=\"evenodd\" d=\"M10 2a6 6 0 0 0-6 6c0 1.887-.454 3.665-1.257 5.234a.75.75 0 0 0 .515 1.076 32.91 32.91 0 0 0 3.256.508 3.5 3.5 0 0 0 6.972 0 32.903 32.903 0 0 0 3.256-.508.75.75 0 0 0 .515-1.076A11.448 11.448 0 0 1 16 8a6 6 0 0 0-6-6Zm0 14.5a2 2 0 0 1-1.95-1.557 33.54 33.54 0 0 0 3.9 0A2 2 0 0 1 10 16.5Z\" clip-rule=\"evenodd\"/>"}, "pencil": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z\"/> <path d=\"M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z\"/>"}, "phone": {"vb": "0 0 24 24", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z\" clip-rule=\"evenodd\"/>"}, "chat": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M10 2c-2.236 0-4.43.18-6.57.524C1.993 2.755 1 4.014 1 5.426v5.148c0 1.413.993 2.67 2.43 2.902.848.137 1.705.248 2.57.331v3.443a.75.75 0 0 0 1.28.53l3.58-3.579a.78.78 0 0 1 .527-.224 41.202 41.202 0 0 0 5.183-.5c1.437-.232 2.43-1.49 2.43-2.903V5.426c0-1.413-.993-2.67-2.43-2.902A41.289 41.289 0 0 0 10 2Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM8 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z\" clip-rule=\"evenodd\"/>"}, "check": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z\" clip-rule=\"evenodd\"/>"}, "dots": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M10 3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM10 8.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM11.5 15.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z\"/>"}, "search": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z\" clip-rule=\"evenodd\"/>"}, "home": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z\" clip-rule=\"evenodd\"/>"}, "stack": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"m3.196 12.87-.825.483a.75.75 0 0 0 0 1.294l7.25 4.25a.75.75 0 0 0 .758 0l7.25-4.25a.75.75 0 0 0 0-1.294l-.825-.484-5.666 3.322a2.25 2.25 0 0 1-2.276 0L3.196 12.87Z\"/> <path d=\"m3.196 8.87-.825.483a.75.75 0 0 0 0 1.294l7.25 4.25a.75.75 0 0 0 .758 0l7.25-4.25a.75.75 0 0 0 0-1.294l-.825-.484-5.666 3.322a2.25 2.25 0 0 1-2.276 0L3.196 8.87Z\"/> <path d=\"M10.38 1.103a.75.75 0 0 0-.76 0l-7.25 4.25a.75.75 0 0 0 0 1.294l7.25 4.25a.75.75 0 0 0 .76 0l7.25-4.25a.75.75 0 0 0 0-1.294l-7.25-4.25Z\"/>"}, "export": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15\"/>"}, "printer": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z\"/>"}, "funnel": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z\"/>"}, "plus": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 4.5v15m7.5-7.5h-15\"/>"}, "apps": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z\"/>"}, "bell": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0\"/>"}, "cog": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z\"/> <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"/>"}, "chevL": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z\" clip-rule=\"evenodd\"/>"}, "chevR": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\"/>"}, "sort": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M10.53 3.47a.75.75 0 0 0-1.06 0L6.22 6.72a.75.75 0 0 0 1.06 1.06L10 5.06l2.72 2.72a.75.75 0 1 0 1.06-1.06l-3.25-3.25Zm-4.31 9.81 3.25 3.25a.75.75 0 0 0 1.06 0l3.25-3.25a.75.75 0 1 0-1.06-1.06L10 14.94l-2.72-2.72a.75.75 0 0 0-1.06 1.06Z\" clip-rule=\"evenodd\"/>"}, "x": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z\"/>"}, "eye": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z\"/> <path fill-rule=\"evenodd\" d=\"M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z\" clip-rule=\"evenodd\"/>"}, "chevUp": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z\" clip-rule=\"evenodd\"/>"}, "chevDown": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\"/>"}};
 ICONS.mail={vb:'0 0 20 20',o:false,p:'<path d="M3 4a2 2 0 0 0-2 2v1.161l8.441 4.221a1.25 1.25 0 0 0 1.118 0L19 7.162V6a2 2 0 0 0-2-2H3Z"/><path d="m19 8.839-7.77 3.885a2.75 2.75 0 0 1-2.46 0L1 8.839V14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.839Z"/>'};
-ICONS.kCal={vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"/><g fill="currentColor" stroke="none"><circle cx="8" cy="13" r="1.25"/><circle cx="12" cy="13" r="1.25"/><circle cx="16" cy="13" r="1.25"/><circle cx="16" cy="17" r="1.25"/><circle cx="12" cy="17" r="1.25"/></g>'};
+ICONS.importSq={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0001 1.34998C12.4972 1.34998 12.9001 1.75292 12.9001 2.24998L12.9001 12.8272L14.3637 11.3636C14.7152 11.0121 15.285 11.0121 15.6365 11.3636C15.988 11.7151 15.988 12.2849 15.6365 12.6364L12.6365 15.6364C12.4677 15.8052 12.2388 15.9 12.0001 15.9C11.7614 15.9 11.5325 15.8052 11.3637 15.6364L8.3637 12.6364C8.01223 12.2849 8.01223 11.715 8.3637 11.3636C8.71517 11.0121 9.28502 11.0121 9.63649 11.3636L11.1001 12.8272L11.1001 2.24998C11.1001 1.75292 11.503 1.34998 12.0001 1.34998ZM7.5001 9.14998C6.75451 9.14998 6.1501 9.75439 6.1501 10.5V19.5C6.1501 20.2456 6.75451 20.85 7.5001 20.85H16.5001C17.2457 20.85 17.8501 20.2456 17.8501 19.5V10.5C17.8501 9.75439 17.2457 9.14998 16.5001 9.14998H15.0001C14.503 9.14998 14.1001 8.74703 14.1001 8.24998C14.1001 7.75292 14.503 7.34998 15.0001 7.34998H16.5001C18.2398 7.34998 19.6501 8.76028 19.6501 10.5V19.5C19.6501 21.2397 18.2398 22.65 16.5001 22.65H7.5001C5.7604 22.65 4.3501 21.2397 4.3501 19.5V10.5C4.3501 8.76028 5.7604 7.34998 7.5001 7.34998H9.0001C9.49715 7.34998 9.9001 7.75292 9.9001 8.24998C9.9001 8.74703 9.49715 9.14998 9.0001 9.14998H7.5001Z"/>'};
+ICONS.trayDown={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0001 2.09998C12.4972 2.09998 12.9001 2.50292 12.9001 2.99998V14.3272L15.8637 11.3636C16.2152 11.0121 16.785 11.0121 17.1365 11.3636C17.488 11.7151 17.488 12.2849 17.1365 12.6364L12.6365 17.1364C12.285 17.4878 11.7152 17.4878 11.3637 17.1364L6.8637 12.6364C6.51223 12.2849 6.51223 11.7151 6.8637 11.3636C7.21517 11.0121 7.78502 11.0121 8.13649 11.3636L11.1001 14.3272V2.99998C11.1001 2.50292 11.503 2.09998 12.0001 2.09998ZM3.0001 15.6C3.49715 15.6 3.9001 16.0029 3.9001 16.5V18.75C3.9001 19.4956 4.50451 20.1 5.2501 20.1H18.7501C19.4957 20.1 20.1001 19.4956 20.1001 18.75V16.5C20.1001 16.0029 20.503 15.6 21.0001 15.6C21.4972 15.6 21.9001 16.0029 21.9001 16.5V18.75C21.9001 20.4897 20.4898 21.9 18.7501 21.9H5.2501C3.5104 21.9 2.1001 20.4897 2.1001 18.75V16.5C2.1001 16.0029 2.50304 15.6 3.0001 15.6Z"/>'};
+ICONS.trayUp={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M11.3637 2.36358C11.7152 2.01211 12.285 2.01211 12.6365 2.36358L17.1365 6.86358C17.488 7.21505 17.488 7.7849 17.1365 8.13637C16.785 8.48784 16.2152 8.48784 15.8637 8.13637L12.9001 5.17277L12.9001 16.5C12.9001 16.997 12.4972 17.4 12.0001 17.4C11.503 17.4 11.1001 16.997 11.1001 16.5L11.1001 5.17277L8.13649 8.13637C7.78502 8.48784 7.21517 8.48784 6.8637 8.13637C6.51223 7.7849 6.51223 7.21505 6.8637 6.86358L11.3637 2.36358ZM3.0001 15.6C3.49715 15.6 3.9001 16.0029 3.9001 16.5V18.75C3.9001 19.4956 4.50451 20.1 5.2501 20.1H18.7501C19.4957 20.1 20.1001 19.4956 20.1001 18.75V16.5C20.1001 16.0029 20.503 15.6 21.0001 15.6C21.4972 15.6 21.9001 16.0029 21.9001 16.5V18.75C21.9001 20.4897 20.4898 21.9 18.7501 21.9H5.2501C3.5104 21.9 2.1001 20.4897 2.1001 18.75V16.5C2.1001 16.0029 2.50304 15.6 3.0001 15.6Z"/>'};
+ICONS.inboxDown={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0001 2.09998C12.4972 2.09998 12.9001 2.50292 12.9001 2.99998V9.07718L14.3637 7.61358C14.7152 7.26211 15.285 7.26211 15.6365 7.61358C15.988 7.96505 15.988 8.5349 15.6365 8.88637L12.6365 11.8864C12.285 12.2378 11.7152 12.2378 11.3637 11.8864L8.3637 8.88637C8.01223 8.5349 8.01223 7.96505 8.3637 7.61358C8.71517 7.26211 9.28502 7.26211 9.63649 7.61358L11.1001 9.07718V2.99998C11.1001 2.50292 11.503 2.09998 12.0001 2.09998ZM6.91189 4.64998C6.31923 4.64998 5.79588 5.03651 5.62159 5.60296L3.46866 12.6H6.10952C7.30265 12.6 8.39338 13.2741 8.92697 14.3413L9.1832 14.8537C9.41188 15.3111 9.87933 15.6 10.3907 15.6H13.6095C14.1209 15.6 14.5883 15.3111 14.817 14.8537L15.0732 14.3413C15.6068 13.2741 16.6975 12.6 17.8907 12.6H20.5315L18.3786 5.60296C18.2043 5.03651 17.681 4.64998 17.0883 4.64998H15.0001C14.503 4.64998 14.1001 4.24703 14.1001 3.74998C14.1001 3.25292 14.503 2.84998 15.0001 2.84998H17.0883C18.4712 2.84998 19.6923 3.75189 20.099 5.0736L22.5108 12.9119C22.5324 12.982 22.5514 13.0527 22.568 13.124C22.6207 13.2384 22.6501 13.3658 22.6501 13.5C22.6501 13.5401 22.6475 13.5795 22.6424 13.6182C22.6475 13.6914 22.6501 13.7648 22.6501 13.8383V18C22.6501 19.7397 21.2398 21.15 19.5001 21.15H4.5001C2.7604 21.15 1.3501 19.7397 1.3501 18V13.8383C1.3501 13.7648 1.35267 13.6914 1.3578 13.6182C1.35272 13.5795 1.3501 13.5401 1.3501 13.5C1.3501 13.3658 1.37948 13.2384 1.43216 13.124C1.44875 13.0527 1.46783 12.982 1.48939 12.9119L3.90119 5.0736C4.30787 3.75189 5.52903 2.84998 6.91189 2.84998H9.0001C9.49715 2.84998 9.9001 3.25292 9.9001 3.74998C9.9001 4.24703 9.49715 4.64998 9.0001 4.64998H6.91189ZM3.1501 14.4V18C3.1501 18.7456 3.75451 19.35 4.5001 19.35H19.5001C20.2457 19.35 20.8501 18.7456 20.8501 18V14.4H17.8907C17.3793 14.4 16.9119 14.6889 16.6832 15.1462L16.427 15.6587C15.8934 16.7259 14.8027 17.4 13.6095 17.4H10.3907C9.19754 17.4 8.10681 16.7259 7.57323 15.6587L7.317 15.1462C7.08832 14.6889 6.62086 14.4 6.10952 14.4H3.1501Z"/>'};
+ICONS.kCal={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M6.7501 2.09998C7.24715 2.09998 7.6501 2.50292 7.6501 2.99998V4.34998H16.3501V2.99998C16.3501 2.50292 16.753 2.09998 17.2501 2.09998C17.7472 2.09998 18.1501 2.50292 18.1501 2.99998V4.34998H18.7501C20.4898 4.34998 21.9001 5.76028 21.9001 7.49998V18.75C21.9001 20.4897 20.4898 21.9 18.7501 21.9H5.2501C3.5104 21.9 2.1001 20.4897 2.1001 18.75V7.49998C2.1001 5.76028 3.5104 4.34998 5.2501 4.34998H5.8501V2.99998C5.8501 2.50292 6.25304 2.09998 6.7501 2.09998ZM5.2501 6.14998C4.50451 6.14998 3.9001 6.75439 3.9001 7.49998V8.40311C4.30926 8.20874 4.76698 8.09998 5.2501 8.09998H18.7501C19.2332 8.09998 19.6909 8.20874 20.1001 8.40311V7.49998C20.1001 6.75439 19.4957 6.14998 18.7501 6.14998H5.2501ZM20.1001 11.25C20.1001 10.5044 19.4957 9.89998 18.7501 9.89998H5.2501C4.50451 9.89998 3.9001 10.5044 3.9001 11.25V18.75C3.9001 19.4956 4.50451 20.1 5.2501 20.1H18.7501C19.4957 20.1 20.1001 19.4956 20.1001 18.75V11.25ZM11.1001 12.75C11.1001 12.2529 11.503 11.85 12.0001 11.85H12.0076C12.5047 11.85 12.9076 12.2529 12.9076 12.75V12.7575C12.9076 13.2545 12.5047 13.6575 12.0076 13.6575H12.0001C11.503 13.6575 11.1001 13.2545 11.1001 12.7575V12.75ZM13.3501 12.75C13.3501 12.2529 13.753 11.85 14.2501 11.85H14.2576C14.7547 11.85 15.1576 12.2529 15.1576 12.75V12.7575C15.1576 13.2545 14.7547 13.6575 14.2576 13.6575H14.2501C13.753 13.6575 13.3501 13.2545 13.3501 12.7575V12.75ZM15.6001 12.75C15.6001 12.2529 16.003 11.85 16.5001 11.85H16.5076C17.0047 11.85 17.4076 12.2529 17.4076 12.75V12.7575C17.4076 13.2545 17.0047 13.6575 16.5076 13.6575H16.5001C16.003 13.6575 15.6001 13.2545 15.6001 12.7575V12.75ZM6.6001 15C6.6001 14.5029 7.00304 14.1 7.5001 14.1H7.5076C8.00465 14.1 8.4076 14.5029 8.4076 15V15.0075C8.4076 15.5045 8.00465 15.9075 7.5076 15.9075H7.5001C7.00304 15.9075 6.6001 15.5045 6.6001 15.0075V15ZM8.8501 15C8.8501 14.5029 9.25304 14.1 9.7501 14.1H9.7576C10.2547 14.1 10.6576 14.5029 10.6576 15V15.0075C10.6576 15.5045 10.2547 15.9075 9.7576 15.9075H9.7501C9.25304 15.9075 8.8501 15.5045 8.8501 15.0075V15ZM11.1001 15C11.1001 14.5029 11.503 14.1 12.0001 14.1H12.0076C12.5047 14.1 12.9076 14.5029 12.9076 15V15.0075C12.9076 15.5045 12.5047 15.9075 12.0076 15.9075H12.0001C11.503 15.9075 11.1001 15.5045 11.1001 15.0075V15ZM13.3501 15C13.3501 14.5029 13.753 14.1 14.2501 14.1H14.2576C14.7547 14.1 15.1576 14.5029 15.1576 15V15.0075C15.1576 15.5045 14.7547 15.9075 14.2576 15.9075H14.2501C13.753 15.9075 13.3501 15.5045 13.3501 15.0075V15ZM15.6001 15C15.6001 14.5029 16.003 14.1 16.5001 14.1H16.5076C17.0047 14.1 17.4076 14.5029 17.4076 15V15.0075C17.4076 15.5045 17.0047 15.9075 16.5076 15.9075H16.5001C16.003 15.9075 15.6001 15.5045 15.6001 15.0075V15ZM6.6001 17.25C6.6001 16.7529 7.00304 16.35 7.5001 16.35H7.5076C8.00465 16.35 8.4076 16.7529 8.4076 17.25V17.2575C8.4076 17.7545 8.00465 18.1575 7.5076 18.1575H7.5001C7.00304 18.1575 6.6001 17.7545 6.6001 17.2575V17.25ZM8.8501 17.25C8.8501 16.7529 9.25304 16.35 9.7501 16.35H9.7576C10.2547 16.35 10.6576 16.7529 10.6576 17.25V17.2575C10.6576 17.7545 10.2547 18.1575 9.7576 18.1575H9.7501C9.25304 18.1575 8.8501 17.7545 8.8501 17.2575V17.25ZM11.1001 17.25C11.1001 16.7529 11.503 16.35 12.0001 16.35H12.0076C12.5047 16.35 12.9076 16.7529 12.9076 17.25V17.2575C12.9076 17.7545 12.5047 18.1575 12.0076 18.1575H12.0001C11.503 18.1575 11.1001 17.7545 11.1001 17.2575V17.25ZM13.3501 17.25C13.3501 16.7529 13.753 16.35 14.2501 16.35H14.2576C14.7547 16.35 15.1576 16.7529 15.1576 17.25V17.2575C15.1576 17.7545 14.7547 18.1575 14.2576 18.1575H14.2501C13.753 18.1575 13.3501 17.7545 13.3501 17.2575V17.25Z"/>'};
 Object.assign(ICONS,{"renew": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M15.312 11.424a5.5 5.5 0 0 1-9.201 2.466l-.312-.311h2.433a.75.75 0 0 0 0-1.5H3.989a.75.75 0 0 0-.75.75v4.242a.75.75 0 0 0 1.5 0v-2.43l.31.31a7 7 0 0 0 11.712-3.138.75.75 0 0 0-1.449-.39Zm1.23-3.723a.75.75 0 0 0 .219-.53V2.929a.75.75 0 0 0-1.5 0V5.36l-.31-.31A7 7 0 0 0 3.239 8.188a.75.75 0 1 0 1.448.389A5.5 5.5 0 0 1 13.89 6.11l.311.31h-2.432a.75.75 0 0 0 0 1.5h4.243a.75.75 0 0 0 .53-.219Z\" clip-rule=\"evenodd\"/>"}, "copy": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M7 3.5A1.5 1.5 0 0 1 8.5 2h3.879a1.5 1.5 0 0 1 1.06.44l3.122 3.12A1.5 1.5 0 0 1 17 6.622V12.5a1.5 1.5 0 0 1-1.5 1.5h-1v-3.379a3 3 0 0 0-.879-2.121L10.5 5.379A3 3 0 0 0 8.379 4.5H7v-1Z\"/> <path d=\"M4.5 6A1.5 1.5 0 0 0 3 7.5v9A1.5 1.5 0 0 0 4.5 18h7a1.5 1.5 0 0 0 1.5-1.5v-5.879a1.5 1.5 0 0 0-.44-1.06L9.44 6.439A1.5 1.5 0 0 0 8.378 6H4.5Z\"/>"}, "bellOff": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M4 8c0-.26.017-.517.049-.77l7.722 7.723a33.56 33.56 0 0 1-3.722-.01 2 2 0 0 0 3.862.15l1.134 1.134a3.5 3.5 0 0 1-6.53-1.409 32.91 32.91 0 0 1-3.257-.508.75.75 0 0 1-.515-1.076A11.448 11.448 0 0 0 4 8ZM17.266 13.9a.756.756 0 0 1-.068.116L6.389 3.207A6 6 0 0 1 16 8c.001 1.887.455 3.665 1.258 5.234a.75.75 0 0 1 .01.666ZM3.28 2.22a.75.75 0 0 0-1.06 1.06l14.5 14.5a.75.75 0 1 0 1.06-1.06L3.28 2.22Z\"/>"}});
 Object.assign(ICONS,{"mUsers": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z\"/>"}, "mMoney": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z\"/>"}, "mBrief": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z\"/>"}, "mDoc": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z\"/>"}, "mChart": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z\"/>"}, "chevLs": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z\" clip-rule=\"evenodd\"/>"}, "chevRs": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\"/>"}});
 Object.assign(ICONS,{"plusS": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z\"/>"}});
@@ -2021,8 +2033,44 @@ function afMissing(r){const f=AF_FIELDS.find(x=>x.k===r.field);
   if(!r.op)return {part:'op',msg:'شرط را انتخاب کنید.'};
   if(String(r.value).trim()==='')return {part:'value',msg:f.type==='enum'?'مقدار را انتخاب کنید.':'مقدار را وارد کنید.'};
   if(f.type==='number'&&!/\d/.test(toEn(r.value)))return {part:'value',msg:'مقدار باید عدد باشد.'};
-  if(f.type==='date'&&!afDateOk(r.value))return {part:'value',msg:'تاریخ معتبر نیست؛ سال (۱۳۷۴)، سال و ماه (۱۳۷۴/۰۵) یا تاریخ کامل وارد کنید.'};
+  if(f.type==='date'&&!afDateOk(r.value))return {part:'value',msg:'تاریخ معتبر نیست؛ سال، سال و ماه یا تاریخ کامل را وارد کنید.'};
   return null}
+const AF_RULES={
+  name:{keep:v=>v.replace(/[^\p{Script_Extensions=Arabic}\s\u200c]|[0-9۰-۹٠-٩]/gu,''),msg:t=>t+' را با حروف فارسی وارد کنید.'},
+  mobile:{keep:v=>fa(toEn(v).replace(/\D/g,'')),msg:t=>t+' را با اعداد فارسی وارد کنید.'},
+  nationalId:{keep:v=>fa(toEn(v).replace(/\D/g,'')),msg:t=>t+' را با اعداد فارسی وارد کنید.'},
+  idNumber:{keep:v=>fa(toEn(v).replace(/\D/g,'')),msg:t=>t+' را با اعداد فارسی وارد کنید.'},
+  salary:{keep:v=>v.replace(/[^0-9۰-۹٠-٩٬,]/g,''),msg:t=>t+' را با اعداد فارسی وارد کنید.'}
+};
+/* show / clear a value error on one row without re-rendering (keeps the caret where it is) */
+function afLiveErr(el,id,msg){
+  const row=el.closest('.af-row');if(!row)return;
+  if(!msg&&!(afErr&&afErr.id===id))return;
+  afErr=msg?{id,part:'value',msg}:null;
+  row.querySelectorAll('.af-ctl.bad').forEach(c=>c.classList.remove('bad'));row.querySelector('.af-err')?.remove();
+  if(msg){el.closest('.af-ctl').classList.add('bad');const sp=document.createElement('span');sp.className='af-err';sp.setAttribute('role','alert');sp.textContent=msg;row.appendChild(sp)}
+}
+/* advanced-filter date: year / month / day boxes; a year, a year+month or a full date all filter */
+function afDateInput(el,e){
+  const node=afFind(state.filters.advanced,el.dataset.id)?.node;if(!node)return;
+  const parts=[...el.closest('.af-d3').querySelectorAll('[data-afd]')],i=+el.dataset.afd,LEN=[4,2,2];
+  const raw=toEn(el.value),d=raw.replace(/\D/g,'').slice(0,LEN[i]);let msg='';
+  if(d!==raw)msg='تاریخ را با اعداد فارسی وارد کنید.';
+  let v=d;if(i&&v.length===1&&+v>(i===1?1:3))v='0'+v;
+  if(fa(v)!==el.value){el.value=fa(v)}
+  const y=toEn(parts[0].value),m=toEn(parts[1].value),dd=toEn(parts[2].value);
+  if(!msg){if(y.length===4&&!/^1[34]\d{2}$/.test(y))msg='سال را درست وارد کنید؛ مثلاً ۱۳۷۴.';
+    else if(m.length===2&&!(+m>=1&&+m<=12))msg='ماه باید بین ۱ تا ۱۲ باشد.';
+    else if(dd.length===2&&!(+dd>=1&&+dd<=31))msg='روز باید بین ۱ تا ۳۱ باشد.';
+    else if((m||dd)&&y.length<4)msg='اول سال را کامل وارد کنید.';
+    else if(dd&&!m)msg='اول ماه را وارد کنید.'}
+  afLiveErr(el,node.id,msg);
+  node.value=fa(y+(m?'/'+m:'')+(m&&dd?'/'+dd:''));
+  if(!msg&&toEn(el.value).length===LEN[i]&&parts[i+1]&&e.inputType!=='deleteContentBackward')parts[i+1].focus();
+  applyFilters();
+  const h=fpEl.querySelector('.fp-hint');if(h){const n=afCountRows(state.filters.advanced);h.textContent=n?fa(n)+' شرط فعال':''}
+  const b=fpEl.querySelector('.fp-show');if(b){b.textContent=`نمایش ${fa(visible().length)} نتیجه`;b.hidden=!filterCount()}
+}
 function afFirstIncomplete(g){for(const c of g.children){const r=c.kind==='group'?afFirstIncomplete(c):afMissing(c)?c:null;if(r)return r}return null}
 const afActive=g=>g.children.some(c=>c.kind==='group'?afActive(c):afComplete(c));
 const afCountRows=g=>g.children.reduce((n,c)=>n+(c.kind==='group'?afCountRows(c):afComplete(c)?1:0),0);
@@ -2362,7 +2410,7 @@ function confirmModal(title,msg,label,onYes){
 
 /* ---------- employee form ---------- */
 const CHECK_ICON='<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.4 6.3l2.3 2.3 4.9-5.2"/></svg>';
-const AVATAR_ICON='<svg class="av-ph" width="64" height="64" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><circle cx="32" cy="25" r="11"/><ellipse cx="32" cy="62" rx="22" ry="20"/></svg>';
+const AVATAR_ICON='<svg class="av-ph" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C9.56586 3 7.59259 4.95716 7.59259 7.37143C7.59259 9.7857 9.56586 11.7429 12 11.7429C14.4341 11.7429 16.4074 9.7857 16.4074 7.37143C16.4074 4.95716 14.4341 3 12 3Z"/><path d="M14.601 13.6877C12.8779 13.4149 11.1221 13.4149 9.39904 13.6877L9.21435 13.7169C6.78647 14.1012 5 16.1783 5 18.6168C5 19.933 6.07576 21 7.40278 21H16.5972C17.9242 21 19 19.933 19 18.6168C19 16.1783 17.2135 14.1012 14.7857 13.7169L14.601 13.6877Z"/></svg>';
 const NAME_ERR='نام و نام خانوادگی را با حروف فارسی و در دو بخش یا بیشتر وارد کنید.';
 const DATE_ERR='تاریخ معتبر را به شکل سال/ماه/روز وارد کنید.';
 const WORK_MODES=['حضوری','دورکاری','ترکیبی'];
@@ -2425,7 +2473,7 @@ function nidChecksumOk(v){
 }
 /* read-only view of an employee, grouped like the add form; each group has its own edit button */
 const EMP_SECTIONS=['اطلاعات هویتی','اطلاعات تماس','اطلاعات شغلی'];
-const SEC_KEYS=[['photo','name','nationalId','idNumber','birthCity','birthDate'],['mobile','email','residence'],['role','team','roleFull','seniority','contract','workMode','salary','insurance','start','contractEnd']];
+const SEC_KEYS=[['photo','name','nationalId','idNumber','birthCity','birthDate'],['mobile','email','residence','address'],['role','team','roleFull','seniority','contract','workMode','salary','insurance','start','contractEnd']];
 /* renders a form (same options as openModal) inside an element instead of a dialog */
 function mountInline(host,o){
   host.innerHTML=`<div class="ev-form">${o.body}<div class="modal-actions"></div></div>`;
@@ -2460,7 +2508,7 @@ function employeeViewHtml(e,a=0){
   const secs=[
     `<div class="ev-who">${photo?`<img src="${esc(photo)}" alt="">`:`<span class="ev-av">${esc(initials(e.name))}</span>`}<span class="ev-id"><b>${esc(e.name)}</b>${e.roleFull||e.role?`<small>${esc(e.roleFull||e.role)}</small>`:''}</span></div>`+
     `<dl class="ev-grid">${row('کد ملی',e.nationalId&&fa(e.nationalId))}${row('شماره شناسنامه',e.idNumber&&fa(e.idNumber))}${row('صادره از',e.birthCity&&esc(e.birthCity))}${row('تاریخ تولد',e.birthDate&&fa(e.birthDate))}</dl>`,
-    `<dl class="ev-grid">${row('شماره موبایل',e.mobile&&fa(e.mobile))}${row('ایمیل',e.email&&esc(e.email))}${row('محل سکونت',e.residence&&esc(e.residence))}</dl>`,
+    `<dl class="ev-grid">${row('شماره موبایل',e.mobile&&fa(e.mobile))}${row('ایمیل',e.email&&esc(e.email))}${row('محل سکونت',e.residence&&esc(e.residence))}${row('آدرس دقیق',e.address&&esc(e.address))}</dl>`,
     `<dl class="ev-grid">${row('سمت شغلی',e.role&&esc(e.role))}${row('تیم',e.team&&esc(e.team))}${row('عنوان کامل سمت',e.roleFull&&esc(e.roleFull),0,0,e.roleFull&&esc(e.roleFull))}${row('سطح',e.seniority&&esc(e.seniority))}${row('نوع قرارداد',e.contract&&esc(e.contract))}${row('نوع حضور',e.workMode&&esc(e.workMode))}${row('حقوق دریافتی',e.salary?money(e.salary)+' ریال':'')}${row('بیمه',e.insurance==null?'':e.insurance?'دارد':'ندارد')}${row('تاریخ شروع به کار',e.start&&fa(e.start))}${row('تاریخ پایان قرارداد',e.contractEnd&&fa(e.contractEnd))}</dl>`
   ];
   return secs.map((s,i)=>`<section class="ev-sec" id="ev-s${i}" aria-labelledby="ev-h${i}"><div class="ev-head"><h3 id="ev-h${i}">${EMP_SECTIONS[i]}</h3><button type="button" class="ev-edit" data-sec="${i}" aria-label="ویرایش ${EMP_SECTIONS[i]}">${icon('pencil',14)}</button></div><div class="ev-body">${s}</div></section>`).join('');
@@ -2609,6 +2657,7 @@ function employeeForm(e,only,onDone,host){
       <div class="field">${label('f-mob','شماره موبایل',true)}<input id="f-mob" name="mobile" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="14" class="ltr" dir="ltr" placeholder="۰۹۱۲۳۴۵۶۷۸۹" value="${fa(e.mobile||'')}" required><span class="err"></span></div>
       <div class="field">${label('f-email','ایمیل',false)}<input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="100" class="ltr" dir="ltr" placeholder="name@example.com" value="${esc(e.email||'')}"><span class="err"></span></div>
       <div class="field">${label('f-res','محل سکونت',false)}<div class="city-picker"><input id="f-res" name="residence" data-city-picker autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" placeholder="شهر محل سکونت کارمند را وارد کنید" value="${esc(e.residence||'')}"><div class="city-options" role="listbox" hidden></div></div><span class="err"></span></div>
+      <div class="field full">${label('f-addr','آدرس دقیق محل سکونت',false)}<input id="f-addr" name="address" autocomplete="street-address" maxlength="250" placeholder="آدرس دقیق محل سکونت کارمند را وارد کنید" value="${esc(e.address||'')}"><span class="err"></span></div>
       </section>
       <section class="wizard-step" data-step="2" hidden>
       <div class="field">${label('f-role','سمت شغلی',true)}<select id="f-role" name="role"><option value="" ${!e.role?'selected':''}>انتخاب کنید</option>${opt(ROLE_OPTIONS,e.role)}</select><span class="err"></span></div>
@@ -2799,7 +2848,7 @@ function employeeForm(e,only,onDone,host){
       const data={
         contractEnd:toEn(g('contractEnd')).trim(),nationalId:toEn(g('nationalId')).replace(/\D/g,''),idNumber:toEn(g('idNumber')).replace(/\s/g,''),
         birthDate:toEn(g('birthDate')).trim(),birthCity:fixFa(g('birthCity')),email:g('email').trim().toLowerCase(),workMode:g('workMode'),
-        photo:photoRemoved?'':(photoData||e.photo),issuedFrom:e.issuedFrom||'',residence:fixFa(g('residence')),name,
+        photo:photoRemoved?'':(photoData||e.photo),issuedFrom:e.issuedFrom||'',residence:fixFa(g('residence')),address:fixFa(g('address')).trim(),name,
         role:g('role'),team:g('team'),roleFull:fixFa(g('roleFull'))||g('role'),seniority:g('seniority'),contract:g('contract'),
         salary:+toEn(g('salary')).replace(/\D/g,''),insurance:g('insurance')==='دارد',mobile:normMobile(g('mobile')),start:toEn(g('start')).trim()
       };
@@ -2874,13 +2923,13 @@ function openPhone(btn,e){
     <div class="phone-num" dir="ltr">${fa(e.mobile.replace(/^(\d{4})(\d{3})(\d{4})$/,'$1 $2 $3'))}</div>
     <div class="pp-acts"><a class="btn btn-primary pp-call" href="tel:${esc(e.mobile)}">${icon('phone',14)}تماس</a><button type="button" class="pp-copy" data-copy aria-label="کپی شماره" data-tip="کپی شماره">${icon('copy',16)}</button></div>
     </div>`,
-    p=>p.querySelector('[data-copy]').addEventListener('click',async ev=>{
+    p=>{p.querySelector('.pp-call').addEventListener('click',ev=>{if(!matchMedia('(max-width:860px)').matches){ev.preventDefault();toast('در نسخه‌ی دسکتاپ امکان تماس نیست')}});p.querySelector('[data-copy]').addEventListener('click',async ev=>{
       let ok=false;const cb=ev.currentTarget;
       try{await navigator.clipboard.writeText(e.mobile);ok=true}catch(err){
         try{const ta=document.createElement('textarea');ta.value=e.mobile;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();ok=document.execCommand('copy');ta.remove()}catch(_){}}
       toast(ok?'شماره کپی شد':'کپی انجام نشد؛ شماره را دستی انتخاب کنید');
       if(ok){cb.innerHTML=icon('check',16);cb.classList.add('ok');setTimeout(()=>{cb.innerHTML=icon('copy',16);cb.classList.remove('ok')},1500)}
-    }));
+    })});
 }
 function openNotifs(btn,e){
   let tab=personNotifs(e).length?'list':'set';
@@ -3030,7 +3079,7 @@ $('#bulkClear').addEventListener('click',()=>{state.checked.clear();renderTable(
 $('#bulkDelete').addEventListener('click',()=>{const ids=[...state.checked];confirmModal('حذف کارمندان',`${fa(ids.length)} کارمند انتخاب‌شده از فهرست حذف می‌شوند.`,'حذف',()=>{removeEmployees(ids);toast(`${fa(ids.length)} کارمند حذف شد`,{undo:true})})});
 $('#bulkMsg').addEventListener('click',()=>{const n=state.checked.size;
   openModal({title:`پیام به ${fa(n)} کارمند`,body:`<div class="form"><div class="field full"><label for="bulkBody">متن پیام</label><textarea id="bulkBody"></textarea><span class="err"></span></div></div>`,
-    actions:[{label:'ارسال پیام',kind:'btn-primary',onClick:ov=>{const x=ov.querySelector('#bulkBody');if(!x.value.trim()){x.nextElementSibling.textContent='متن پیام خالی است.';x.focus();return false}toast(`پیام برای ${fa(n)} کارمند ارسال شد`)}},{label:'انصراف'}]})});
+    actions:[{label:'ارسال ایمیل',kind:'btn-primary',onClick:ov=>{const x=ov.querySelector('#bulkBody');if(!x.value.trim()){x.nextElementSibling.textContent='متن پیام خالی است.';x.focus();return false}toast(`پیام برای ${fa(n)} کارمند ارسال شد`)}},{label:'انصراف'}]})});
 $('#bulkRenew').addEventListener('click',()=>{const ids=[...state.checked];
   openModal({title:'تمدید قرارداد گروهی',body:`<p class="msg">قرارداد ${fa(ids.length)} کارمند انتخاب‌شده تمدید می‌شود. مدت تمدید را انتخاب کنید.</p>
     <div class="radio-row" role="radiogroup" aria-label="مدت تمدید"><label><input type="radio" name="dur" value="۶ ماه" checked><span>۶ ماه</span></label><label><input type="radio" name="dur" value="۱ سال"><span>۱ سال</span></label><label><input type="radio" name="dur" value="۲ سال"><span>۲ سال</span></label></div>`,
@@ -3066,14 +3115,15 @@ function renderGeneral(){
       <div class="fp-opt-list">${opts.length?(()=>{const n=opts.filter(o=>G[cat.k].has(o.k)).length;return `<label class="fp-opt fp-all"><input type="checkbox" class="cb" data-optall ${n===opts.length?'checked':''} ${n&&n<opts.length?'data-ind="1"':''}><span>انتخاب همه${fpOptQ?' نتایج':''}</span><span class="fp-all-n">${n?fa(n)+' از '+fa(opts.length):''}</span></label>`})():''}${opts.map((o,i)=>`${o.g&&o.g!==opts[i-1]?.g?`<div class="fp-grp" role="presentation">${esc(o.g)}</div>`:''}<label class="fp-opt"><input type="checkbox" class="cb" data-opt="${esc(o.k)}" ${G[cat.k].has(o.k)?'checked':''}><span>${esc(o.t)}</span></label>`).join('')||'<div class="fp-none">موردی پیدا نشد</div>'}</div>
     </div>
   </div>
-  <div class="fp-foot"><button class="fp-btn" data-act="clear-general">حذف همه</button></div>`;
+  <div class="fp-foot"><button class="fp-btn" data-act="clear-general">حذف همه</button><button class="fp-btn fp-show" data-act="fp-close"${filterCount()?'':' hidden'}>نمایش ${fa(visible().length)} نتیجه</button></div>`;
 }
 function afSel(name,id,opts,val,ph,extra=''){return `<select data-af="${name}" data-id="${id}" aria-label="${ph}"${extra}><option value="" ${val?'':'selected'}>انتخاب</option>${opts.map(o=>`<option value="${esc(o.k)}" ${o.k===val?'selected':''}>${esc(o.t)}</option>`).join('')}</select>`}
 function renderRow(r,parent,idx){
   const f=AF_FIELDS.find(x=>x.k===r.field);
   const ops=f?AF_OPS[f.type]:[];
   let valCtl;
-  if(f&&f.type==='enum')valCtl=afSel('value',r.id,f.opts().map(o=>({k:o,t:o})),r.value,'مقدار',f.k==='birthCity'||f.k==='residence'?' data-search':'');
+  if(f&&f.type==='date'){const dp=toEn(r.value).split('/');valCtl=`<div class="af-d3">${[['سال',4],['ماه',2],['روز',2]].map(([ph,ml],i)=>`<input data-afd="${i}" data-id="${r.id}" inputmode="numeric" maxlength="${ml}" placeholder="${dp[0]&&i&&!dp[i]?'—':ph}" aria-label="${ph}" autocomplete="off" value="${fa(dp[i]||'')}">`).join('<span class="d3-sep" aria-hidden="true">/</span>')}</div>`}
+  else if(f&&f.type==='enum')valCtl=afSel('value',r.id,f.opts().map(o=>({k:o,t:o})),r.value,'مقدار',f.k==='birthCity'||f.k==='residence'?' data-search':'');
   else valCtl=`<input data-af="value" data-id="${r.id}" ${f?'':'disabled'} value="${esc(r.value)}" placeholder="${!f?'انتخاب':f.type==='number'?'مثلاً ۳۰۰٬۰۰۰٬۰۰۰ ریال':f.type==='date'?'تاریخ':'متن'}" ${f&&(f.type==='number'||f.type==='date')?'inputmode="numeric" class="ltr"':''} aria-label="مقدار">`;
   const er=afErr&&afErr.id===r.id?afErr:null,bad=p=>er&&er.part===p?' bad':'';
   return `<div class="af-line">${connector(parent,idx)}
@@ -3100,7 +3150,7 @@ function renderGroup(g,parent,idx,root){
 }
 function renderAdvanced(){
   return `<div class="fp-adv">${renderGroup(state.filters.advanced,null,0,true)}</div>
-  <div class="fp-foot"><button class="fp-btn" data-act="clear-adv">حذف همه</button><span class="fp-hint">${afCountRows(state.filters.advanced)?fa(afCountRows(state.filters.advanced))+' شرط فعال':''}</span></div>`;
+  <div class="fp-foot"><button class="fp-btn" data-act="clear-adv">حذف همه</button><button class="fp-btn fp-show" data-act="fp-close"${filterCount()?'':' hidden'}>نمایش ${fa(visible().length)} نتیجه</button><span class="fp-hint">${afCountRows(state.filters.advanced)?fa(afCountRows(state.filters.advanced))+' شرط فعال':''}</span></div>`;
 }
 function renderFp(keepFocus){
   if(!fpEl)return;
@@ -3142,6 +3192,7 @@ function openFp(){
   const first=fpEl.querySelector('[role="tab"][aria-selected="true"]');first&&first.focus();
   document.addEventListener('pointerdown',fpOutside,true);
   fpEl.addEventListener('keydown',e=>{
+    if(e.target.dataset.afd&&e.key==='Backspace'&&!e.target.value&&e.target.dataset.afd!=='0'){e.preventDefault();e.target.previousElementSibling.previousElementSibling.focus();return}
     if(e.key!=='Escape'||ddOpen)return;
     e.preventDefault();e.stopPropagation();
     const q=e.target.dataset&&e.target.dataset.q;
@@ -3188,6 +3239,11 @@ function openFp(){
   fpEl.addEventListener('input',e=>{
     const el=e.target;
     if(el.dataset.q){if(el.dataset.q==='cat')fpCatQ=el.value;else fpOptQ=el.value;renderFp();return}
+    if(el.dataset.afd!==undefined){afDateInput(el,e);return}
+    if(el.dataset.af==='value'&&el.tagName==='INPUT'){const nd=afFind(state.filters.advanced,el.dataset.id)?.node,ff=nd&&AF_FIELDS.find(x=>x.k===nd.field);if(ff){
+      /* each field accepts only its own kind of characters; anything else is dropped and explained */
+      const rule=AF_RULES[ff.k]||(ff.type==='number'?AF_RULES.salary:null);
+      if(rule){const raw=el.value,clean=rule.keep(raw);if(clean!==raw){const pos=Math.max(0,(el.selectionStart??raw.length)-(raw.length-clean.length));el.value=clean;try{el.setSelectionRange(pos,pos)}catch(_){}afLiveErr(el,nd.id,rule.msg(ff.t))}else afLiveErr(el,nd.id,'')}else afLiveErr(el,nd.id,'')}}
     /* (filter search boxes behave like the page search: × replaces the magnifier while there is text; Esc clears) */
     if(el.dataset.af==='value'&&el.tagName==='INPUT'){const node=afFind(state.filters.advanced,el.dataset.id)?.node;if(node){
       /* numbers: digits only with separators; dates: digits with slashes added as you type */
@@ -3196,7 +3252,8 @@ function openFp(){
       else if(ft==='date'){const d=toEn(el.value).replace(/\D/g,'').slice(0,8);const out=fa(d.length<=4?d:d.length<=6?d.slice(0,4)+'/'+d.slice(4):d.slice(0,4)+'/'+d.slice(4,6)+'/'+d.slice(6));if(out!==el.value&&!(e.inputType||'').startsWith('delete'))el.value=out}
       node.value=el.value;applyFilters();
       const h=fpEl.querySelector('.fp-hint');if(h){const n=afCountRows(state.filters.advanced);h.textContent=n?fa(n)+' شرط فعال':''}
-      if(afErr&&afErr.id===node.id){afErr=null;const row=el.closest('.af-row');row.querySelector('.af-err')?.remove();row.querySelectorAll('.af-ctl.bad').forEach(c=>c.classList.remove('bad'))}}}
+      {const b=fpEl.querySelector('.fp-show');if(b){b.textContent=`نمایش ${fa(visible().length)} نتیجه`;b.hidden=!filterCount()}}
+      }}
   });
 }
 $('#filterBtn').addEventListener('click',()=>{fpEl?closeFp():openFp()});
@@ -3653,8 +3710,7 @@ $('#importBtn').addEventListener('click',()=>{
   openModal({title:'ایمپورت لیست کارمندان',body:`
     <p class="msg">فایل اکسل (xlsx) یا CSV را انتخاب کنید. ردیف اول باید عنوان ستون‌ها باشد؛ ستون‌های «نام کارمند» و «شماره موبایل» الزامی‌اند.</p>
     <label class="drop" id="drop"><input type="file" id="impFile" accept=".xlsx,.xls,.csv" class="sr-only">
-      <span class="drop-ic">${icon('docUp',28)}</span><b>فایل را اینجا رها کنید یا برای انتخاب کلیک کنید</b><span id="impName">xlsx، xls یا csv</span></label>
-    <button type="button" class="text-btn" id="impTpl">${icon('importI',14)} دریافت فایل نمونه</button>
+      <span class="drop-ic">${icon('inboxDown',22)}</span><b>فایل را اینجا رها کنید یا برای انتخاب کلیک کنید</b><span id="impName">xlsx، xls یا csv</span></label>
     <div id="impRes"></div>`,
     actions:[{label:'ایمپورت',kind:'btn-primary',onClick:()=>{
       if(!parsed||!parsed.ok.length){toast('ردیف معتبری برای ایمپورت نیست');return false}
@@ -3683,7 +3739,7 @@ $('#importBtn').addEventListener('click',()=>{
       ['dragenter','dragover'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('over')}));
       ['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('over')}));
       drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)read(f)});
-      ov.querySelector('#impTpl').addEventListener('click',async()=>{
+      ov.querySelector('#impTpl')?.addEventListener('click',async()=>{
         const q=s=>{s=String(s);if(/^[=+\-@\t\r]/.test(s)&&!/^[+-]?[\d۰-۹.,]+$/.test(s))s="'"+s;return `"${s.replace(/"/g,'""')}"`};
         const sample=state.employees[0]||{};
         const csv='\ufeff'+[COLS.map(c=>q(c.label)).join(','),COLS.map(c=>q(c.key==='name'?'نام نمونه':c.key==='mobile'?'09120000000':c.key==='nationalId'?'':rawVal(sample,c.key))).join(',')].join('\r\n');
