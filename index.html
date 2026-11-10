@@ -2806,10 +2806,12 @@ function employeeForm(e,only,onDone,host){
   function validateStep(i){
     let first=null;
     EMP_STEPS[i].forEach(n=>{dirty.add(n);if(validate(n)&&!first)first=form.elements[n]});
+    if(first&&isNew&&window.clarity){clarity('event','add_error');clarity('set','add_error_field',first.name)}
     return first;
   }
   function showStep(i,focusFirst=true){
     step=i;reached=Math.max(reached,i);
+    if(isNew)window.clarity&&clarity('event','add_step_'+(i+1));
     form.querySelectorAll('.wizard-step').forEach((s,k)=>s.hidden=k!==step);
     modalEl.querySelectorAll('[data-step-label]').forEach((l,k)=>{
       const dn=k!==step&&k<reached,nav=k!==step&&k<=reached;
@@ -3047,7 +3049,7 @@ function employeeForm(e,only,onDone,host){
       });
       showStep(sec?only:0,false);
     },
-    actions:[{label:'انصراف'},{label:host?'ذخیره':isNew?'افزودن کارمند':'ذخیره تغییرات',kind:'btn-primary',onClick:()=>{
+    actions:[{label:'انصراف',onClick:()=>{if(isNew)window.clarity&&clarity('event','add_cancel')}},{label:host?'ذخیره':isNew?'افزودن کارمند':'ذخیره تغییرات',kind:'btn-primary',onClick:()=>{
       if(sec){const bad=validateStep(only);if(bad){bad.focus();return false}}
       else if(step<2){
         const bad=validateStep(step);
@@ -3066,7 +3068,7 @@ function employeeForm(e,only,onDone,host){
       let filtersCleared=false;
       if(isNew){
         const emp={id:state.nextId++,...data,terminated:false,notifs:{contract:true,insurance:true,hours:false,anniversary:false},inProgress:0,completed:0};
-        state.employees.unshift(emp);state.selectedId=emp.id;state.query='';$('#tableSearch').value='';syncClear('tableSearch');
+        window.clarity&&clarity('event','add_success');state.employees.unshift(emp);state.selectedId=emp.id;state.query='';$('#tableSearch').value='';syncClear('tableSearch');
         state.sort.key=null;state.page=1;
         // an active filter would hide the new row and make it look like nothing happened
         if(!visible().some(x=>x.id===emp.id)){resetFilters();filtersCleared=true}
@@ -3297,7 +3299,7 @@ $('#bulkRenew').addEventListener('click',()=>{const ids=[...state.checked];
     <div class="radio-row" role="radiogroup" aria-label="مدت تمدید"><label><input type="radio" name="dur" value="۶ ماه" checked><span>۶ ماه</span></label><label><input type="radio" name="dur" value="۱ سال"><span>۱ سال</span></label><label><input type="radio" name="dur" value="۲ سال"><span>۲ سال</span></label></div>`,
     actions:[{label:'تمدید قرارداد',kind:'btn-primary',onClick:ov=>{const d=ov.querySelector('input[name=dur]:checked').value,months=d==='۶ ماه'?6:d==='۱ سال'?12:24;
       ids.forEach(id=>{const e=byId(id);if(e){e.contractEnd=addJalaliMonths(e.contractEnd>TODAY?e.contractEnd:TODAY,months);e.terminated=false}});persist();renderTable();renderPanel();toast(ids.length>1?`قرارداد ${fa(ids.length)} کارمند به مدت ${d} تمدید شد`:`قرارداد ${byId(ids[0])?.name||''} تا ${fa(byId(ids[0])?.contractEnd||'')} تمدید شد (${d})`,{undo:true})}},{label:'انصراف'}]})});
-$('#addBtn').addEventListener('click',()=>employeeForm(null));
+$('#addBtn').addEventListener('click',()=>{window.clarity&&clarity('event','add_start');employeeForm(null)});
 
 let fpEl=null,fpTab='general',fpCat='role',fpCatQ='',fpOptQ='';
 function afFind(g,id,parent=null){if(g.id===id)return {node:g,parent};for(const c of g.children){if(c.id===id)return {node:c,parent:g};if(c.kind==='group'){const r=afFind(c,id,g);if(r)return r}}return null}
