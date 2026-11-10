@@ -980,7 +980,7 @@ td.cell-icon .cb,th.cell-icon .cb{width:16px;height:16px;border-radius:4px}
 
 .chart-card{padding:12px 13px 10px}
 .chart-head{display:flex;align-items:center;gap:4px}
-.chart-head .month-sel{margin-inline-start:auto;height:24px;padding:0 6px;border:1px solid var(--border-soft);border-radius:6px;color:var(--text-strong)}
+.chart-head .month-sel{margin-inline-start:4px;height:24px;padding:0 6px;border:1px solid var(--border-soft);border-radius:6px;color:var(--text-strong)}
 .chart-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0 0}
 .chart-kpis>div{padding:8px 10px;border:1px solid var(--border-soft);border-radius:8px}
 .chart-kpis .ck-ic{grid-row:1/3;display:grid;place-items:center;width:32px;height:32px;border-radius:8px;color:var(--primary);background:var(--primary-softer)}
@@ -1035,6 +1035,135 @@ td.cell-icon .cb,th.cell-icon .cb{width:16px;height:16px;border-radius:4px}
 .xticks{position:relative;height:14px;margin-inline-start:18px}
 .xticks span{position:absolute;top:2px;transform:translateX(-50%);font-size:8px;line-height:10px;color:var(--text-muted);font-weight:400}
 .chart-sum{margin-top:6px;font-size:10px;line-height:14px;color:var(--text-muted);text-align:right;direction:rtl;font-weight:400}
+.chart-more{display:inline-flex;align-items:center;gap:2px;font-size:10px;line-height:14px;color:var(--primary);font-weight:500;margin-inline-start:auto;border-radius:4px}
+.chart-more:hover{color:var(--primary-strong);text-decoration:underline}
+.chart-more:focus-visible{box-shadow:var(--focus)}
+.modal.wd-modal{width:min(720px,100%)}
+.wd-modal .modal-actions:empty{display:none}
+.wd-sub{font-size:11px;font-weight:400;color:var(--text-muted);margin-inline-start:6px}
+.wd-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px;flex-wrap:wrap}
+.wd-msel{display:flex;align-items:center;gap:2px;padding:2px;border:1px solid var(--border-soft);border-radius:8px}
+.wd-modal .wd-msel .month-sel{border:0;height:24px;padding:0 8px;font-size:11px;color:var(--text-strong);font-weight:500}
+.wd-msel .wd-yr{padding:0 8px;line-height:24px}
+.wd-nav{display:grid;place-items:center;width:24px;height:24px;border-radius:6px;color:var(--text-muted)}
+.wd-nav:hover:not(:disabled){background:var(--surface-alt);color:var(--text-strong)}
+.wd-nav:disabled{color:var(--text-faint);opacity:.5}
+.wd-nav:focus-visible{box-shadow:var(--focus)}
+.wd-kpi.neg dd b{color:var(--danger)}
+.wd-kpi.ot dd b{color:var(--bar-ot)}
+.wd-yr{font-size:11px;color:var(--text-strong);font-weight:500}
+.wd-modal .month-sel{height:24px;padding:0 6px;border:1px solid var(--border-soft);border-radius:6px;color:var(--text-strong)}
+.wd-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:16px}
+.wd-kpi{padding:8px 10px;border:1px solid var(--border-soft);border-radius:8px}
+.wd-kpi dt{display:flex;align-items:center;gap:4px;font-size:10px;line-height:14px;color:var(--text-muted);white-space:nowrap}
+.wd-kpi dd{margin:2px 0 0;font-size:10px;line-height:20px;color:var(--text-muted)}
+.wd-kpi dd b{font-size:14px;font-weight:700;color:var(--text-strong);margin-inline-end:2px}
+.wd-d{display:inline-flex;align-items:center;gap:2px;font-size:10px;line-height:14px;color:var(--text-muted)}
+.wd-d.pos{color:var(--success)}
+.wd-d.neg{color:var(--danger)}
+.wd-perf{display:flex;align-items:center;gap:16px;margin-top:12px;padding:12px 16px;border:1px solid var(--border-soft);border-radius:8px}
+.wd-ring{position:relative;flex:none;width:80px;height:80px}
+.wd-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.wd-ring circle{fill:none;stroke-width:3.2}
+.wd-ring .bg{stroke:var(--surface-alt)}
+.wd-ring .fg{stroke:var(--primary);stroke-linecap:round}
+.wd-ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:16px;font-weight:700;color:var(--text-strong)}
+.wd-pi{flex:1;min-width:0}
+.wd-pi-h{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.wd-pct{font-size:16px;line-height:20px;font-weight:700;color:var(--text-strong)}
+.wd-pi h4{margin:0;font-size:12px;line-height:16px;font-weight:600;color:var(--text-strong)}
+.wd-pi-c{display:flex;align-items:center;gap:4px;margin:0;font-size:10px;line-height:14px;color:var(--text-muted)}
+.wd-pi-c .wd-d.pos,.wd-pi-c .wd-d.neg{background:none;padding:0}
+.wd-pi p{margin:4px 0 8px;font-size:11px;line-height:16px;color:var(--text-muted)}
+.wd-pi p b{color:var(--text-strong);font-weight:600}
+.wd-segw{position:relative;margin:8px 0 6px;border-radius:6px;cursor:default}
+.wd-segw:focus-visible{box-shadow:var(--focus)}
+.wd-seg{position:relative;height:8px;border-radius:4px;background:var(--surface-alt);transition:height .25s var(--ease-out),background .2s}
+.wd-seg i.t{display:block;height:100%;border-radius:4px;background:var(--bar-reg);transition:opacity .2s}
+.wd-seg-d{position:absolute;inset:0;display:flex;gap:3px;pointer-events:none}
+.wd-seg-d i{display:flex;align-items:center;justify-content:center;gap:3px;min-width:max-content;padding:0 10px;border-radius:6px;background:var(--bar-reg);font-style:normal;font-size:10px;line-height:14px;color:#fff;white-space:nowrap;opacity:0;transform:scaleY(.4);transition:opacity .2s,transform .25s var(--ease-out)}
+.wd-seg-d i span{opacity:.85}
+.wd-seg-d i b{font-size:12px;font-weight:700}
+.wd-seg-d i small{font-size:9px;opacity:.85}
+.wd-seg-d i.o{background:var(--bar-ot);transition-delay:.04s}
+.wd-seg-d i.d{background:var(--danger);transition-delay:.08s}
+.wd-segw:hover .wd-seg,.wd-segw:focus-visible .wd-seg{height:32px;background:transparent}
+.wd-segw:hover .wd-seg i.t,.wd-segw:focus-visible .wd-seg i.t{opacity:0}
+.wd-segw:hover .wd-seg-d i,.wd-segw:focus-visible .wd-seg-d i{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.wd-seg,.wd-seg-d i{transition:none}}
+.wd-seg-lg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:10px;line-height:14px;color:var(--text-muted)}
+.wd-seg-lg span{display:inline-flex;align-items:center;gap:4px}
+.wd-seg-lg i{width:8px;height:8px;border-radius:2px}
+.wd-seg-lg b{color:var(--text-strong);font-weight:600}
+.wd-d.pos,.wd-d.neg{padding:1px 6px;border-radius:10px}
+.wd-d.pos{background:var(--success-soft)}
+.wd-d.neg{background:var(--danger-soft)}
+.wd-cmp-pick{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted)}
+.wd-cmp-pick b{color:var(--text-strong);font-weight:600}
+.wd-key{width:8px;height:8px;border-radius:2px;flex:none}
+.wd-key.c,.wd-cr-t i.c{background:var(--text-faint)}
+.wd-key.s,.wd-cr-t i.s{background:var(--primary)}
+.wd-cr.def .wd-cr-t i.s{background:var(--danger)}
+.wd-ct td.cur,.wd-ct th.cur{font-weight:600}
+.wd-ct thead th.cur{color:var(--text-strong)}
+.wd-t.wd-ct tbody tr:nth-child(n) td.cur{color:var(--text-strong)}
+.wd-ct .wd-d.pos,.wd-ct .wd-d.neg{background:none;padding:0}
+.wd-cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.wd-cr{padding:10px 12px;border:1px solid var(--border-soft);border-radius:8px}
+.wd-cr-h{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:8px;font-size:11px;line-height:16px;color:var(--text-strong);font-weight:500}
+.wd-cr-b{display:grid;grid-template-columns:52px 1fr 64px;align-items:center;gap:8px;font-size:10px;line-height:16px;color:var(--text-muted)}
+.wd-cr-b+.wd-cr-b{margin-top:4px}
+.wd-cr-t{height:6px;border-radius:3px;background:var(--surface-alt);overflow:hidden}
+.wd-cr-t i{display:block;height:100%;border-radius:3px}
+.wd-cr-b em{font-style:normal;color:var(--text-strong);text-align:left;white-space:nowrap}
+@media (max-width:600px){.wd-cmp{grid-template-columns:1fr}.wd-perf{flex-direction:column;align-items:stretch}.wd-ring{align-self:center}}
+.wd-h{margin:20px 0 8px;font-size:11px;line-height:16px;font-weight:600;color:var(--text-strong)}
+.wd-tw{overflow-x:auto;border:1px solid var(--border-soft);border-radius:8px}
+.wd-t{width:100%;min-width:0;table-layout:auto;border-collapse:collapse;font-size:11px;line-height:16px;color:var(--text)}
+.wd-t th,.wd-t td{padding:8px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--border-soft)}
+.wd-t thead th{position:static;box-shadow:none;background:var(--surface-alt);color:var(--text-muted);font-weight:500;font-size:10px}
+.wd-t tbody th{font-weight:500;color:var(--text-strong)}
+.wd-t tbody tr:last-child>*{border-bottom:0}
+.wd-t tbody tr>th{background:var(--surface)}
+.wd-t tbody tr:nth-child(n) td{background:var(--surface);color:var(--text)}
+.wd-t tbody tr.on>*,.wd-t tbody tr.on:nth-child(n) td{background:var(--primary-softer)}
+.wd-t tr.fut>*,.wd-t tbody tr.fut:nth-child(n) td{color:var(--text-faint)}
+.wd-t tfoot>tr>*{background:var(--surface-alt);font-weight:600;color:var(--text-strong);border-top:1px solid var(--border-soft);border-bottom:0}
+.wd-cal{border:1px solid var(--border-soft);border-radius:8px;padding:8px}
+.wd-wk,.wd-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.wd-wk span{text-align:center;font-size:10px;color:var(--text-muted);padding-bottom:4px}
+.wd-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;height:40px;border-radius:6px;font-style:normal;font-size:9px;line-height:12px;color:var(--text-muted)}
+.wd-cell b{font-size:11px;line-height:14px;font-weight:600;color:var(--text-strong)}
+.wd-cell.blank{visibility:hidden}
+.wd-cell.ok,.wd-sw.ok{background:color-mix(in srgb,var(--bar-reg) 18%,transparent)}
+.wd-cell.ot,.wd-sw.ot{background:color-mix(in srgb,var(--bar-ot) 20%,transparent)}
+.wd-cell.low,.wd-sw.low{background:var(--danger-soft)}
+.wd-cell.low b{color:var(--danger)}
+.wd-cell.off,.wd-sw.off{background:transparent;border:1px dashed var(--danger);box-sizing:border-box}
+.wd-cell.off{width:auto;height:40px;margin:0;border-radius:6px}
+.chart-legend .wd-sw.off{width:8px;height:8px;margin:0;border-radius:2px}
+.wd-cell.off b{color:var(--danger)}
+.wd-cell.fut{background:var(--surface-sunken);color:var(--text-faint)}
+.wd-note{display:flex;align-items:center;gap:4px;margin:12px 0 0;font-size:10px;line-height:16px;color:var(--warn)}
+.wd-part{font-size:9px;font-weight:400;color:var(--text-muted)}
+.wd-hrow{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:6px;margin:20px 0 8px}
+.wd-hrow .wd-h{margin:0}
+.wd-cell.hol,.wd-sw.hol{background:color-mix(in srgb,var(--text-faint) 18%,transparent)}
+.wd-sw.al{background:var(--border-soft)}
+.chart-legend.wd-lg{flex-wrap:wrap;margin-top:8px;padding-top:0}
+.chart-legend .wd-sw{width:8px;height:8px;border-radius:2px}
+.wd-sw.ok{background:var(--bar-reg)}
+.wd-sw.x,.wd-ybar i.x{background:var(--bar-ot)}
+.wd-yc{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;height:160px;padding:8px;border:1px solid var(--border-soft);border-radius:8px;direction:rtl}
+.wd-yb{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.wd-yb span{font-size:9px;line-height:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.wd-yb.on span{color:var(--primary);font-weight:600}
+.wd-ybar{position:relative;flex:1;width:100%;max-width:22px}
+.wd-ybar i{position:absolute;bottom:0;left:0;right:0;border-radius:3px 3px 0 0}
+.wd-ybar i.al{background:var(--border-soft)}
+.wd-ybar i.v{background:var(--bar-reg);left:4px;right:4px}
+.wd-ybar i.x{left:4px;right:4px}
+@media (max-width:600px){.wd-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.wd-yc{gap:2px;padding:6px 4px}.wd-yb span{font-size:8px}}
 
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .stat{padding:12px 8px 13px;text-align:center}
@@ -1176,6 +1305,7 @@ td.cell-icon .cb,th.cell-icon .cb{width:16px;height:16px;border-radius:4px}
 .dd.compact{width:auto;height:20px;padding:0 4px;gap:2px;border-color:transparent;background:transparent;font-size:10px;color:var(--text-muted);font-weight:400}
 .dd.compact:hover{color:var(--primary-strong);background:var(--surface-alt)}
 .dd.compact:focus-visible,.dd.compact[aria-expanded="true"]{box-shadow:0 0 0 2px var(--primary-softer);border-color:var(--primary-light)}
+.wd-msel .dd.compact{height:24px;padding:0 8px;font-size:11px;color:var(--text-strong);font-weight:500}
 .dd-list{position:fixed;z-index:90;min-width:140px;max-height:240px;overflow-y:auto;overflow-x:hidden;padding:4px;margin:0;list-style:none;background:var(--surface);
   border:1px solid var(--border-soft);border-radius:8px;box-shadow:var(--shadow-pop)}
 .dd-opt{display:flex;align-items:center;justify-content:space-between;gap:8px;height:32px;padding:0 8px;border-radius:4px;font-size:12px;color:var(--text-strong);cursor:pointer;white-space:nowrap}
@@ -1709,6 +1839,7 @@ ICONS.importSq={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="e
 ICONS.trayDown={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0001 2.09998C12.4972 2.09998 12.9001 2.50292 12.9001 2.99998V14.3272L15.8637 11.3636C16.2152 11.0121 16.785 11.0121 17.1365 11.3636C17.488 11.7151 17.488 12.2849 17.1365 12.6364L12.6365 17.1364C12.285 17.4878 11.7152 17.4878 11.3637 17.1364L6.8637 12.6364C6.51223 12.2849 6.51223 11.7151 6.8637 11.3636C7.21517 11.0121 7.78502 11.0121 8.13649 11.3636L11.1001 14.3272V2.99998C11.1001 2.50292 11.503 2.09998 12.0001 2.09998ZM3.0001 15.6C3.49715 15.6 3.9001 16.0029 3.9001 16.5V18.75C3.9001 19.4956 4.50451 20.1 5.2501 20.1H18.7501C19.4957 20.1 20.1001 19.4956 20.1001 18.75V16.5C20.1001 16.0029 20.503 15.6 21.0001 15.6C21.4972 15.6 21.9001 16.0029 21.9001 16.5V18.75C21.9001 20.4897 20.4898 21.9 18.7501 21.9H5.2501C3.5104 21.9 2.1001 20.4897 2.1001 18.75V16.5C2.1001 16.0029 2.50304 15.6 3.0001 15.6Z"/>'};
 ICONS.trayUp={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M11.3637 2.36358C11.7152 2.01211 12.285 2.01211 12.6365 2.36358L17.1365 6.86358C17.488 7.21505 17.488 7.7849 17.1365 8.13637C16.785 8.48784 16.2152 8.48784 15.8637 8.13637L12.9001 5.17277L12.9001 16.5C12.9001 16.997 12.4972 17.4 12.0001 17.4C11.503 17.4 11.1001 16.997 11.1001 16.5L11.1001 5.17277L8.13649 8.13637C7.78502 8.48784 7.21517 8.48784 6.8637 8.13637C6.51223 7.7849 6.51223 7.21505 6.8637 6.86358L11.3637 2.36358ZM3.0001 15.6C3.49715 15.6 3.9001 16.0029 3.9001 16.5V18.75C3.9001 19.4956 4.50451 20.1 5.2501 20.1H18.7501C19.4957 20.1 20.1001 19.4956 20.1001 18.75V16.5C20.1001 16.0029 20.503 15.6 21.0001 15.6C21.4972 15.6 21.9001 16.0029 21.9001 16.5V18.75C21.9001 20.4897 20.4898 21.9 18.7501 21.9H5.2501C3.5104 21.9 2.1001 20.4897 2.1001 18.75V16.5C2.1001 16.0029 2.50304 15.6 3.0001 15.6Z"/>'};
 ICONS.inboxDown={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M12.0001 2.09998C12.4972 2.09998 12.9001 2.50292 12.9001 2.99998V9.07718L14.3637 7.61358C14.7152 7.26211 15.285 7.26211 15.6365 7.61358C15.988 7.96505 15.988 8.5349 15.6365 8.88637L12.6365 11.8864C12.285 12.2378 11.7152 12.2378 11.3637 11.8864L8.3637 8.88637C8.01223 8.5349 8.01223 7.96505 8.3637 7.61358C8.71517 7.26211 9.28502 7.26211 9.63649 7.61358L11.1001 9.07718V2.99998C11.1001 2.50292 11.503 2.09998 12.0001 2.09998ZM6.91189 4.64998C6.31923 4.64998 5.79588 5.03651 5.62159 5.60296L3.46866 12.6H6.10952C7.30265 12.6 8.39338 13.2741 8.92697 14.3413L9.1832 14.8537C9.41188 15.3111 9.87933 15.6 10.3907 15.6H13.6095C14.1209 15.6 14.5883 15.3111 14.817 14.8537L15.0732 14.3413C15.6068 13.2741 16.6975 12.6 17.8907 12.6H20.5315L18.3786 5.60296C18.2043 5.03651 17.681 4.64998 17.0883 4.64998H15.0001C14.503 4.64998 14.1001 4.24703 14.1001 3.74998C14.1001 3.25292 14.503 2.84998 15.0001 2.84998H17.0883C18.4712 2.84998 19.6923 3.75189 20.099 5.0736L22.5108 12.9119C22.5324 12.982 22.5514 13.0527 22.568 13.124C22.6207 13.2384 22.6501 13.3658 22.6501 13.5C22.6501 13.5401 22.6475 13.5795 22.6424 13.6182C22.6475 13.6914 22.6501 13.7648 22.6501 13.8383V18C22.6501 19.7397 21.2398 21.15 19.5001 21.15H4.5001C2.7604 21.15 1.3501 19.7397 1.3501 18V13.8383C1.3501 13.7648 1.35267 13.6914 1.3578 13.6182C1.35272 13.5795 1.3501 13.5401 1.3501 13.5C1.3501 13.3658 1.37948 13.2384 1.43216 13.124C1.44875 13.0527 1.46783 12.982 1.48939 12.9119L3.90119 5.0736C4.30787 3.75189 5.52903 2.84998 6.91189 2.84998H9.0001C9.49715 2.84998 9.9001 3.25292 9.9001 3.74998C9.9001 4.24703 9.49715 4.64998 9.0001 4.64998H6.91189ZM3.1501 14.4V18C3.1501 18.7456 3.75451 19.35 4.5001 19.35H19.5001C20.2457 19.35 20.8501 18.7456 20.8501 18V14.4H17.8907C17.3793 14.4 16.9119 14.6889 16.6832 15.1462L16.427 15.6587C15.8934 16.7259 14.8027 17.4 13.6095 17.4H10.3907C9.19754 17.4 8.10681 16.7259 7.57323 15.6587L7.317 15.1462C7.08832 14.6889 6.62086 14.4 6.10952 14.4H3.1501Z"/>'};
+ICONS.exclC={vb:'0 0 20 20',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5A.75.75 0 0 1 10 5Zm0 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/>'};
 ICONS.kCal={vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M6.7501 2.09998C7.24715 2.09998 7.6501 2.50292 7.6501 2.99998V4.34998H16.3501V2.99998C16.3501 2.50292 16.753 2.09998 17.2501 2.09998C17.7472 2.09998 18.1501 2.50292 18.1501 2.99998V4.34998H18.7501C20.4898 4.34998 21.9001 5.76028 21.9001 7.49998V18.75C21.9001 20.4897 20.4898 21.9 18.7501 21.9H5.2501C3.5104 21.9 2.1001 20.4897 2.1001 18.75V7.49998C2.1001 5.76028 3.5104 4.34998 5.2501 4.34998H5.8501V2.99998C5.8501 2.50292 6.25304 2.09998 6.7501 2.09998ZM5.2501 6.14998C4.50451 6.14998 3.9001 6.75439 3.9001 7.49998V8.40311C4.30926 8.20874 4.76698 8.09998 5.2501 8.09998H18.7501C19.2332 8.09998 19.6909 8.20874 20.1001 8.40311V7.49998C20.1001 6.75439 19.4957 6.14998 18.7501 6.14998H5.2501ZM20.1001 11.25C20.1001 10.5044 19.4957 9.89998 18.7501 9.89998H5.2501C4.50451 9.89998 3.9001 10.5044 3.9001 11.25V18.75C3.9001 19.4956 4.50451 20.1 5.2501 20.1H18.7501C19.4957 20.1 20.1001 19.4956 20.1001 18.75V11.25ZM11.1001 12.75C11.1001 12.2529 11.503 11.85 12.0001 11.85H12.0076C12.5047 11.85 12.9076 12.2529 12.9076 12.75V12.7575C12.9076 13.2545 12.5047 13.6575 12.0076 13.6575H12.0001C11.503 13.6575 11.1001 13.2545 11.1001 12.7575V12.75ZM13.3501 12.75C13.3501 12.2529 13.753 11.85 14.2501 11.85H14.2576C14.7547 11.85 15.1576 12.2529 15.1576 12.75V12.7575C15.1576 13.2545 14.7547 13.6575 14.2576 13.6575H14.2501C13.753 13.6575 13.3501 13.2545 13.3501 12.7575V12.75ZM15.6001 12.75C15.6001 12.2529 16.003 11.85 16.5001 11.85H16.5076C17.0047 11.85 17.4076 12.2529 17.4076 12.75V12.7575C17.4076 13.2545 17.0047 13.6575 16.5076 13.6575H16.5001C16.003 13.6575 15.6001 13.2545 15.6001 12.7575V12.75ZM6.6001 15C6.6001 14.5029 7.00304 14.1 7.5001 14.1H7.5076C8.00465 14.1 8.4076 14.5029 8.4076 15V15.0075C8.4076 15.5045 8.00465 15.9075 7.5076 15.9075H7.5001C7.00304 15.9075 6.6001 15.5045 6.6001 15.0075V15ZM8.8501 15C8.8501 14.5029 9.25304 14.1 9.7501 14.1H9.7576C10.2547 14.1 10.6576 14.5029 10.6576 15V15.0075C10.6576 15.5045 10.2547 15.9075 9.7576 15.9075H9.7501C9.25304 15.9075 8.8501 15.5045 8.8501 15.0075V15ZM11.1001 15C11.1001 14.5029 11.503 14.1 12.0001 14.1H12.0076C12.5047 14.1 12.9076 14.5029 12.9076 15V15.0075C12.9076 15.5045 12.5047 15.9075 12.0076 15.9075H12.0001C11.503 15.9075 11.1001 15.5045 11.1001 15.0075V15ZM13.3501 15C13.3501 14.5029 13.753 14.1 14.2501 14.1H14.2576C14.7547 14.1 15.1576 14.5029 15.1576 15V15.0075C15.1576 15.5045 14.7547 15.9075 14.2576 15.9075H14.2501C13.753 15.9075 13.3501 15.5045 13.3501 15.0075V15ZM15.6001 15C15.6001 14.5029 16.003 14.1 16.5001 14.1H16.5076C17.0047 14.1 17.4076 14.5029 17.4076 15V15.0075C17.4076 15.5045 17.0047 15.9075 16.5076 15.9075H16.5001C16.003 15.9075 15.6001 15.5045 15.6001 15.0075V15ZM6.6001 17.25C6.6001 16.7529 7.00304 16.35 7.5001 16.35H7.5076C8.00465 16.35 8.4076 16.7529 8.4076 17.25V17.2575C8.4076 17.7545 8.00465 18.1575 7.5076 18.1575H7.5001C7.00304 18.1575 6.6001 17.7545 6.6001 17.2575V17.25ZM8.8501 17.25C8.8501 16.7529 9.25304 16.35 9.7501 16.35H9.7576C10.2547 16.35 10.6576 16.7529 10.6576 17.25V17.2575C10.6576 17.7545 10.2547 18.1575 9.7576 18.1575H9.7501C9.25304 18.1575 8.8501 17.7545 8.8501 17.2575V17.25ZM11.1001 17.25C11.1001 16.7529 11.503 16.35 12.0001 16.35H12.0076C12.5047 16.35 12.9076 16.7529 12.9076 17.25V17.2575C12.9076 17.7545 12.5047 18.1575 12.0076 18.1575H12.0001C11.503 18.1575 11.1001 17.7545 11.1001 17.2575V17.25ZM13.3501 17.25C13.3501 16.7529 13.753 16.35 14.2501 16.35H14.2576C14.7547 16.35 15.1576 16.7529 15.1576 17.25V17.2575C15.1576 17.7545 14.7547 18.1575 14.2576 18.1575H14.2501C13.753 18.1575 13.3501 17.7545 13.3501 17.2575V17.25Z"/>'};
 Object.assign(ICONS,{"renew": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M15.312 11.424a5.5 5.5 0 0 1-9.201 2.466l-.312-.311h2.433a.75.75 0 0 0 0-1.5H3.989a.75.75 0 0 0-.75.75v4.242a.75.75 0 0 0 1.5 0v-2.43l.31.31a7 7 0 0 0 11.712-3.138.75.75 0 0 0-1.449-.39Zm1.23-3.723a.75.75 0 0 0 .219-.53V2.929a.75.75 0 0 0-1.5 0V5.36l-.31-.31A7 7 0 0 0 3.239 8.188a.75.75 0 1 0 1.448.389A5.5 5.5 0 0 1 13.89 6.11l.311.31h-2.432a.75.75 0 0 0 0 1.5h4.243a.75.75 0 0 0 .53-.219Z\" clip-rule=\"evenodd\"/>"}, "copy": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M7 3.5A1.5 1.5 0 0 1 8.5 2h3.879a1.5 1.5 0 0 1 1.06.44l3.122 3.12A1.5 1.5 0 0 1 17 6.622V12.5a1.5 1.5 0 0 1-1.5 1.5h-1v-3.379a3 3 0 0 0-.879-2.121L10.5 5.379A3 3 0 0 0 8.379 4.5H7v-1Z\"/> <path d=\"M4.5 6A1.5 1.5 0 0 0 3 7.5v9A1.5 1.5 0 0 0 4.5 18h7a1.5 1.5 0 0 0 1.5-1.5v-5.879a1.5 1.5 0 0 0-.44-1.06L9.44 6.439A1.5 1.5 0 0 0 8.378 6H4.5Z\"/>"}, "bellOff": {"vb": "0 0 20 20", "o": false, "p": "<path d=\"M4 8c0-.26.017-.517.049-.77l7.722 7.723a33.56 33.56 0 0 1-3.722-.01 2 2 0 0 0 3.862.15l1.134 1.134a3.5 3.5 0 0 1-6.53-1.409 32.91 32.91 0 0 1-3.257-.508.75.75 0 0 1-.515-1.076A11.448 11.448 0 0 0 4 8ZM17.266 13.9a.756.756 0 0 1-.068.116L6.389 3.207A6 6 0 0 1 16 8c.001 1.887.455 3.665 1.258 5.234a.75.75 0 0 1 .01.666ZM3.28 2.22a.75.75 0 0 0-1.06 1.06l14.5 14.5a.75.75 0 1 0 1.06-1.06L3.28 2.22Z\"/>"}});
 Object.assign(ICONS,{"mUsers": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z\"/>"}, "mMoney": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z\"/>"}, "mBrief": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z\"/>"}, "mDoc": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z\"/>"}, "mChart": {"vb": "0 0 24 24", "o": true, "p": "<path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z\"/>"}, "chevLs": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z\" clip-rule=\"evenodd\"/>"}, "chevRs": {"vb": "0 0 20 20", "o": false, "p": "<path fill-rule=\"evenodd\" d=\"M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z\" clip-rule=\"evenodd\"/>"}});
@@ -2179,7 +2310,7 @@ function renderPager(pages){
 }
 
 /* ---------- side panel ---------- */
-const MONTHS=[{n:'آبان ۱۴۰۵',d:30,w:5},{n:'مهر ۱۴۰۵',d:30,w:3},{n:'شهریور ۱۴۰۵',d:31,w:0},{n:'مرداد ۱۴۰۵',d:31,w:4}];
+const MONTHS=[{n:'آبان ۱۴۰۵',d:30,w:5},{n:'مهر ۱۴۰۵',d:30,w:3},{n:'شهریور ۱۴۰۵',d:31,w:0},{n:'مرداد ۱۴۰۵',d:31,w:4},{n:'تیر ۱۴۰۵',d:31,w:1},{n:'خرداد ۱۴۰۵',d:31,w:5},{n:'اردیبهشت ۱۴۰۵',d:31,w:2},{n:'فروردین ۱۴۰۵',d:31,w:6}];
 /* w = weekday of day 1 (0=Sun … 4=Thu, 5=Fri, 6=Sat); Thursday and Friday are holidays */
 const isHol=(m,i)=>{const w=(MONTHS[m].w+i)%7;return w===4||w===5};
 const holName=(m,i)=>(MONTHS[m].w+i)%7===4?'پنج‌شنبه':'جمعه';
@@ -2188,6 +2319,85 @@ function hoursFor(e,m){
   if(e.id===1&&m===0)return DESIGN_HOURS;
   const r=rng(e.id*97+m*13+7);const pool=[1.5,6,6.5,7,8,8.5,9,10,11,12];
   return Array.from({length:MONTHS[m].d},()=>{const v=r();return v<.12?0:pool[Math.floor(r()*pool.length)]});
+}
+/* ---------- work details (chart "more") ---------- */
+const YEAR_MONTHS=[['فروردین',31,6],['اردیبهشت',31,2],['خرداد',31,5],['تیر',31,1],['مرداد',31,4],['شهریور',31,0],['مهر',30,3],['آبان',30,5],['آذر',30,0],['دی',30,2],['بهمن',30,4],['اسفند',29,6]];
+const [CUR_YM,CUR_DAY]=(()=>{const [y,m,d]=TODAY.split('/').map(Number);return y===1405?[m-1,d]:y>1405?[11,31]:[7,30]})();
+function ymStats(e,k,lim){
+  const [n,d,w]=YEAR_MONTHS[k];if(k>CUR_YM)return {k,n,future:true};
+  const cut=Math.min(k===CUR_YM?CUR_DAY:d,lim||d,d);
+  const mi=MONTHS.findIndex(x=>x.n===n+' ۱۴۰۵');
+  const hol=Array.from({length:d},(_,i)=>{const x=(w+i)%7;return x===4||x===5});
+  let hrs;if(mi>=0)hrs=hoursFor(e,mi);else{const r=rng(e.id*97+(k+20)*13+7);const pool=[1.5,6,6.5,7,8,8.5,9,10,11,12];hrs=Array.from({length:d},()=>{const v=r();return v<.12?0:pool[Math.floor(r()*pool.length)]})}
+  const STD=8;const fut=Array.from({length:d},(_,i)=>i>=cut);const data=hrs.map((h,i)=>hol[i]||fut[i]?0:h);
+  const allowDays=hol.filter((x,i)=>!x&&!fut[i]).length,allowHrs=allowDays*STD;
+  const worked=data.filter(Boolean).length,total=data.reduce((a,b)=>a+b,0);
+  const defHrs=Math.max(0,allowHrs-total);
+  const otHrs=data.reduce((a,h)=>a+Math.max(0,h-STD),0);
+  const under=data.filter(h=>h&&h<STD).length;
+  return {k,n,d,w,hol,fut,cut,partial:cut<d,data,allowDays,allowHrs,worked,total,defHrs,otHrs,defDays:allowDays-worked,under,perf:allowHrs?Math.round(total/allowHrs*100):0,avg:worked?total/worked:0};
+}
+function workDetails(e){
+  const n1=v=>fa(String(Math.round(v*10)/10).replace('.','٫'));
+  const mi0=YEAR_MONTHS.findIndex(x=>x[0]+' ۱۴۰۵'===MONTHS[state.month].n);
+  let tab='m',k=mi0<0||mi0>CUR_YM?CUR_YM:mi0,cmp=k>0?k-1:1;
+  const GOOD={total:1,worked:1,otHrs:1,avg:1,perf:1,defHrs:0,defDays:0,under:0};
+  const delta=(cur,prev,unit,ic=true,key)=>{if(prev==null)return '<span class="wd-d">—</span>';const d=Math.round((cur-prev)*10)/10;if(!d)return '<span class="wd-d">بدون تغییر</span>';const up=d>0,cl=key==null?'':(GOOD[key]?up:!up)?' pos':' neg';return `<span class="wd-d${cl}">${ic?icon(up?'arrUp':'arrDown',10):''}${n1(Math.abs(d))}${unit==='٪'?'٪':' '+unit} ${up?'بیشتر':'کمتر'}</span>`};
+  const kpi=(ic,t,v,of,dl,cl='')=>`<div class="wd-kpi${cl}"><dt>${icon(ic,12)}${t}</dt><dd><b>${v}</b>${of?` <span>${of}</span>`:''}</dd>${dl}</div>`;
+  const perfCard=(s,p)=>{const P=Math.min(100,s.perf),reg=s.total-s.otHrs,all=s.total+s.defHrs||1;
+    const sg=(c,v,t)=>v?`<i class="${c}" style="flex:${v} 1 0"><span>${t}</span><b>${n1(v)}</b><small>ساعت</small></i>`:'';
+    return `<div class="wd-perf">
+      <div class="wd-pi"><div class="wd-pi-h"><h4>عملکرد ${s.n}</h4><b class="wd-pct">${fa(s.perf)}٪</b></div>
+      <div class="wd-segw" tabindex="0" aria-label="مجموع ${n1(s.total)} ساعت از ${fa(s.allowHrs)} ساعت؛ عادی ${n1(reg)}، اضافه‌کار ${n1(s.otHrs)}، کسری ${n1(s.defHrs)} ساعت"><div class="wd-seg"><i class="t" style="width:${Math.min(100,s.allowHrs?s.total/s.allowHrs*100:0)}%"></i><div class="wd-seg-d" aria-hidden="true">${sg('r',reg,'عادی')}${sg('o',s.otHrs,'اضافه‌کار')}${sg('d',s.defHrs,'کسری')}</div></div></div>
+      ${p?`<span class="wd-pi-c">نسبت به ${p.n} ${delta(s.perf,p.perf,'٪',true,'perf')}</span>`:''}</div></div>`};
+  const cmpView=(s,c,opts)=>{
+    const rows=[['مجموع ساعات کاری','total','ساعت',n1],['روزهای کاری','worked','روز',fa],['کسری ساعات کاری','defHrs','ساعت',n1,1],['کسری روز کاری (مرخصی)','defDays','روز',fa,1],['روزهای کمتر از ۸ ساعت','under','روز',fa,1],['اضافه‌کار','otHrs','ساعت',n1],['میانگین ساعت در روز','avg','ساعت',n1],['عملکرد','perf','٪',fa]];
+    const val=(o,r)=>r[3](o[r[1]])+(r[2]==='٪'?'٪':' '+r[2]);
+    return `<div class="wd-hrow"><h3 class="wd-h">مقایسه با</h3><label class="sr-only" for="wdCmp">ماه مقایسه</label><select class="month-sel" id="wdCmp">${opts}</select></div>
+    <div class="wd-tw"><table class="wd-t wd-ct"><thead><tr><th>شاخص</th><th>${c.n}${c.partial?` <small class="wd-part">(تا ${fa(c.cut)}م)</small>`:''}</th><th class="cur">${s.n}${s.partial?` <small class="wd-part">(تا ${fa(s.cut)}م)</small>`:''}</th><th>تغییر</th></tr></thead><tbody>${rows.map(r=>`<tr${r[4]?' class="def"':''}><th>${r[0]}</th><td>${val(c,r)}</td><td class="cur">${val(s,r)}</td><td>${delta(s[r[1]],c[r[1]],r[2],true,r[1])}</td></tr>`).join('')}</tbody></table></div>`};
+  const monthView=()=>{
+    const s=ymStats(e,k),L=s.partial?s.cut:0,p=k>0?ymStats(e,k-1,L):null,c=ymStats(e,cmp,L);
+    const lead=Array.from({length:(s.w+1)%7},()=>'<i class="wd-cell blank"></i>').join('');
+    const cells=s.data.map((h,i)=>{const c=s.hol[i]?'hol':s.fut[i]?'fut':!h?'off':h>8?'ot':h<8?'low':'ok';const lb=s.hol[i]?'تعطیل':s.fut[i]?'هنوز نرسیده':!h?'مرخصی':n1(h)+' ساعت';return `<i class="wd-cell ${c}" title="${fa(i+1)} ${s.n}: ${lb}"><span>${fa(i+1)}</span>${s.hol[i]||s.fut[i]?'':`<b>${h?n1(h):'—'}</b>`}</i>`}).join('');
+    const opts=YEAR_MONTHS.map((x,i)=>i>CUR_YM||i===k?'':`<option value="${i}" ${i===cmp?'selected':''}>${x[0]} ۱۴۰۵</option>`).join('');
+    return `${s.partial?`<p class="wd-note">${icon('exclC',14)}${s.n} هنوز تمام نشده است؛ آمار تا ${fa(s.cut)} ${s.n} محاسبه شده است.</p>`:''}<div class="wd-kpis">
+      ${kpi('nClock','مجموع ساعات',n1(s.total),'از '+fa(s.allowHrs)+' ساعت','')}
+      ${kpi('kCal','روز کاری',fa(s.worked),'از '+fa(s.allowDays)+' روز','')}
+      ${s.total>s.allowHrs?kpi('nClock','اضافه‌کار',n1(s.total-s.allowHrs),'ساعت','',' ot'):kpi('nClock','کسری ساعت',n1(s.defHrs),'ساعت','',s.defHrs>0?' neg':'')}
+      ${kpi('kCal','کسری روز',fa(s.defDays),'روز','',s.defDays>0?' neg':'')}
+    </div>
+    ${perfCard(s,p)}
+    ${cmpView(s,c,opts)}
+    <h3 class="wd-h">کارکرد روزانه</h3>
+    <div class="wd-cal"><div class="wd-wk">${['ش','ی','د','س','چ','پ','ج'].map(x=>`<span>${x}</span>`).join('')}</div><div class="wd-days">${lead}${cells}</div></div>
+    <div class="chart-legend wd-lg"><span><i class="wd-sw ok"></i>۸ ساعت</span><span><i class="wd-sw ot"></i>اضافه‌کار</span><span><i class="wd-sw low"></i>کسری ساعت</span><span><i class="wd-sw off"></i>مرخصی</span><span><i class="wd-sw hol"></i>تعطیل</span></div>`;
+  };
+  const yearView=()=>{
+    const all=YEAR_MONTHS.map((_,i)=>ymStats(e,i)),past=all.filter(s=>!s.future);
+    const sum=f=>past.reduce((a,s)=>a+s[f],0);
+    const T={total:sum('total'),allowHrs:sum('allowHrs'),worked:sum('worked'),allowDays:sum('allowDays'),defHrs:sum('defHrs'),defDays:sum('defDays'),otHrs:sum('otHrs')};T.perf=T.allowHrs?Math.round(T.total/T.allowHrs*100):0;
+    const mx=Math.max(...past.map(s=>Math.max(s.total,s.allowHrs)));
+    return `<div class="wd-kpis">
+      ${kpi('nClock','مجموع ساعات سال',n1(T.total),'از '+fa(T.allowHrs)+' ساعت','')}
+      ${kpi('kCal','روز کاری سال',fa(T.worked),'از '+fa(T.allowDays)+' روز','')}
+      ${T.total>T.allowHrs?kpi('nClock','اضافه‌کار سال',n1(T.total-T.allowHrs),'ساعت','',' ot'):kpi('nClock','کسری ساعت سال',n1(T.defHrs),'ساعت','',T.defHrs>0?' neg':'')}
+      ${kpi('kCal','کسری روز سال',fa(T.defDays),'روز','',T.defDays>0?' neg':'')}
+    </div>
+    <h3 class="wd-h">ساعات کاری به تفکیک ماه</h3>
+    <div class="wd-yc" role="img" aria-label="نمودار ساعات کاری ماهانه سال ۱۴۰۵">${all.map(s=>`<div class="wd-yb${s.k===k?' on':''}"${s.future?'':` title="${s.n}: ${n1(s.total)} از ${fa(s.allowHrs)} ساعت"`}><div class="wd-ybar">${s.future?'':`<i class="al" style="height:${s.allowHrs/mx*100}%"></i><i class="v" style="height:${Math.min(s.total,s.allowHrs)/mx*100}%"></i>${s.total>s.allowHrs?`<i class="x" style="bottom:${s.allowHrs/mx*100}%;height:${(s.total-s.allowHrs)/mx*100}%"></i>`:''}`}</div><span>${s.n}</span></div>`).join('')}</div>
+    <div class="chart-legend wd-lg"><span><i class="wd-sw ok"></i>ساعات کارکرد</span><span><i class="wd-sw al"></i>ساعات مجاز</span><span><i class="wd-sw x"></i>بیش از مجاز</span></div>
+    <h3 class="wd-h">جزئیات ماه‌ها</h3>
+    <div class="wd-tw"><table class="wd-t wd-ty"><thead><tr><th>ماه</th><th>ساعات</th><th>روز کاری</th><th>کسری ساعت</th><th>کسری روز</th><th>اضافه‌کار</th><th>عملکرد</th></tr></thead><tbody>${all.map(s=>s.future?`<tr class="fut"><th>${s.n}</th><td colspan="6">هنوز نرسیده</td></tr>`:`<tr${s.k===k?' class="on"':''}><th>${s.n}${s.partial?` <small class="wd-part">(تا ${fa(s.cut)}م)</small>`:''}</th><td>${n1(s.total)}</td><td>${fa(s.worked)} از ${fa(s.allowDays)}</td><td>${n1(s.defHrs)}</td><td>${fa(s.defDays)}</td><td>${n1(s.otHrs)}</td><td>${fa(s.perf)}٪</td></tr>`).join('')}</tbody><tfoot><tr><th>جمع سال</th><td>${n1(T.total)}</td><td>${fa(T.worked)} از ${fa(T.allowDays)}</td><td>${n1(T.defHrs)}</td><td>${fa(T.defDays)}</td><td>${n1(T.otHrs)}</td><td>${fa(T.perf)}٪</td></tr></tfoot></table></div>`;
+  };
+  const sel=()=>`<button type="button" class="wd-nav" data-wdnav="-1" aria-label="ماه قبل" ${k<=0?'disabled':''}>${icon('chevR',14)}</button><label class="sr-only" for="wdMonth">ماه</label><select class="month-sel" id="wdMonth">${YEAR_MONTHS.map((x,i)=>i>CUR_YM?'':`<option value="${i}" ${i===k?'selected':''}>${x[0]} ۱۴۰۵</option>`).join('')}</select><button type="button" class="wd-nav" data-wdnav="1" aria-label="ماه بعد" ${k>=CUR_YM?'disabled':''}>${icon('chevL',14)}</button>`;
+  const draw=ov=>{const b=ov.querySelector('.wd-body');b.innerHTML=tab==='m'?monthView():yearView();
+    ov.querySelectorAll('[data-wdtab]').forEach(t=>t.setAttribute('aria-selected',t.dataset.wdtab===tab));
+    const ms=ov.querySelector('.wd-msel');ms.innerHTML=tab==='m'?sel():'<span class="wd-yr">سال ۱۴۰۵</span>'};
+  openModal({title:`جزئیات کارکرد <small class="wd-sub">${esc(e.name)}</small>`,
+    body:`<div class="wd-bar"><div class="fp-tabs" role="tablist"><button role="tab" data-wdtab="m" aria-selected="true">ماهانه</button><button role="tab" data-wdtab="y" aria-selected="false">سالانه</button></div><div class="wd-msel"></div></div><div class="wd-body"></div>`,
+    onOpen:ov=>{ov.querySelector('.modal').classList.add('wd-modal');draw(ov);
+      ov.addEventListener('click',ev=>{const t=ev.target.closest('[data-wdtab]');if(t){tab=t.dataset.wdtab;draw(ov)}const nv=ev.target.closest('[data-wdnav]');if(nv&&!nv.disabled){const d=nv.dataset.wdnav;k=Math.max(0,Math.min(CUR_YM,k+ +d));cmp=k>0?k-1:1;draw(ov);const nb=ov.querySelector('[data-wdnav="'+d+'"]');if(nb)nb.focus()}});
+      ov.addEventListener('change',ev=>{if(ev.target.id==='wdMonth'){k=+ev.target.value;cmp=k>0?k-1:1;draw(ov)}else if(ev.target.id==='wdCmp'){cmp=+ev.target.value;draw(ov)}})}});
 }
 function renderPanel(){
   const e=byId(state.selectedId);
@@ -2227,6 +2437,7 @@ function renderPanel(){
         <h3 id="chartTitle">ساعات کاری</h3>
         <label class="sr-only" for="monthSel">ماه</label>
         <select class="month-sel" id="monthSel">${MONTHS.map((m,i)=>`<option value="${i}" ${i===state.month?'selected':''}>${m.n}</option>`).join('')}</select>
+        <button type="button" class="chart-more" data-act="chart-more">جزئیات بیشتر${icon('chevL',10)}</button>
       </div>
       <dl class="chart-kpis" id="chartTotal"></dl>
       <div id="chart"></div>
@@ -2239,11 +2450,11 @@ function renderPanel(){
   $('#pfClose').addEventListener('click',()=>{const id=state.selectedId;select(null,id)});
 }
 function renderChart(e){
-  const MAX=16,H=140,STD=8,m=state.month;const hol=Array.from({length:MONTHS[m].d},(_,i)=>isHol(m,i));const data=hoursFor(e,m).map((h,i)=>hol[i]?0:h);
-  const total=data.reduce((a,b)=>a+b,0);const worked=data.filter(Boolean).length;const allowDays=hol.filter(x=>!x).length,allowHrs=allowDays*STD;
+  const MAX=16,H=140,STD=8,m=state.month;const hol=Array.from({length:MONTHS[m].d},(_,i)=>isHol(m,i));const cutD=MONTHS[m].n===YEAR_MONTHS[CUR_YM][0]+' ۱۴۰۵'?CUR_DAY:99;const fut=hol.map((_,i)=>i>=cutD);const data=hoursFor(e,m).map((h,i)=>hol[i]||fut[i]?0:h);
+  const total=data.reduce((a,b)=>a+b,0);const worked=data.filter(Boolean).length;const allowDays=hol.filter((x,i)=>!x&&!fut[i]).length,allowHrs=allowDays*STD;
   const ct=$('#chartTotal');const n1=v=>fa(String(Math.round(v*10)/10).replace('.','٫'));if(ct)ct.innerHTML=`<div><dt>${icon('nClock',12)}مجموع ساعات</dt><dd><b>${n1(total)}</b> <span class="ck-of">از ${fa(allowHrs)} ساعت</span></dd></div><div><dt>${icon('kCal',12)}روز کاری</dt><dd><b>${fa(worked)}</b> <span class="ck-of">از ${fa(allowDays)} روز</span></dd></div>`;
   const yt=[0,4,8,12,16].map(v=>`<span style="bottom:${v/MAX*H}px"${v===STD?` class="std"`:""}>${fa(v)}</span>`).join('');
-  const otDays=data.filter(h=>h>STD).length,offDays=data.filter((h,i)=>!h&&!hol[i]).length,holDays=data.length-allowDays,overDays=data.filter(h=>h>MAX).length;
+  const otDays=data.filter(h=>h>STD).length,offDays=data.filter((h,i)=>!h&&!hol[i]&&!fut[i]).length,holDays=hol.filter(Boolean).length,overDays=data.filter(h=>h>MAX).length;
   const marks=[1,5,10,15,20,25,30].filter(d=>d<=data.length);
   $('#chart').innerHTML=`
     <div class="chart">
@@ -2253,7 +2464,7 @@ function renderChart(e){
         <div class="plot" id="plot" tabindex="0" role="img" aria-labelledby="chartTitle" aria-describedby="chartSum">
           <div class="gridl" style="bottom:${4/MAX*H}px"></div><div class="gridl" style="bottom:${12/MAX*H}px"></div><div class="gridl" style="bottom:${H}px"></div>
           <div class="refl" style="bottom:${STD/MAX*H}px"></div>
-          ${data.map((h,i)=>{const reg=Math.min(h,STD),ot=Math.max(0,Math.min(h,MAX)-STD);return `<div class="bar-col${h>MAX?' over':''}${hol[i]?' hol':''}" data-i="${i}">${hol[i]?'':h?`<div class="bar">${h>MAX?'<b class="over-mk" aria-hidden="true"></b>':''}${ot?`<i class="ot" style="height:${ot/MAX*H-2}px"></i>`:''}<i class="reg" style="height:${Math.max(2,reg/MAX*H)}px"></i></div>`:'<span class="off"></span>'}</div>`}).join('')}
+          ${data.map((h,i)=>{const reg=Math.min(h,STD),ot=Math.max(0,Math.min(h,MAX)-STD);return `<div class="bar-col${h>MAX?' over':''}${hol[i]?' hol':''}" data-i="${i}">${hol[i]||fut[i]?'':h?`<div class="bar">${h>MAX?'<b class="over-mk" aria-hidden="true"></b>':''}${ot?`<i class="ot" style="height:${ot/MAX*H-2}px"></i>`:''}<i class="reg" style="height:${Math.max(2,reg/MAX*H)}px"></i></div>`:'<span class="off"></span>'}</div>`}).join('')}
           <div class="guide" id="guide"></div>
           <div class="tip" id="tip"></div>
         </div>
@@ -2278,7 +2489,7 @@ function renderChart(e){
     g.style.display='block';g.style.top=(H-h)+'px';g.style.width=x+'px';
     t.style.display='block';t.style.left=Math.min(Math.max(x,34),plot.clientWidth-34)+'px';t.style.top=(H-h)+'px';
     plot.classList.add('hovering');
-    const ot=Math.max(0,data[i]-STD);t.innerHTML=hol[i]?`<b>تعطیل</b>${holName(m,i)} ${fa(i+1)}`:`<b>${data[i]?fa(String(data[i]).replace('.','٫'))+' ساعت':'مرخصی'}</b>${ot?`<span class="tip-ot">${fa(String(ot).replace('.','٫'))} ساعت اضافه‌کار</span>`:''}روز ${fa(i+1)}`;
+    const ot=Math.max(0,data[i]-STD);t.innerHTML=hol[i]?`<b>تعطیل</b>${holName(m,i)} ${fa(i+1)}`:fut[i]?`<b>هنوز نرسیده</b>روز ${fa(i+1)}`:`<b>${data[i]?fa(String(data[i]).replace('.','٫'))+' ساعت':'مرخصی'}</b>${ot?`<span class="tip-ot">${fa(String(ot).replace('.','٫'))} ساعت اضافه‌کار</span>`:''}روز ${fa(i+1)}`;
   };
   plot.addEventListener('pointermove',ev=>{const c=ev.target.closest('.bar-col');if(c)show(+c.dataset.i)});
   plot.addEventListener('pointerleave',()=>show(-1));
@@ -2893,6 +3104,7 @@ function removeEmployees(ids){
 }
 function act(name,e){
   switch(name){
+    case 'chart-more':workDetails(e);break;
     case 'edit':employeeView(e);break;
     case 'delete':confirmModal('حذف کارمند',`«${esc(e.name)}» از فهرست کارمندان حذف می‌شود.`,'حذف',()=>{removeEmployees([e.id]);toast(`${e.name} حذف شد`,{undo:true})});break;
     case 'chat':{
