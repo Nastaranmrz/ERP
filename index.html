@@ -1263,6 +1263,9 @@ form.fb-pv>.fb-stepnav [data-pvsubmit]{font-weight:600}
   .fb-set{width:auto;min-width:0;flex:none}
   .fb-paper{padding:20px 14px}
   .fb-rbar{display:none!important}
+  .fb-rbar{display:flex!important;position:static;grid-column:1/-1;margin:-2px 0 4px;opacity:1!important;pointer-events:auto!important}
+  .fb-rbar .fb-racts{display:none}
+  .fb-row.sel>.fb-rbar .fb-racts{display:flex}
   .fb-row.sel>.fb-rbar,.fb-row.act>.fb-rbar{display:flex!important;opacity:1!important;pointer-events:auto!important;position:static;grid-column:1/-1;margin:-2px 0 4px}
   .fb-row.act>.fb-rbar .fb-racts{display:none}
   .m-bar .fb-st{white-space:nowrap}
@@ -1274,7 +1277,15 @@ form.fb-pv>.fb-stepnav [data-pvsubmit]{font-weight:600}
   .m-bar>.fb-vt+.sp{display:none}
 }
 
-.fb-fab,.fb-scrim,.fb-pane-x,.m-bar .fb-setbtn{display:none}
+.fb-scrim,.fb-pane-x,.m-bar .fb-setbtn,.m-bar .fb-more{display:none}
+.m-body .fb-fab{display:none}
+.pb-tpls.fb-tpls2{grid-template-columns:1fr 1fr}
+.fb-sh .fb-ok,.fb-sh .fb-rowchip,.fb-sh .fb-pane-x{display:none}
+@media (max-width:1240px){.fb-set .fb-sh .fb-pane-x{display:grid}.fb-sh .fb-ok{display:grid;background:var(--primary);color:var(--on-primary)}.fb-sh .fb-ok:hover:not(:disabled){background:var(--primary-strong)}.fb-sh .fb-ok:disabled{background:var(--surface-alt);color:var(--text-faint);cursor:default}.fb-sh .fb-rowchip{display:inline-flex;align-items:center;width:auto;height:24px;padding:0 8px;border:1px solid var(--border);border-radius:6px;font-size:10px;color:var(--text-muted)}}
+@media (max-width:1240px) and (hover:none){.fb-rbar{opacity:1!important;pointer-events:auto!important}.fb-rbar .fb-racts{display:none}}
+.fb-ctl .fb-st,.pb-menu .fb-st{font-size:inherit}
+@keyframes fbNew{0%,100%{box-shadow:0 0 0 0 transparent}30%{box-shadow:0 0 0 4px var(--primary-light)}}
+.fb-comp.fb-new{animation:fbNew 1.4s ease 2}
 .fb-pal-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .fb-pal-h .fb-pane-x{width:28px;height:28px;border-radius:6px;place-items:center;color:var(--text-muted);margin-bottom:10px}
 @media (max-width:1240px){
@@ -1287,10 +1298,13 @@ form.fb-pv>.fb-stepnav [data-pvsubmit]{font-weight:600}
   .fb-wb.set-on>.fb-scrim{display:block}
   .fb-set .fb-pane-x{display:grid}
 }
+.m-bar.fb-compact .fb-more{display:grid}
+.m-bar.fb-compact [data-fbt="undo"],.m-bar.fb-compact [data-fbt="redo"],.m-bar.fb-compact [data-fbt="preview"],.m-bar.fb-compact [data-fbt="device"],.m-bar.fb-compact .fb-setbtn,.m-bar.fb-compact .fb-st{display:none}
+.m-bar .fb-more{width:24px;min-width:24px;height:24px;padding:0}
 @media (max-width:860px){
   .m-body.fb-wb{flex-direction:column;overflow:hidden}
-  .fb-wb>.fb-stage{flex:1;min-height:0;padding-bottom:88px}
-  .fb-wb>.fb-ctl,.fb-wb>.fb-set{position:fixed;top:auto;left:0;right:0;bottom:0;z-index:60;width:auto;max-width:none;max-height:78vh;padding-top:0;border:0;border-radius:16px 16px 0 0;overflow:auto;transform:translateY(100%);visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),visibility .25s;box-shadow:0 -8px 24px rgba(15,23,42,.18)}
+  .fb-wb>.fb-stage{flex:1;min-height:0;padding-bottom:96px!important}
+  .fb-wb>.fb-ctl,.fb-wb>.fb-set{position:fixed;top:0;left:0;right:0;bottom:0;z-index:90;width:auto;max-width:none;height:100dvh;max-height:none;padding-top:0;border:0;border-radius:0;overflow:auto;transform:translateY(100%);visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),visibility .25s;box-shadow:0 -8px 24px rgba(15,23,42,.18)}
   .fb-wb.pal-on>.fb-ctl,.fb-wb.set-on>.fb-set{transform:none;visibility:visible}
   .fb-wb>.fb-ctl{padding:0 16px 16px}
   .fb-ctl .fb-pal-h{position:sticky;top:0;z-index:2;margin:0 -16px 6px;padding:12px 16px 0;background:var(--surface)}
@@ -1298,9 +1312,12 @@ form.fb-pv>.fb-stepnav [data-pvsubmit]{font-weight:600}
   .fb-wb>.fb-scrim{position:fixed;z-index:59}
   .fb-wb.pal-on>.fb-scrim{display:block}
   .fb-set .fb-sh{position:sticky;top:0;z-index:2;background:var(--surface)}
-  .fb-fab{display:inline-flex;align-items:center;gap:6px;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;height:40px;padding:0 18px;border-radius:20px;box-shadow:0 6px 16px rgba(15,23,42,.22)}
+  .m-body.fb-wb .fb-fab{display:inline-flex}
+  body:has(.fb-wb .fb-fab) .toast{bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+  .fb-fab{align-items:center;gap:6px;position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));right:16px;left:auto;width:max-content;margin:0;transform:none!important;touch-action:manipulation;z-index:50;height:40px;padding:0 18px;border-radius:20px;box-shadow:0 6px 16px rgba(15,23,42,.22)}
   .fb-wb.pal-on .fb-fab,.fb-wb.set-on .fb-fab{display:none}
-  .fb-ctl .fb-items{display:grid;grid-template-columns:1fr 1fr;overflow:visible;padding-bottom:0}
+  .fb-ctl .fb-items{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;overflow:visible;padding-bottom:0}
+  .fb-ctl .fb-items>*{height:100%;box-sizing:border-box}
   .fb-ctl .fb-lays{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible;padding-bottom:0}
   .fb-ctl .fb-item,.fb-ctl .fb-lay{flex:none;min-width:0}
 }
@@ -6394,7 +6411,7 @@ const fbW=r=>r.w&&r.w.length===r.cols?r.w:(r.cols===3?[4,4,4]:r.cols===2?[6,6]:[
 const fbCols=r=>r.w&&r.w.length===r.cols?r.w.map(x=>x+'fr').join(' '):`repeat(${r.cols},1fr)`;
 const fbSnapO=F=>({fid:F.id,title:F.title,desc:F.desc,submit:F.submit,rows:F.rows,cfg:F.cfg||{}});
 const fbWhen=t=>new Intl.DateTimeFormat('fa-IR-u-ca-persian',{timeZone:'Asia/Tehran',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(t);
-let fbPane=null,fbView='build',fbStep=0,fbDone=null,fbDev='desk',fbRq='';const fbOpenG=new Set(['gen']);
+let fbEditFor=null,fbEditBase=null,fbEditH=0,fbQuiet=false,fbPane=null,fbView='build',fbStep=0,fbDone=null,fbDev='desk',fbRq='';const fbOpenG=new Set(['gen']);
 const FB_SVG={eqw:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M12 5v14M5.5 12h4M14.5 12h4"/>',input:'<rect x="3" y="7" width="18" height="10" rx="2.5"/><path d="M7.5 10v4"/>',button:'<rect x="3" y="7.5" width="18" height="9" rx="4.5"/><path d="M9 12h6"/>',checkbox:'<rect x="4" y="4" width="16" height="16" rx="4"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',radio:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/>',select:'<rect x="3" y="6.5" width="18" height="11" rx="2.5"/><path d="m14.5 11 2 2 2-2M6.5 12h5"/>',image:'<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m4 17.5 5-4.5 4 3.5 3-2.5 4.5 3.5"/>',date:'<rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M14 14h2"/>',file:'<path d="M12 15V4m0 0L8 8m4-4 4 4"/><path d="M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>',map:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/>',money:'<rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.5"/><path d="M6.5 9.5v5M17.5 9.5v5"/>',rating:'<path d="M12 4l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 16.4 7.2 18.9l.9-5.4-3.9-3.8 5.4-.8z"/>',sign:'<path d="M3 16c2.5 0 3.5-8 6-8s1 7 3.5 7 2-3.5 3.5-3.5 1.5 2.5 5 2.5"/><path d="M3 20h18"/>',repeat:'<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M3.5 14.5h17M10 4.5v15"/>',city:'<path d="M4 20V9l5-3v14M9 20V4l7 3v13M16 20v-8l4 2v6M3 20h18"/>',people:'<circle cx="9" cy="8.5" r="3.2"/><path d="M3 19c.7-3 3-4.6 6-4.6s5.3 1.6 6 4.6"/><circle cx="17" cy="9.5" r="2.4"/><path d="M16.5 14.5c2.2.1 3.9 1.4 4.5 3.8"/>',section:'<path d="M6 5v14M18 5v14M6 12h12"/>',page:'<path d="M6 3.5h12M6 20.5h12M4 12h3M10.5 12h3M17 12h3"/>',desktop:'<rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M9 20h6M12 16.5V20"/>',mobile:'<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/>',cond:'<circle cx="6" cy="18" r="2.5"/><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7M18 10.5c0 4-4 5-9.5 6.5"/>',row:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M12 5v14"/>',form:'<rect x="4.5" y="3" width="15" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/>'};
 const fbSvg=(k,n=18)=>`<svg width="${n}" height="${n}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${FB_SVG[k]||FB_SVG.input}</svg>`;
 const fbSk=n=>`<span class="fb-sk" aria-hidden="true">${'<i></i>'.repeat(n)}</span>`;
@@ -6438,7 +6455,7 @@ const fbOptsW=c=>{if(!c.opts||!c.opts.length)c.opts=fbOpts(c).slice();return c.o
 const fbBody=F=>JSON.stringify({title:F.title,desc:F.desc,submit:F.submit,rows:F.rows,...(F.cfg&&Object.keys(F.cfg).length?{cfg:F.cfg}:{})});
 function fbStateOf(F){if(!F.published)return 'draft';if(F.pubSnap===undefined)F.pubSnap=fbBody(F);return F.pubSnap===fbBody(F)?'live':'dirty'}
 function fbState(){return fbStateOf(FB())}
-function fbHelp(btn){const K=[['بازگشت','Ctrl+Z'],['انجام دوباره','Ctrl+Y'],['تکثیر المان','Ctrl+D'],['حذف المان یا ردیف','Delete'],['لغو انتخاب','Esc'],['جابه‌جایی المان','Alt+↑↓']];
+function fbHelp(btn){const K=[['بازگشت','Ctrl+Z'],['ازنو','Ctrl+Y'],['تکثیر المان','Ctrl+D'],['حذف المان یا ردیف','Delete'],['لغو انتخاب','Esc'],['جابه‌جایی المان','Alt+↑↓']];
   pbMenu(btn,'fbhelp',`<div class="fb-help"><p class="pb-mh">میان‌برها</p><div class="fb-keys">${K.map(([t,k])=>`<div><span>${t}</span><span class="k">${k.split('+').map(x=>`<kbd>${x}</kbd>`).join('+')}</span></div>`).join('')}</div><div class="pb-msep"></div><p class="pb-mh">راهنما</p><ul class="fb-tips"><li>کنترل‌ها را از ستون کناری روی فرم بکشید یا روی آن‌ها کلیک کنید.</li><li>برای تغییر تعداد ستون‌ها، روی برچسب «ردیف» کلیک کنید.</li><li>با دکمه‌ی پیش‌نمایش، فرم را همان‌طور که کاربر می‌بیند امتحان کنید.</li><li>تا «ذخیره و انتشار» را نزنید، تغییرات برای کاربران دیده نمی‌شود.</li></ul></div>`,()=>{})}
 function fbGo(id){fbPane=null;fbRq='';FBS().cur=id;fbHist=[];fbFut=[];fbPreview=false;fbView='build';fbDone=null;fbStep=0;saveMods();renderForm()}
 function fbListMenu(btn){const S=FBS(),L={draft:['draft','پیش‌نویس'],live:['pub','منتشر شده'],dirty:['dirty','تغییرات منتشرنشده']};
@@ -6451,10 +6468,10 @@ function fbListMenu(btn){const S=FBS(),L={draft:['draft','پیش‌نویس'],li
 const fbThumb=k=>{const T=FB_TPL[k];return `<span class="pb-tth ${T?T.tint:''}${T?'':' blank'}"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${T?T.ic:'<path d="M12 7v10M7 12h10"/>'}</svg></i></span>`};
 function fbNewModal(){const opts=[['','خالی'],...Object.entries(FB_TPL).filter(([k])=>k!=='contact').map(([k,v])=>[k,v.t])];
   openModal({title:'فرم جدید',body:`<label class="m-label" for="fbn-name">نام فرم</label><input class="m-input" id="fbn-name" placeholder="مثلاً درخواست مرخصی" autocomplete="off">
-    <p class="m-label" style="margin-top:14px">انتخاب قالب</p><div class="pb-tpls" role="radiogroup" aria-label="قالب">${opts.map(([k,t],i)=>`<label class="pb-tpl"><input type="radio" name="fbtpl" value="${k}" class="sr-only" ${i?'':'checked'}>${fbThumb(k)}<span class="pb-ttx"><b>${t}</b></span><span class="pb-tck">${icon('check',10)}</span></label>`).join('')}</div>`,
+    <p class="m-label" style="margin-top:14px">انتخاب قالب</p><div class="pb-tpls fb-tpls2" role="radiogroup" aria-label="قالب">${opts.map(([k,t],i)=>`<label class="pb-tpl"><input type="radio" name="fbtpl" value="${k}" class="sr-only" ${i?'':'checked'}>${fbThumb(k)}<span class="pb-ttx"><b>${t}</b></span><span class="pb-tck">${icon('check',10)}</span></label>`).join('')}</div>`,
     onOpen:ov=>{const inp=ov.querySelector('#fbn-name');let auto='';ov.querySelector('.pb-tpls').addEventListener('change',e=>{const k=e.target.value,v=k?FB_TPL[k].t:'';if(!inp.value.trim()||inp.value===auto){inp.value=v;auto=v}})},
     actions:[{label:'انصراف'},{label:'ساخت فرم',kind:'btn-primary',onClick:ov=>{const nm=ov.querySelector('#fbn-name').value.trim(),t=ov.querySelector('[name=fbtpl]:checked').value;const S=FBS(),f=fbFromTpl(t);if(nm)f.title=nm;else if(!t)f.title='فرم بدون عنوان';S.list.push(f);fbGo(f.id);toast('فرم ساخته شد')}}]})}
-function fbStatusHtml(){const st=fbState();return st==='live'?'<small class="fb-st live">· منتشر شده</small>':st==='dirty'?'<small class="fb-st dirty">· تغییرات منتشرنشده</small>':'<small class="fb-st">· پیش‌نویس</small>'}
+function fbStatusHtml(){const st=fbState(),tt='title="تغییرات به‌صورت خودکار ذخیره می‌شوند. برای دیده شدن توسط کاربران، منتشر کنید."';return st==='live'?`<small class="fb-st live" ${tt}>· منتشر شده</small>`:st==='dirty'?`<small class="fb-st dirty" ${tt}>· ذخیره شد، منتشر نشده</small>`:`<small class="fb-st" ${tt}>· پیش‌نویس ذخیره شد</small>`}
 function fbPubBtn(){const st=fbState();return `<button class="m-pbtn" data-fbt="publish" ${st==='live'?'disabled':''}>${st==='dirty'?'انتشار تغییرات':'ذخیره و انتشار'}</button>`}
 function fbRefreshStatus(){const m=modEl();const a=m.querySelector('.m-bar .fb-st');if(a)a.outerHTML=fbStatusHtml();const b=m.querySelector('.m-bar [data-fbt="publish"]');if(b)b.outerHTML=fbPubBtn()}
 const FB_FMTS=[['','آزاد'],['nid','کد ملی'],['mobile','موبایل'],['postal','کد پستی'],['shaba','شماره شبا'],['fa','فقط حروف فارسی'],['digits','فقط عدد']];
@@ -6608,8 +6625,12 @@ function fbCtl(c){
   if(c.sub==='textarea')return `<div class="ctl area" style="align-items:flex-start;justify-content:flex-start;padding-top:6px;border-style:solid">${esc(c.ph||'')}</div>`;
   return `<div class="ctl">${esc(c.ph||'')}</div>`;
 }
+function fbOkUpd(){const b=modEl()?.querySelector('.fb-sh .fb-ok');if(!b)return;b.disabled=!(fbEditFor&&fbEditBase&&fbEditBase!==JSON.stringify(fbSnapO(FB())))}
+document.addEventListener('input',()=>{if(currentRoute().mod==='form')setTimeout(fbOkUpd)},true);document.addEventListener('change',()=>{if(currentRoute().mod==='form')setTimeout(fbOkUpd)},true);
+function fbBarFit(){const bar=modEl()?.querySelector('.m-bar');if(!bar||!bar.querySelector('.fb-more'))return;bar.classList.remove('fb-compact');const a=bar.querySelector('.pb-pick'),b=bar.querySelector('[data-fbt="publish"]');if(a&&b&&Math.abs(a.getBoundingClientRect().top+a.offsetHeight/2-(b.getBoundingClientRect().top+b.offsetHeight/2))>6)bar.classList.add('fb-compact')}
+addEventListener('resize',()=>{if(currentRoute().mod==='form')fbBarFit()});
 function renderForm(){{const F=FB();if(F&&F.rows)fbAll(F).forEach(x=>{if(!x.cond)return;const o=fbFind(x.cond.on);if(!o||!fbCondVals(o.comp).includes(x.cond.eq))delete x.cond})}const pv0=fbPreview,sel0=FB().sel,sy=window.scrollY,keep=[...modEl().querySelectorAll('.fb-stage,.fb-ctl *,.fb-set *,.fb-ctl,.fb-set')].filter(x=>x.scrollTop>0).map(x=>[x.className,x.scrollTop]);
-  fbRender0();
+  fbRender0();fbBarFit();{const F=FB(),id=F.sel||F.selRow,sh=!!(id&&matchMedia('(max-width:1240px)').matches&&modEl().querySelector('.fb-wb.set-on'));if(sh&&fbEditFor!==id){fbEditFor=id;fbEditBase=JSON.stringify(fbSnapO(F));fbEditH=fbHist.length}else if(!sh)fbEditFor=null}fbOkUpd();
   const m=modEl();if(fbPreview){const pf=m.querySelector('form.fb-pv');if(pf)fbApplyCond(pf)}if(fbPreview===pv0){keep.forEach(([c,t])=>{const x=[...m.querySelectorAll('.fb-stage,.fb-ctl *,.fb-set *,.fb-ctl,.fb-set')].find(y=>y.className===c);if(x)x.scrollTop=t});window.scrollTo(0,sy);
     const F=FB();if(F.sel&&F.sel!==sel0){const n=m.querySelector('.fb-comp.sel');if(n)n.scrollIntoView({block:'nearest'})}}}
 function fbRender0(){
@@ -6633,14 +6654,15 @@ function fbRender0(){
   const nR=(F.responses||[]).length,RV=fbView==='resp';
   el.innerHTML=`<div class="m-bar"><button type="button" class="pb-pick" data-fbt="list" aria-haspopup="menu" aria-label="فهرست فرم‌ها" data-tip="فهرست فرم‌ها"><span class="fb-tt">${esc(F.title||'فرم بدون عنوان')}</span>${icon('chevDown',12)}</button> ${fbStatusHtml()}<span class="sp"></span>
       <div class="fb-vt" role="tablist" aria-label="بخش‌های فرم">${[['build','ساخت فرم','pencil'],['resp','پاسخ‌ها','chartBar']].map(([k,t,ic])=>`<button type="button" role="tab" aria-selected="${fbView===k}" data-fbview="${k}">${icon(ic,14)}<span>${t}</span>${k==='resp'&&nR?`<span class="n">${fa(nR)}</span>`:''}</button>`).join('')}</div><span class="sp"></span>
-      ${RV?'':fbPreview?`<button class="m-tool" data-fbt="device" aria-pressed="${fbDev==='mob'}" aria-label="${fbDev==='mob'?'نمایش دسکتاپ':'نمایش موبایل'}" data-tip="${fbDev==='mob'?'نمایش دسکتاپ':'نمایش موبایل'}">${fbSvg(fbDev==='mob'?'desktop':'mobile',14)}</button>`:''}
+      ${RV||true?'':fbPreview?`<button class="m-tool" data-fbt="device" aria-pressed="${fbDev==='mob'}" aria-label="${fbDev==='mob'?'نمایش دسکتاپ':'نمایش موبایل'}" data-tip="${fbDev==='mob'?'نمایش دسکتاپ':'نمایش موبایل'}">${fbSvg(fbDev==='mob'?'desktop':'mobile',14)}</button>`:''}
       ${RV?'':`
       <button class="m-tool fb-setbtn" data-fbpane="set" aria-pressed="${fbPane==='set'}" aria-label="تنظیمات فرم" data-tip="تنظیمات فرم">${icon('cog',14)}</button>
-      <button class="m-tool" data-fbt="redo" aria-label="انجام دوباره" data-tip="انجام دوباره (Ctrl+Y)" ${fbFut.length?'':'disabled'}>${icon('redo',14)}</button>
+      <button class="m-tool" data-fbt="redo" aria-label="ازنو" data-tip="ازنو (Ctrl+Y)" ${fbFut.length?'':'disabled'}>${icon('redo',14)}</button>
       <button class="m-tool" data-fbt="undo" aria-label="بازگشت" data-tip="بازگشت (Ctrl+Z)" ${fbHist.length?'':'disabled'}>${icon('undo',14)}</button>
-      <button class="m-tool" data-fbt="preview" aria-pressed="${fbPreview}" aria-label="پیش‌نمایش" data-tip="پیش‌نمایش">${icon('eye',14)}</button>`}
-      ${fbPubBtn()}</div>
-    ${RV?`<div class="m-body fb-rbody" style="direction:rtl">${fbRespHtml(F)}</div>`:`<div class="m-body fb-wb${fbPane==='pal'?' pal-on':''}${!fbPreview&&fbPane!=='pal'&&(sc||sr||fbPane==='set')?' set-on':''}" style="direction:rtl">
+      <button class="m-tool" data-fbt="preview" aria-pressed="${fbPreview}" aria-label="پیش‌نمایش" data-tip="پیش‌نمایش">${icon('eye',14)}</button>
+      <button class="m-tool fb-more" data-fbt="more" aria-haspopup="menu" aria-label="گزینه‌های بیشتر">${icon('dots',14)}</button>`}
+      ${RV?'':fbPubBtn()}</div>
+    ${RV?`<div class="m-body fb-rbody" style="direction:rtl">${fbRespHtml(F)}</div>`:`<div class="m-body fb-wb${fbPane==='pal'?' pal-on':''}${!fbPreview&&fbPane!=='pal'&&(fbPane==='set'||(sc||sr)&&!fbQuiet)?' set-on':''}" style="direction:rtl">
       ${fbPreview?'':`<aside class="m-panel r fb-ctl" aria-label="افزودن کنترل">
         <div class="fb-pal-h"><h2 class="m-title">لیست المان‌ها</h2><button type="button" class="fb-pane-x" data-fbpane="close" aria-label="بستن لیست المان‌ها">${icon('x',16)}</button></div>
         <label class="search acl-es${fbQ?' has-text':''}"><span class="sr-only">جستجوی کنترل</span><input type="search" data-q="fb" placeholder="جست‌وجوی کنترل" value="${esc(fbQ)}" autocomplete="off">${fbQ?`<button type="button" class="search-clear" data-fbq="clr" aria-label="پاک کردن جست‌وجو">${icon('x',14)}</button>`:`<span>${icon('search',14)}</span>`}</label>
@@ -6652,7 +6674,7 @@ function fbRender0(){
         <div class="fb-footc"><label class="btn btn-primary fb-submit" data-tip="برای تغییر متن، روی دکمه بنویسید"><input data-ff="submit" value="${esc(F.submit||'ارسال')}" placeholder="ارسال" maxlength="30" aria-label="متن دکمه ارسال فرم" autocomplete="off"></label></div>`}
       </div></section>
       ${fbPreview?'':`<aside class="m-panel fb-set ${sc||sr?'has-selection':''}" aria-label="تنظیمات">
-        ${sc?`<div class="fb-sh"><div class="tx"><b>${T.t}</b></div><button type="button" data-fbdesel="1" aria-label="بستن تنظیمات المان" data-tip="بستن (Esc)">${icon('x',16)}</button></div>
+        ${sc?`<div class="fb-sh"><div class="tx"><b>${T.t}</b></div>${(()=>{const fr=fbFind(sc.id);return fr?`<button type="button" class="fb-rowchip" data-rsel="${fr.r.id}">ردیف ${fa(F.rows.indexOf(fr.r)+1)}</button>`:''})()}<button type="button" class="fb-ok" data-fbdesel="1" data-fbok="1" aria-label="ذخیره تغییرات" data-tip="ذخیره تغییرات">${icon('check',16)}</button><button type="button" data-fbdesel="1" aria-label="بستن تنظیمات المان" data-tip="بستن (Esc)">${icon('x',16)}</button></div>
           ${T.types.length>1?`<label class="m-label" for="fb-type">نوع</label><div class="m-field"><select id="fb-type" data-fc="sub">${T.types.map(([k,l])=>`<option value="${k}" ${k===sc.sub?'selected':''}>${l}</option>`).join('')}</select></div>`:''}
           <label class="m-label" for="fb-lab">${sc.type==='page'?'نام مرحله':'عنوان'}</label><input class="m-input" id="fb-lab" data-fc="label" value="${esc(sc.label)}" placeholder="بنویسید.">
           ${'ph' in T?`<label class="m-label" for="fb-ph">متن داخل فیلد</label><input class="m-input" id="fb-ph" data-fc="ph" value="${esc(sc.ph||'')}" placeholder="بنویسید.">`:''}
@@ -6660,20 +6682,21 @@ function fbRender0(){
           ${fbSettingsExtra(sc)}
           ${!FB_NOVAL.includes(sc.type)?`<label class="fb-sw">ضروری<input type="checkbox" role="switch" class="switch" data-fc="req" ${sc.req?'checked':''}></label>`:''}
           ${fbCondHtml(sc)}`
-        :sr?`<div class="fb-sh"><div class="tx"><b>ردیف ${fa(F.rows.indexOf(sr)+1)}</b><small>${fa(sr.cols)} ستون · ${fa(sr.cells.reduce((a,c)=>a+c.length,0))} المان</small></div><button type="button" data-fbdesel="1" aria-label="بستن تنظیمات ردیف" data-tip="بستن (Esc)">${icon('x',16)}</button></div>
+        :sr?`<div class="fb-sh"><div class="tx"><b>ردیف ${fa(F.rows.indexOf(sr)+1)}</b><small>${fa(sr.cols)} ستون · ${fa(sr.cells.reduce((a,c)=>a+c.length,0))} المان</small></div><button type="button" class="fb-ok" data-fbdesel="1" data-fbok="1" aria-label="ذخیره تغییرات" data-tip="ذخیره تغییرات">${icon('check',16)}</button><button type="button" data-fbdesel="1" aria-label="بستن تنظیمات ردیف" data-tip="بستن (Esc)">${icon('x',16)}</button></div>
           <div class="m-label" id="fb-cols-l">چیدمان ستون‌ها</div><div class="fb-seg" role="radiogroup" aria-labelledby="fb-cols-l">${[1,2,3].map(n=>`<button type="button" role="radio" aria-checked="${sr.cols===n}" data-rcols="${n}">${fbSk(n)}<span>${['','یک','دو','سه'][n]} ستون</span></button>`).join('')}</div>
           <div class="m-label">ستون‌ها</div><div class="fb-collist">${sr.cells.map((c,i)=>`<div><span>ستون ${fa(i+1)}</span><small class="cnt">${c.length?fa(c.length)+' المان':'خالی'}</small></div>`).join('')}</div>${sr.cols>1?'<p class="fb-note">برای تغییر عرض، خط بین ستون‌ها را روی فرم بکشید. با کم کردن ستون‌ها، المان‌های ستون‌های حذف‌شده به آخرین ستون منتقل می‌شوند.</p>':''}`
         :`<div class="fb-sh"><div class="tx"><b>تنظیمات فرم</b><small>برای ویرایش، یک المان یا ردیف را انتخاب کنید</small></div><button type="button" data-fbt="help" aria-haspopup="dialog" aria-label="راهنما و میان‌برها" data-tip="راهنما و میان‌برها">${icon('info',16)}</button><button type="button" class="fb-pane-x" data-fbpane="close" aria-label="بستن تنظیمات فرم">${icon('x',16)}</button></div>
           ${fbFormSettings(F)}`}</aside>`}
     ${fbPreview?'':`<div class="fb-scrim" data-fbpane="close" aria-hidden="true"></div><button type="button" class="btn btn-primary fb-fab" data-fbpane="pal">${icon('plus',16)}افزودن المان</button>`}</div>`}`;
   el.onclick=e=>{
-    const F=FB();const t=e.target;fbOptKey=null;
+    const F=FB();const t=e.target;fbOptKey=null;fbQuiet=false;
     {const pn=t.closest('[data-fbpane]');if(pn){const v=pn.dataset.fbpane;if(v==='close'){if(fbPane!=='pal'){F.sel=null;F.selRow=null;saveMods()}fbPane=null}else{fbPane=fbPane===v?null:v;if(v==='set'){F.sel=null;F.selRow=null}}renderForm();return}}
     const tb=t.closest('[data-fbt]');if(tb){const k=tb.dataset.fbt;
       if(k==='undo')fbUndo();
       else if(k==='redo')fbRedo();
       else if(k==='list')fbListMenu(tb);
       else if(k==='help')fbHelp(tb);
+      else if(k==='more'){const it=(m,ic,t,dis)=>`<button type="button" data-mi="${m}" ${dis?'disabled':''}>${icon(ic,14)} ${t}</button>`;pbMenu(tb,'fbmore',`<div class="pb-mlab"><span class="fb-st ${fbState()}">${{live:'منتشر شده',dirty:'ذخیره شد، منتشر نشده'}[fbState()]||'پیش‌نویس ذخیره شد'}</span></div>`+(fbPreview?it('preview','eye','خروج از پیش‌نمایش'):it('preview','eye','پیش‌نمایش')+it('undo','undo','بازگشت',!fbHist.length)+it('redo','redo','ازنو',!fbFut.length)+it('set','cog','تنظیمات فرم')),m=>{if(m==='undo')fbUndo();else if(m==='redo')fbRedo();else if(m==='set'){const F2=FB();fbPane='set';F2.sel=null;F2.selRow=null;renderForm()}else el.querySelector(`[data-fbt="${m}"]`)?.click()})}
       else if(k==='preview'){fbPreview=fbView==='resp'?true:!fbPreview;fbView='build';fbDone=null;fbStep=0;renderForm()}
       else if(k==='device'){fbDev=fbDev==='mob'?'desk':'mob';renderForm()}
       else if(k==='settings'){F.tab=F.tab==='gen'&&!F.sel?'input':'gen';renderForm();$('#fb-t')?.focus()}
@@ -6695,8 +6718,8 @@ function fbRender0(){
     if(t.closest('[data-fbexport]')){fbExport(F);return}
     const rsd=t.closest('[data-respdel]');if(rsd){const id=rsd.dataset.respdel;confirmModal('حذف پاسخ','این پاسخ حذف شود؟ این کار برگشت‌پذیر نیست.','حذف',()=>{F.responses=(F.responses||[]).filter(r=>r.id!==id);saveMods();renderForm();toast('پاسخ حذف شد')});return}
     const vr=t.closest('[data-fbver]');if(vr){const v=(F.vers||[]).find(x=>String(x.ver)===vr.dataset.fbver);if(!v)return;confirmModal('بازگردانی نسخه',`فرم به نسخه ${fa(v.ver)} برگردد؟ تغییرات فعلی با Ctrl+Z قابل برگشت است.`,'بازگردانی',()=>{fbSnap();const b=JSON.parse(v.body);F.title=b.title;F.desc=b.desc;F.submit=b.submit;F.rows=b.rows;F.cfg=b.cfg||{};F.sel=null;F.selRow=null;saveMods();renderForm();toast(`نسخه ${fa(v.ver)} بازگردانی شد`)});return}
-    const tile=t.closest('[data-tile]');if(tile){const tk=tile.dataset.tile;fbAddTile(tk,null);el.querySelector(`[data-tile="${tk}"]`)?.focus({preventScroll:true});return}
-    if(t.closest('[data-fbdesel]')){fbPane=null;F.sel=null;F.selRow=null;saveMods();renderForm();return}
+    const tile=t.closest('[data-tile]');if(tile){const tk=tile.dataset.tile,mob=matchMedia('(max-width:1240px)').matches;fbQuiet=mob;fbAddTile(tk,null);const F2=FB(),nc=F2.sel&&fbFind(F2.sel);if(nc&&!/^g\d$/.test(tk)){const n=el.querySelector(`[data-comp="${nc.comp.id}"]`);if(n){n.scrollIntoView({block:'center',behavior:'smooth'});n.classList.add('fb-new')}toast(`«${nc.comp.label||FB_COMPS[tk].t}» به فرم اضافه شد`)}if(!mob)el.querySelector(`[data-tile="${tk}"]`)?.focus({preventScroll:true});return}
+    if(t.closest('[data-fbdesel]')){const ok=!!t.closest('[data-fbok]'),id=F.sel||F.selRow,isRow=!F.sel&&!!F.selRow;if(fbEditFor&&!ok&&fbEditBase&&fbEditBase!==JSON.stringify(fbSnapO(F))){const o=JSON.parse(fbEditBase);delete o.fid;Object.assign(F,o);fbHist.length=Math.min(fbHist.length,fbEditH);fbFut=[];toast('تغییرات لغو شد')}else if(ok)toast('تغییرات ذخیره شد');fbEditFor=null;fbPane=null;F.sel=null;F.selRow=null;saveMods();renderForm();if(ok&&id){const n=el.querySelector(isRow?`[data-row="${id}"]`:`[data-comp="${id}"]`);if(n){n.scrollIntoView({block:'center',behavior:'smooth'});if(!isRow)n.classList.add('fb-new');n.setAttribute('tabindex','-1');n.focus({preventScroll:true})}}return}
     const rc=t.closest('[data-rcols]');if(rc){const r=F.rows.find(x=>x.id===F.selRow),n=+rc.dataset.rcols;if(!r||r.cols===n)return;fbSnap();if(n>r.cols){while(r.cells.length<n)r.cells.push([])}else{const keep=r.cells.slice(0,n),rest=r.cells.slice(n).flat();keep[n-1].push(...rest);r.cells=keep}r.cols=n;delete r.w;saveMods();renderForm();el.querySelector(`[data-rcols="${n}"]`)?.focus();return}
     const rs=t.closest('[data-rsel]');if(rs){F.sel=null;F.selRow=F.selRow===rs.dataset.rsel?null:rs.dataset.rsel;saveMods();renderForm();el.querySelector(`[data-rsel="${rs.dataset.rsel}"]`)?.focus();return}
     if(t.closest('.fb-stage')&&!fbPreview&&!t.closest('[data-comp],.fb-headc,.fb-footc,.fb-rbar,[data-row],.fb-step0')&&(F.sel||F.selRow)){F.sel=null;F.selRow=null;saveMods();renderForm();return}
