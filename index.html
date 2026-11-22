@@ -2979,6 +2979,7 @@ body.nd-open{overflow:hidden}
 .splash-spin{position:relative;width:28px;height:28px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg,color-mix(in srgb,var(--primary) 15%,transparent) 60deg,var(--primary) 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));animation:splashSpin .9s linear infinite}
 .tb-load td,tbody tr.tb-load:nth-child(n) td{height:240px;text-align:center;vertical-align:middle;pointer-events:none;background:transparent;box-shadow:none;border:0}
 .sk-row td{pointer-events:none}
+.m-sk .tk-card,.m-sk .tk-ghead,.m-sk .tk-pitem{cursor:default}
 .sk{display:inline-block;height:8px;border-radius:4px;vertical-align:middle;background:linear-gradient(90deg,color-mix(in srgb,var(--text-faint) 20%,transparent) 25%,color-mix(in srgb,var(--text-faint) 34%,transparent) 50%,color-mix(in srgb,var(--text-faint) 20%,transparent) 75%);background-size:200% 100%;animation:skShine 1.4s ease-in-out infinite}
 .sk.sk-box{display:block;width:16px;height:16px;border-radius:4px}
 .sk.sk-chip{height:18px;border-radius:5px}
@@ -5734,8 +5735,26 @@ function renderModule(mod,view){
   if(mod==='acl'){aclSkeleton();return}
   if(mod==='proc'){pbEnter();pbSkeleton();return}
   if(mod==='form'){fbSkeleton();return}
+  if(mod==='tasks'){tkSkeleton();return}
+  if(mod==='invest'){ivSkeleton();return}
   ({tasks:renderTasks,invest:renderInvest,proc:renderProc,form:renderForm,acl:renderAcl})[mod]();
 }
+/* loading skeleton for tasks / invest: render the real page, swap the data for placeholders of the same size, then render again */
+const SK=(w,h=8)=>`<span class="sk" style="width:${w};height:${h}px"></span>`;
+function skText(x){const rg=document.createRange();rg.selectNodeContents(x);const w=Math.max(16,Math.round(rg.getBoundingClientRect().width));x.innerHTML=SK(w+'px')}
+function modSkel(body,mod,done){body.classList.add('m-sk');body.setAttribute('aria-busy','true');body.inert=true;
+  const splashOn=()=>{const sp=document.getElementById('splash');return !!sp&&getComputedStyle(sp).display!=='none'};
+  clearTimeout(modSkel.t);const tick=()=>{modSkel.t=setTimeout(()=>{if(splashOn()){tick();return}modSkel.t=setTimeout(()=>{if(currentRoute().mod===mod&&body.isConnected&&body.classList.contains('m-sk'))done()},700)},splashOn()?100:0)};tick()}
+function tkSkeleton(){renderTasks();const b=modEl().querySelector('.tk-body');if(!b)return;
+  b.querySelectorAll('.tk-ghead .sp,.tk-pitem .sp,.tk-back h3 .nm,.tk-colh').forEach(skText);
+  b.querySelectorAll('.tk-gic').forEach(x=>{x.outerHTML=SK('28px',28)});
+  b.querySelectorAll('.tk-card').forEach(c=>{c.innerHTML=`<div class="tk-ct">${SK('70%')}</div><div class="tk-meta">${SK('56px',14)}${SK('64px',14)}${SK('80px')}</div>`});
+  modSkel(b,'tasks',renderTasks)}
+function ivSkeleton(){renderInvest();const el=modEl(),b=el.querySelector('.iv-body');if(!b)return;
+  b.querySelectorAll('.iv-t tbody td:not(.kb)').forEach(skText);
+  [...b.querySelectorAll('.iv-ov *,.iv-side .iv-col.a *')].filter(x=>[...x.childNodes].some(n=>n.nodeType===3&&n.textContent.trim())&&!x.closest('button,[role="tab"],.iv-ctabs,.iv-chd')).forEach(x=>{if(x.isConnected)skText(x)});
+  b.querySelectorAll('[data-ivchart]').forEach(x=>{x.innerHTML='<span class="sk" style="display:block;width:100%;height:100%;border-radius:6px"></span>'});
+  modSkel(b,'invest',renderInvest)}
 
 /* ================= TASKS ================= */
 function TK(){
@@ -6019,7 +6038,7 @@ function renderInvest(){
     const p=ivPts.P[i],d=(p.v-ivPts.base)/ivPts.base;tip.hidden=false;tip.innerHTML=`<b>${tm(p.v)} <span class="${ivCls(d)}">${ivPct(d)}</span></b><small>${p.l}</small>`;const bx=box.getBoundingClientRect();tip.style.left=Math.max(4,Math.min(bx.width-tip.offsetWidth-4,xx/ivPts.W*r.width+(r.left-bx.left)-tip.offsetWidth/2))+'px';tip.style.top=Math.max(0,yy/ivPts.H*r.height+(r.top-bx.top)-46)+'px'};
   el.onpointerleave=()=>{const g=el.querySelector('.iv-hv'),tip=el.querySelector('.iv-tip');if(g)g.style.display='none';if(tip)tip.hidden=true};
   clearInterval(window.__ivTimer);window.__ivTimer=setInterval(()=>{
-    if(currentRoute().mod!=='invest')return;const D=IV();let filled=[],failed=[];
+    if(currentRoute().mod!=='invest'||el.querySelector('.m-sk'))return;const D=IV();let filled=[],failed=[];
     D.stocks.forEach(s=>{const f=1+(Math.random()-.5)*.006;s.now=Math.max(10,Math.round(s.now*f/10)*10);s.buy=Math.round(s.now*1.002/10)*10;s.sell=Math.round(s.now*.998/10)*10;s.high=Math.max(s.high,s.now);s.low=Math.min(s.low,s.now);s.vol+=Math.round(Math.random()*4000);
       s.intra.push(s.now);if(s.intra.length>60)s.intra.shift()});
     D.orders.filter(o=>o.status==='open').forEach(o=>{const s=D.stocks.find(x=>x.id===o.s);if(!s)return;if(o.side==='buy'?s.buy<=o.price:s.sell>=o.price){if(ivFill(D,o,o.side==='buy'?Math.min(o.price,s.buy):Math.max(o.price,s.sell)))filled.push(s.name);else{o.status='cancel';failed.push(s.name)}}});
