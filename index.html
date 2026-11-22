@@ -155,11 +155,19 @@ svg.i{display:block;flex:none}
 .tk-body .m-panel.r{border-inline-start:0}
 .tk-ttl{font-size:12px;line-height:16px;font-weight:500;color:var(--text-strong)}
 .tk-trow{display:flex;align-items:center;gap:7px;margin-top:8px}
+.tk-trow .sp{flex:1}
+.tk-proj>.tk-trow:not(.tk-gqrow){position:absolute;top:14px;left:15px;margin:0}
+.tk-trow .tk-search{flex:1;height:26px}
 .tk-tabs{display:flex;gap:7px}
-.tk-tabs button{width:84px;height:20px;border-radius:4px;background:#f1f5f9;color:#1e293b;font-size:8px;line-height:12px;font-weight:500;border:1px solid transparent}
 .tk-tabs button[aria-selected="true"]{background:#dbeafe;border-color:#bfdbfe;color:#3b82f6}
-.tk-ib{position:relative;display:grid;place-items:center;width:20px;height:20px;border-radius:4px;background:#eff6ff;color:var(--text)}
-.tk-ib:hover{background:var(--primary-soft);color:var(--primary-strong)}
+.tk-ib{position:relative;display:grid;place-items:center;width:20px;height:20px;border-radius:4px;background:transparent!important;border:1px solid var(--border-soft);color:var(--text)}
+.tk-ib:hover{border-color:var(--primary);color:var(--primary-strong)}
+.tk-back{position:relative}
+.tk-back>.sub{position:absolute;top:14px;left:16px;margin:0!important}
+.tk-back>.tk-list{margin-top:8px}
+@media (hover:none){.tk-card .tk-hd{display:none}}
+.m-panel.tk-back>h3 .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-panel.tk-back>h3{font-size:10px;line-height:16px;padding-left:76px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tk-div{height:1px;background:var(--border-soft);margin:8px 0 8px}
 .tk-group{margin-top:6px}
 .tk-group:first-of-type{margin-top:0}
@@ -169,8 +177,18 @@ svg.i{display:block;flex:none}
 .tk-ghead .tog{color:var(--text-muted);display:grid}
 .tk-gic{display:grid;place-items:center;width:28px;height:28px;border-radius:4px;flex:none}
 .g-blue{background:#bfdbfe;color:#2563eb}.g-green{background:rgba(6,95,70,.1);color:#065f46}.g-orange{background:#ffedd5;color:#ea580c}
+.tk-gwrap{display:grid;grid-template-rows:1fr;transition:grid-template-rows .28s cubic-bezier(.4,0,.2,1)}
+.tk-gwrap>.tk-gbody{min-height:0;overflow:hidden;transition:opacity .2s ease,padding .28s cubic-bezier(.4,0,.2,1)}
+.tk-gwrap[inert]{grid-template-rows:0fr}
+.tk-gwrap[inert]>.tk-gbody{opacity:0;padding-top:0;padding-bottom:0}
 .tk-gbody{padding:8px 0 4px}
-.tk-tools{display:flex;gap:4px;align-items:center;margin-bottom:8px}
+.tk-ghead .tog svg{display:block;transition:transform .28s cubic-bezier(.4,0,.2,1)}
+.tk-ghead .tog .v{transform-origin:8px 8px;transition:transform .28s cubic-bezier(.4,0,.2,1),opacity .2s ease}
+.tk-ghead[aria-expanded="true"] .tog svg{transform:rotate(180deg)}
+.tk-ghead[aria-expanded="true"] .tog .v{transform:rotate(90deg);opacity:0}
+@media (prefers-reduced-motion:reduce){.tk-gwrap,.tk-gwrap>.tk-gbody,.tk-ghead .tog svg,.tk-ghead .tog .v{transition:none}}
+.tk-tools{display:flex;gap:4px;align-items:center;margin-bottom:6px}
+.tk-tools .sp{flex:1}
 .tk-search{flex:1;display:flex;align-items:center;gap:6px;height:24px;padding:0 8px;border:.5px solid var(--border);border-radius:4px;background:var(--surface)}
 .tk-search svg{color:var(--text-faint);flex:none}
 .tk-search input{flex:1;min-width:0;border:0;background:transparent;font-size:10px;line-height:14px;color:var(--text-strong);outline:none}
@@ -179,14 +197,14 @@ svg.i{display:block;flex:none}
 .tk-search:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-softer)}
 .tk-search input:focus-visible{box-shadow:none}
 .tk-ob{display:grid;place-items:center;width:24px;height:24px;border-radius:4px;border:.5px solid var(--border);color:var(--text-muted);flex:none}
-.tk-ob:hover{background:var(--primary-softer);color:var(--primary-strong)}
-.tk-pitem{display:flex;align-items:center;width:100%;height:32px;padding:0 8px;margin-top:8px;border-radius:4px;background:#f8fafc;font-size:10px;line-height:14px;color:#64748b;text-align:right}
+.tk-pitem{display:flex;align-items:center;width:100%;height:32px;padding:0 8px;margin-top:8px;border-radius:4px;background:transparent;border:1px solid var(--border-soft);font-size:10px;line-height:14px;color:#64748b;text-align:right}
 .tk-pitem:first-of-type{margin-top:0}
 .tk-pitem .sp{flex:1}
 .tk-pitem svg{color:var(--text-muted)}
 .tk-pitem:hover{background:var(--primary-softer)}
-.tk-pitem[aria-current="true"]{border-right:2px solid #3b82f6;box-shadow:0 0 0 1px #60a5fa;padding-right:6px}
-:root[data-theme="dark"] .tk-ghead,:root[data-theme="dark"] .tk-pitem,:root[data-theme="dark"] .tk-tabs button:not([aria-selected="true"]){background:var(--surface-alt);color:var(--text)}
+.tk-pitem[aria-current="true"]{border-color:#60a5fa;border-right:2px solid #3b82f6;padding-right:7px;color:var(--text-strong)}
+.m-panel.tk-proj .tk-gbody .tk-pitem:not(:hover){background:transparent}
+:root[data-theme="dark"] .tk-ghead,:root[data-theme="dark"] .tk-pitem{background:var(--surface-alt);color:var(--text)}
 :root[data-theme="dark"] .tk-ib{background:var(--surface-alt)}
 .tk-back{width:220px;padding:16px;border-inline-start:0}
 .tk-back h3{display:flex;align-items:center;gap:6px;margin:0;font-size:12px;line-height:16px;font-weight:500;color:var(--text-strong)}
@@ -208,14 +226,14 @@ svg.i{display:block;flex:none}
 :root[data-theme="dark"] .tk-back .tk-card{background:var(--surface-alt)}
 .tk-card.dragging{opacity:.4}
 .tk-card:focus-visible{box-shadow:var(--focus)}
-.tk-hd{position:absolute;right:-16px;top:0;display:grid;place-items:center;width:16px;height:16px;color:var(--text-faint)}
+.tk-hd{flex:none;display:grid;place-items:center;width:8px;height:14px;color:var(--text-faint);cursor:grab}
 .tk-hd svg{margin:0;display:block}
 .tk-colb .tk-card .tk-hd{display:none}
 .tk-ct{display:flex;align-items:center;gap:4px;padding-bottom:6px;border-bottom:1px solid var(--border-soft);font-size:10px;line-height:14px;font-weight:500;color:#303030}
 .tk-back .tk-ct{font-size:10px;line-height:14px;color:#1e293b;padding-bottom:8px}
 :root[data-theme="dark"] .tk-ct{color:var(--text-strong)}
-.tk-ct span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tk-kb{display:grid;place-items:center;width:12px;height:12px;color:var(--text-muted);flex:none;border-radius:2px}
+.tk-ct .tk-tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tk-kb{display:grid;place-items:center;width:16px;height:16px;color:var(--text-strong);flex:none;border-radius:3px}
 .tk-kb:hover{color:var(--primary-strong)}
 .tk-meta{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:5px}
 .tk-chip{height:14px;box-sizing:border-box}
@@ -223,6 +241,9 @@ svg.i{display:block;flex:none}
 .tk-colb .tk-card{padding:8px 6px 5.5px}
 .tk-board{background:var(--app-bg)}
 .tk-col.c-doing{--c:#2f6fed}.tk-col.c-review{--c:#e08a00}.tk-col.c-done{--c:#12a173}
+@media (max-width:1366px){.tk-proj{width:260px}.tk-board{gap:12px;padding:12px}}
+@media (max-width:1260px) and (min-width:700px){.m-body.tk-body{flex-direction:row;overflow:hidden}.tk-body>.m-panel.tk-proj{width:240px}.tk-body>.m-panel.tk-back{width:220px}.tk-body>.tk-board{flex-direction:column;align-items:flex-start;overflow-x:hidden;overflow-y:auto;min-width:222px}.tk-board .tk-col{width:220px;flex:none}.tk-board .tk-colb{min-height:120px}}
+@media (max-width:699px){.tk-proj,.tk-back{width:auto}.tk-board{flex-direction:column;align-items:stretch;overflow:visible}.tk-col{width:auto}}
 .tk-colh{background:color-mix(in srgb,var(--c) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 30%,var(--surface));color:color-mix(in srgb,var(--c) 78%,#000);font-weight:600}
 .tk-colb{background:color-mix(in srgb,var(--c) 5%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 22%,var(--surface));padding-top:16px}
 .tk-colb .tk-card{background:color-mix(in srgb,var(--c) 11%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 32%,var(--surface));box-shadow:0 1px 2px rgba(15,23,42,.06)}
@@ -232,114 +253,282 @@ svg.i{display:block;flex:none}
 .tk-colb .tk-chip.from{background:#eff6ff;border-color:#93c5fd}
 .tk-colb .tk-ct{padding-bottom:5px}
 .tk-colb .tk-meta{margin-top:4.5px}
-.tk-chip{display:inline-flex;align-items:center;gap:3px;padding:1px 4px;border-radius:2px;font-size:8px;line-height:12px;color:#475569;border:.5px solid;white-space:nowrap}
-.tk-chip i,.tk-due i{font-style:normal;color:#94a3b8}
+.tk-chip{display:inline-flex;align-items:center;gap:3px;padding:1px 4px;border-radius:2px;font-size:9px;line-height:12px;color:#475569;border:.5px solid;white-space:nowrap}
+.tk-chip i{font-style:normal;color:#94a3b8}
+.tk-due i{font-style:normal;color:var(--text-faint)}
 .tk-chip.high{background:#fee2e2;border-color:#ef4444}.tk-chip.mid{background:#fff7ed;border-color:#f97316}.tk-chip.low{background:#ecfdf5;border-color:#047857}
 .tk-chip.from{background:#dbeafe;border-color:#3b82f6;padding:2px 4px}
-.tk-chip u{color:#475569}
-.tk-due{font-size:8px;line-height:12px;color:#475569;display:flex;gap:3px;margin-top:-2px;padding:1px 0}
+.tk-list{display:grid;grid-template-columns:repeat(auto-fill,186px);gap:16px 8px;justify-content:start;align-content:start}
+.tk-list>.tk-ph{width:186px}
+.tk-le{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:32px 8px;text-align:center}
+.tk-le .ic{display:grid;place-items:center;width:40px;height:40px;margin-bottom:6px;border-radius:50%;background:var(--surface-alt);color:var(--text-faint)}
+.tk-le b{font-size:10px;line-height:14px;font-weight:500;color:var(--text-strong)}
+.tk-le span:not(.ic){font-size:9px;line-height:14px;color:var(--text-muted)}
+.tk-list:has(.tk-ph) .tk-le{display:none}
+.tk-list:has(>.tk-le):not(:has(>.tk-ph)){display:flex;flex-direction:column;justify-content:center}
+.tk-list:has(>.tk-le)>.tk-le{padding-bottom:56px}
+.tk-list .tk-card{width:186px;margin:0}
+.tk-colb .tk-card{width:186px;align-self:center}
+.tk-colh,.tk-colb{background:var(--surface)!important}
+@media (max-width:699px){.tk-back{padding-inline:29px}.tk-list{grid-template-columns:1fr}.tk-list .tk-card,.tk-colb .tk-card{width:auto;align-self:stretch}.tk-list>.tk-ph{width:auto}}
+.tk-chip.from{height:14px;padding:1px 1px 1px 4px;background:#eff6ff;border-color:#93c5fd}
+.tk-chip.from .tk-av{width:auto;height:10px;padding:0 3px;border-radius:5px;font-size:7px;line-height:10px;box-shadow:none}
+.tk-from i{font-style:normal;color:#94a3b8}
+.tk-av{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:hsl(var(--h) 70% 92%);color:hsl(var(--h) 55% 32%);font-size:8px;font-weight:700;letter-spacing:-.2px;box-shadow:0 0 0 1.5px var(--surface)}
+.tk-tools{display:none}
+.tk-due{font-size:9px;line-height:12px;color:var(--text-muted);display:flex;gap:3px;margin-top:-2px;padding:1px 0}
 :root[data-theme="dark"] .tk-chip{color:#334155}
-.tk-drop{outline:2px dashed var(--primary);outline-offset:-4px}
-.tk-add{display:flex;align-items:center;justify-content:center;gap:4px;height:28px;border:1px dashed var(--border);border-radius:8px;font-size:10px;color:var(--primary);background:transparent}
+.tk-drop{outline:1.5px dashed var(--c,var(--primary));outline-offset:-4px}
+.tk-ph{flex:none;border:1.5px dashed var(--c,var(--primary));border-radius:8px;background:color-mix(in srgb,var(--c,var(--primary)) 7%,transparent)}
+.tk-list>.tk-ph{margin-bottom:8px}
+.tk-list.tk-drop{outline:none}
 .tk-add:hover{border-color:var(--primary);background:var(--primary-softer)}
 .tk-empty{flex:1;display:flex;align-items:center;justify-content:center;background:var(--app-bg)}
 .tk-proj-handle{position:absolute;left:-16px;top:129px;color:var(--text-faint)}
 /* ================= invest ================= */
-.iv-body{flex:1;min-height:0;display:flex}
-.iv-body{position:relative;--ivw:max(560px,calc(100% - 548px))}
-.iv-main{flex:none;width:var(--ivw);max-width:100%;min-width:0;display:flex;flex-direction:column;background:var(--surface);border-inline-start:1px solid var(--border-soft);overflow:auto}
+.iv-body{flex:1;min-height:0;display:flex;position:relative;--sw:328px}
+.iv-body.tk{--sw:582px}
+.iv-main{flex:1;min-width:0;container-type:inline-size;display:flex;flex-direction:column;background:var(--surface);border-inline-start:1px solid var(--border-soft);overflow:auto}
 .iv-body.collapsed .iv-main{flex:1;width:auto}
-.iv-body .iv-side{flex:1;min-width:0;justify-content:flex-start}
-.iv-handle{left:auto!important;right:var(--ivw);margin-right:-8px}
-.iv-body.collapsed .iv-handle{right:auto;left:0!important;margin:0;border-radius:0 4px 4px 0}
-.iv-kpis{display:flex;gap:12px;padding:16px;border-bottom:1px solid var(--border-soft);flex-wrap:wrap}
-.iv-card{border:1px solid var(--border);border-radius:6px;padding:10px 12px;background:var(--surface)}
-.iv-kv{width:126px;display:flex;flex-direction:column;gap:8px}
-.iv-kv .row{display:flex;flex-direction:column;gap:2px}
-.iv-kv .l{display:flex;align-items:center;gap:2px;font-size:9px;color:var(--text-muted)}
-.iv-kv .v{font-size:13px;font-weight:700;color:var(--text-strong)}
-.iv-kv .v small{font-size:8px;font-weight:400;color:var(--text-muted);margin-inline-start:2px}
-.iv-kv hr{border:0;border-top:1px solid var(--border-soft);margin:0}
-.iv-donut{width:186px;display:flex;flex-direction:column;gap:6px}
-.iv-donut .t{font-size:9px;color:var(--text-muted)}
-.iv-donut .in{display:flex;align-items:center;gap:10px}
-.iv-leg{display:flex;flex-direction:column;gap:3px;flex:1}
-.iv-leg div{display:flex;justify-content:space-between;padding:1px 6px;border-radius:3px;background:var(--surface-alt);font-size:8px;color:var(--text-muted)}
-.iv-leg b{color:var(--text-strong);font-weight:600}
-.iv-bars{flex:1;min-width:220px;display:flex;flex-direction:column;gap:6px}
-.iv-bars .t,.iv-donut .t,.iv-kv .l{display:flex;align-items:center;gap:3px;font-size:9px;color:var(--text-muted);white-space:nowrap}
-.iv-bars .plot{display:flex;align-items:flex-end;justify-content:space-between;height:64px;gap:3px;background:none}
-.iv-bars .plot i{flex:1;max-width:4px;border-radius:4px;background:var(--bar-a)}
-.iv-bars .plot i:nth-child(odd){background:var(--bar-b)}
-.iv-tablebox{padding:16px;display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
-.iv-tablebox .tb{display:flex;gap:8px;align-items:center}
-.iv-tablebox .tb .m-search{width:300px;height:32px;background:var(--surface-sunken)}
-.iv-tw{overflow:auto;flex:1;min-height:0}
-.iv-t{width:100%;min-width:700px;border-collapse:collapse;table-layout:fixed}
-.iv-t th,.iv-t td{height:30px;padding:6px 8px;font-size:12px;text-align:right;white-space:nowrap}
-.iv-t th{font-weight:500;color:var(--text-muted);position:sticky;top:0;background:var(--surface);z-index:1}
-.iv-t tbody tr{cursor:pointer}
-.iv-t tbody tr:nth-child(odd) td{background:var(--surface-alt)}
-.iv-t tbody tr:hover td{background:var(--row-hover)}
-.iv-t tbody tr[aria-selected="true"] td{background:var(--row-selected)}
-.iv-t td.up{color:#059669}.iv-t td.down{color:#dc2626}
-.iv-t td .ar{display:inline-block;vertical-align:-2px;margin-inline-start:4px}
-.iv-t td .num{color:var(--text)}
-.iv-t td.flash{animation:ivflash .8s}
-@keyframes ivflash{from{background:color-mix(in srgb,var(--primary-soft) 80%,transparent)}}
-.iv-side{display:flex;gap:14px;padding:14px;background:var(--app-bg);overflow:auto;flex:none}
-.iv-col{display:flex;flex-direction:column;gap:10px;background:var(--surface);border-radius:8px;padding:10px;flex:none}
-.iv-col.a{width:287px;align-self:stretch}.iv-col.b{width:213px;align-self:flex-start}
-.iv-col.a .iv-chart{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
-.iv-chart>svg{flex:1;min-height:0;height:100%}
-.iv-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px}
-.iv-in{border:0;border-radius:0;padding:0}
-.iv-stock h3{margin:0;font-size:13px;font-weight:700;color:var(--text-strong)}
-.iv-stock .sub{font-size:10px;color:var(--text-muted);margin-top:4px}
-.iv-line{display:flex;align-items:center;gap:8px;margin-top:12px;padding:0 8px;font-size:9px;color:var(--text-muted);white-space:nowrap}
-.iv-line i{flex:1;min-width:16px;height:0;border-top:1.5px dotted var(--text-muted);opacity:.55}
-.iv-line b,.iv-final b{min-width:56px;text-align:left;direction:ltr;font-variant-numeric:tabular-nums;font-weight:600}
-.iv-line b{min-width:0;font-size:11px;color:var(--text-strong)}
-.iv-final{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:14px;padding:8px;border-radius:4px;background:var(--surface-alt);font-size:9px;color:var(--text-muted)}
-.iv-final b{font-size:11px;color:var(--text-strong)}
-.iv-bs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.iv-bs button{height:28px;border-radius:4px;font-size:11px;font-weight:500;border:1px solid;background:transparent}
-.iv-bs button.buy{border-color:color-mix(in srgb,var(--primary) 55%,var(--surface));color:var(--primary-strong)}
-.iv-bs button.sell{border-color:color-mix(in srgb,var(--danger) 45%,var(--surface));color:var(--danger)}
-.iv-bs button.buy:hover,.iv-bs button[aria-pressed="true"].buy{background:var(--primary-softer);border-color:var(--primary)}
-.iv-bs button.sell:hover,.iv-bs button[aria-pressed="true"].sell{background:var(--danger-soft);border-color:var(--danger)}
-.iv-ctabs{display:flex;gap:8px}
-.iv-ctabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;border-radius:6px;background:var(--surface-alt);color:var(--text-faint);font-size:10px}
-.iv-ctabs button[aria-selected="true"]{background:var(--primary-softer);color:var(--text-strong)}
+.iv-handle{right:auto!important;left:calc(var(--sw) - 8px)!important;margin:0}
+.iv-body.collapsed .iv-handle{left:0!important;border-radius:0 4px 4px 0}
+.iv-side{flex:none;width:var(--sw);box-sizing:border-box;min-width:0;display:flex;align-items:flex-start;gap:14px;padding:14px;background:var(--app-bg);overflow:auto}
+.iv-side>.side-empty{flex:1;align-self:stretch}
+.iv-col{display:flex;flex-direction:column;gap:10px;flex:none;background:var(--surface);border-radius:8px;padding:10px}
+.iv-col.a{width:300px;align-self:stretch}
+.iv-col.a>.iv-fill{flex:1;min-height:0;display:flex;flex-direction:column}
+.iv-fill>.iv-chart{flex:1;min-height:180px}
+.iv-fill>.iv-chart>.iv-csvg{position:absolute;top:22px;right:0;left:0;bottom:0;width:100%;height:calc(100% - 22px)}
+
+.iv-hist{flex:1;min-height:160px;display:flex;align-items:stretch;gap:6px;direction:ltr}
+.iv-pair .bb{flex:1;display:flex;align-items:flex-end;gap:3px}
+.iv-pair .bb i.s{background:#dc2626}
+.iv-hleg{display:flex;gap:12px;margin-top:8px;font-size:10px;color:var(--text-muted)}
+.iv-hleg i{width:8px;height:8px;border-radius:2px;background:#059669}
+.iv-mine{flex:1;min-height:0;overflow:auto}
+.iv-mine .r{display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid var(--border-soft)}
+.iv-mine .r:last-child{border-bottom:0}
+.iv-mine .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.iv-mine .t b{font-size:10px;font-weight:600;color:var(--text-strong);font-variant-numeric:tabular-nums}
+.iv-mine .t small{font-size:8px;color:var(--text-muted)}
+.iv-mine .iv-side-chip,.iv-mine .pb-st{font-size:9px}
+.iv-tkh.buy{--c:#059669}
+.iv-ptype{margin:0;font-size:10px;color:var(--text-muted)}
+.iv-ptype button{color:var(--primary-strong);font-size:10px;text-decoration:underline}.iv-col.b{width:240px}
+.iv-ctabs{display:flex;gap:4px;padding:3px;margin-bottom:14px;border-radius:8px;background:var(--surface-alt)}
+.iv-ctabs button{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:46px;padding:0 4px;border-radius:6px;font-size:10px;color:var(--text-muted);white-space:nowrap}
+.iv-ctabs button:hover{color:var(--text-strong)}
+.iv-ctabs button[aria-selected="true"]{background:var(--surface);color:var(--text-strong);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.08)}
 .iv-ctabs button[aria-selected="true"] svg{color:var(--primary)}
-.iv-chart h4{margin:0 0 10px;font-size:11px;font-weight:600;color:var(--text-strong)}
-.iv-pairs{display:flex;align-items:flex-end;justify-content:space-between;flex:1;min-height:0;max-height:250px;gap:6px}
-.iv-pair{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
-.iv-pair .bb{display:flex;gap:3px;align-items:flex-end;flex:1}
-.iv-pair .bb i{width:4px;border-radius:4px;background:color-mix(in srgb,#059669 45%,var(--surface))}
-.iv-pair .bb i.s{background:color-mix(in srgb,#dc2626 45%,var(--surface))}
-.iv-pair small{font-size:7px;padding:1px 2px;border-radius:2px;white-space:nowrap}
-.iv-pair small.s{background:color-mix(in srgb,#dc2626 8%,var(--surface));color:#dc2626}.iv-pair small.b{background:color-mix(in srgb,#059669 8%,var(--surface));color:#059669}
-.iv-info div{display:flex;justify-content:space-between;padding:7px 2px;border-bottom:1px solid var(--border-soft);font-size:11px;color:var(--text-muted)}
-.iv-info b{color:var(--text-strong);font-weight:500}
+.iv-ctabs .n{min-width:16px;height:14px;padding:0 4px;border-radius:7px;background:var(--primary-softer);font-size:9px;line-height:14px;color:var(--primary-strong)}
+.iv-dt .iv-rng button{flex:1;height:26px;padding:0;border-radius:6px;font-size:10px;color:var(--text-muted)}
+.iv-dt .iv-rng button[aria-selected="true"]{background:color-mix(in srgb,var(--c,var(--primary)) 11%,transparent);color:var(--c,var(--primary-strong));font-weight:700;box-shadow:none}
+.iv-stock .hd>.iv-now{flex:none;display:flex;align-items:baseline;gap:6px}
+.iv-now b{font-size:15px;font-weight:700;color:var(--text-strong);font-variant-numeric:tabular-nums}
+.iv-now span{font-size:10px;font-weight:600;color:var(--c)}
+.iv-csvg .vb.u{fill:#059669;opacity:.22}.iv-csvg .vb.d{fill:#dc2626;opacity:.2}
+.iv-csvg .wk{stroke-width:1}.iv-csvg .wk.u{stroke:#059669}.iv-csvg .wk.d{stroke:#dc2626}
+.iv-csvg .cd.u{fill:#059669}.iv-csvg .cd.d{fill:#dc2626}
+.iv-csvg .lp{stroke-width:1;stroke-dasharray:2 3}
+.iv-csvg text{paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round}
+.iv-csvg text.lt{fill:#fff;font-weight:600;stroke:none}
+.iv-csvg .htag{fill:var(--text-strong)}
+.iv-dt .iv-empty{flex:1;justify-content:center;padding:24px 8px}
+.iv-dt .iv-empty{font-size:9px}.iv-dt .iv-empty b{font-size:10px}
+.iv-eic{display:grid;place-items:center;width:32px;height:32px;margin-bottom:8px;border-radius:50%;background:var(--surface-alt);color:var(--text-faint)}
+.iv-rcard{padding:10px 12px}
+.iv-chd .iv-rdd span{font-size:10px;font-weight:400;color:inherit}
+.iv-chd .iv-rdd{margin-left:auto;display:inline-flex;align-items:center;justify-content:space-between;gap:4px;width:72px;height:22px;padding:0 8px;direction:rtl;border-radius:6px;border:1px solid var(--border);font-size:10px;color:var(--text)}
+.iv-chd .iv-rdd:hover{border-color:var(--primary);color:var(--primary-strong)}
+.iv-chd .iv-rdd svg{color:var(--text-muted)}
+.iv-rpop{min-width:0;padding:4px;z-index:95}
+.iv-rpop .dd-opt{height:30px;font-size:11px}
+.iv-facts{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.iv-rbox small,.iv-hpair small{display:block;font-size:9px;color:var(--text-muted);margin-bottom:6px}
+.iv-inf{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.iv-inf .iv-rbox{padding:10px;border:1px solid var(--border-soft);border-radius:8px}
+.iv-tiles{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.iv-tile{display:flex;flex-direction:column;gap:3px;min-width:0;padding:8px 10px;border-radius:6px;border:1px solid var(--border-soft)}
+.iv-tile.wide{grid-column:1/-1}
+.iv-tile small{font-size:9px;color:var(--text-muted)}
+.iv-tile b{font-size:11px;font-weight:700;color:var(--text-strong);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iv-tile.up b,.iv-tile.down b{color:var(--c)}
+.iv-rbar{position:relative;height:4px;border-radius:2px;background:linear-gradient(90deg,color-mix(in srgb,#dc2626 35%,var(--surface-alt)),var(--surface-alt) 50%,color-mix(in srgb,#059669 35%,var(--surface-alt)));direction:ltr}
+.iv-rbar i{position:absolute;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--surface);border:2px solid var(--text-strong);transition:left .4s}
+.iv-rlab{display:flex;align-items:center;justify-content:space-between;margin-top:6px;direction:ltr}
+.iv-rlab b{font-size:10px;font-weight:600;color:var(--text-strong);font-variant-numeric:tabular-nums}
+.iv-rlab span{display:inline-flex;align-items:baseline;gap:4px;font-size:8px;color:var(--text-muted)}
+.iv-hpair{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 10px;border-radius:6px;background:var(--primary-softer)}
+.iv-hpair>div+div{border-inline-start-color:color-mix(in srgb,var(--primary) 18%,transparent)!important}
+.iv-hpair>div+div{padding-inline-start:10px;border-inline-start:1px solid var(--border-soft)}
+.iv-hpair small{margin-bottom:2px}
+.iv-hpair b{font-size:12px;font-weight:700;color:var(--text-strong);font-variant-numeric:tabular-nums;white-space:nowrap}
+.iv-hpair b i{font-style:normal;font-size:8px;font-weight:400;color:var(--text-muted);margin-inline-start:3px}
+.iv-hpair.none{display:block}.iv-hpair.none b{font-size:10px;font-weight:500;color:var(--text-muted)}
+.iv-col.in{animation:ivIn .45s cubic-bezier(.22,1,.36,1) both}
+.iv-col.b.in{animation-delay:.06s}
+.iv-col.out{animation:ivOut .22s ease-in both}
+@keyframes ivIn{from{opacity:0;transform:translateX(-28px)}}
+@keyframes ivOut{to{opacity:0;transform:translateX(-20px)}}
+@media (prefers-reduced-motion:reduce){.iv-col.in,.iv-col.out{animation:none}}
+.iv-ctabs .ic{position:relative;display:grid;place-items:center;width:24px;height:24px;border-radius:7px;color:var(--text-faint);opacity:.7}
+.iv-ctabs button[aria-selected="true"] .ic{opacity:1}
+.iv-ctabs button[aria-selected="true"] .ic{background:var(--primary-softer);color:var(--primary)}
+.iv-ctabs .lb{display:inline-flex;align-items:center;gap:4px}
+.iv-col.b .iv-ticket{border:0}
 .iv-step{display:flex;gap:2px;align-items:stretch;direction:ltr}
-.iv-step .m-input{height:28px}
 .iv-step input{flex:1;min-width:0}
 .iv-step .ud{display:flex;flex-direction:column;gap:2px;width:27px;flex:none}
 .iv-step .ud button{flex:1;display:grid;place-items:center;border-radius:3px;background:var(--surface-alt);border:.5px solid var(--border);color:var(--text-muted)}
 .iv-step .ud button:hover{color:var(--primary)}
-.iv-col.b .m-input{text-align:left;direction:ltr}
-.iv-total{direction:ltr;justify-content:flex-start;gap:4px;margin-top:6px;height:24px;display:flex;align-items:center;padding:0 8px;border-radius:4px;background:var(--primary-softer);font-size:11px;font-weight:400;color:var(--text-strong)}
-.iv-col.b .iv-box:last-child{min-height:136px;display:flex;flex-direction:column}
-.iv-col.b .iv-box:last-child .iv-in{flex:1;display:flex;flex-direction:column}
-.iv-acts{display:grid;grid-template-columns:115fr 50fr;gap:8px;margin-top:auto;padding-top:12px}
-.iv-acts button{height:20px;border-radius:4px;font-size:10px}
-.iv-acts .go{background:var(--primary-soft);color:var(--primary-strong);font-weight:600}
-.iv-acts .go.sell{background:var(--danger-soft);color:var(--danger)}
-.iv-acts .no{border:1px solid var(--border);color:var(--text-muted)}
+.iv-tkt .ic{width:24px;height:24px;display:grid;place-items:center;border-radius:6px;background:var(--c);color:#fff}
+.iv-ticket.buy{--c:#059669}.iv-ticket.sell{--c:#dc2626}
+.iv-ticket.buy,.iv-ticket.sell{background:color-mix(in srgb,var(--c) 3%,var(--surface))}
+.iv-ticket .m-input:focus{border-color:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 15%,transparent)}
+.iv-ticket .iv-osum{background:color-mix(in srgb,var(--c) 6%,var(--surface))}
+.iv-info div{display:flex;justify-content:space-between;gap:8px;padding:11px 4px;border-bottom:1px solid var(--border-soft);font-size:11px;color:var(--text-muted)}
+.iv-info b{color:var(--c,var(--text-strong));font-weight:500;font-variant-numeric:tabular-nums}
+.iv-q{display:flex;align-items:center;gap:4px;margin-inline-start:auto}
+.iv-qb{width:28px;height:28px;display:grid;place-items:center;border-radius:4px;color:var(--text-muted)}
+.iv-qb:hover,.iv-qb[aria-expanded="true"]{color:var(--primary-strong)}
+.iv-trend{display:inline-flex;align-items:center;gap:6px;height:16px;vertical-align:top}
+.iv-trend .v{min-width:44px;font-size:10px;font-weight:600}
+.iv-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px}
 .iv-fund{display:flex;gap:8px}
 .iv-fund button{height:24px;padding:0 14px;border-radius:4px;background:var(--surface-alt);color:var(--text);font-size:11px}
 .iv-fund button[aria-selected="true"]{background:var(--primary-soft);color:var(--primary-strong);font-weight:600}
+.iv-live{display:inline-flex;align-items:center;gap:6px;font-size:10px;color:var(--text-muted)}
+.iv-live i{width:6px;height:6px;border-radius:50%;background:#059669;box-shadow:0 0 0 3px color-mix(in srgb,#059669 20%,transparent)}
+.iv-body .up{--c:#059669}.iv-body .down{--c:#dc2626}
+/* overview */
+.iv-ov{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:auto 16px 0;padding:12px 0 14px;border-top:1px solid var(--border-soft);flex:none}
+.iv-ov>div{display:flex;align-items:flex-start;gap:6px;min-width:0;padding:8px;border-radius:8px;background:var(--surface);border:1px solid var(--border-soft)}
+.iv-ov .ic{width:26px;height:26px;flex:none;display:grid;place-items:center;border-radius:8px;background:var(--primary-softer);color:var(--primary)}
+.iv-ov .up .ic,.iv-ov .down .ic{color:var(--c);background:color-mix(in srgb,var(--c) 8%,var(--surface))}
+.iv-ov p{margin:0;display:flex;flex-direction:column;gap:1px;min-width:0}
+.iv-ov small{font-size:9px;color:var(--text-muted);white-space:nowrap}
+.iv-ov b{font-size:12px;line-height:18px;font-weight:700;color:var(--text-strong);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.iv-ov b i{font-style:normal;font-size:9px;font-weight:400;color:var(--text-muted);margin-inline-start:3px}
+.iv-ov em{font-style:normal;font-size:9px;color:var(--c,var(--text-muted));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.iv-ov .up b,.iv-ov .down b{color:var(--c)}
+.iv-hero{display:flex;flex-direction:column;gap:4px;min-width:0}
+.iv-hero b{font-size:20px;line-height:28px;font-weight:700;color:var(--text-strong);white-space:nowrap}
+.iv-hero .d{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text-muted)}
+.iv-chip.up,.iv-chip.down{background:color-mix(in srgb,var(--c) 11%,transparent);color:var(--c)}
+.iv-mix .bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--primary-soft)}
+.iv-mix .leg{display:flex;gap:16px;flex-wrap:wrap;font-size:10px;color:var(--text-muted)}
+.iv-mix .leg i{width:8px;height:8px;border-radius:2px;background:var(--primary)}
+.iv-mix .leg b{color:var(--text-strong);font-weight:600}
+.iv-ost b{font-size:13px;font-weight:700;color:var(--text-strong);white-space:nowrap}
+/* tabs + table */
+.iv-tb{display:flex;align-items:center;gap:8px;margin:8px 16px 0;border-bottom:1px solid var(--border-soft);min-height:40px}
+.iv-tabs{display:flex;gap:4px;align-self:stretch}
+.iv-tabs button{display:flex;align-items:center;gap:6px;padding:0 10px;border-bottom:2px solid transparent;margin-bottom:-1px;font-size:11px;color:var(--text-muted)}
+.iv-tabs button[aria-selected="true"]{color:var(--primary-strong);border-color:var(--primary);font-weight:600}
+.iv-tabs .n{min-width:18px;height:16px;padding:0 5px;border-radius:8px;background:var(--surface-alt);font-size:9px;line-height:16px;text-align:center;color:var(--text-muted)}
+.iv-tabs button[aria-selected="true"] .n{background:var(--primary-softer);color:var(--primary-strong)}
+.iv-tb .m-search{width:220px;height:28px;background:var(--surface-sunken)}
+.iv-tw{flex:0 1 auto;min-height:0;overflow:auto;margin:8px 16px 0}
+.iv-tw>.sbar-h{background:color-mix(in srgb,var(--sb-thumb) 45%,transparent)}
+.iv-tw>.sbar-h:hover,.iv-tw>.sbar-h.drag{background:var(--sb-thumb)}
+.iv-t{table-layout:fixed;min-width:calc(var(--n,8) * 84px)}
+.iv-t th.trc{width:60px}
+.iv-t th,.iv-t td{overflow:hidden;text-overflow:ellipsis}
+.iv-t th .sort-btn{width:auto}
+.iv-t td.up,.iv-t td.down,.iv-t .up.v,.iv-t .down.v{color:var(--c)}
+.iv-t td .num{color:var(--text)}
+.iv-t td .ar{display:inline-block;vertical-align:-2px;margin-inline-start:4px}
+
+@keyframes ivflash{from{background:color-mix(in srgb,var(--primary-soft) 80%,transparent)}}
+.iv-t td.kb,.iv-t th.kb{width:28px;padding-inline-end:0}
+.iv-t .sym{font-weight:600;color:var(--text-strong)}
+.iv-t .muted{color:var(--text-muted)}
+.iv-t .iv-spark{display:block}
+.iv-spark .u{fill:#059669}.iv-spark .d{fill:#dc2626}
+.iv-spark.up,.iv-spark.down{color:var(--c)}
+.iv-none{text-align:center!important;color:var(--text-muted)!important}
+.iv-share{display:inline-block;width:40px;height:4px;margin-inline-end:6px;border-radius:2px;background:var(--surface-alt);vertical-align:middle;overflow:hidden}
+.iv-share i{display:block;height:100%;background:var(--primary)}
+.iv-side-chip{display:inline-block;padding:0 8px;border-radius:4px;font-size:10px;font-weight:600}
+.iv-side-chip.buy{background:color-mix(in srgb,#059669 12%,transparent);color:#059669}.iv-side-chip.sell{background:color-mix(in srgb,#dc2626 10%,transparent);color:#dc2626}
+.iv-xbtn{height:20px;padding:0 8px;font-size:10px}
+.iv-empty{display:flex;flex-direction:column;align-items:center;gap:4px;padding:56px 16px;text-align:center;font-size:11px;color:var(--text-muted)}
+.iv-empty b{font-size:12px;color:var(--text-strong)}
+/* side: stock box */
+.iv-stock .hd{display:flex;align-items:flex-start;gap:8px}
+.iv-stock .hd>div{flex:1;min-width:0}
+.iv-stock h3{margin:0;font-size:13px;font-weight:700;color:var(--text-strong)}
+.iv-stock .sub{font-size:10px;color:var(--text-muted);margin-top:4px}
+.iv-back{display:none;width:28px;height:28px;border-radius:6px;place-items:center;color:var(--text-muted);flex:none}
+.iv-final{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:12px;padding:8px;border-radius:4px;background:var(--surface-alt);font-size:9px;color:var(--text-muted)}
+.iv-final span{font-size:10px;font-weight:600;color:var(--c)}
+.iv-line{display:flex;align-items:center;gap:8px;margin-top:10px;padding:0 8px;font-size:9px;color:var(--text-muted);white-space:nowrap}
+.iv-line b{font-size:11px;font-weight:600;color:var(--c,var(--text-strong));font-variant-numeric:tabular-nums}
+.iv-bs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.iv-bs button{height:28px;border-radius:4px;font-size:11px;font-weight:500;border:1px solid;background:transparent}
+.iv-bs button.buy{border-color:color-mix(in srgb,#059669 55%,var(--surface));color:#059669}
+.iv-bs button.sell{border-color:color-mix(in srgb,#dc2626 45%,var(--surface));color:#dc2626}
+.iv-bs button.buy[aria-pressed="true"]{background:#059669;border-color:#059669;color:#fff}
+.iv-bs button.sell[aria-pressed="true"]{background:#dc2626;border-color:#dc2626;color:#fff}
+/* side: chart */
+.iv-box h4{margin:0 0 10px;font-size:11px;font-weight:600;color:var(--text-strong)}
+.iv-rng{display:flex;gap:2px;padding:2px;margin-bottom:8px;border-radius:6px;background:var(--surface-alt)}
+.iv-rng button[aria-selected="true"]{background:var(--surface);color:var(--text-strong);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.08)}
+.iv-chart{position:relative;direction:ltr}
+.iv-csvg{display:block;width:100%;height:auto;touch-action:none}
+.iv-csvg .g{stroke:var(--border-soft);stroke-width:1}
+.iv-csvg .pc{stroke:var(--text-faint);stroke-width:1;stroke-dasharray:3 3}
+.iv-csvg .hl{stroke:var(--text-faint);stroke-width:1;stroke-dasharray:2 2}
+.iv-csvg text{font-family:inherit;font-size:9px;fill:var(--text-muted)}
+.iv-tip{position:absolute;z-index:2;display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 8px;border-radius:6px;background:var(--text-primary);color:var(--surface);pointer-events:none;white-space:nowrap;direction:rtl}
+.iv-tip b{font-size:11px;font-variant-numeric:tabular-nums}.iv-tip b span{font-size:9px;margin-inline-start:4px}.iv-tip .up{color:#6ee7b7}.iv-tip .down{color:#fca5a5}.iv-tip small{font-size:9px;opacity:.75}
+.iv-chd{display:flex;align-items:center;gap:6px;height:22px}
+.iv-chd span{font-size:12px;font-weight:700;color:var(--c)}
+.iv-chd small{font-size:9px;color:var(--text-muted)}
+.iv-cnote{display:flex;align-items:center;gap:6px;margin:6px 0 0;font-size:9px;color:var(--text-muted)}
+/* side: ticket */
+.iv-ticket{display:flex;flex-direction:column;gap:8px}
+.iv-ticket .m-label{margin:2px 0 -2px}
+.iv-ticket .iv-u{font-size:9px;font-weight:400;color:var(--text-muted)}
+.iv-ticket .m-input{height:32px;text-align:left}
+.iv-seg{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px;border-radius:6px;background:var(--surface-alt)}
+.iv-seg button[aria-checked="true"]{background:var(--surface);color:var(--text-strong);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.08)}
+.iv-pcts button{height:24px;border-radius:4px;border:1px solid var(--border);font-size:10px;color:var(--text-muted)}
+.iv-avail{margin:0;font-size:10px;color:var(--text-muted)}
+.iv-avail b{color:var(--text-strong);font-weight:600}
+.iv-osum{display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:4px;background:var(--surface-alt)}
+.iv-orow{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:10px;color:var(--text-muted)}
+.iv-orow b{font-size:11px;font-weight:600;color:var(--text-strong);font-variant-numeric:tabular-nums}
+.iv-orow b small{font-size:9px;font-weight:400;color:var(--text-muted)}
+.iv-orow.tot{padding-top:6px;border-top:1px solid var(--border-soft)}
+.iv-orow.tot b{font-size:13px}
+.iv-err{margin:0;font-size:10px;color:var(--danger)}
+.iv-acts{display:flex;gap:6px}
+.iv-go{flex:1;height:32px;color:#fff;font-weight:600}
+.iv-no{flex:none;height:32px;padding:0 12px;font-size:11px}
+.iv-go.buy{background:#059669}.iv-go.sell{background:#dc2626}
+.iv-go:disabled{background:var(--surface-alt);color:var(--text-faint);cursor:default}
+@container (max-width:860px){.iv-ov .ic{display:none}.iv-ov b{font-size:11px}.iv-ov{gap:6px}}
+@container (max-width:640px){.iv-ov{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@container (max-width:440px){.iv-ov{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1240px){.iv-body.tk{--sw:328px}.iv-side{flex-direction:column;align-items:stretch}.iv-col.a,.iv-col.b{width:auto}.iv-col.a{flex:none;min-height:100%}}
+@media (max-width:1024px){.iv-body,.iv-body.tk{--sw:300px}}
+@media (max-width:860px){
+  .iv-body{flex-direction:column}
+  .iv-main{width:auto;overflow:visible;border:0}
+  .iv-side{width:auto}
+  .iv-col.a{min-height:0}
+  .iv-fill>.iv-chart{flex:none;height:240px}
+  .iv-handle{display:none}
+  .iv-side{position:fixed;inset:0;z-index:90;transform:translateX(-100%);visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),visibility .25s}
+  .iv-body.has-sel .iv-side{transform:none;visibility:visible}
+  .iv-body .iv-side{flex-wrap:nowrap}
+  .iv-side>.side-empty{display:none}
+  .iv-back{display:grid}
+
+  .iv-tb .m-search{flex:1;width:auto}
+  .m-bar .iv-live{display:none}
+}
 
 /* ================= process builder ================= */
 .pb-canvas{position:relative;flex:1;min-width:0;overflow:hidden;background-color:var(--app-bg);
@@ -770,8 +959,7 @@ svg.i{display:block;flex:none}
 .fb-pv .pv-f.bad .fb-file{border-color:var(--danger)}
 .fb-drange{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .fb-drange label{display:flex;flex-direction:column;gap:4px;font-size:10px;color:var(--text-muted)}
-@media (max-width:860px){
-}
+
 .fb-pv .pv-img{display:block;max-width:100%;border-radius:6px}
 .fb-pv div.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .fb-tile .ti.o{color:#f97316}.fb-tile .ti.b{color:#3b82f6}
@@ -1914,6 +2102,7 @@ input[type=radio]:disabled{opacity:.5;cursor:not-allowed}
 .rail{grid-column:1;grid-row:2;background:var(--rail);margin-top:1px;margin-inline-start:0;padding:8px;display:flex;flex-direction:column;gap:10px}
 .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:51px;border-radius:4px;color:var(--rail-text);font-size:11px;line-height:16px;text-decoration:none;border:1px solid transparent}
 .nav-item:hover{background:rgba(255,255,255,.08)}
+.nav-item .nl.sm{font-size:9px;white-space:nowrap}
 .nav-item[aria-current="page"]{background:var(--rail-active-bg);border-color:#eff6ff;color:var(--rail-active-text);box-shadow:0 0 20px rgba(255,255,255,.5)}
 
 .main{--side-w:355px;position:relative;grid-column:2;grid-row:2;display:grid;grid-template-columns:minmax(0,1fr) var(--side-w);min-height:0}
@@ -2337,6 +2526,11 @@ td.cell-icon.s2,th.cell-icon.s2{cursor:pointer}
 .menu-item svg{color:var(--text-muted)}
 .menu-item.danger svg{color:var(--danger)}
 .menu-item[aria-checked="true"]{color:var(--primary-strong);background:var(--primary-softer)}
+.pop:has(.tk-mm){min-width:0;padding:4px}
+.tk-mm h4{margin:4px 8px;font-size:9px}
+.tk-mm .chk{gap:6px;padding:5px 8px;font-size:10px;line-height:14px;white-space:nowrap}
+.tk-mm .cb{width:13px;height:13px;background-size:9px}
+.tk-mm .menu-item{gap:6px;padding:6px 8px;font-size:10px;line-height:14px;white-space:nowrap}
 .chk{display:flex;align-items:center;gap:8px;padding:5px 8px;font-size:12px;color:var(--text-strong);cursor:pointer;border-radius:4px}
 .chk:hover{background:var(--surface-alt)}
 .pop hr{border:0;border-top:1px solid var(--border-soft);margin:6px 0}
@@ -2834,7 +3028,7 @@ button,a,.btn,.sq-btn,input,select{transition:background-color .15s var(--ease-o
 /* system theme with a dark OS: same overrides as the explicit dark theme */
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]) .ev-who b,:root:not([data-theme="light"]) .ev-row dd,:root:not([data-theme="light"]) .ev-form .field input:not([type="file"]),:root:not([data-theme="light"]) .ev-form .field select{color:var(--text-strong)}
-  :root:not([data-theme="light"]) .tk-ghead,:root:not([data-theme="light"]) .tk-pitem,:root:not([data-theme="light"]) .tk-tabs button:not([aria-selected="true"]){background:var(--surface-alt);color:var(--text)}
+  :root:not([data-theme="light"]) .tk-ghead,:root:not([data-theme="light"]) .tk-pitem{background:var(--surface-alt);color:var(--text)}
   :root:not([data-theme="light"]) .tk-ib{background:var(--surface-alt)}
   :root:not([data-theme="light"]) .tk-back .tk-card{background:var(--surface-alt)}
   :root:not([data-theme="light"]) .tk-ct{color:var(--text-strong)}
@@ -4016,7 +4210,7 @@ function applyView(){
   if(typeof aclLeaveGuard==='function'&&aclLeaveGuard())return;
   const r=currentRoute();const R_=MOD_ROUTES[r.mod];
   document.body.dataset.mod=r.mod;
-  $('#navDash').href='#'+R_.dash;$('#navMain').href='#'+R_.main;$('#navMain .nl').textContent=R_.nav;{const ni=$('#navMain').firstElementChild,ic=R_.ic||'stack';if(ni.dataset.ic!==ic){ni.innerHTML=icon(ic,20);ni.dataset.ic=ic}}
+  $('#navDash').href='#'+R_.dash;$('#navMain').href='#'+R_.main;$('#navMain .nl').textContent=R_.nav;$('#navMain .nl').classList.toggle('sm',R_.nav.length>9);{const ni=$('#navMain').firstElementChild,ic=R_.ic||'stack';if(ni.dataset.ic!==ic){ni.innerHTML=icon(ic,20);ni.dataset.ic=ic}}
   document.querySelectorAll('.nav-item').forEach(a=>{if(a.dataset.view===r.view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   closePop();if(typeof closeFp==='function'&&fpEl)closeFp();document.querySelector('.acl-pop')?.remove();
   const isHr=r.mod==='hr';if(pbSim&&(r.mod!=='proc'||r.view!=='main'))pbSimStop(true);document.querySelector('.pb-menu')?._close?.();document.querySelector('.pb-tour')?._end?.();
@@ -5085,7 +5279,8 @@ $('#settingsBtn').addEventListener('click',ev=>{
 });
 const MOD_GLYPH={hr:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="16.2" cy="7.6" r="2.4" stroke-opacity=".55"/><path d="M14.6 12.4c.5-.1 1-.2 1.6-.2 2.6 0 4.5 1.8 5 4.9" stroke-opacity=".55"/><circle cx="9" cy="8.4" r="3.3" fill="currentColor" fill-opacity=".28"/><path d="M2.8 19.8c.6-3.7 3-5.8 6.2-5.8s5.6 2.1 6.2 5.8"/></svg>',proc:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="8.4" y="2.6" width="7.2" height="5" rx="1.6" fill="currentColor" fill-opacity=".28"/><path d="M12 7.6v2.3"/><path d="M12 9.9l2.7 2.7-2.7 2.7-2.7-2.7z"/><path d="M9.3 12.6H6.6A1.6 1.6 0 0 0 5 14.2v2.2"/><path d="M14.7 12.6h2.7a1.6 1.6 0 0 1 1.6 1.6v2.2"/><circle cx="5" cy="19" r="2.4" fill="currentColor" fill-opacity=".28"/><circle cx="19" cy="19" r="2.4" fill="currentColor" fill-opacity=".28"/></svg>',form:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M14.2 2.8H7A2.8 2.8 0 0 0 4.2 5.6v12.8A2.8 2.8 0 0 0 7 21.2h10a2.8 2.8 0 0 0 2.8-2.8V8.4z"/><path d="M14.2 2.8v3.4a2.2 2.2 0 0 0 2.2 2.2h3.4" fill="currentColor" fill-opacity=".28"/><circle cx="15.4" cy="11.6" r="1.15" fill="currentColor" stroke="none"/><path d="M8 11.6h4.6"/><circle cx="15.4" cy="14.9" r="1.15" fill="currentColor" stroke="none"/><path d="M8 14.9h4.6"/><circle cx="15.4" cy="18.2" r="1.15" fill="currentColor" stroke="none"/><path d="M8 18.2h4.6"/></svg>',invest:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3.6 3.6v14.8a2 2 0 0 0 2 2h14.8"/><path d="M7.2 16.6l3.5-4.2 3 2.4 5.3-6.1v7.9z" fill="currentColor" fill-opacity=".28" stroke="none"/><path d="M7.2 16.6l3.5-4.2 3 2.4 5.3-6.1"/><path d="M16.2 8.5h2.8v2.8"/></svg>',tasks:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M15.5 4.5h1.7a2.3 2.3 0 0 1 2.3 2.3v12.4a2.3 2.3 0 0 1-2.3 2.3H6.8a2.3 2.3 0 0 1-2.3-2.3V6.8a2.3 2.3 0 0 1 2.3-2.3h1.7"/><rect x="8.5" y="2.6" width="7" height="3.6" rx="1.2" fill="currentColor" fill-opacity=".28"/><path d="M13.6 11.2l1.1 1.1 1.8-2.1"/><path d="M7.6 11.4h3.4"/><path d="M13.6 16.4l1.1 1.1 1.8-2.1"/><path d="M7.6 16.6h3.4"/></svg>',acl:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 2.8l7 2.8v5.6c0 4.4-2.9 8.1-7 9.9-4.1-1.8-7-5.5-7-9.9V5.6z" fill="currentColor" fill-opacity=".28"/><circle cx="12" cy="10.6" r="1.9" fill="currentColor" stroke="none"/><path d="M12 12.4v3.3"/></svg>'};
 /* only these modules can be opened for now */
-var MOD_ENABLED=new Set(['hr','acl','proc','form']);
+document.addEventListener('compositionend',e=>{const m=currentRoute().mod;if((m==='tasks'||m==='invest')&&e.target.dataset&&e.target.dataset.q){const el=modEl();if(el&&el.oninput)el.oninput(e)}},true);
+var MOD_ENABLED=new Set(['hr','acl','proc','form','tasks','invest']);
 const MODULES=[
   {k:'hr',n:'منابع انسانی',i:'mHR',c:'blue'},
   {k:'proc',n:'فرایندساز',i:'mProc',c:'violet'},
@@ -5337,7 +5532,6 @@ document.querySelectorAll('select').forEach(enhanceSelect);
 window.addEventListener('resize',()=>closeDd());
 document.addEventListener('scroll',e=>{if(ddOpen&&!ddOpen.list.contains(e.target))closeDd()},true);
 
-
 /* ---------- header profile dropdown ---------- */
 $('#meBtn .me-chev').innerHTML=icon('chevDownS',16);
 const PF_IC={building:'<path d="M4 20.5V5A1.5 1.5 0 0 1 5.5 3.5h8A1.5 1.5 0 0 1 15 5v15.5"/><path d="M15 9.5h3.5A1.5 1.5 0 0 1 20 11v9.5"/><path d="M2.5 20.5h19"/><path d="M8 7.5h3M8 11h3M8 14.5h3"/>',id:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10.8" r="2"/><path d="M5.8 16c.5-1.5 1.7-2.3 3.2-2.3s2.7.8 3.2 2.3"/><path d="M14.5 10h3.5M14.5 13.5h3.5"/>',phone:'<path d="M5.2 3.5h2.9l1.6 4-2 1.3a11 11 0 0 0 5.5 5.5l1.3-2 4 1.6v2.9a2 2 0 0 1-2.2 2A15 15 0 0 1 3.2 5.7a2 2 0 0 1 2-2.2z"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.8 7.2 12 13l8.2-5.8"/>',shield:'<path d="M12 3l7 2.8v5.4c0 4.3-2.9 7.9-7 9.8-4.1-1.9-7-5.5-7-9.8V5.8z"/><path d="M9 12l2 2 4-4"/>',clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',cog:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',logout:'<path d="M14 4h3.5A1.5 1.5 0 0 1 19 5.5v13a1.5 1.5 0 0 1-1.5 1.5H14"/><path d="M10 16l-4-4 4-4"/><path d="M6 12h9"/>',copy:'<rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6A1.5 1.5 0 0 0 14 4.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/>'};
@@ -5511,7 +5705,7 @@ document.addEventListener('input',e=>{
 const MOD_ROUTES={
   hr:{main:'list',dash:'dashboard',nav:'لیست'},
   tasks:{main:'tasks',dash:'tasks-dash',nav:'لیست'},
-  invest:{main:'invest',dash:'invest-dash',nav:'صندوق'},
+  invest:{main:'invest',dash:'invest-dash',nav:'صندوق‌ها',ic:'mInvestF'},
   proc:{main:'proc',dash:'proc-dash',nav:'فرایندساز',ic:'procF'},
   form:{main:'forms',dash:'forms-dash',nav:'فرم‌ساز',ic:'mForm'},
   acl:{main:'acl',dash:'acl-dash',nav:'دسترسی',ic:'shieldF'}
@@ -5528,8 +5722,8 @@ const modEl=()=>$('#modView');
 (()=>{const mv=document.getElementById('modView');if(!mv)return;const sel='.m-panel,.dash-mod,.acl-main,.iv-main,.iv-tw,.fb-stage';
   new MutationObserver(()=>{mv.querySelectorAll(sel).forEach(e=>{if(e.dataset.rt)return;e.dataset.rt='1';if(e.scrollWidth>e.clientWidth)e.scrollLeft=e.scrollWidth})}).observe(mv,{childList:true,subtree:true})})();
 const persianMonths=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
-function modMenu(btn,items,onPick){
-  openPop(btn,`<div role="menu">${items.map(i=>`<button class="menu-item ${i.danger?'danger':''}" role="menuitem" data-k="${i.k}">${i.ic?icon(i.ic,16):''}${i.t}</button>`).join('')}</div>`,
+function modMenu(btn,items,onPick,cls){
+  openPop(btn,`<div role="menu"${cls?` class="${cls}"`:''}>${items.map(i=>`<button class="menu-item ${i.danger?'danger':''}" role="menuitem" data-k="${i.k}">${i.ic?icon(i.ic,cls?12:16):''}${i.t}</button>`).join('')}</div>`,
     p=>p.addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b)return;closePop(true);onPick(b.dataset.k)}));
 }
 function modDash(mod){dashWip({hr:'داشبورد کارمندان',tasks:'داشبورد مدیریت تسک‌ها',invest:'داشبورد سرمایه‌گذاری',proc:'داشبورد فرایندساز',form:'داشبورد فرم‌ساز',acl:'داشبورد کنترل دسترسی'}[mod],modEl())}
@@ -5564,18 +5758,19 @@ const TK_GIC={g1:'brushB',g2:'codeG',g3:'brushO'};
 const COLS_TK=[{k:'doing',t:'در حال انجام',c:'c-doing'},{k:'review',t:'در حال بررسی',c:'c-review'},{k:'done',t:'انجام شده',c:'c-done'}];
 function tkCard(t){
   return `<div class="tk-card" draggable="true" tabindex="0" data-task="${t.id}" aria-label="${esc(t.title)}، اولویت ${PRI[t.priority]}">
-    <span class="tk-hd" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="6" cy="4" r="1.1"/><circle cx="10" cy="4" r="1.1"/><circle cx="6" cy="8" r="1.1"/><circle cx="10" cy="8" r="1.1"/><circle cx="6" cy="12" r="1.1"/><circle cx="10" cy="12" r="1.1"/></svg></span>
-    <div class="tk-ct"><span>${esc(t.title)}</span><button class="tk-kb" data-tmenu="${t.id}" aria-label="گزینه‌های تسک">${icon('dotsO',12)}</button></div>
-    <div class="tk-meta"><span class="tk-chip ${t.priority}"><i>اولویت:</i>${PRI[t.priority]}</span><span class="tk-chip from"><i>ارسالی از:</i><u dir="ltr">${esc(t.from)}</u></span>
+    <div class="tk-ct"><span class="tk-hd" aria-hidden="true"><svg width="6" height="9" viewBox="0 0 6 9" fill="currentColor"><circle cx="1.25" cy="1.25" r=".75"/><circle cx="4.75" cy="1.25" r=".75"/><circle cx="1.25" cy="4.5" r=".75"/><circle cx="4.75" cy="4.5" r=".75"/><circle cx="1.25" cy="7.75" r=".75"/><circle cx="4.75" cy="7.75" r=".75"/></svg></span><span class="tk-tt">${esc(t.title)}</span>
+    <button class="tk-kb" data-tmenu="${t.id}" aria-label="گزینه‌های تسک">${icon('dotsO',14)}</button></div>
+    <div class="tk-meta"><span class="tk-chip ${t.priority}"><i>اولویت:</i>${PRI[t.priority]}</span><span class="tk-chip from"><i>ارسالی از:</i><span class="tk-av" dir="ltr" style="--h:${[...t.from].reduce((a,c)=>a+c.charCodeAt(0)*37,0)%360}" title="${esc(t.from)}">${esc(t.from)}</span></span>
     <span class="tk-due"><i>تاریخ انقضا:</i>${fa(t.d)} ${persianMonths[t.m]}</span></div></div>`;
 }
+document.addEventListener('pointerdown',e=>{if(currentRoute().mod!=='tasks'||!MS.tasks)return;MS.tasks.gs=MS.tasks.gs||{};if(e.target.closest&&e.target.closest('.tk-tools,.tk-trow,.tk-gqrow'))return;let ch=false;if(MS.tasks.gsq&&!MS.tasks.gq){MS.tasks.gsq=false;ch=true}Object.values(MS.tasks.gs).forEach(g=>{if(g.sq&&!g.q){g.sq=false;ch=true}});if(ch)setTimeout(()=>{if(currentRoute().mod==='tasks')renderTasks()})},true);
 function renderTasks(){
   const D=TK();const el=modEl();
   if(!D.v3){D.sel=null;D.v3=true;saveMods()}
   const proj=D.projects.find(p=>p.id===D.sel);
   const grp=D.groups.find(g=>g.id===proj?.g)||D.groups[0];
-  {const keep=(proj&&D.groups.find(g=>g.id===proj.g&&g.open))||D.groups.find(g=>g.open);D.groups.forEach(g=>{if(g!==keep)g.open=false})}
-  const GS=g=>{D.gs=D.gs||{};return D.gs[g.id]=D.gs[g.id]||{q:'',sort:0,mine:false}};const projs=g=>{const s=GS(g);let l=D.projects.filter(p=>p.g===g.id&&(D.scope==='pub'||p.mine)&&(!s.mine||p.mine)&&(!s.q||norm(p.name).includes(norm(s.q))));if(s.sort)l=[...l].sort((a,b)=>a.name.localeCompare(b.name,'fa')*s.sort);return l};
+  const projs=g=>D.projects.filter(p=>p.g===g.id);
+  const gNm=g=>!D.gq||norm(g.name).includes(norm(D.gq)),pNm=p=>norm(p.name).includes(norm(D.gq||'')),gHit=g=>gNm(g)||projs(g).some(pNm);
   const pt=D.tasks.filter(t=>t.project===D.sel);
   let back=pt.filter(t=>t.status==='backlog'&&(!D.tq||norm(t.title).includes(norm(D.tq)))&&(!D.tfilter.length||D.tfilter.includes(t.priority)));
   const ord={high:0,mid:1,low:2};
@@ -5584,186 +5779,260 @@ function renderTasks(){
   el.innerHTML=`<div class="m-body tk-body">
     <aside class="m-panel tk-proj" aria-label="لیست پروژه‌ها">
       <h2 class="m-title tk-ttl">لیست پروژه‌ها</h2>
-      <div class="tk-trow"><div class="tk-tabs" role="tablist"><button role="tab" data-scope="pub" aria-selected="${D.scope==='pub'}">عمومی</button><button role="tab" data-scope="mine" aria-selected="${D.scope==='mine'}">شخصی</button></div><span class="sp"></span><button class="tk-ib" data-act="tk-psearch" aria-label="جستجوی پروژه" data-tip="جستجو">${icon('search',16)}</button></div>
+      <div class="tk-trow"><span class="sp"></span><button class="tk-ib" data-act="tk-psearch" aria-expanded="${!!(D.gsq||D.gq)}" aria-label="${D.gsq||D.gq?'بستن جستجو':'جستجوی پروژه'}" data-tip="${D.gsq||D.gq?'بستن جستجو':'جستجوی پروژه'}">${icon(D.gsq||D.gq?'x':'search',13)}</button></div>${D.gsq||D.gq?`<div class="tk-trow tk-gqrow"><label class="tk-search"><span class="sr-only">جستجوی پروژه</span>${icon('search',14)}<input type="search" data-q="grp" placeholder="جستجوی پروژه" value="${esc(D.gq||'')}" autocomplete="off"></label></div>`:''}
       <div class="tk-div"></div>
-      ${D.groups.map(g=>{const l=projs(g);return `<div class="tk-group">
-        <button class="tk-ghead" data-group="${g.id}" aria-expanded="${g.open}"><span class="tk-gic g-${g.c}">${icon(TK_GIC[g.id]||g.ic,g.id==='g1'?16:20)}</span><span class="sp">${g.name}</span><span class="tog">${icon(g.open?'minusO':'plusO',16)}</span></button>
-        ${g.open?`<div class="tk-gbody">
-          ${g.open?`<div class="tk-tools"><label class="tk-search"><span class="sr-only">جستجوی پروژه</span>${icon('search',16)}<input type="search" data-q="proj" placeholder="جستجو" data-g="${g.id}" value="${esc(GS(g).q)}"></label><button class="tk-ob" data-act="tk-psort" data-g="${g.id}" aria-label="مرتب‌سازی پروژه‌ها" data-tip="مرتب‌سازی">${icon('sortO',16)}</button><button class="tk-ob" data-act="tk-pfilter" data-g="${g.id}" aria-pressed="${GS(g).mine}" aria-label="فقط پروژه‌های شخصی" data-tip="فیلتر">${icon('funnel',16)}</button></div>`:''}
-          ${l.map(p=>`<button class="tk-pitem" data-proj="${p.id}" aria-current="${p.id===D.sel}"><span class="sp">${p.name}</span>${icon('chevLs',12)}</button>`).join('')||'<div class="fp-none">پروژه‌ای پیدا نشد</div>'}
-        </div>`:''}</div>`}).join('')}
+      ${(()=>{const gl=D.groups.filter(gHit);return gl.length?'':'<div class="fp-none">پروژه‌ای پیدا نشد</div>'})()}${D.groups.filter(gHit).map(g=>{const gm=gNm(g),l=projs(g).filter(p=>gm||pNm(p)),op=g.open||(!!D.gq&&!gm);return `<div class="tk-group">
+        <button class="tk-ghead" data-group="${g.id}" aria-expanded="${op}"><span class="tk-gic g-${g.c}">${icon(TK_GIC[g.id]||g.ic,g.id==='g1'?16:20)}</span><span class="sp">${esc(g.name)}</span><span class="tog" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4.5 8h7"/><path class="v" d="M8 4.5v7"/></svg></span></button>
+        <div class="tk-gwrap"${op?'':' inert'}><div class="tk-gbody">
+          ${l.map(p=>`<button class="tk-pitem" data-proj="${p.id}" aria-current="${p.id===D.sel}"><span class="sp">${esc(p.name)}</span>${icon('chevLs',12)}</button>`).join('')||'<div class="fp-none">پروژه‌ای پیدا نشد</div>'}
+        </div></div></div>`}).join('')}
     </aside>
     ${proj?`<section class="m-panel tk-back" aria-label="لیست تسک‌ها">
-      <h3><span class="tk-bic g-${grp.c}">${icon(TK_GIC[grp.id]||grp.ic,12)}</span>${esc(proj?.name||'')}</h3>
-      <div class="sub"><span class="sp">لیست تسک‌ها</span>
-        <button class="tk-ib" data-act="tk-tsearch" aria-label="جستجوی تسک" data-tip="جستجو">${icon('search',16)}</button>
-        <button class="tk-ib" data-act="tk-tsort" aria-label="مرتب‌سازی تسک‌ها" data-tip="مرتب‌سازی">${icon('sortO',16)}</button>
-        <button class="tk-ib" data-act="tk-tfilter" aria-label="فیلتر اولویت" data-tip="فیلتر">${icon('funnel',16)}${D.tfilter.length?'<span class="badge" style="position:absolute"></span>':''}</button></div>
-      ${D.tq!==null&&D.showTq?`<label class="m-search" style="margin-top:8px"><span class="sr-only">جستجوی تسک</span><input type="search" data-q="task" placeholder="جستجوی تسک" value="${esc(D.tq)}">${icon('search',14)}</label>`:''}
-      <div class="tk-list" data-drop="backlog">${back.map(tkCard).join('')}<button class="tk-add" data-act="tk-add">${icon('plusSm',14)}تسک جدید</button></div>
+      <h3><span class="tk-bic g-${grp.c}">${icon(TK_GIC[grp.id]||grp.ic,12)}</span><span class="nm">${esc(proj?.name||'')}</span></h3>
+      <div class="sub">
+        <button class="tk-ib" data-act="tk-tsearch" aria-expanded="${!!D.showTq}" aria-label="${D.showTq?'بستن جستجو':'جستجوی تسک'}" data-tip="${D.showTq?'بستن جستجو':'جستجو'}">${icon(D.showTq?'x':'search',13)}</button>
+        <button class="tk-ib" data-act="tk-tfilter" aria-label="فیلتر اولویت" data-tip="فیلتر">${icon('funnel',13)}${D.tfilter.length?'<span class="badge" style="position:absolute"></span>':''}</button>
+        <button class="tk-ib" data-act="tk-tsort" aria-label="مرتب‌سازی تسک‌ها" data-tip="مرتب‌سازی">${icon('sortO',13)}</button></div>
+      ${D.showTq?`<label class="tk-search" style="flex:none;margin-top:8px"><span class="sr-only">جستجوی تسک</span>${icon('search',12)}<input type="search" data-q="task" placeholder="جستجوی تسک" value="${esc(D.tq)}" autocomplete="off"></label>`:''}
+      <div class="tk-list" data-drop="backlog">${back.length?back.map(tkCard).join(''):`<div class="tk-le"><span class="ic" aria-hidden="true">${icon('mTask',16)}</span><b>${(D.showTq&&D.tq)||D.tfilter.length?'تسکی پیدا نشد':'لیست تسک‌ها خالی است'}</b><span>${(D.showTq&&D.tq)||D.tfilter.length?'جستجو یا فیلتر را تغییر دهید.':'تسک‌ها را می‌توانید از بورد به اینجا بکشید.'}</span></div>`}</div>
     </section>
     <section class="tk-board" aria-label="بورد تسک‌ها">${COLS_TK.map(c=>{const l=pt.filter(t=>t.status===c.k);return `<div class="tk-col ${c.c}">
       <div class="tk-colh">${c.t}</div>
       <div class="tk-colb" data-drop="${c.k}">${l.map(tkCard).join('')}</div></div>`}).join('')}</section>`:`<section class="tk-empty" aria-label="تسک‌ها"><div class="m-empty">${document.querySelector('.empty-art-tbl')?.outerHTML||''}<b>موردی برای نمایش وجود ندارد!</b><span>ابتدا پروژه مورد نظر خود را انتخاب فرمایید.</span></div></section>`}
   </div>`;
   el.onclick=e=>{
-    const D=TK();const b=e.target.closest('[data-scope],[data-group],[data-proj],[data-act],[data-tmenu]');if(!b)return;
-    if(b.dataset.scope){D.scope=b.dataset.scope;saveMods();renderTasks();return}
-    if(b.dataset.group){const g=D.groups.find(x=>x.id===b.dataset.group);const was=g.open;D.groups.forEach(x=>x.open=false);g.open=!was;saveMods();renderTasks();return}
+    const D=TK();const b=e.target.closest('[data-group],[data-proj],[data-act],[data-tmenu]');if(!b)return;
+    if(b.dataset.group){const g=D.groups.find(x=>x.id===b.dataset.group);g.open=b.getAttribute('aria-expanded')!=='true';saveMods();b.setAttribute('aria-expanded',g.open);const w=b.nextElementSibling;if(w)w.inert=!g.open;return}
     if(b.dataset.proj){D.sel=D.sel===b.dataset.proj?null:b.dataset.proj;D.showTq=false;D.tq='';saveMods();renderTasks();return}
     if(b.dataset.tmenu){const t=D.tasks.find(x=>x.id===b.dataset.tmenu);
-      const items=[{k:'edit',t:'ویرایش',ic:'pencil'},...[{k:'backlog',t:'لیست تسک‌ها'},...COLS_TK].filter(c=>c.k!==t.status).map(c=>({k:'mv:'+c.k,t:'انتقال به «'+c.t+'»',ic:'chevLs'})),{k:'del',t:'حذف',ic:'trash',danger:true}];
-      modMenu(b,items,k=>{if(k==='del'){const i=D.tasks.indexOf(t);D.tasks.splice(i,1);saveMods();renderTasks();toast('تسک حذف شد')}
-        else if(k==='edit')tkEdit(t);else{t.status=k.slice(3);saveMods();renderTasks();toast('تسک جابجا شد')}});return}
+      const items=[{k:'backlog',t:'لیست تسک‌ها'},...COLS_TK].filter(c=>c.k!==t.status).map(c=>({k:'mv:'+c.k,t:'انتقال به «'+c.t+'»',ic:'chevLs'}));
+      modMenu(b,items,k=>{{t.status=k.slice(3);saveMods();renderTasks();el.querySelector(`[data-task="${t.id}"]`)?.focus();toast('تسک جابجا شد')}},'tk-mm');return}
     switch(b.dataset.act){
-      case 'tk-psearch':{const i=el.querySelector('[data-q="proj"]');if(i)i.focus();else{D.groups.forEach((x,i)=>x.open=i===0);renderTasks();el.querySelector('[data-q="proj"]')?.focus()}break}
-      case 'tk-psort':(s=>s.sort=s.sort===1?-1:1)(GS(D.groups.find(x=>x.id===b.dataset.g)));saveMods();renderTasks();break;
-      case 'tk-pfilter':(s=>s.mine=!s.mine)(GS(D.groups.find(x=>x.id===b.dataset.g)));saveMods();renderTasks();toast(GS(D.groups.find(x=>x.id===b.dataset.g)).mine?'فقط پروژه‌های شخصی':'همه پروژه‌ها');break;
-      case 'tk-tsearch':D.showTq=!D.showTq;if(!D.showTq)D.tq='';renderTasks();el.querySelector('[data-q="task"]')?.focus();break;
-      case 'tk-tsort':modMenu(b,[{k:'none',t:'پیش‌فرض'},{k:'pri',t:'بر اساس اولویت'},{k:'due',t:'بر اساس تاریخ انقضا'}],k=>{D.tsort=k;saveMods();renderTasks()});break;
-      case 'tk-tfilter':openPop(b,`<h4>اولویت</h4>${['high','mid','low'].map(p=>`<label class="chk"><input type="checkbox" class="cb" value="${p}" ${D.tfilter.includes(p)?'checked':''}>${PRI[p]}</label>`).join('')}`,
-        p=>p.addEventListener('change',ev=>{const v=ev.target.value;D.tfilter=ev.target.checked?[...D.tfilter,v]:D.tfilter.filter(x=>x!==v);saveMods();const keep=popAnchor;renderTasks()}));break;
-      case 'tk-add':tkEdit(null);break;
+      case 'tk-psearch':{if(D.gsq||D.gq){D.gsq=false;D.gq='';renderTasks();el.querySelector('[data-act="tk-psearch"]')?.focus()}else{D.gsq=true;renderTasks();el.querySelector('[data-q="grp"]')?.focus()}break}
+      case 'tk-tsearch':D.showTq=!D.showTq;if(!D.showTq)D.tq='';renderTasks();(el.querySelector('[data-q="task"]')||el.querySelector('[data-act="tk-tsearch"]'))?.focus();break;
+      case 'tk-tsort':modMenu(b,[{k:'none',t:'پیش‌فرض'},{k:'pri',t:'بر اساس اولویت'},{k:'due',t:'بر اساس تاریخ انقضا'}],k=>{D.tsort=k;saveMods();renderTasks();el.querySelector('[data-act="tk-tsort"]')?.focus()},'tk-mm');break;
+      case 'tk-tfilter':openPop(b,`<div class="tk-mm"><h4>اولویت</h4>${['high','mid','low'].map(p=>`<label class="chk"><input type="checkbox" class="cb" value="${p}" ${D.tfilter.includes(p)?'checked':''}>${PRI[p]}</label>`).join('')}</div>`,
+        p=>p.addEventListener('change',ev=>{const v=ev.target.value;D.tfilter=ev.target.checked?[...D.tfilter,v]:D.tfilter.filter(x=>x!==v);saveMods();renderTasks();const na=el.querySelector('[data-act="tk-tfilter"]');if(na){popAnchor=na;na.setAttribute('aria-expanded','true')}}));break;
     }
   };
-  el.oninput=e=>{const q=e.target.dataset.q;if(!q)return;if(q==='proj'){const gg=D.groups.find(x=>x.id===e.target.dataset.g);if(gg)GS(gg).q=e.target.value}else D.tq=e.target.value;const pos=e.target.selectionStart;renderTasks();const i=el.querySelector(`[data-q="${q}"]`);if(i){i.focus();try{i.setSelectionRange(pos,pos)}catch(_){}}};
+  el.oninput=e=>{const q=e.target.dataset.q;if(!q||e.isComposing)return;if(q==='grp')D.gq=e.target.value;else D.tq=e.target.value;const pos=e.target.selectionStart;renderTasks();const i=el.querySelector(`[data-q="${q}"]`);if(i){i.focus();try{i.setSelectionRange(pos,pos)}catch(_){}}};
   /* drag & drop */
-  let dragId=null;
+  let dragId=null;const ph=document.createElement('div');ph.className='tk-ph';ph.setAttribute('aria-hidden','true');
+  const flip=fn=>{if(matchMedia('(prefers-reduced-motion:reduce)').matches){fn();return}const cs=[...el.querySelectorAll('.tk-card:not(.dragging)')],r=new Map(cs.map(c=>[c,c.getBoundingClientRect().top])),had=!!ph.parentNode;fn();cs.forEach(c=>{const d=r.get(c)-c.getBoundingClientRect().top;if(Math.abs(d)>.5)c.animate([{transform:'translateY('+d+'px)'},{transform:'none'}],{duration:200,easing:'cubic-bezier(.2,.8,.2,1)'})});if(ph.parentNode&&!had)ph.animate([{opacity:0,transform:'scaleY(.6)'},{opacity:1,transform:'none'}],{duration:180,easing:'ease-out'})};
   el.querySelectorAll('.tk-card').forEach(c=>{
-    c.addEventListener('dragstart',e=>{dragId=c.dataset.task;c.classList.add('dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',dragId)}catch(_){}});
-    c.addEventListener('dragend',()=>{c.classList.remove('dragging');el.querySelectorAll('.tk-drop').forEach(z=>z.classList.remove('tk-drop'))});
+    c.addEventListener('dragstart',e=>{dragId=c.dataset.task;ph.style.height=c.offsetHeight+'px';c.classList.add('dragging');requestAnimationFrame(()=>{if(dragId!==c.dataset.task)return;let n=c.nextElementSibling;while(n&&!n.matches('.tk-card'))n=n.nextElementSibling;c.parentNode.insertBefore(ph,c);ph.dataset.before=n?n.dataset.task:'';c.style.display='none'});e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',dragId)}catch(_){}});
+    c.addEventListener('dragend',()=>{dragId=null;c.classList.remove('dragging');c.style.display='';ph.remove();el.querySelectorAll('.tk-drop').forEach(z=>z.classList.remove('tk-drop'))});
   });
   el.querySelectorAll('[data-drop]').forEach(z=>{
-    z.addEventListener('dragover',e=>{if(!dragId)return;e.preventDefault();z.classList.add('tk-drop')});
-    z.addEventListener('dragleave',e=>{if(!z.contains(e.relatedTarget))z.classList.remove('tk-drop')});
-    z.addEventListener('drop',e=>{e.preventDefault();const t=TK().tasks.find(x=>x.id===dragId);if(t&&t.status!==z.dataset.drop){t.status=z.dataset.drop;saveMods();renderTasks();
-      toast(`تسک به «${z.dataset.drop==='backlog'?'لیست تسک‌ها':COLS_TK.find(c=>c.k===z.dataset.drop).t}» منتقل شد`)}dragId=null});
+    z.addEventListener('dragover',e=>{if(!dragId)return;e.preventDefault();el.querySelectorAll('.tk-drop').forEach(x=>{if(x!==z)x.classList.remove('tk-drop')});z.classList.add('tk-drop');
+      const before=[...z.querySelectorAll('.tk-card:not(.dragging)')].find(c=>{const r=c.getBoundingClientRect();return e.clientY<r.top+r.height/2})||null,ref=before;
+      if(ph.parentNode!==z||ph.nextSibling!==ref)flip(()=>z.insertBefore(ph,ref));ph.dataset.before=before?before.dataset.task:''});
+    z.addEventListener('dragleave',e=>{if(!z.contains(e.relatedTarget)){z.classList.remove('tk-drop');if(ph.parentNode===z)flip(()=>ph.remove())}});
+    z.addEventListener('drop',e=>{e.preventDefault();const T=TK(),t=T.tasks.find(x=>x.id===dragId),bid=ph.dataset.before;ph.remove();dragId=null;if(!t)return;const moved=t.status!==z.dataset.drop;
+      T.tasks.splice(T.tasks.indexOf(t),1);t.status=z.dataset.drop;let j=bid?T.tasks.findIndex(x=>x.id===bid):-1;if(j<0){j=-1;T.tasks.forEach((x,k)=>{if(x.status===t.status&&x.project===t.project)j=k});j++}T.tasks.splice(j,0,t);
+      if(z.dataset.drop==='backlog'&&T.tsort!=='none')T.tsort='none';saveMods();renderTasks();modEl().querySelector(`[data-task="${t.id}"]`)?.focus({preventScroll:true});
+      if(moved)toast(`تسک به «${z.dataset.drop==='backlog'?'لیست تسک‌ها':COLS_TK.find(c=>c.k===z.dataset.drop).t}» منتقل شد`)});
   });
 }
-function tkEdit(t){
-  const D=TK();const isNew=!t;t=t||{title:'',priority:'mid',from:'NM',d:30,m:2,status:'backlog'};
-  const o=(arr,v)=>arr.map(([k,l])=>`<option value="${k}" ${k===v?'selected':''}>${l}</option>`).join('');
-  openModal({title:isNew?'تسک جدید':'ویرایش تسک',body:`<form class="form" onsubmit="return false">
-    <div class="field full"><label for="tk-t">عنوان تسک</label><input id="tk-t" value="${esc(t.title)}"><span class="err"></span></div>
-    <div class="field"><label for="tk-p">اولویت</label><select id="tk-p">${o([['high','بالا'],['mid','متوسط'],['low','پایین']],t.priority)}</select></div>
-    <div class="field"><label for="tk-s">وضعیت</label><select id="tk-s">${o([['backlog','لیست تسک‌ها'],['doing','در حال انجام'],['review','در حال بررسی'],['done','انجام شده']],t.status)}</select></div>
-    <div class="field"><label for="tk-d">روز انقضا</label><input id="tk-d" class="ltr" inputmode="numeric" value="${fa(t.d)}"></div>
-    <div class="field"><label for="tk-m">ماه انقضا</label><select id="tk-m">${o(persianMonths.map((m,i)=>[String(i),m]),String(t.m))}</select></div></form>`,
-    actions:[{label:isNew?'افزودن تسک':'ذخیره',kind:'btn-primary',onClick:ov=>{
-      const ti=ov.querySelector('#tk-t');if(ti.value.trim().length<3){ti.nextElementSibling.textContent='عنوان را وارد کنید.';ti.focus();return false}
-      const d=Math.min(31,Math.max(1,+toEn(ov.querySelector('#tk-d').value).replace(/\D/g,'')||1));
-      Object.assign(t,{title:ti.value.trim(),priority:ov.querySelector('#tk-p').value,status:ov.querySelector('#tk-s').value,d,m:+ov.querySelector('#tk-m').value});
-      if(isNew){t.id='t'+Date.now();t.project=D.sel;D.tasks.push(t)}
-      saveMods();renderTasks();toast(isNew?'تسک اضافه شد':'تسک ذخیره شد')}},{label:'انصراف'}]});
-}
 /* ================= INVEST ================= */
-const IV_FUNDS=[{k:'stock',t:'صندوق سهام',names:['فرزام','فزر','فولاد','شستا','خودرو','وبملت','فملی','شپنا','کگل','اخابر','کچاد','وتجارت']},
-  {k:'gold',t:'صندوق طلا',names:['عیار','طلا','گوهر','زر','کهربا','نفیس','آلتون','مثقال']},
-  {k:'silver',t:'صندوق نقره',names:['سیمین','نقره‌فام','آبگینه','سیم‌تاب','مهتاب','بلور']}];
+const IV_FUNDS=[{k:'stock',t:'صندوق سهام',full:'صندوق سرمایه‌گذاری سهامی',names:['فرزام','فزر','فولاد','شستا','خودرو','وبملت','فملی','شپنا','کگل','اخابر','کچاد','وتجارت']},
+  {k:'gold',t:'صندوق طلا',full:'صندوق سرمایه‌گذاری طلا',names:['عیار','طلا','گوهر','زر','کهربا','نفیس','آلتون','مثقال']},
+  {k:'silver',t:'صندوق نقره',full:'صندوق سرمایه‌گذاری نقره',names:['سیمین','نقره‌فام','آبگینه','سیم‌تاب','مهتاب','بلور']}];
+const IV_FEE=.005,IV_RANGES=[['1d','۱ روز'],['1w','۱ هفته'],['1m','۱ ماه'],['3m','۳ ماه'],['1y','۱ سال']];
 function IV(){
-  if(!MS.invest){
-    const r=rng(909);const stocks=[];
-    IV_FUNDS.forEach(f=>f.names.forEach((n,i)=>{const close=Math.round((8000+r()*60000)/10)*10;const ch=(r()-.45)*.06;
-      stocks.push({id:f.k+i,fund:f.k,name:n,full:f.k==='stock'?'صندوق سرمایه‌گذاری سهامی':f.k==='gold'?'صندوق سرمایه‌گذاری طلا':'صندوق سرمایه‌گذاری نقره',
-        close,now:Math.round(close*(1+ch)/10)*10,buy:Math.round(close*(1+ch*.6)/10)*10,sell:Math.round(close*(1+ch*.8)/10)*10,
-        last:`1405/0${1+Math.floor(r()*7)}/${String(1+Math.floor(r()*29)).padStart(2,'0')}`,hist:Array.from({length:10},()=>({b:20+r()*80,s:20+r()*80}))})}));
-    MS.invest={stocks,fund:'stock',sel:'stock0',mode:'buy',qty:106,price:null,q:'',page:1,tab:0,orders:[],buyTotal:24452236,profit:12568341};
+  if(!MS.invest||MS.invest.v!==2){
+    const r=rng(909),stocks=[],hold={};
+    IV_FUNDS.forEach(f=>f.names.forEach((n,i)=>{
+      const id=f.k+i;let p=Math.round((8000+r()*60000)/10)*10;const daily=[];
+      for(let d=0;d<260;d++){p=Math.max(500,p*(1+(r()-.48)*.035));daily.push(Math.round(p/10)*10)}
+      const close=daily[daily.length-1],now=Math.round(close*(1+(r()-.45)*.05)/10)*10,intra=[];
+      for(let k=0;k<30;k++){const t=k/29;intra.push(Math.round((close+(now-close)*t+(r()-.5)*close*.01*(1-Math.abs(.5-t)))/10)*10)}intra[29]=now;
+      stocks.push({id,fund:f.k,name:n,close,now,buy:Math.round(now*1.002/10)*10,sell:Math.round(now*.998/10)*10,high:Math.max(...intra),low:Math.min(...intra),vol:Math.round(200000+r()*4800000),daily,intra});
+      if(i<(f.k==='stock'?4:f.k==='gold'?2:1))hold[id]={qty:Math.round((20000+r()*60000)/100)*100,avg:Math.round(close*(.82+r()*.3)/10)*10}}));
+    MS.invest={v:2,stocks,hold,cash:{stock:1250000000,gold:640000000,silver:310000000},realized:{stock:0,gold:0,silver:0},orders:[],oseq:1,
+      fund:'stock',sel:null,tab:'market',q:'',sort:{k:'',d:-1},range:'1d',side:'buy',otype:'market',qty:'',lp:null};
   }
   return MS.invest;
 }
 const tm=n=>money(Math.round(n));
-function donut(parts,size=76){
-  const r=size/2-7,C=2*Math.PI*r;let off=0;
-  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--primary-softer)" stroke-width="12"/>${parts.map(p=>{const len=C*p.v;const s=`<circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${p.c}" stroke-width="12" stroke-dasharray="${len} ${C-len}" stroke-dashoffset="${-off}" transform="rotate(-90 ${size/2} ${size/2})"/>`;off+=len;return s}).join('')}</svg>`;
-}
+const ivPct=v=>`‎${v>0?'+':v<0?'−':''}${fa(Math.abs(v*100).toFixed(2)).replace('.','٫')}٪`;
+const ivSigned=v=>`‎${v>0?'+':v<0?'−':''}${tm(Math.abs(v))}`;
+const ivCls=v=>v>0?'up':v<0?'down':'';
+const ivTime=t=>new Intl.DateTimeFormat('fa-IR',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Tehran'}).format(t);
+const ivDay=t=>new Intl.DateTimeFormat('fa-IR-u-ca-persian',{month:'short',day:'numeric',timeZone:'Asia/Tehran'}).format(t);
+function ivSum(D,f){let val=0,day=0,cost=0;D.stocks.filter(s=>s.fund===f).forEach(s=>{const h=D.hold[s.id];if(!h||!h.qty)return;val+=h.qty*s.now;day+=h.qty*(s.now-s.close);cost+=h.qty*h.avg});
+  return {val,day,dayP:val-day?day/(val-day):0,pl:val-cost,plP:cost?(val-cost)/cost:0,cost,cash:D.cash[f]||0,n:D.stocks.filter(s=>s.fund===f&&D.hold[s.id]?.qty).length}}
+function ivSeries(s,range){const n={'1w':5,'1m':22,'3m':66,'1y':260}[range];const now=Date.now(),DAY=864e5;
+  if(range==='1d'){const L=s.intra,st=new Date();st.setUTCHours(5,30,0,0);const step=Math.max(60000,(Math.min(now,st.getTime()+3.5*36e5)-st.getTime())/Math.max(1,L.length-1));return L.map((v,i)=>({v,l:ivTime(new Date(st.getTime()+i*step))}))}
+  const d=s.daily.slice(-n);return [...d.map((v,i)=>({v,l:ivDay(new Date(now-(d.length-i)*DAY*(range==='1y'?1.4:1.4)))})),{v:s.now,l:'امروز'}]}
+let ivPts=null;
+let ivDim={w:360,h:220};
+function ivChart(s,range,W=360,H=220){
+  W=Math.max(200,Math.round(W));H=Math.max(160,Math.round(H));
+  const P=ivSeries(s,range),n=P.length,L=8,R=W-8,T=12,B=H-22,base=range==='1d'?s.close:P[0].v,vs=P.map(p=>p.v).concat(base);
+  let mn=Math.min(...vs),mx=Math.max(...vs);const pad=(mx-mn||mx*.02)*.12;mn-=pad;mx+=pad;
+  const x=i=>n<2?(L+R)/2:L+i/(n-1)*(R-L),y=v=>T+(1-(v-mn)/(mx-mn))*(B-T);
+  const last=P[n-1].v,up=last>=base,c=up?'#059669':'#dc2626',ch=(last-base)/base;
+  const line=P.map((p,i)=>`${x(i).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ');
+  const ticks=[0,1,2,3].map(k=>mn+(mx-mn)*(k+.5)/4);
+  ivPts={P,x0:L,x1:n<2?L:R,W,H,y:P.map(p=>y(p.v)),c,base};
+  const xl=[0,Math.floor((n-1)/2),n-1];
+  return `<div class="iv-chd"><span class="${ivCls(ch)}">${ivPct(ch)}</span><small>${range==='1d'?'نسبت به پایانی دیروز':'در '+IV_RANGES.find(q=>q[0]===range)[1]+' گذشته'}</small><button type="button" class="iv-rdd" data-act="iv-range" aria-haspopup="menu" aria-label="بازه‌ی نمودار: ${IV_RANGES.find(q=>q[0]===range)[1]}"><span>${IV_RANGES.find(q=>q[0]===range)[1]}</span>${icon('chevDown',12)}</button></div>
+  <svg class="iv-csvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="نمودار روند قیمت ${esc(s.name)}، ${IV_RANGES.find(q=>q[0]===range)[1]}"><defs><linearGradient id="ivg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c}" stop-opacity=".2"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></linearGradient></defs>
+    ${ticks.map(v=>`<line x1="${L}" x2="${R}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" class="g"/><text x="${L+2}" y="${(y(v)-4).toFixed(1)}">${tm(v)}</text>`).join('')}
+    <line x1="${L}" x2="${R}" y1="${y(base).toFixed(1)}" y2="${y(base).toFixed(1)}" class="pc"/>
+    <polygon points="${x(0).toFixed(1)},${B} ${line} ${x(n-1).toFixed(1)},${B}" fill="url(#ivg)"/><polyline points="${line}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="${x(n-1).toFixed(1)}" cy="${y(last).toFixed(1)}" r="3.5" fill="${c}" stroke="var(--surface)" stroke-width="2"/>
+    <rect x="${(R-62).toFixed(1)}" y="${(y(last)-26<2?y(last)+10:y(last)-26).toFixed(1)}" width="52" height="16" rx="3" fill="${c}"/><text class="lt" x="${(R-36).toFixed(1)}" y="${((y(last)-26<2?y(last)+10:y(last)-26)+11).toFixed(1)}" text-anchor="middle">${tm(last)}</text>
+    ${xl.map((i,k)=>`<text x="${x(i).toFixed(1)}" y="${H-6}" text-anchor="${k===0?'start':k===2?'end':'middle'}">${P[i].l}</text>`).join('')}
+    <g class="iv-hv" style="display:none"><line class="hl" y1="${T}" y2="${B}"/><circle r="4.5" fill="${c}" stroke="var(--surface)" stroke-width="2"/></g></svg><div class="iv-tip" hidden></div>`}
+function ivAvail(D,f){return Math.max(0,D.cash[f]-D.orders.filter(o=>o.status==='open'&&o.side==='buy'&&(D.stocks.find(x=>x.id===o.s)||{}).fund===f).reduce((a,o)=>a+o.qty*o.price+Math.round(o.qty*o.price*IV_FEE),0))}
+function ivSelect(D,id){if(D.sel!==id){D.sel=id;D.qty='';D.lp=null;D.otype='market'}}
+function ivOrderBox(D,s){
+  D.otype=D.lp?'limit':'market';const h=D.hold[s.id]||{qty:0,avg:0},buy=D.side==='buy',px=D.lp||(buy?s.buy:s.sell),q=+D.qty||0,val=q*px,fee=Math.round(val*IV_FEE),tot=buy?val+fee:val-fee;
+  const openSell=D.orders.filter(o=>o.status==='open'&&o.s===s.id&&o.side==='sell').reduce((a,o)=>a+o.qty,0),canSell=Math.max(0,h.qty-openSell);
+  let err='';if(q>0&&px>0){if(buy&&tot>ivAvail(D,s.fund))err='نقدینگی صندوق برای این سفارش کافی نیست.';if(!buy&&q>canSell)err=`حداکثر ${fa(canSell)} سهم قابل فروش است.`}
+  return {buy,px,q,val,fee,tot,err,canSell,avail:ivAvail(D,s.fund),ok:q>0&&px>0&&!err}}
+function ivSumHtml(D,s){const o=ivOrderBox(D,s);
+  return `<div class="iv-orow"><span>ارزش سفارش</span><b>${tm(o.val)} <small>تومان</small></b></div><div class="iv-orow"><span>کارمزد معاملات (۰٫۵٪)</span><b>${tm(o.fee)} <small>تومان</small></b></div><div class="iv-orow tot"><span>${o.buy?'مبلغ قابل پرداخت':'مبلغ دریافتی'}</span><b>${tm(o.tot)} <small>تومان</small></b></div>${o.err?`<p class="iv-err" role="alert">${o.err}</p>`:''}`}
+function ivFill(D,o,px){const s=D.stocks.find(x=>x.id===o.s);if(!s)return false;const val=o.qty*px,fee=Math.round(val*IV_FEE);const h=D.hold[s.id]||(D.hold[s.id]={qty:0,avg:0});
+  if(o.side==='buy'){if(val+fee>D.cash[s.fund])return false;h.avg=Math.round((h.qty*h.avg+val)/(h.qty+o.qty));h.qty+=o.qty;D.cash[s.fund]-=val+fee}
+  else{if(o.qty>h.qty)return false;D.realized[s.fund]+=(px-h.avg)*o.qty-fee;h.qty-=o.qty;if(!h.qty)h.avg=0;D.cash[s.fund]+=val-fee}
+  Object.assign(o,{status:'done',price:px,fee,doneAt:Date.now()});return true}
+function ivPlace(D,s,side,otype,qty,lp){const o={id:'o'+(D.oseq++),s:s.id,side,type:otype,qty,price:otype==='market'?(side==='buy'?s.buy:s.sell):lp,at:Date.now(),status:'open'};
+  {const v=qty*o.price,f=Math.round(v*IV_FEE),h=D.hold[s.id]||{qty:0},os=D.orders.filter(x=>x.status==='open'&&x.s===s.id&&x.side==='sell').reduce((a,x)=>a+x.qty,0);if(side==='buy'?v+f>ivAvail(D,s.fund):qty>h.qty-os)return null}
+  D.orders.unshift(o);const cross=otype==='market'||(side==='buy'?s.buy<=lp:s.sell>=lp);if(cross&&!ivFill(D,o,otype==='market'?o.price:(side==='buy'?Math.min(lp,s.buy):Math.max(lp,s.sell)))){D.orders.shift();return null}return o}
+document.addEventListener('click',e=>{if(currentRoute().mod!=='invest'||!MS.invest)return;const D=MS.invest;if(!D.showQ||D.q||(e.target.closest&&e.target.closest('.iv-q')))return;D.showQ=false;setTimeout(()=>{if(currentRoute().mod==='invest'&&!D.showQ)renderInvest()})},true);
+function ivBig(v){return v>=1e9?fa((v/1e9).toFixed(1)).replace('.','٫')+' میلیارد':fa((v/1e6).toFixed(0))+' میلیون'}
+function ivOvHtml(D,F,S){const st=(ic,l,v,sub,c='')=>`<div class="${c}"><span class="ic">${icon(ic,16)}</span><p><small>${l}</small><b>${v}</b><em>${sub}</em></p></div>`;
+  return st('stack','ارزش کل صندوق (تومان)',tm(S.val+S.cash),F.t)+st('chartBar','ارزش دارایی‌ها',tm(S.val),fa(S.n)+' نماد')+st('mMoney','نقدینگی',tm(S.cash),'قابل سرمایه‌گذاری')+st(S.day<0?'trendDown':'trendUp','سود / زیان امروز',ivSigned(S.day),ivPct(S.dayP),ivCls(S.day))+st('mInvest','سود / زیان کل',ivSigned(S.pl),ivPct(S.plP),ivCls(S.pl))}
+function ivFit(){const el=modEl(),b=el&&el.querySelector('.iv-fill>[data-ivchart]');if(!b)return;const D=IV(),st=D.stocks.find(x=>x.id===D.sel);if(!st)return;ivDim={w:b.clientWidth,h:b.clientHeight-22};b.innerHTML=ivChart(st,D.range,ivDim.w,ivDim.h)}
+window.addEventListener('resize',()=>{if(currentRoute().mod==='invest')ivFit()});
+function ivLeave(el,sel,fn){const n=[...el.querySelectorAll(sel)];if(!n.length||matchMedia('(max-width:860px)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches){fn();return}n.forEach(x=>x.classList.add('out'));setTimeout(fn,220)}
 function renderInvest(){
-  const D=IV();const el=modEl();
-  let list=D.stocks.filter(s=>s.fund===D.fund&&(!D.q||norm(s.name).includes(norm(D.q))));
-  const per=12,pages=Math.max(1,Math.ceil(list.length/per));if(D.page>pages)D.page=pages;
-  const rows=list.slice((D.page-1)*per,D.page*per);
-  if(!D.v4){D.sel=null;D.v4=true}
-  if(!D.v5){D.mode=null;D.collapsed=false;D.v5=true}
+  const el0=modEl(),sc0={side:el0.querySelector('.iv-side')?.scrollTop||0,main:el0.querySelector('.iv-main')?.scrollTop||0,tw:el0.querySelector('.iv-tw')?.scrollTop||0,twl:el0.querySelector('.iv-tw')?.scrollLeft||0,sel:window.__ivSel,tab:window.__ivTab,sw:el0.querySelector('.iv-side')?.getBoundingClientRect().width,hadA:!!el0.querySelector('.iv-col.a'),hadB:!!el0.querySelector('.iv-col.b')};
+  const D=IV(),el=modEl(),F=IV_FUNDS.find(f=>f.k===D.fund),S=ivSum(D,D.fund);
+  const all=D.stocks.filter(s=>s.fund===D.fund),q=norm(D.q||'');
   const st=D.stocks.find(s=>s.id===D.sel&&s.fund===D.fund)||null;if(!st)D.sel=null;
-  if(st&&(D.price==null||D.priceFor!==st.id+D.mode)){D.price=D.mode==='sell'?st.sell:st.buy;D.priceFor=st.id+D.mode}
-  const arrow=(v,base)=>{const up=v>=base;return `<td class="${up?'up':'down'}" data-tip="${up?'بالاتر':'پایین‌تر'} از قیمت پایانی دیروز"><span class="num">${tm(v)}</span><span class="ar">${icon(up?'arrUp':'arrDown',12)}</span></td>`};
-  const fundParts=[{c:'#3b82f6',v:.42},{c:'#93c5fd',v:.33},{c:'#bfdbfe',v:.25}];
-  el.innerHTML=`<div class="m-bar"><div class="iv-fund" role="tablist" aria-label="صندوق‌ها">${IV_FUNDS.map(f=>`<button role="tab" data-fund="${f.k}" aria-selected="${f.k===D.fund}">${f.t}</button>`).join('')}</div><span class="sp"></span><span style="font-size:10px;color:var(--text-muted)">قیمت‌ها به تومان · به‌روزرسانی زنده هر ۴ ثانیه</span></div>
-  <div class="iv-body ${D.collapsed?'collapsed':''}">
-    <section class="iv-main" aria-label="${IV_FUNDS.find(f=>f.k===D.fund).t}">
-      <div class="iv-kpis">
-        <div class="iv-card iv-kv"><div class="row"><span class="l">میزان خرید ${icon('chevDown',10)}</span><span class="v">${tm(D.buyTotal)}<small>تومان</small></span></div><hr><div class="row"><span class="l">میزان سود ${icon('chevDown',10)}</span><span class="v">${tm(D.profit)}<small>تومان</small></span></div></div>
-        <div class="iv-card iv-donut"><span class="t">صندوق شهرداری</span><div class="in">${donut(fundParts)}<div class="iv-leg"><div>طلا<b>${fa(42)}٪</b></div><div>نقره<b>${fa(33)}٪</b></div><div>زعفران<b>${fa(25)}٪</b></div></div></div></div>
-        <div class="iv-card iv-donut"><span class="t">صندوق بورس ${icon('chevDown',10)}</span><div class="in">${donut([{c:'#3b82f6',v:.6},{c:'#93c5fd',v:.4}])}<div class="iv-leg"><div>سهام<b>${fa(60)}٪</b></div><div>اوراق<b>${fa(40)}٪</b></div><div>نقد<b>${fa(0)}٪</b></div></div></div></div>
-        <div class="iv-card iv-bars"><span class="t">نمودار سود ${icon('chevDown',10)} ماه</span><div class="plot" role="img" aria-label="نمودار سود ماهانه">${Array.from({length:26},(_,i)=>`<i style="height:${20+Math.abs(Math.sin(i*1.7))*80}%"></i>`).join('')}</div></div>
-      </div>
-      <div class="iv-tablebox">
-        <div class="tb"><label class="m-search"><span class="sr-only">جستجوی نماد</span><input type="search" data-q="iv" placeholder="جستجو" value="${esc(D.q)}">${icon('search',14)}</label><button class="icon-btn" data-act="iv-sort" aria-label="مرتب‌سازی" data-tip="مرتب‌سازی بر اساس تغییر قیمت">${icon('funnel',16)}</button></div>
-        <div class="iv-tw"><table class="iv-t"><colgroup><col style="width:30px"><col><col><col><col><col><col></colgroup>
-          <thead><tr><th></th><th>نام سهام</th><th>قیمت لحظه‌ای</th><th>قیمت خرید</th><th>قیمت فروش</th><th>قیمت پایانی</th><th>تاریخ آخرین خرید</th></tr></thead>
-          <tbody>${rows.map(s=>`<tr data-stock="${s.id}" aria-selected="${s.id===D.sel}" tabindex="${s.id===D.sel?0:-1}"><td><button class="kebab" data-smenu="${s.id}" aria-label="گزینه‌ها">${icon('dots',14)}</button></td>
-            <td>${esc(s.name)}</td>${arrow(s.now,s.close)}${arrow(s.buy,s.close)}${arrow(s.sell,s.close)}<td>${tm(s.close)}</td><td>${fa(s.last)}</td></tr>`).join('')}</tbody></table></div>
-        <div class="table-foot" style="margin-top:0"><div class="counts"><span>تعداد نمادها: ${fa(list.length)}</span><i></i><span>تعداد صفحات: ${fa(pages)}</span></div>
-          <nav class="pager" aria-label="صفحه‌بندی">${Array.from({length:pages},(_,i)=>`<button class="pg" data-ivpage="${i+1}" ${i+1===D.page?'aria-current="page"':''}>${fa(i+1)}</button>`).join('')}</nav></div>
-      </div>
+  const chg=s=>(s.now-s.close)/s.close;
+  let rows=all.filter(s=>!q||norm(s.name).includes(q));
+  const sk=D.sort.k,sd=D.sort.d;if(sk){const val={name:s=>s.name,now:s=>s.now,chg,vol:s=>s.vol,val:s=>s.vol*s.now,hold:s=>(D.hold[s.id]?.qty||0)*s.now}[sk];rows=[...rows].sort((a,b)=>{const A=val(a),B=val(b);return (typeof A==='string'?A.localeCompare(B,'fa'):A-B)*sd})}
+  const th=(k,t)=>`<th scope="col"${D.sort.k===k?` aria-sort="${sd>0?'ascending':'descending'}"`:''}><button type="button" class="sort-btn" data-ivsort="${k}" data-tip="مرتب‌سازی بر اساس ${t}"><span>${t}</span>${icon(D.sort.k===k?(sd>0?'chevUp':'chevDown'):'sort',12)}</button></th>`;
+  const pxTd=(v,base,f)=>{const up=v>=base;return `<td class="${up?'up':'down'}"${f?` data-f="${f}"`:''}><span class="num">${tm(v)}</span><span class="ar">${icon(up?'arrUp':'arrDown',12)}</span></td>`};
+  const hold=all.filter(s=>D.hold[s.id]?.qty),ords=D.orders.filter(o=>D.stocks.find(s=>s.id===o.s)?.fund===D.fund);
+  const tabs=[['market','بازار',all.length],['hold','دارایی‌های من',hold.length],['orders','سفارش‌ها',ords.length]];
+  let table='';
+  if(D.tab==='market')table=`<table class="iv-t" style="--n:10"><thead><tr><th class="kb"><span class="sr-only">گزینه‌ها</span></th>${th('name','نام نماد')}${th('now','قیمت لحظه‌ای')}${th('chg','تغییر امروز')}<th>قیمت پایانی</th><th title="کمترین قیمت معامله‌شده امروز">کمترین امروز</th><th title="بیشترین قیمت معامله‌شده امروز">بیشترین امروز</th><th>بهترین خرید</th><th>بهترین فروش</th>${th('vol','حجم معاملات')}${th('val','ارزش معاملات')}</tr></thead>
+    <tbody>${rows.map(s=>{const h=D.hold[s.id];return `<tr data-stock="${s.id}" aria-selected="${s.id===D.sel}" tabindex="${s.id===D.sel||(!D.sel&&s===rows[0])?0:-1}"><td class="kb"><button type="button" class="kebab" data-smenu="${s.id}" aria-label="گزینه‌های ${esc(s.name)}">${icon('dots',14)}</button></td><td><span class="sym">${esc(s.name)}</span></td>${pxTd(s.now,s.close,'now')}<td><span class="v ${ivCls(chg(s))}" data-f="chg">${ivPct(chg(s))}</span></td><td>${tm(s.close)}</td><td data-f="lo">${tm(s.low)}</td><td data-f="hi">${tm(s.high)}</td>${pxTd(s.buy,s.close,'buy')}${pxTd(s.sell,s.close,'sell')}<td data-f="vol">${money(s.vol)}</td><td data-f="val">${ivBig(s.vol*s.now)}</td></tr>`}).join('')||`<tr><td colspan="11" class="iv-none">نمادی با «${esc(D.q)}» پیدا نشد.</td></tr>`}</tbody></table>`;
+  else if(D.tab==='hold')table=hold.length?`<table class="iv-t" style="--n:8"><thead><tr><th>نام نماد</th><th>تعداد</th><th>میانگین خرید</th><th>قیمت لحظه‌ای</th><th>ارزش روز</th><th>سود / زیان</th><th>بازده</th><th>سهم از دارایی</th></tr></thead>
+    <tbody>${hold.map(s=>{const h=D.hold[s.id],v=h.qty*s.now,pl=v-h.qty*h.avg;return `<tr data-stock="${s.id}" aria-selected="${s.id===D.sel}" tabindex="${s.id===D.sel||(!hold.some(x=>x.id===D.sel)&&s===hold[0])?0:-1}"><td><span class="sym">${esc(s.name)}</span></td><td>${money(h.qty)}</td><td>${tm(h.avg)}</td><td data-f="now">${tm(s.now)}</td><td>${tm(v)}</td><td class="${ivCls(pl)}">${ivSigned(pl)}</td><td class="${ivCls(pl)}">${ivPct(pl/(h.qty*h.avg))}</td><td><span class="iv-share"><i style="width:${(v/S.val*100).toFixed(1)}%"></i></span>${fa((v/S.val*100).toFixed(0))}٪</td></tr>`}).join('')}</tbody></table>`
+    :`<div class="iv-empty"><b>در این صندوق دارایی ندارید</b><span>از تب «بازار» یک نماد را انتخاب و خرید کنید.</span></div>`;
+  else table=ords.length?`<table class="iv-t" style="--n:8"><thead><tr><th>زمان</th><th>نام نماد</th><th>نوع</th><th>تعداد</th><th>قیمت</th><th>مبلغ کل</th><th>وضعیت</th><th><span class="sr-only">عملیات</span></th></tr></thead>
+    <tbody>${ords.map(o=>{const s=D.stocks.find(x=>x.id===o.s);return `<tr><td class="muted">${ivDay(o.at)} · ${ivTime(o.at)}</td><td><span class="sym">${esc(s.name)}</span></td><td><span class="iv-side-chip ${o.side}">${o.side==='buy'?'خرید':'فروش'}</span>${o.type==='limit'?' <small class="muted">محدود</small>':''}</td><td>${money(o.qty)}</td><td>${tm(o.price)}</td><td>${tm(o.qty*o.price)}</td><td><span class="pb-st ${o.status==='done'?'pub':o.status==='open'?'dirty':''}">${{done:'انجام شد',open:'در انتظار',cancel:'لغو شد'}[o.status]}</span></td><td class="x">${o.status==='open'?`<button type="button" class="btn btn-ghost iv-xbtn" data-ivcancel="${o.id}">لغو</button>`:''}</td></tr>`}).join('')}</tbody></table>`
+    :`<div class="iv-empty"><b>هنوز سفارشی ثبت نشده</b><span>سفارش‌های خرید و فروش این صندوق اینجا نمایش داده می‌شوند.</span></div>`;
+  let side='';
+  if(!st)side=`<div class="side-empty"><div class="empty-art" aria-hidden="true">${EMPTY_ART}</div><h2>موردی برای نمایش وجود ندارد!</h2><p>ابتدا نماد مورد نظر خود را انتخاب فرمایید.</p></div>`;
+  else{const h=D.hold[st.id]||{qty:0,avg:0},c=chg(st),o=ivOrderBox(D,st),buy=D.side==='buy';
+    const ct=['info','hist'].includes(D.ctab)?D.ctab:'chart',mine=D.orders.filter(x=>x.s===st.id);
+    const step=(id,lab,val,k,ph='',u='')=>`<label class="m-label" for="${id}">${lab}${u?` <small class="iv-u">(${u})</small>`:''}</label><div class="iv-step"><input class="m-input ltr" id="${id}" inputmode="numeric" value="${val}" placeholder="${ph}" autocomplete="off"><span class="ud"><button type="button" data-step="${k}:1" aria-label="افزایش ${lab}">${icon('chevUp',10)}</button><button type="button" data-step="${k}:-1" aria-label="کاهش ${lab}">${icon('chevDown',10)}</button></span></div>`;
+    side=`<div class="iv-col a">
+      <section class="iv-box iv-stock" aria-label="اطلاعات نماد"><div class="hd"><button type="button" class="iv-back" data-act="iv-back" aria-label="بازگشت به فهرست">${icon('chevRs',16)}</button><div><h3>${esc(st.name)}</h3><div class="sub">${F.full}</div></div>
+          <div class="iv-now"><span class="${ivCls(c)}" data-f="schg">${ivSigned(st.now-st.close)} (${ivPct(c)})</span><b data-f="spx">${tm(st.now)}</b></div></div>
+        <div class="iv-facts">
+          ${h.qty?`<div class="iv-hpair"><div><small>دارایی شما</small><b>${money(h.qty)}<i>سهم</i></b></div><div><small>ارزش روز</small><b><span data-f="shv">${tm(h.qty*st.now)}</span><i>تومان</i></b></div></div>`:`<div class="iv-hpair none"><small>دارایی شما</small><b>از این نماد سهمی ندارید</b></div>`}</div>
+        <div class="iv-bs" role="group" aria-label="نوع معامله"><button type="button" class="buy" aria-pressed="${!!D.tk&&buy}" data-ivside="buy">خرید</button><button type="button" class="sell" aria-pressed="${!!D.tk&&!buy}" data-ivside="sell">فروش</button></div></section>
+      <section class="iv-box iv-rcard" aria-label="بازه‌ی قیمت امروز"><div class="iv-rbox"><small>بازه‌ی امروز</small><div class="iv-rbar" aria-hidden="true"><i style="left:${(st.high>st.low?(st.now-st.low)/(st.high-st.low)*100:50).toFixed(1)}%"></i></div><div class="iv-rlab"><span><b data-f="slo">${tm(st.low)}</b>کمترین</span><span>بیشترین<b data-f="shi">${tm(st.high)}</b></span></div></div></section>
+      <section class="iv-box iv-fill iv-dt" aria-label="جزئیات نماد">
+        <div class="iv-ctabs" role="tablist" aria-label="جزئیات نماد">${[['chart','روند قیمت','trendUp'],['hist','معاملات من','chartBar'],['info','اطلاعات','info']].map(([k,l,i])=>`<button type="button" role="tab" data-ivctab="${k}" aria-selected="${ct===k}"><span class="ic">${icon(i,14)}</span><span class="lb">${l}${k==='hist'&&mine.length?`<span class="n">${fa(mine.length)}</span>`:''}</span></button>`).join('')}</div>
+        ${ct==='chart'?`<div class="iv-chart" data-ivchart>${ivChart(st,D.range)}</div>`
+        :ct==='hist'?(mine.length?`<div class="iv-mine">${mine.map(x=>`<div class="r"><span class="iv-side-chip ${x.side}">${x.side==='buy'?'خرید':'فروش'}</span><div class="t"><b>${money(x.qty)} سهم × ${tm(x.price)}</b><small>${ivDay(x.doneAt||x.at)} · ${ivTime(x.doneAt||x.at)}${x.type==='limit'?' · قیمت دلخواه':''}</small></div><span class="pb-st ${x.status==='done'?'pub':x.status==='open'?'dirty':''}">${{done:'انجام شد',open:'در انتظار',cancel:'لغو شد'}[x.status]}</span></div>`).join('')}</div>`
+          :`<div class="iv-empty"><span class="iv-eic" aria-hidden="true">${icon('chartBar',14)}</span><b>هنوز معامله‌ای روی این نماد ندارید</b><span>سفارش‌های خرید و فروش شما برای «${esc(st.name)}» اینجا نمایش داده می‌شوند.</span></div>`)
+        :`<div class="iv-inf"><div class="iv-tiles">${[['پایانی دیروز',tm(st.close)],['حجم معاملات',money(st.vol)],['بهترین خرید',tm(st.buy)],['بهترین فروش',tm(st.sell)],['ارزش معاملات',ivBig(st.vol*st.now)],['بازده یک‌ماهه',ivPct((st.now-st.daily[st.daily.length-22])/st.daily[st.daily.length-22]),ivCls(st.now-st.daily[st.daily.length-22])],['بازه‌ی یک‌ساله',`${tm(Math.min(...st.daily,st.now))} – ${tm(Math.max(...st.daily,st.now))}`,'wide'],...(h.qty?[['میانگین خرید شما',tm(h.avg)],['سود / زیان شما',ivSigned((st.now-h.avg)*h.qty),ivCls(st.now-h.avg)]]:[])].map(([l,v,c=''])=>`<div class="iv-tile ${c}"><small>${l}</small><b>${v}</b></div>`).join('')}</div></div>`}
+      </section>
+    </div>
+    ${D.tk?`<div class="iv-col b">
+      <section class="iv-box iv-ticket ${D.side}" aria-label="ثبت سفارش ${buy?'خرید':'فروش'}">
+        
+        ${step('iv-lp',`قیمت ${buy?'خرید':'فروش'}`,tm(D.lp||(buy?st.buy:st.sell)),'price','','تومان')}
+        <p class="iv-ptype" id="iv-ptype">${D.lp?`سفارش با قیمت دلخواه؛ با رسیدن بازار به این قیمت انجام می‌شود. <button type="button" data-act="iv-mkt">قیمت بازار</button>`:'قیمت بازار؛ بلافاصله انجام می‌شود.'}</p>
+        ${step('iv-qty',`تعداد ${buy?'خرید':'فروش'}`,D.qty?money(+D.qty):'','qty','۰')}
+        <p class="iv-avail">${buy?`نقدینگی صندوق: <b>${tm(o.avail)}</b> تومان`:`قابل فروش: <b>${money(o.canSell)}</b> سهم`}</p>
+        <div class="iv-osum" id="iv-sum">${ivSumHtml(D,st)}</div>
+        <div class="iv-acts"><button type="button" class="btn iv-go ${D.side}" data-act="iv-submit" ${o.ok?'':'disabled'}>ارسال ${buy?'خرید':'فروش'}</button><button type="button" class="btn btn-ghost iv-no" data-act="iv-tkclose">انصراف</button></div>
+      </section>
+    </div>`:''}`}
+  el.innerHTML=`<div class="m-bar"><div class="iv-fund" role="tablist" aria-label="صندوق‌ها">${IV_FUNDS.map(f=>`<button role="tab" data-fund="${f.k}" aria-selected="${f.k===D.fund}">${f.t}</button>`).join('')}</div><span class="sp"></span><span class="iv-live"><i></i>قیمت‌ها زنده · تومان</span></div>
+  <div class="iv-body${st?' has-sel':''}${st&&D.tk?' tk':''}${D.collapsed?' collapsed':''}">
+    <section class="iv-main" aria-label="${F.t}">
+      <div class="iv-tb"><div class="iv-tabs" role="tablist" aria-label="بخش‌ها">${tabs.map(([k,t,n])=>`<button type="button" role="tab" aria-selected="${D.tab===k}" data-ivtab="${k}">${t}<span class="n">${fa(n)}</span></button>`).join('')}</div><span class="sp"></span>
+        ${D.tab!=='market'?'':`<div class="iv-q">${D.showQ||D.q?`<label class="m-search"><span class="sr-only">جستجوی نماد</span><input type="search" data-q="iv" placeholder="جستجوی نماد" value="${esc(D.q)}" autocomplete="off"></label>`:''}<button type="button" class="iv-qb" data-act="iv-search" aria-expanded="${!!(D.showQ||D.q)}" aria-label="${D.showQ||D.q?'بستن جستجو':'جستجوی نماد'}" data-tip="${D.showQ||D.q?'بستن جستجو':'جستجو'}">${icon(D.showQ||D.q?'x':'search',16)}</button></div>`}</div>
+      <div class="iv-tw">${table}</div>
+      <div class="iv-ov">${ivOvHtml(D,F,S)}</div>
     </section>
-    ${D.collapsed?'':`<aside class="iv-side" aria-label="جزئیات و سفارش">${st?`
-      <div class="iv-col a">
-        <div class="iv-box"><div class="iv-in iv-stock"><h3>${esc(st.name)}</h3><div class="sub">${st.full}</div>
-          <div class="iv-line">قیمت خرید لحظه‌ای:<i></i><b>${tm(st.buy)}</b></div><div class="iv-line">قیمت فروش لحظه‌ای:<i></i><b>${tm(st.sell)}</b></div>
-          <div class="iv-final">قیمت نهایی:<b>${tm(st.close)}</b></div>
-          <div class="iv-bs"><button class="buy" data-mode="buy" aria-pressed="${D.mode==='buy'}">خرید</button><button class="sell" data-mode="sell" aria-pressed="${D.mode==='sell'}">فروش</button></div></div></div>
-        <div class="iv-box"><div class="iv-ctabs" role="tablist">${[['خرید و فروش','chartBar'],['روند قیمت','trendUp'],['اطلاعات','info']].map(([l,i],k)=>`<button role="tab" data-ctab="${k}" aria-selected="${D.tab===k}">${icon(i,18)}${l}</button>`).join('')}</div></div>
-        <div class="iv-box iv-chart">${D.tab===0?`<h4>نمودار خرید و فروش <small style="font-weight:400;color:var(--text-muted)">ماه</small></h4><div class="iv-pairs" role="img" aria-label="نمودار خرید و فروش">${st.hist.slice(0,8).map(h=>`<div class="iv-pair"><div class="bb"><i class="s" style="height:${h.s}%"></i><i style="height:${h.b}%"></i></div><small class="s">${tm(st.close*h.s/60)}</small><small class="b">${tm(st.close*h.b/60)}</small></div>`).join('')}</div>`
-          :D.tab===1?`<h4>روند قیمت</h4>${(()=>{const pts=st.hist.map((h,i)=>[i*26+6,230-(h.b+h.s)]);return `<svg width="100%" viewBox="0 0 250 250" preserveAspectRatio="none" role="img" aria-label="روند قیمت"><polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="var(--primary)" stroke-width="2"/>${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="var(--surface)" stroke="var(--primary)" stroke-width="2"/>`).join('')}</svg>`})()}`
-          :`<h4>اطلاعات نماد</h4><div class="iv-info"><div>نماد<b>${esc(st.name)}</b></div><div>نوع<b>${st.full}</b></div><div>قیمت پایانی<b>${tm(st.close)} تومان</b></div><div>تغییر امروز<b dir="ltr">${fa(((st.now-st.close)/st.close*100).toFixed(2))}٪</b></div><div>آخرین خرید<b>${fa(st.last)}</b></div></div>`}</div>
-      </div>`:''}${st&&D.mode?`
-      <div class="iv-col b">
-        <div class="iv-box"><div class="iv-in">
-          <label class="m-label" for="iv-qty" style="margin-top:0">تعداد ${D.mode==='buy'?'خرید':'فروش'}</label>
-          <div class="iv-step"><input class="m-input ltr" id="iv-qty" inputmode="numeric" value="${fa(D.qty)}"><span class="ud"><button data-step="qty:1" aria-label="افزایش تعداد">${icon('chevUp',10)}</button><button data-step="qty:-1" aria-label="کاهش تعداد">${icon('chevDown',10)}</button></span></div>
-          <label class="m-label" for="iv-price">قیمت ${D.mode==='buy'?'خرید':'فروش'}</label>
-          <div class="iv-step"><input class="m-input ltr" id="iv-price" inputmode="numeric" value="${tm(D.price)}"><span class="ud"><button data-step="price:10" aria-label="افزایش قیمت">${icon('chevUp',10)}</button><button data-step="price:-10" aria-label="کاهش قیمت">${icon('chevDown',10)}</button></span></div>
-        </div></div>
-        <div class="iv-box"><div class="iv-in"><span class="m-label" style="margin-top:0">قیمت کل</span><div class="iv-total" id="iv-total"><span>${tm(D.qty*D.price)}</span><span>تومان</span></div>
-          <div class="iv-acts"><button class="go ${D.mode}" data-act="iv-send">ارسال ${D.mode==='buy'?'خرید':'فروش'}</button><button class="no" data-act="iv-cancel">انصراف</button></div></div></div>
-      </div>`:''}
-    </aside>`}
-    <button class="panel-handle iv-handle" data-act="iv-toggle" aria-expanded="${!D.collapsed}" aria-label="${D.collapsed?'نمایش پنل‌های کناری':'پنهان کردن پنل‌های کناری'}" data-tip="${D.collapsed?'نمایش پنل‌ها':'پنهان کردن پنل‌ها'}">${icon(D.collapsed?'chevRs':'chevLs',12)}</button>
+    ${D.collapsed?'':`<aside class="iv-side" aria-label="جزئیات نماد و سفارش">${side}</aside>`}
+    <button class="panel-handle iv-handle" data-act="iv-toggle" aria-expanded="${!D.collapsed}" aria-label="${D.collapsed?'نمایش پنل کناری':'پنهان کردن پنل کناری'}" data-tip="${D.collapsed?'نمایش پنل':'پنهان کردن پنل'}">${icon(D.collapsed?'chevRs':'chevLs',12)}</button>
   </div>`;
-  el.onclick=e=>{
-    const D=IV();const b=e.target.closest('[data-fund],[data-stock],[data-mode],[data-ctab],[data-step],[data-act],[data-ivpage],[data-smenu]');if(!b)return;
-    if(b.dataset.smenu){e.stopPropagation();const s=D.stocks.find(x=>x.id===b.dataset.smenu);modMenu(b,[{k:'buy',t:'خرید',ic:'plusSm'},{k:'sell',t:'فروش',ic:'minus'}],k=>{D.sel=s.id;D.mode=k;D.price=null;saveMods();renderInvest()});return}
-    if(b.dataset.fund){D.fund=b.dataset.fund;D.page=1;D.price=null;D.sel=null;saveMods();renderInvest();return}
-    if(b.dataset.stock){if(e.target.closest('.cb'))return;const id=b.dataset.stock;D.sel=D.sel===id?null:id;D.mode=null;if(D.sel)D.collapsed=false;D.price=null;saveMods();renderInvest();el.querySelector(`[data-stock="${id}"]`)?.focus();return}
-    if(b.dataset.mode){D.mode=D.mode===b.dataset.mode?null:b.dataset.mode;D.price=null;saveMods();renderInvest();if(D.mode)$('#iv-qty')?.focus();return}
-    if(b.dataset.ctab){D.tab=+b.dataset.ctab;saveMods();renderInvest();return}
-    if(b.dataset.ivpage){D.page=+b.dataset.ivpage;renderInvest();return}
-    if(b.dataset.step){const [k,v]=b.dataset.step.split(':');D[k]=Math.max(k==='qty'?1:10,D[k]+(+v));saveMods();renderInvest();el.querySelector(`[data-step="${b.dataset.step}"]`)?.focus();return}
-    if(b.dataset.act==='iv-sort'){const s=D.stocks.filter(x=>x.fund===D.fund).sort((a,c)=>(c.now-c.close)/c.close-(a.now-a.close)/a.close);D.stocks=[...D.stocks.filter(x=>x.fund!==D.fund),...s];renderInvest();toast('مرتب‌سازی بر اساس بیشترین رشد');return}
-    if(b.dataset.act==='iv-cancel'){D.mode=null;D.price=null;saveMods();renderInvest();el.querySelector('[data-mode]')?.focus();return}
-    if(b.dataset.act==='iv-toggle'){D.collapsed=!D.collapsed;saveMods();renderInvest();el.querySelector('[data-act="iv-toggle"]')?.focus();return}
-    if(b.dataset.act==='iv-send'){if(!(D.qty>0&&D.price>0)){toast('تعداد و قیمت را وارد کنید');return}const s=D.stocks.find(x=>x.id===D.sel);const total=D.qty*D.price;
-      confirmModal(`تأیید ${D.mode==='buy'?'خرید':'فروش'}`,`${fa(D.qty)} واحد «${esc(s.name)}» به قیمت ${tm(D.price)} تومان، جمعاً ${tm(total)} تومان.`,`ارسال ${D.mode==='buy'?'خرید':'فروش'}`,()=>{
-        D.orders.push({s:s.id,mode:D.mode,qty:D.qty,price:D.price,at:Date.now()});if(D.mode==='buy')D.buyTotal+=total;else D.profit+=Math.round(total*.08);
-        saveMods();renderInvest();toast(`سفارش ${D.mode==='buy'?'خرید':'فروش'} ${s.name} ثبت شد`)});
-      const ok=document.querySelector('.modal .btn-danger');if(ok&&D.mode==='buy'){ok.classList.remove('btn-danger');ok.classList.add('btn-primary')}}
+  {const sd=el.querySelector('.iv-side');if(sd&&sc0.sel===D.sel)sd.scrollTop=sc0.side;const mn=el.querySelector('.iv-main');if(mn)mn.scrollTop=sc0.main;const tw=el.querySelector('.iv-tw');if(tw&&sc0.tab===D.tab){tw.scrollTop=sc0.tw;tw.scrollLeft=sc0.twl}window.__ivSel=D.sel;window.__ivTab=D.tab;ivFit();
+    if(sd&&!matchMedia('(max-width:860px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){const nw=sd.getBoundingClientRect().width;if(sc0.sw&&Math.abs(nw-sc0.sw)>1){sd.style.transition='none';sd.style.width=sc0.sw+'px';void sd.offsetWidth;sd.style.transition='width .45s cubic-bezier(.22,1,.36,1)';sd.style.width='';sd.addEventListener('transitionend',()=>{sd.style.transition='';ivFit()},{once:true})}
+      const ca=el.querySelector('.iv-col.a'),cb=el.querySelector('.iv-col.b');if(ca&&!sc0.hadA)ca.classList.add('in');if(cb&&!sc0.hadB)cb.classList.add('in')}}
+  const reSum=()=>{const s=D.stocks.find(x=>x.id===D.sel);if(!s)return;const b=el.querySelector('#iv-sum');if(b)b.innerHTML=ivSumHtml(D,s);const g=el.querySelector('[data-act="iv-submit"]');if(g)g.disabled=!ivOrderBox(D,s).ok};
+  el.onclick=e=>{const D=IV(),t=e.target;
+    const km=t.closest('[data-smenu]');if(km){e.stopPropagation();const id=km.dataset.smenu;modMenu(km,[{k:'buy',t:'خرید',ic:'plusSm'},{k:'sell',t:'فروش',ic:'minus'}],k=>{if(D.sel!==id){D.qty='';D.lp=null;D.otype='market'}D.sel=id;D.side=k;D.tk=true;D.collapsed=false;saveMods();renderInvest();el.querySelector('#iv-qty')?.focus({preventScroll:true})});return}
+    const f=t.closest('[data-fund]');if(f){if(D.fund!==f.dataset.fund){D.fund=f.dataset.fund;D.sel=null;D.q='';D.qty='';D.lp=null;saveMods();renderInvest()}return}
+    const tb=t.closest('[data-ivtab]');if(tb){D.tab=tb.dataset.ivtab;saveMods();renderInvest();el.querySelector(`[data-ivtab="${D.tab}"]`)?.focus({preventScroll:true});return}
+    const so=t.closest('[data-ivsort]');if(so){const k=so.dataset.ivsort;D.sort=D.sort.k===k?(D.sort.d<0?{k,d:1}:{k:'',d:-1}):{k,d:-1};saveMods();renderInvest();el.querySelector(`[data-ivsort="${k}"]`)?.focus({preventScroll:true});return}
+    const stp=t.closest('[data-step]');if(stp){const s0=D.stocks.find(x=>x.id===D.sel);if(!s0)return;const [k,d]=stp.dataset.step.split(':');if(k==='qty')D.qty=String(Math.max(0,(+D.qty||0)+ +d));else{const mk=D.side==='buy'?s0.buy:s0.sell,nv=Math.max(10,(D.lp||mk)+ +d*10);D.lp=nv===mk?null:nv}saveMods();renderInvest();el.querySelector(`[data-step="${stp.dataset.step}"]`)?.focus({preventScroll:true});return}
+    const ctb=t.closest('[data-ivctab]');if(ctb){D.ctab=ctb.dataset.ivctab;saveMods();renderInvest();el.querySelector(`[data-ivctab="${D.ctab}"]`)?.focus({preventScroll:true});return}
+    const sd=t.closest('[data-ivside]');if(sd){const k=sd.dataset.ivside;if(D.tk&&D.side===k){ivLeave(el,'.iv-col.b',()=>{D.tk=false;saveMods();renderInvest()});return}else{if(D.side!==k){D.qty='';D.lp=null}D.side=k;D.tk=true}saveMods();renderInvest();if(D.tk&&matchMedia('(max-width:1240px)').matches)el.querySelector('.iv-col.b')?.scrollIntoView({block:'nearest',behavior:'smooth'});el.querySelector(`[data-ivside="${D.side}"]`)?.focus({preventScroll:true});return}
+    const cx=t.closest('[data-ivcancel]');if(cx){const o=D.orders.find(x=>x.id===cx.dataset.ivcancel);if(o&&o.status==='open'){o.status='cancel';saveMods();renderInvest();toast('سفارش لغو شد')}return}
+    const ac=t.closest('[data-act]');if(ac){const a=ac.dataset.act;
+      if(a==='iv-mkt'){D.lp=null;D.otype='market';saveMods();renderInvest();el.querySelector('#iv-lp')?.focus({preventScroll:true});return}
+      if(a==='iv-range'){e.stopPropagation();openPop(ac,`<div role="listbox" aria-label="بازه‌ی نمودار">${IV_RANGES.map(([k,t])=>`<div class="dd-opt" role="option" tabindex="-1" data-k="${k}" aria-selected="${k===D.range}"><span>${t}</span>${icon('check',14)}</div>`).join('')}</div>`,p=>{p.classList.add('iv-rpop');p.style.minWidth=ac.offsetWidth+'px';const a2=ac.getBoundingClientRect(),pw=p.getBoundingClientRect().width;p.style.left=Math.max(8,a2.right-pw)+'px';p.style.top=(a2.bottom+4)+'px';p.querySelector('[aria-selected="true"]')?.focus();
+        p.addEventListener('click',ev=>{const o=ev.target.closest('[data-k]');if(!o)return;closePop(true);D.range=o.dataset.k;saveMods();renderInvest();el.querySelector('[data-act="iv-range"]')?.focus({preventScroll:true})});
+        p.addEventListener('keydown',ev=>{const os=[...p.querySelectorAll('[data-k]')],i=os.indexOf(document.activeElement);if(ev.key==='ArrowDown'){ev.preventDefault();os[Math.min(os.length-1,i+1)].focus()}else if(ev.key==='ArrowUp'){ev.preventDefault();os[Math.max(0,i-1)].focus()}else if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();document.activeElement.click()}})});return}
+      if(a==='iv-tkclose'){ivLeave(el,'.iv-col.b',()=>{D.tk=false;D.qty='';D.lp=null;saveMods();renderInvest();el.querySelector('[data-ivside="'+D.side+'"]')?.focus({preventScroll:true})});return}
+      if(a==='iv-search'){if(D.showQ||D.q){D.showQ=false;D.q='';renderInvest();el.querySelector('[data-act="iv-search"]')?.focus({preventScroll:true})}else{D.showQ=true;renderInvest();el.querySelector('[data-q="iv"]')?.focus({preventScroll:true})}return}
+      if(a==='iv-toggle'){D.collapsed=!D.collapsed;saveMods();renderInvest();el.querySelector('[data-act="iv-toggle"]')?.focus({preventScroll:true});return}
+      if(a==='iv-back'){const id=D.sel;ivLeave(el,'.iv-col',()=>{D.sel=null;D.tk=false;saveMods();renderInvest();el.querySelector(`[data-stock="${id}"]`)?.focus({preventScroll:true})});return}
+      if(a==='iv-submit'){const s=D.stocks.find(x=>x.id===D.sel);if(!s)return;const o=ivOrderBox(D,s);if(!o.ok)return;
+        confirmModal(`تأیید ارسال ${o.buy?'خرید':'فروش'}`,`${money(o.q)} سهم «${esc(s.name)}» ${D.otype==='market'?'به قیمت بازار (حدود '+tm(o.px)+' تومان)':'با قیمت محدود '+tm(o.px)+' تومان'}؛ ${o.buy?'مبلغ قابل پرداخت':'مبلغ دریافتی'} حدود ${tm(o.tot)} تومان.`,`ارسال ${o.buy?'خرید':'فروش'}`,()=>{
+          const r=ivPlace(D,s,D.side,D.otype,o.q,o.px);if(!r){toast('سفارش ثبت نشد؛ نقدینگی یا دارایی کافی نیست');return}
+          D.qty='';saveMods();renderInvest();toast(r.status==='done'?`${o.buy?'خرید':'فروش'} ${s.name} ارسال و انجام شد`:`${o.buy?'خرید':'فروش'} ${s.name} ارسال شد و در انتظار رسیدن قیمت است`)});
+        const ok=document.querySelector('.modal .btn-danger');if(ok&&o.buy){ok.classList.remove('btn-danger');ok.classList.add('btn-primary')}return}}
+    const tr=t.closest('tr[data-stock]');if(tr){const id=tr.dataset.stock;if(D.sel!==id){D.sel=id;D.qty='';D.lp=null;D.otype='market'}D.collapsed=false;saveMods();renderInvest();el.querySelector(`tr[data-stock="${id}"]`)?.focus({preventScroll:true});return}
+    if(D.sel&&!t.closest('.iv-side,button,input,a,label,[role="tab"],.modal')){ivLeave(el,'.iv-col',()=>{D.sel=null;D.tk=false;saveMods();renderInvest()});return}
   };
-  el.onkeydown=e=>{if(e.key==='Escape'&&IV().sel&&!e.target.matches('input')&&!document.querySelector('.modal')){const D=IV();if(D.mode)D.mode=null;else D.sel=null;saveMods();renderInvest();return}
-    const tr=e.target.closest('tr[data-stock]');if(!tr)return;const rs=[...el.querySelectorAll('tr[data-stock]')];const i=rs.indexOf(tr);
-    if(e.key==='ArrowDown'&&rs[i+1]){e.preventDefault();rs[i+1].click()}else if(e.key==='ArrowUp'&&rs[i-1]){e.preventDefault();rs[i-1].click()}else if(e.key==='Enter'){tr.click()}};
-  el.oninput=e=>{
-    const D=IV();
-    if(e.target.dataset.q==='iv'){D.q=e.target.value;D.page=1;const p=e.target.selectionStart;renderInvest();const i=el.querySelector('[data-q="iv"]');i.focus();try{i.setSelectionRange(p,p)}catch(_){}return}
-    if(e.target.id==='iv-qty'||e.target.id==='iv-price'){const v=+toEn(e.target.value).replace(/\D/g,'')||0;if(e.target.id==='iv-qty')D.qty=Math.max(1,v);else D.price=v;saveMods();
-      if(e.target.id==='iv-price'){const p=e.target.value.length-e.target.selectionStart;e.target.value=v?tm(v):'';const np=Math.max(0,e.target.value.length-p);try{e.target.setSelectionRange(np,np)}catch(_){}}
-      $('#iv-total').innerHTML=`<span>${tm(D.qty*D.price)}</span><span>تومان</span>`}
-  };
+  el.onkeydown=e=>{const D=IV();
+    if(e.key==='Escape'&&e.target.dataset&&e.target.dataset.q==='iv'){e.preventDefault();e.stopPropagation();if(D.q)D.q='';else D.showQ=false;renderInvest();(el.querySelector('[data-q="iv"]')||el.querySelector('[data-act="iv-search"]'))?.focus();return}
+    if(e.key==='Escape'&&D.sel&&!document.querySelector('.modal')&&!document.querySelector('.pop')){const id=D.sel;if(D.tk){ivLeave(el,'.iv-col.b',()=>{D.tk=false;saveMods();renderInvest()});return}ivLeave(el,'.iv-col',()=>{D.sel=null;saveMods();renderInvest();el.querySelector(`[data-stock="${id}"]`)?.focus()});return}
+    const tr=e.target.closest&&e.target.closest('tr[data-stock]');if(!tr||e.target!==tr)return;const rs=[...el.querySelectorAll('tr[data-stock]')],i=rs.indexOf(tr);
+    if(e.key==='ArrowDown'&&rs[i+1]){e.preventDefault();rs[i+1].focus()}else if(e.key==='ArrowUp'&&rs[i-1]){e.preventDefault();rs[i-1].focus()}else if(e.key==='Enter'||e.key===' '){e.preventDefault();tr.click()}};
+  el.oninput=e=>{const D=IV();
+    if(e.target.dataset.q==='iv'){if(e.isComposing)return;D.q=e.target.value;const p=e.target.selectionStart;renderInvest();const i=el.querySelector('[data-q="iv"]');if(i){i.focus();try{i.setSelectionRange(p,p)}catch(_){}}return}
+    if(e.target.id==='iv-qty'||e.target.id==='iv-lp'){const v=+toEn(e.target.value).replace(/\D/g,'')||0;if(e.target.id==='iv-qty')D.qty=v?String(v):'';else{const s0=D.stocks.find(x=>x.id===D.sel),mk=s0?(D.side==='buy'?s0.buy:s0.sell):0;D.lp=v&&v!==mk?v:null;D.otype=D.lp?'limit':'market';const pt=el.querySelector('#iv-ptype');if(pt)pt.innerHTML=D.lp?'سفارش با قیمت دلخواه؛ با رسیدن بازار به این قیمت انجام می‌شود. <button type="button" data-act="iv-mkt">قیمت بازار</button>':'قیمت بازار؛ بلافاصله انجام می‌شود.'}
+      const p=e.target.value.length-e.target.selectionStart;e.target.value=v?money(v):'';const np=Math.max(0,e.target.value.length-p);try{e.target.setSelectionRange(np,np)}catch(_){}saveMods();reSum()}};
+  el.onfocusout=e=>{if(e.target.dataset&&e.target.dataset.q==='iv')setTimeout(()=>{const D=IV();if(!D.q&&D.showQ&&!(document.activeElement&&document.activeElement.closest&&document.activeElement.closest('.iv-q'))&&currentRoute().mod==='invest'&&document.activeElement!==el.querySelector('[data-q="iv"]')){D.showQ=false;renderInvest()}},120)};
+  el.onpointermove=e=>{const sv=e.target.closest&&e.target.closest('.iv-csvg');const box=el.querySelector('[data-ivchart]');if(!box)return;const g=box.querySelector('.iv-hv'),tip=box.querySelector('.iv-tip');
+    if(!sv||!ivPts){if(g)g.style.display='none';if(tip)tip.hidden=true;return}
+    const r=sv.getBoundingClientRect(),vx=(e.clientX-r.left)/r.width*ivPts.W,n=ivPts.P.length,i=n<2?0:Math.max(0,Math.min(n-1,Math.round((vx-ivPts.x0)/(ivPts.x1-ivPts.x0)*(n-1)))),xx=n<2?ivPts.x0:ivPts.x0+i/(n-1)*(ivPts.x1-ivPts.x0),yy=ivPts.y[i];
+    g.style.display='';const ln=g.querySelector('line');ln.setAttribute('x1',xx);ln.setAttribute('x2',xx);const ci=g.querySelector('circle');ci.setAttribute('cx',xx);ci.setAttribute('cy',yy);
+    const p=ivPts.P[i],d=(p.v-ivPts.base)/ivPts.base;tip.hidden=false;tip.innerHTML=`<b>${tm(p.v)} <span class="${ivCls(d)}">${ivPct(d)}</span></b><small>${p.l}</small>`;const bx=box.getBoundingClientRect();tip.style.left=Math.max(4,Math.min(bx.width-tip.offsetWidth-4,xx/ivPts.W*r.width+(r.left-bx.left)-tip.offsetWidth/2))+'px';tip.style.top=Math.max(0,yy/ivPts.H*r.height+(r.top-bx.top)-46)+'px'};
+  el.onpointerleave=()=>{const g=el.querySelector('.iv-hv'),tip=el.querySelector('.iv-tip');if(g)g.style.display='none';if(tip)tip.hidden=true};
   clearInterval(window.__ivTimer);window.__ivTimer=setInterval(()=>{
-    if(currentRoute().mod!=='invest'||document.querySelector('.modal')){return}
-    const D=IV();D.stocks.filter(s=>s.fund===D.fund).forEach(s=>{const f=1+(Math.random()-.5)*.012;s.now=Math.max(10,Math.round(s.now*f/10)*10);s.buy=Math.round(s.now*1.002/10)*10;s.sell=Math.round(s.now*.998/10)*10});
-    const ae=document.activeElement;if(ae&&modEl().contains(ae)&&(ae.tagName==='INPUT'))return;
-    el.querySelectorAll('tbody tr[data-stock]').forEach(tr=>{const s=D.stocks.find(x=>x.id===tr.dataset.stock);const tds=tr.children;
-      [[2,s.now],[3,s.buy],[4,s.sell]].forEach(([i,v])=>{const td=tds[i];const up=v>=s.close;td.className=(up?'up':'down')+' flash';td.innerHTML=`<span class="num">${tm(v)}</span><span class="ar">${icon(up?'arrUp':'arrDown',12)}</span>`})});
+    if(currentRoute().mod!=='invest')return;const D=IV();let filled=[],failed=[];
+    D.stocks.forEach(s=>{const f=1+(Math.random()-.5)*.006;s.now=Math.max(10,Math.round(s.now*f/10)*10);s.buy=Math.round(s.now*1.002/10)*10;s.sell=Math.round(s.now*.998/10)*10;s.high=Math.max(s.high,s.now);s.low=Math.min(s.low,s.now);s.vol+=Math.round(Math.random()*4000);
+      s.intra.push(s.now);if(s.intra.length>60)s.intra.shift()});
+    D.orders.filter(o=>o.status==='open').forEach(o=>{const s=D.stocks.find(x=>x.id===o.s);if(!s)return;if(o.side==='buy'?s.buy<=o.price:s.sell>=o.price){if(ivFill(D,o,o.side==='buy'?Math.min(o.price,s.buy):Math.max(o.price,s.sell)))filled.push(s.name);else{o.status='cancel';failed.push(s.name)}}});
+    if(filled.length||failed.length){saveMods();if(!document.querySelector('.modal')){const ae=document.activeElement,sq=ae&&el.contains(ae)?(ae.id?'#'+ae.id:ae.dataset&&ae.dataset.q?`[data-q="${ae.dataset.q}"]`:null):null,cp=sq&&ae.selectionStart;renderInvest();if(sq){const n=el.querySelector(sq);if(n){n.focus({preventScroll:true});try{if(cp!=null)n.setSelectionRange(cp,cp)}catch(_){}}}}if(filled.length)toast(`سفارش ${filled.join('، ')} انجام شد`);if(failed.length)toast(`سفارش ${failed.join('، ')} لغو شد؛ موجودی کافی نبود`);return}
+    if(document.querySelector('.modal'))return;
+    el.querySelectorAll('tr[data-stock]').forEach(tr=>{const s=D.stocks.find(x=>x.id===tr.dataset.stock);if(!s)return;const n=tr.querySelector('[data-f="now"]');if(n&&n.textContent!==tm(s.now)){n.textContent=tm(s.now)}
+      {const vo=tr.querySelector('[data-f="vol"]');if(vo)vo.textContent=money(s.vol);const va=tr.querySelector('[data-f="val"]');if(va)va.textContent=ivBig(s.vol*s.now);const lo=tr.querySelector('[data-f="lo"]');if(lo)lo.textContent=tm(s.low);const hi=tr.querySelector('[data-f="hi"]');if(hi)hi.textContent=tm(s.high)}const c=tr.querySelector('[data-f="chg"]'),v=(s.now-s.close)/s.close;if(c){c.textContent=ivPct(v);c.className='v '+ivCls(v)}
+      [['now',s.now],['buy',s.buy],['sell',s.sell]].forEach(([k,x])=>{const td=tr.querySelector(`td[data-f="${k}"]`);if(!td||!tr.querySelector('.kb'))return;const up=x>=s.close,fl=td.classList.contains('flash');td.className=(up?'up':'down')+(fl?' flash':'');td.innerHTML=`<span class="num">${tm(x)}</span><span class="ar">${icon(up?'arrUp':'arrDown',12)}</span>`})});
+    const s=D.stocks.find(x=>x.id===D.sel);if(s){const v=(s.now-s.close)/s.close,set=(k,h,c)=>{const n=el.querySelector(`[data-f="${k}"]`);if(n){n.innerHTML=h;if(c!=null)n.className=c}};
+      set('spx',tm(s.now));set('schg',`${ivSigned(s.now-s.close)} (${ivPct(v)})`,ivCls(v));set('slo',tm(s.low));set('shi',tm(s.high));{const m=el.querySelector('.iv-rbar i');if(m)m.style.left=(s.high>s.low?(s.now-s.low)/(s.high-s.low)*100:50).toFixed(1)+'%'}{const hh=D.hold[s.id];if(hh&&hh.qty)set('shv',tm(hh.qty*s.now))}{const lp=el.querySelector('#iv-lp');if(lp&&!D.lp&&document.activeElement!==lp)lp.value=tm(D.side==='buy'?s.buy:s.sell)}
+      if(D.range==='1d'){const b=el.querySelector('[data-ivchart]');if(b&&!b.matches(':hover')&&!b.contains(document.activeElement)&&!document.querySelector('.iv-rpop'))b.innerHTML=ivChart(s,'1d',ivDim.w,ivDim.h)}
+      reSum()}
+    {const ov=el.querySelector('.iv-ov');if(ov)ov.innerHTML=ivOvHtml(D,IV_FUNDS.find(f=>f.k===D.fund),ivSum(D,D.fund))}
   },4000);
 }
 /* ================= PROCESS BUILDER ================= */
@@ -5773,7 +6042,7 @@ const PB_KINDS={user:'کار دستی',approve:'تأیید',notify:'اعلان',
 const PB_KI={user:'<circle cx="0" cy="-2" r="2.6"/><path d="M-4.6 5c.6-2.8 2.2-4 4.6-4s4 1.2 4.6 4"/>',approve:'<circle r="5.5"/><path d="M-2.4 0l1.7 1.7 3.1-3.4"/>',notify:'<rect x="-5.5" y="-4" width="11" height="8" rx="1.2"/><path d="M-5.5 -3.2L0 .8l5.5-4"/>',auto:'<path d="M1.2 -6l-5 7h3.8l-1.2 5 5-7h-3.8z"/>'};
 const PB_APPS=['فرم استخدام (فرم‌ساز)','ثبت کارمند (منابع انسانی)','ایجاد تسک (مدیریت تسک‌ها)','ارسال ایمیل','ارسال پیامک','تأیید مدیر'];
 const SVGNS='http://www.w3.org/2000/svg';
-Object.assign(ICONS,{pbAlH:{vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2" d="M2 12h20"/><rect x="4" y="6" width="6" height="12" rx="1.5"/><rect x="14" y="8.5" width="6" height="7" rx="1.5"/>'},pbAlV:{vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2" d="M12 2v20"/><rect x="6" y="4" width="12" height="6" rx="1.5"/><rect x="8.5" y="14" width="7" height="6" rx="1.5"/>'},pbDsH:{vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" d="M3 4v16M21 4v16"/><rect x="9" y="7" width="6" height="10" rx="1.5"/>'},pbDsV:{vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" d="M4 3h16M4 21h16"/><rect x="7" y="9" width="10" height="6" rx="1.5"/>'},pbPdf:{vb:'0 0 20 20',o:false,p:'<path fill-rule="evenodd" d="M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.6a1.5 1.5 0 0 0-.44-1.06l-4.1-4.1A1.5 1.5 0 0 0 11.4 2H4.5ZM5 10.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-5Z"/><text x="10" y="14.6" text-anchor="middle" font-size="4.8" font-weight="800" font-family="Arial,sans-serif" style="direction:ltr">PDF</text>'},procF:{vb:'-2 -2 28 28',o:false,p:'<g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8.4" y="2.6" width="7.2" height="5" rx="1.6" fill="currentColor"/><path d="M12 7.6v2.3"/><path d="M12 9.9l2.7 2.7-2.7 2.7-2.7-2.7z" fill="currentColor"/><path d="M9.3 12.6H6.6A1.6 1.6 0 0 0 5 14.2v2.2"/><path d="M14.7 12.6h2.7a1.6 1.6 0 0 1 1.6 1.6v2.2"/><circle cx="5" cy="19" r="2.4" fill="currentColor"/><circle cx="19" cy="19" r="2.4" fill="currentColor"/></g>'},pbWarn:{vb:'0 0 20 20',o:false,p:'<path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 5Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd"/>'},pbPlay:{vb:'0 0 24 24',o:true,p:'<path stroke-linejoin="round" d="M7 4.8v14.4a.6.6 0 0 0 .9.5l11.4-7.2a.6.6 0 0 0 0-1L7.9 4.3a.6.6 0 0 0-.9.5Z"/>'},pbStop:{vb:'0 0 24 24',o:true,p:'<rect x="6" y="6" width="12" height="12" rx="2"/>'}});
+Object.assign(ICONS,{mInvestF:{vb:'0 0 24 24',o:false,p:'<path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 2.25a.75.75 0 0 0 0 1.5H3v10.5a3 3 0 0 0 3 3h1.21l-1.172 3.513a.75.75 0 0 0 1.424.474l.329-.987h8.418l.33.987a.75.75 0 0 0 1.422-.474l-1.17-3.513H18a3 3 0 0 0 3-3V3.75h.75a.75.75 0 0 0 0-1.5H2.25Zm6.54 15h6.42l.5 1.5H8.29l.5-1.5Zm8.085-8.995a.75.75 0 1 0-.75-1.299 12.81 12.81 0 0 0-3.558 3.05L11.03 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l2.47-2.47 1.617 1.618a.75.75 0 0 0 1.146-.102 11.312 11.312 0 0 1 3.612-3.321Z"/>'},pbAlH:{vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2" d="M2 12h20"/><rect x="4" y="6" width="6" height="12" rx="1.5"/><rect x="14" y="8.5" width="6" height="7" rx="1.5"/>'},pbAlV:{vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 2" d="M12 2v20"/><rect x="6" y="4" width="12" height="6" rx="1.5"/><rect x="8.5" y="14" width="7" height="6" rx="1.5"/>'},pbDsH:{vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" d="M3 4v16M21 4v16"/><rect x="9" y="7" width="6" height="10" rx="1.5"/>'},pbDsV:{vb:'0 0 24 24',o:true,p:'<path stroke-linecap="round" stroke-linejoin="round" d="M4 3h16M4 21h16"/><rect x="7" y="9" width="10" height="6" rx="1.5"/>'},pbPdf:{vb:'0 0 20 20',o:false,p:'<path fill-rule="evenodd" d="M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.6a1.5 1.5 0 0 0-.44-1.06l-4.1-4.1A1.5 1.5 0 0 0 11.4 2H4.5ZM5 10.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-5Z"/><text x="10" y="14.6" text-anchor="middle" font-size="4.8" font-weight="800" font-family="Arial,sans-serif" style="direction:ltr">PDF</text>'},procF:{vb:'-2 -2 28 28',o:false,p:'<g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8.4" y="2.6" width="7.2" height="5" rx="1.6" fill="currentColor"/><path d="M12 7.6v2.3"/><path d="M12 9.9l2.7 2.7-2.7 2.7-2.7-2.7z" fill="currentColor"/><path d="M9.3 12.6H6.6A1.6 1.6 0 0 0 5 14.2v2.2"/><path d="M14.7 12.6h2.7a1.6 1.6 0 0 1 1.6 1.6v2.2"/><circle cx="5" cy="19" r="2.4" fill="currentColor"/><circle cx="19" cy="19" r="2.4" fill="currentColor"/></g>'},pbWarn:{vb:'0 0 20 20',o:false,p:'<path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 5Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd"/>'},pbPlay:{vb:'0 0 24 24',o:true,p:'<path stroke-linejoin="round" d="M7 4.8v14.4a.6.6 0 0 0 .9.5l11.4-7.2a.6.6 0 0 0 0-1L7.9 4.3a.6.6 0 0 0-.9.5Z"/>'},pbStop:{vb:'0 0 24 24',o:true,p:'<rect x="6" y="6" width="12" height="12" rx="2"/>'}});
 /* ready-made processes offered when a new process is created */
 const pbT=(t,d,ns,es)=>({t,d,seq:100,nodes:ns.map(([id,type,x,y,title='',o={}])=>({id,type,x,y,title,app:'',...o})),edges:es.map(([from,to,label='',o={}],i)=>({id:'e'+(i+1),from,to,label,...o}))});
 const pbApprFlow=[['n1','n2'],['n2','n3'],['n3','n4'],['n4','n5','تأیید شد',{cond:'ok:n3'}],['n4','n7','رد شد',{cond:'no:n3'}],['n5','n6'],['n6','n8'],['n7','n8']];
@@ -7294,6 +7563,10 @@ const AS_MODS={
   form:{g:'سلام! دستیار فرم‌سازم؛ از روی توضیح شما فرم می‌سازم، فیلد اضافه یا حذف می‌کنم، فرم رو بررسی می‌کنم و پاسخ‌ها رو خلاصه می‌کنم.',n:'فرم‌ساز',sub:'ساخت، ویرایش و بررسی فرم',ph:'مثلاً: فرم ثبت شکایت بساز: نام، موبایل، شرح شکایت',
     can:'• از روی هر توضیحی پیش‌نویس فرم بسازم؛ نوع و اعتبارسنجی فیلدها رو خودم تشخیص می‌دم\n• به فرم بازشده فیلد اضافه یا ازش حذف کنم، یا فیلدی رو ضروری کنم\n• فرم رو بررسی کنم و ایرادهاش رو نشون بدم\n• پاسخ‌های فرم رو خلاصه و تحلیل کنم\n\nانتشار همیشه با شماست.'}
 };
+AS_MODS.tasks={g:'سلام! دستیار مدیریت تسک‌ام؛ وضعیت پروژه‌ها رو خلاصه می‌کنم، تسک‌های عقب‌افتاده و فوری رو پیدا می‌کنم و تسک می‌سازم یا جابه‌جا می‌کنم.',n:'مدیریت تسک',sub:'پروژه‌ها و تسک‌ها',ph:'مثلاً: وضعیت اپلیکیشن شعبه',
+  can:'• وضعیت و پیشرفت هر پروژه رو بگم؛ مثلاً «وضعیت اپلیکیشن شعبه»\n• تسک‌های عقب‌افتاده یا فوری رو پیدا کنم\n• تسک‌های ارسالی از هر نفر رو نشون بدم؛ مثلاً «تسک‌های NM»\n• تسک جدید بسازم؛ مثلاً «تسک «طراحی لوگو» با اولویت بالا به هویت بصری اضافه کن»\n• تسک رو بین ستون‌ها جابه‌جا کنم؛ مثلاً «طراحی آیکون‌ها رو ببر به انجام شده»\n\nهیچ تغییری بدون تأیید شما اعمال نمی‌شه.'};
+AS_MODS.invest={g:'سلام! دستیار سرمایه‌گذاری‌ام؛ قیمت و وضعیت نمادها رو می‌گم، دارایی و سود و زیان صندوق رو خلاصه می‌کنم و سفارش خرید یا فروش رو برای تأیید شما آماده می‌کنم.',n:'سرمایه‌گذاری',sub:'نمادها، دارایی‌ها و سفارش‌ها',ph:'مثلاً: ۱۰۰۰ سهم فولاد بخر',
+  can:'• قیمت و وضعیت هر نماد رو بگم؛ مثلاً «فولاد چنده؟»\n• بیشترین رشد یا افت امروز رو نشون بدم\n• دارایی، سود و زیان و نقدینگی صندوق رو خلاصه کنم\n• سفارش خرید یا فروش آماده کنم؛ مثلاً «۱۰۰۰ سهم فولاد بخر»\n\nهیچ سفارشی بدون تأیید شما ثبت نمی‌شه.'};
 const asCfg=()=>AS_MODS[asM()]||AS_MODS.hr;
 const asPending=()=>AS().props.filter(p=>p.status==='pending'&&p.mod===asM());
 const asProp=id=>AS().props.find(p=>p.id===id);
@@ -7383,6 +7656,8 @@ function asConvsHtml(){const L=AS().convs.filter(c=>c.mod===asM());
   return h}
 function asSug(){
   const m=asM(),L=aclEmps();
+  if(m==='tasks'){const D=TK(),p=D.projects.find(x=>x.id===D.sel)||D.projects[0],x=D.tasks.find(y=>y.project===p.id&&y.status!=='done');return [`وضعیت ${p.name}`,'تسک‌های عقب‌افتاده','تسک‌های فوری',`تسک «بازبینی نهایی» به ${p.name} اضافه کن`,...(x?[`${x.title} رو ببر به انجام شده`]:[])]}
+  if(m==='invest'){const D=IV(),h=D.stocks.find(x=>x.fund===D.fund&&D.hold[x.id]?.qty),a=D.stocks.find(x=>x.fund===D.fund);return ['دارایی و سود صندوق رو خلاصه کن','بیشترین رشد امروز',`${a?a.name:'فولاد'} چنده؟`,`۱۰۰۰ سهم ${a?a.name:'فولاد'} بخر`,...(h?[`نصف ${h.name} رو بفروش`]:[])]}
   if(m==='form'){const F=FB(),n=fbRespCols(F).length;return n?['این فرم رو بررسی کن','یه فیلد کد ملی اضافه کن',...((F.responses||[]).length?['پاسخ‌های این فرم رو خلاصه کن']:[]),'فرم ثبت شکایت بساز: نام و نام خانوادگی، موبایل، موضوع، شرح شکایت، تصویر (اختیاری)']
     :['فرم درخواست مرخصی بساز','فرم ثبت شکایت بساز: نام و نام خانوادگی، موبایل، موضوع، شرح شکایت، تصویر (اختیاری)','فرم نظرسنجی رضایت بساز']}
   if(m==='proc'){const D=asCurProc(),tk=D&&D.nodes.filter(n=>n.type==='task'&&n.title).sort((a,b)=>a.x-b.x);
@@ -7521,7 +7796,7 @@ function asPaint(m,final){const el=$('#asm-'+m.id);if(!el)return;const b=$('#asB
   const n=$('#asm-'+m.id);if(final&&n&&n.offsetHeight>b.clientHeight-24)b.scrollTop+=n.getBoundingClientRect().top-b.getBoundingClientRect().top-8;else b.scrollTop=b.scrollHeight;asDownUpd()}
 function asQueueHtml(){const L=asPending();
   return L.length?L.map(asPropHtml).join(''):`<div class="as-empty">${AS_ART.queue}<b>موردی در انتظار تأیید نیست</b>هر کاری که دستیار پیشنهاد بدهد، اینجا منتظر تصمیم شما می‌ماند.</div>`}
-const AS_TI={form:'mForm',fedit:'mForm',proc:'procF',pedit:'procF',acl:'shieldF',renew:'mUsers',ins:'mUsers',hrop:'mUsers'};
+const AS_TI={tktask:'mTask',tkmove:'mTask',ivorder:'mInvest',form:'mForm',fedit:'mForm',proc:'procF',pedit:'procF',acl:'shieldF',renew:'mUsers',ins:'mUsers',hrop:'mUsers'};
 function asHistHtml(){const L=AS().props.filter(p=>p.status!=='pending'&&p.mod===asM()).sort((a,b)=>b.decidedAt-a.decidedAt);
   if(!L.length)return `<div class="as-empty">${AS_ART.hist}<b>هنوز سابقه‌ای نیست</b>پیشنهادهایی که تأیید یا رد کنید، با زمان و تصمیم‌گیرنده اینجا ثبت می‌شوند.</div>`;
   let day='',h='';
@@ -7531,8 +7806,8 @@ function asHistHtml(){const L=AS().props.filter(p=>p.status!=='pending'&&p.mod==
       ${p.status==='applied'&&asCanUndo(p)?`<button type="button" class="btn btn-ghost" data-as-undo="${p.id}">${icon('undo',12)}برگرداندن</button>`:`<span class="as-st ${p.status}">${st}</span>`}</div>`});
   return h}
 const AS_ST={pending:'در انتظار تأیید',applied:'اجرا شد',rejected:'رد شد',undone:'برگردانده شد'};
-const AS_OK={form:'ساخت فرم',fedit:'اعمال تغییر',proc:'ساخت پیش‌نویس',pedit:'اعمال تغییر',acl:'تأیید و اعمال',renew:'تأیید تمدید',ins:'تأیید و فعال‌سازی'};
-const AS_GO={form:'باز کردن در فرم‌ساز',fedit:'باز کردن در فرم‌ساز',proc:'باز کردن در فرایندساز',pedit:'باز کردن در فرایندساز',acl:'مشاهده در دسترسی‌ها',renew:'باز کردن پرونده',ins:'باز کردن پرونده'};
+const AS_OK={tktask:'افزودن تسک',tkmove:'جابجا کن',ivorder:'ثبت سفارش',form:'ساخت فرم',fedit:'اعمال تغییر',proc:'ساخت پیش‌نویس',pedit:'اعمال تغییر',acl:'تأیید و اعمال',renew:'تأیید تمدید',ins:'تأیید و فعال‌سازی'};
+const AS_GO={tktask:'مشاهده در مدیریت تسک',tkmove:'مشاهده در مدیریت تسک',ivorder:'مشاهده در سرمایه‌گذاری',form:'باز کردن در فرم‌ساز',fedit:'باز کردن در فرم‌ساز',proc:'باز کردن در فرایندساز',pedit:'باز کردن در فرایندساز',acl:'مشاهده در دسترسی‌ها',renew:'باز کردن پرونده',ins:'باز کردن پرونده'};
 const asStepsLi=(nodes,mark)=>nodes.filter(n=>n.type==='task').sort((a,b)=>a.x-b.x||a.y-b.y).map((n,i)=>`<li class="${mark&&mark[n.id]||''}"><span class="n ${n.kind==='approve'?'approve':''}">${fa(i+1)}</span><div><b>${esc(n.title||'فعالیت')}</b><small>${PB_KINDS[n.kind]||''}${n.who?' · '+esc(pbWho(n.who)):''}${+n.sla>0?' · مهلت '+fa(n.sla)+' روز':''}${n.app?' · '+esc(n.app):''}</small></div></li>`).join('');
 function asPropHtml(p){
   const P=p.payload;let body='';
@@ -7547,6 +7822,10 @@ function asPropHtml(p){
   else if(p.type==='renew')body=`<div class="as-imp"><span>پایان قرارداد:</span><span class="v">${fa(P.from)}</span><span class="ar">←</span><span class="v">${fa(P.to)}</span></div><p class="as-meta" style="margin:0">${fa(P.months)} ماه تمدید برای ${esc(byId(P.emp)?.name||'')}</p>`;
   else if(p.type==='ins')body=`<div class="as-imp"><span>بیمه‌ی ${esc(byId(P.emp)?.name||'')}:</span><span class="v">ندارد</span><span class="ar">←</span><span class="v">دارد</span></div>`;
   else if(p.type==='hrop')body=asOpBody(p);
+  else if(p.type==='tktask'){const pj=TK().projects.find(x=>x.id===P.project);body=`<div class="as-imp"><span>«${esc(P.title)}»</span></div><div class="as-imp"><span>پروژه: ${esc(pj?pj.name:'')}</span><span>·</span><span>اولویت: ${PRI[P.priority]}</span><span>·</span><span>${asTkSt(P.status)}</span></div>`}
+  else if(p.type==='tkmove'){const x=TK().tasks.find(y=>y.id===P.task);body=`<div class="as-imp"><span>«${esc(x?x.title:'')}»:</span><span class="v">${asTkSt(P.from)}</span><span class="ar">←</span><span class="v">${asTkSt(P.to)}</span></div>`}
+  else if(p.type==='ivorder'){const D=IV(),st=D.stocks.find(x=>x.id===P.s),buy=P.side==='buy',px=st?(buy?st.buy:st.sell):P.px,val=P.qty*px,fee=Math.round(val*IV_FEE);
+    body=`<div class="as-imp"><span>${buy?'خرید':'فروش'} ${money(P.qty)} سهم «${esc(st?st.name:'')}»</span></div><div class="iv-osum"><div class="iv-orow"><span>قیمت تقریبی (بازار)</span><b>${tm(px)} <small>تومان</small></b></div><div class="iv-orow"><span>کارمزد (۰٫۵٪)</span><b>${tm(fee)} <small>تومان</small></b></div><div class="iv-orow tot"><span>${buy?'مبلغ قابل پرداخت':'مبلغ دریافتی'}</span><b>${tm(buy?val+fee:val-fee)} <small>تومان</small></b></div></div>`}
   else{const e=byId(P.emp);
     body=`<div class="as-imp"><span>دسترسی‌ها:</span><span class="v">${fa(P.before)}</span><span class="ar">←</span><span class="v">${fa(P.after)}</span><span class="as-meta">بخش</span></div>
       ${P.diff.length?`<div><div class="as-lbl">${P.op==='add'?'بخش‌هایی که اضافه می‌شود':'بخش‌هایی که گرفته می‌شود'}</div><div class="as-chips">${P.diff.slice(0,8).map(k=>`<span class="as-chip ${P.op==='add'?'add':'del'}">${esc(ACL_NAMES[k]||k)}</span>`).join('')}${P.diff.length>8?`<span class="as-chip">+${fa(P.diff.length-8)}</span>`:''}</div></div>`:'<p style="margin:0" class="as-meta">با این تغییر، دسترسی تازه‌ای اضافه یا کم نمی‌شود (از نقش‌های دیگر هم همین دسترسی‌ها را دارد).</p>'}
@@ -7740,6 +8019,71 @@ function asAnswer(text,ctx,att){
 function asStop(){if(!asRun)return;clearTimeout(asRun.timer);const m=asRun.m;m.run=false;m.stopped=true;asRun=null;asSave();asRender()}
 const asR=(steps,t,o={})=>({steps,t,...o});
 
+function asIvFind(t){const D=IV();const L=D.stocks.filter(x=>t.includes(norm(x.name))).sort((a,b)=>b.name.length-a.name.length);return L.find(x=>x.fund===D.fund)||L[0]||null}
+function asIv(raw,t){
+  const D=IV(),F=IV_FUNDS.find(f=>f.k===D.fund),s=asIvFind(t),chg=x=>(x.now-x.close)/x.close;
+  const buy=/(بخر|خرید کن|بخریم|بخرم|خرید)/.test(t),sell=/(بفروش|فروش کن|بفروشیم|بفروشم|فروش)/.test(t)&&!/(نقدینگی)/.test(t);
+  if((buy||sell)&&!/(سفارش‌ها|سفارشها|سفارش های)/.test(t)){
+    if(!s)return asR(['تشخیص نماد'],'کدوم نماد؟',{ask:{q:'نماد رو انتخاب کنید:',opts:D.stocks.filter(x=>x.fund===D.fund).slice(0,4).map(x=>`${buy?'۱۰۰۰ سهم '+x.name+' بخر':x.name+' رو بفروش'}`)}});
+    const h=D.hold[s.id]||{qty:0},side=buy&&!sell?'buy':sell&&!buy?'sell':(/بفروش|فروش کن/.test(t)?'sell':'buy');const mil=/(میلیون|میلیارد)/.test(t);let qty=mil?0:+(t.match(/(\d[\d,٬]*)\s*(?:تا|سهم|عدد|واحد)?/)||[])[1]?.replace(/[,٬]/g,'')||0;const why=[];
+    if(side==='sell'&&!qty){if(/(نصف|نیمی)/.test(t))qty=Math.floor(h.qty/2);else if(/(همه|کل|تمام)/.test(t))qty=h.qty}
+    if(side==='buy'&&mil){const am=(+(t.match(/(\d+)/)||[])[1]||1)*(/میلیارد/.test(t)?1e9:1e6);qty=Math.floor(am/(s.buy*(1+IV_FEE)));why.push(`با ${tm(am)} تومان، ${money(qty)} سهم می‌شه.`)}
+    if(!qty)return asR([`پیدا کردن «${s.name}»`],`چند سهم ${s.name} ${side==='buy'?'بخرم':'بفروشم'}؟`,{ask:{q:'مثلاً:',opts:side==='buy'?[`۱۰۰۰ سهم ${s.name} بخر`,`با ۵۰ میلیون ${s.name} بخر`]:[`نصف ${s.name} رو بفروش`,`همه‌ی ${s.name} رو بفروش`]}});
+    if(side==='sell'&&qty>ivOrderBox(D,s).canSell)return asR([`خواندن دارایی «${s.name}»`],h.qty?`فقط ${money(h.qty)} سهم ${s.name} دارید؛ بیشتر از این نمی‌شه فروخت.`:`از ${s.name} دارایی‌ای ندارید.`);
+    const px=side==='buy'?s.buy:s.sell,val=qty*px,fee=Math.round(val*IV_FEE);if(side==='buy'&&val+fee>D.cash[s.fund])return asR([`محاسبه‌ی مبلغ سفارش`],`نقدینگی ${IV_FUNDS.find(f=>f.k===s.fund).t} (${tm(D.cash[s.fund])} تومان) برای ${money(qty)} سهم ${s.name} کافی نیست؛ حداکثر ${money(Math.floor(D.cash[s.fund]/(px*(1+IV_FEE))))} سهم می‌شه خرید.`);
+    why.push('سفارش به قیمت بازار ثبت می‌شه؛ قیمت نهایی ممکنه کمی فرق کنه.');
+    const pr={id:asId(),type:'ivorder',mod:'invest',status:'pending',at:Date.now(),src:raw,risk:'low',why,title:`${side==='buy'?'خرید':'فروش'} ${money(qty)} سهم ${s.name}`,payload:{s:s.id,side,qty,px}};
+    return asR([`پیدا کردن «${s.name}»`,'خواندن قیمت لحظه‌ای',side==='buy'?'بررسی نقدینگی صندوق':'بررسی دارایی','محاسبه‌ی کارمزد'],'سفارش رو آماده کردم. بعد از تأیید شما ثبت می‌شه:',{blocks:[{k:'prop',id:pr.id}],props:[pr]})}
+  if(/(سفارش)/.test(t)){const L=D.orders.slice(0,10);if(!L.length)return asR(['خواندن سفارش‌ها'],'هنوز سفارشی ثبت نشده.');return asR(['خواندن سفارش‌ها'],`${fa(L.length)} سفارش آخر:`,{blocks:[{k:'table',ic:'mInvest',title:'سفارش‌های اخیر',cols:['نماد','نوع','تعداد','قیمت','وضعیت'],rows:L.map(o=>{const x=D.stocks.find(y=>y.id===o.s);return {c:[x?x.name:'',o.side==='buy'?'خرید':'فروش',money(o.qty),tm(o.price),{done:'انجام شد',open:'در انتظار',cancel:'لغو شد'}[o.status]]}})}]})}
+  if(/(نقدینگی|موجودی نقد|پول نقد)/.test(t))return asR(['خواندن نقدینگی صندوق‌ها'],IV_FUNDS.map(f=>`• ${f.t}: ${tm(D.cash[f.k])} تومان`).join('\n'));
+  if(/(دارایی|پرتفو|سبد|سود|زیان|بازده|عملکرد|خلاصه)/.test(t)){const S=ivSum(D,D.fund),L=D.stocks.filter(x=>x.fund===D.fund&&D.hold[x.id]?.qty);
+    const tot=IV_FUNDS.map(f=>[f,ivSum(D,f.k)]);
+    return asR(['جمع‌زدن دارایی‌ها','محاسبه‌ی سود و زیان'],`ارزش دارایی‌های ${F.t}: ${tm(S.val)} تومان\nسود / زیان امروز: ${ivSigned(S.day)} تومان (${ivPct(S.dayP)})\nسود / زیان کل: ${ivSigned(S.pl)} تومان (${ivPct(S.plP)})\nنقدینگی صندوق: ${tm(S.cash)} تومان\n\nکل صندوق‌ها: ${tm(tot.reduce((a,[,x])=>a+x.val,0))} تومان دارایی و ${tm(tot.reduce((a,[,x])=>a+x.cash,0))} تومان نقدینگی.`,
+      {blocks:L.length?[{k:'table',ic:'mInvest',title:`دارایی‌های ${F.t}`,cols:['نماد','تعداد','ارزش روز','سود / زیان','بازده'],rows:L.map(x=>{const h=D.hold[x.id],v=h.qty*x.now,pl=v-h.qty*h.avg;return {c:[x.name,money(h.qty),tm(v),ivSigned(pl),ivPct(pl/(h.qty*h.avg))]}})}]:[]})}
+  if(/(رشد|صعود|افزایش|بالا رفت|افت|نزول|کاهش|ریزش|پایین اومد|ضرر کرد)/.test(t)){const down=/(افت|نزول|کاهش|ریزش|پایین|ضرر)/.test(t),L=D.stocks.filter(x=>/همه/.test(t)||x.fund===D.fund).sort((a,b)=>down?chg(a)-chg(b):chg(b)-chg(a)).slice(0,5);
+    return asR(['مقایسه‌ی تغییر قیمت امروز'],`${down?'بیشترین افت':'بیشترین رشد'} امروز${/همه/.test(t)?'':' در '+F.t}:`,{blocks:[{k:'table',ic:'mInvest',title:down?'بیشترین افت امروز':'بیشترین رشد امروز',cols:['نماد','آخرین قیمت','تغییر'],rows:L.map(x=>({c:[x.name,tm(x.now),ivPct(chg(x))]}))}]})}
+  if(s){const h=D.hold[s.id],c=chg(s);if(asM()==='invest'){D.fund=s.fund;ivSelect(D,s.id);saveMods();renderInvest()}
+    return asR([`پیدا کردن «${s.name}»`,'خواندن قیمت لحظه‌ای'],`${s.name} الان ${tm(s.now)} تومانه؛ امروز ${ivPct(c)} (${c>=0?'بالاتر':'پایین‌تر'} از پایانی دیروز ${tm(s.close)}).\nبازه‌ی امروز: ${tm(s.low)} تا ${tm(s.high)}${h&&h.qty?`\nدارایی شما: ${money(h.qty)} سهم با میانگین ${tm(h.avg)} — سود / زیان ${ivSigned((s.now-h.avg)*h.qty)} تومان`:''}\n\nجزئیات و نمودارش رو کنار صفحه باز کردم.`,{opts:[`۱۰۰۰ سهم ${s.name} بخر`,...(h&&h.qty?[`نصف ${s.name} رو بفروش`]:[])]})}
+  return asR([],'منظورتون رو کامل متوجه نشدم.',{ask:{q:'دنبال کدوم هستید؟',opts:asSug().slice(0,4)}});
+}
+function asTkToday(){try{const p=new Intl.DateTimeFormat('en-u-ca-persian',{month:'numeric',day:'numeric'}).formatToParts(new Date());return {m:+p.find(x=>x.type==='month').value-1,d:+p.find(x=>x.type==='day').value}}catch(_){return {m:8,d:1}}}
+const asTkSt=k=>k==='backlog'?'لیست تسک‌ها':(COLS_TK.find(c=>c.k===k)||{}).t||k;
+function asTkProj(t){const D=TK();return D.projects.filter(p=>t.includes(norm(p.name))).sort((a,b)=>b.name.length-a.name.length)[0]||null}
+function asTkTask(t,pid,to){const D=TK(),L=D.tasks.filter(x=>(!pid||x.project===pid)&&t.includes(norm(x.title)));if(!L.length)return null;const mx=Math.max(...L.map(x=>x.title.length)),M=L.filter(x=>x.title.length===mx),sc=x=>(x.status!==to?2:0)+(x.project===D.sel?1:0);return M.sort((a,b)=>sc(b)-sc(a))[0]}
+function asTkRows(L){const D=TK();return L.map(x=>({c:[x.title,(D.projects.find(p=>p.id===x.project)||{}).name||'',PRI[x.priority],asTkSt(x.status),`${fa(x.d)} ${persianMonths[x.m]}`]}))}
+function asTkStatus(t){if(/(انجام شده|تموم|تمام شد|کامل شد|done)/.test(t))return 'done';if(/(بررسی|ریویو|review)/.test(t))return 'review';if(/(در حال انجام|شروع|انجام بده|doing)/.test(t))return 'doing';if(/(لیست تسک|بک ?لاگ|backlog|برگردون)/.test(t))return 'backlog';return null}
+function asTk(raw,t){
+  const D=TK(),cur=D.projects.find(p=>p.id===D.sel)||null,pr=asTkProj(t)||cur,today=asTkToday(),late=x=>x.status!=='done'&&(x.m<today.m||(x.m===today.m&&x.d<today.d));
+  const cols=['تسک','پروژه','اولویت','وضعیت','سررسید'];
+  // create a task
+  if(/(تسک|کار)/.test(t)&&/(بساز|اضافه کن|ایجاد کن|تعریف کن|جدید)/.test(t)){
+    if(!pr)return asR(['تشخیص پروژه'],'تسک رو به کدوم پروژه اضافه کنم؟',{ask:{q:'پروژه رو انتخاب کنید:',opts:D.projects.slice(0,4).map(p=>`یه تسک «بازبینی طراحی» به ${p.name} اضافه کن`)}});
+    const q=raw.match(/[«"“]([^»"”]+)[»"”]/);if(!q)return asR([`پیدا کردن «${pr.name}»`],'عنوان تسک چی باشه؟ عنوان رو داخل «» بنویسید.',{ask:{q:'مثلاً:',opts:[`تسک «طراحی صفحه سبد خرید» با اولویت بالا به ${pr.name} اضافه کن`]}});
+    const pri=/(فوری|بالا|مهم|زیاد)/.test(t)?'high':/(پایین|کم)/.test(t)?'low':'mid',st=asTkStatus(t.replace(/(اضافه کن|ایجاد کن|بساز)/g,''))||'backlog';
+    const p={id:asId(),type:'tktask',mod:'tasks',status:'pending',at:Date.now(),src:raw,risk:'low',why:[...(/(فوری|بالا|مهم|زیاد|پایین|کم|متوسط)/.test(t)?[]:['اولویت مشخص نشده بود؛ «متوسط» در نظر گرفتم.']),...(st==='backlog'&&!/لیست تسک/.test(t)?['تسک در «لیست تسک‌ها» قرار می‌گیره.']:[]),'سررسید یک ماه بعد در نظر گرفته شده.'],title:`تسک «${q[1].trim()}» در ${pr.name}`,payload:{title:q[1].trim(),project:pr.id,priority:pri,status:st}};
+    return asR([`پیدا کردن «${pr.name}»`,'تشخیص اولویت و ستون'],'تسک رو آماده کردم. بعد از تأیید شما اضافه می‌شه:',{blocks:[{k:'prop',id:p.id}],props:[p]})}
+  // move a task
+  const mv=asTkStatus(t);if(mv&&/(ببر|منتقل کن|جابجا کن|بذار|تغییر بده|برگردون|علامت بزن)/.test(t)){const x=asTkTask(t,asTkProj(t)?.id,mv);
+    if(!x)return asR(['پیدا کردن تسک'],'کدوم تسک؟ عنوانش رو بنویسید.',{ask:{q:'مثلاً:',opts:D.tasks.filter(y=>y.project===(cur||D.projects[0]).id).slice(0,3).map(y=>`${y.title} رو ببر به انجام شده`)}});
+    if(x.status===mv)return asR([`پیدا کردن «${x.title}»`],`این تسک همین الان در «${asTkSt(mv)}» است.`);
+    const p={id:asId(),type:'tkmove',mod:'tasks',status:'pending',at:Date.now(),src:raw,risk:'low',why:[`پروژه: ${(D.projects.find(y=>y.id===x.project)||{}).name}`],title:`انتقال «${x.title}»`,payload:{task:x.id,from:x.status,to:mv}};
+    return asR([`پیدا کردن «${x.title}»`],'جابجایی رو آماده کردم:',{blocks:[{k:'prop',id:p.id}],props:[p]})}
+  // overdue / due soon
+  if(/(عقب|دیر|گذشته|سررسید|مهلت|ددلاین|انقضا)/.test(t)){const L=D.tasks.filter(x=>(!/همه/.test(t)&&pr?x.project===pr.id:true)&&late(x)).sort((a,b)=>a.m-b.m||a.d-b.d);
+    if(!L.length)return asR(['بررسی سررسیدها'],'تسکِ عقب‌افتاده‌ای نیست.');
+    return asR(['بررسی سررسیدها',"مقایسه با تاریخ امروز"],`${fa(L.length)} تسک ${pr&&!/همه/.test(t)?'در «'+pr.name+'» ':''}از سررسیدش گذشته و هنوز انجام نشده:`,{blocks:[{k:'table',ic:'mTask',title:'تسک‌های عقب‌افتاده',cols,rows:asTkRows(L.slice(0,12))}]})}
+  // high priority
+  if(/(فوری|اولویت بالا|مهم|اولویت)/.test(t)){const lv=/(پایین|کم)/.test(t)?'low':/(متوسط)/.test(t)?'mid':'high',L=D.tasks.filter(x=>x.priority===lv&&x.status!=='done'&&(!pr||/همه/.test(t)||x.project===pr.id));
+    if(!L.length)return asR(['فیلتر بر اساس اولویت'],`تسک باز با اولویت ${PRI[lv]} نیست.`);
+    return asR(['فیلتر بر اساس اولویت'],`${fa(L.length)} تسک باز با اولویت ${PRI[lv]}${pr&&!/همه/.test(t)?' در «'+pr.name+'»':''}:`,{blocks:[{k:'table',ic:'mTask',title:`اولویت ${PRI[lv]}`,cols,rows:asTkRows(L.slice(0,12))}]})}
+  // tasks of a person
+  const who=(t.match(/\b(nm|ab|sr)\b/)||[])[1];if(who){const L=D.tasks.filter(x=>x.from.toLowerCase()===who&&x.status!=='done');return asR(['فیلتر بر اساس فرستنده'],L.length?`${fa(L.length)} تسک باز از ${who.toUpperCase()}:`:`تسک بازی از ${who.toUpperCase()} نیست.`,{blocks:L.length?[{k:'table',ic:'mTask',title:`ارسالی از ${who.toUpperCase()}`,cols,rows:asTkRows(L.slice(0,12))}]:[]})}
+  // status summary of a project / all
+  if(/(وضعیت|خلاصه|گزارش|پیشرفت|چند تا|چندتا|آمار)/.test(t)||asTkProj(t)){const all=/(همه|کل)/.test(t)&&!asTkProj(t),L=D.tasks.filter(x=>all||!pr||x.project===pr.id),c=k=>L.filter(x=>x.status===k).length,done=c('done');
+    if(pr&&!all&&asM()==='tasks'&&D.sel!==pr.id){D.sel=pr.id;const g=D.groups.find(g=>g.id===pr.g);if(g)g.open=true;saveMods();renderTasks()}
+    return asR(['شمردن تسک‌ها بر اساس ستون','محاسبه‌ی پیشرفت'],`${all||!pr?'همه‌ی پروژه‌ها':'«'+pr.name+'»'}: ${fa(L.length)} تسک\n• لیست تسک‌ها: ${fa(c('backlog'))}\n• در حال انجام: ${fa(c('doing'))}\n• در حال بررسی: ${fa(c('review'))}\n• انجام شده: ${fa(done)}\n\nپیشرفت: ${fa(L.length?Math.round(done/L.length*100):0)}٪ · عقب‌افتاده: ${fa(L.filter(late).length)}`,{opts:[`تسک‌های عقب‌افتاده${pr&&!all?' '+pr.name:''}`,`تسک‌های فوری${pr&&!all?' '+pr.name:''}`]})}
+  return asR([],'منظورتون رو کامل متوجه نشدم.',{ask:{q:'دنبال کدوم هستید؟',opts:asSug().slice(0,4)}});
+}
 /* ---------- understanding (rule-based stand-in for the model) ---------- */
 function asThink(raw,ctx){
   const t=norm(raw),m=asM();
@@ -7747,7 +8091,7 @@ function asThink(raw,ctx){
   if(/^(مرسی|ممنون|تشکر|دمت گرم|عالی)/.test(t)&&t.length<30)return asR([],'خواهش می‌کنم! کار دیگه‌ای هست؟');
   const want=asWhich(t);
   if(want&&want!==m)return asR(['تشخیص نوع درخواست'],`این کار مربوط به ماژول «${AS_MODS[want].n}» است. اینجا فقط کارهای ${asCfg().n} رو انجام می‌دم؛ اونجا دوباره بپرسید.`,{go:want});
-  return (({hr:asHr,proc:asPr,acl:asAc,form:asFm})[m]||asHr)(raw,t,ctx);
+  return (({hr:asHr,proc:asPr,acl:asAc,form:asFm,invest:asIv,tasks:asTk})[m]||asHr)(raw,t,ctx);
 }
 function asWhich(t){
   const mk=/(بساز|بسازید|ایجاد کن|درست کن|طراحی کن|تعریف کن)/.test(t),pw=/(فرایند|فرآیند|گردش کار)/.test(t),aw=/(نقش|دسترسی|مجوز)/.test(t),hw=/(قرارداد|بیمه|حقوق|ساعت کار|ساعات کار|آمار|سابقه کار|تمدید|پیام بده|پیام بفرست|ایمیل بزن|ایمیل بفرست|تسک|وظیفه|فسخ|اخراج|منتقل کن)/.test(t);
@@ -7755,7 +8099,7 @@ function asWhich(t){
   if(/فرم/.test(t)&&!pw&&(mk||m==='form'))return 'form';
   if(pw&&mk)return 'proc';
   if(aw)return 'acl';
-  if(m==='form')return null;
+  if(m==='form'||m==='invest'||m==='tasks')return null;
   if(m==='proc'&&!/(مرحله|اضافه|حذف|بذار|فرایند|فرآیند|بررسی|توضیح|تأیید|تایید)/.test(t)&&(asFindEmp(t).length||hw))return 'hr';
   if(m==='acl'&&hw)return 'hr';
   return null;
@@ -7888,7 +8232,7 @@ function asTargets(head,pick,ctx){
   const le=asLastEmp();if(le&&pron)return {ids:[le.id],label:le.name};
   return null}
 const AS_OPOK={msg:P=>P.via==='email'?'ارسال ایمیل':'ارسال پیام',task:()=>'سپردن کار',sal:()=>'اعمال تغییر',team:()=>'اعمال انتقال',mode:()=>'اعمال تغییر',sen:()=>'اعمال تغییر',ctype:()=>'اعمال تغییر',term:()=>'فسخ قرارداد',del:()=>'حذف',renew:()=>'تأیید تمدید',ins:()=>'تأیید و فعال‌سازی'};
-const asCanUndo=p=>!(p.type==='hrop'&&p.payload.kind==='msg');
+const asCanUndo=p=>!(p.type==='hrop'&&p.payload.kind==='msg')&&p.type!=='ivorder'&&p.type!=='tktask'&&p.type!=='tkmove';
 const asFmt=(f,v)=>f==='salary'?asSalM(v)+' م':f==='contractEnd'?fa(v):f==='terminated'?(v?'فسخ‌شده':'فعال'):f==='insurance'?(v?'دارد':'ندارد'):esc(v||'—');
 function asOpBody(p){const P=p.payload,es=P.ids.map(byId).filter(Boolean),pend=p.status==='pending';
   let h=P.ch&&P.ch.length<=6?"":`<div><div class="as-lbl">${P.kind==='msg'?'گیرنده‌ها':'کارمندها'} (${fa(P.ids.length)})</div><div class="as-chips">${es.slice(0,8).map(e=>`<span class="as-chip">${esc(e.name)}</span>`).join('')}${es.length>8?`<span class="as-chip">+${fa(es.length-8)}</span>`:''}</div></div>`;
@@ -8295,11 +8639,14 @@ function asApprove(id){
     D.nodes=pbClone(P.nodes);D.edges=pbClone(P.edges);D.seq=Math.max(D.seq||1,P.seq||1);if(P.newId){D.sel=P.newId;D.selEdge=null}p.result={proc:D.id};p.after=JSON.stringify([D.nodes,D.edges]);
     if(asM()==='proc'&&PBS().cur===D.id){pbReset();renderProc()}}
   else if(p.type==='hrop'){if(asOpApply(p)===false)return}
+  else if(p.type==='tktask'){const D=TK();if(!D.projects.find(x=>x.id===P.project)){asInvalid(p);return}const t={id:'t'+Date.now(),project:P.project,title:P.title,priority:P.priority,from:'NM',...(()=>{const n=asTkToday(),m=(n.m+1)%12;return {m,d:Math.min(m<6?31:m<11?30:29,n.d)}})(),status:P.status};D.tasks.push(t);p.result={task:t.id};{const g=D.groups.find(y=>y.id===(D.projects.find(x=>x.id===P.project)||{}).g);if(g)g.open=true}if(asM()==='tasks'){D.sel=P.project;renderTasks()}}
+  else if(p.type==='tkmove'){const D=TK(),x=D.tasks.find(y=>y.id===P.task);if(!x||x.status!==P.from){asInvalid(p,'وضعیت این تسک بعد از پیشنهاد تغییر کرده؛ لطفاً دوباره درخواست کنید.');return}x.status=P.to;p.result={task:x.id};if(asM()==='tasks')renderTasks()}
+  else if(p.type==='ivorder'){const D=IV(),st=D.stocks.find(x=>x.id===P.s);if(!st){asInvalid(p);return}const r=ivPlace(D,st,P.side,'market',P.qty);if(!r){asInvalid(p,P.side==='buy'?'نقدینگی صندوق برای این سفارش کافی نیست.':'دارایی کافی برای این فروش وجود ندارد.');return}p.result={order:r.id};if(asM()==='invest'){D.fund=st.fund;D.sel=st.id;renderInvest()}}
   else if(p.type==='renew'||p.type==='ins'){const e=byId(P.emp);if(!e){asInvalid(p);return}
     if(p.type==='renew'){p.undo={contractEnd:e.contractEnd,terminated:e.terminated};e.contractEnd=P.to;e.terminated=false}else{p.undo={insurance:e.insurance};e.insurance=true}asHrRefresh()}
   else{const r=ACL().roles.find(x=>x.id===P.role),e=byId(P.emp);if(!r||!e||e.terminated){asInvalid(p);return}if(P.op==='del'&&r.sys&&aclAdminCount()<=1){asInvalid(p,'این تنها مدیر سیستم است؛ گرفتن نقشش ممکن نیست.');return}asAclSet(r,e,P.op==='add');if(asM()==='acl')renderAcl()}
   p.status='applied';p.decidedAt=Date.now();p.by=aclMe();saveMods();asSave();asRender();
-  toast(p.type==='hrop'?asOpDone(p):{form:`پیش‌نویس فرم «${P.title}» ساخته شد`,fedit:'تغییر روی فرم اعمال شد',proc:`پیش‌نویس «${P.name}» در فرایندساز ساخته شد`,pedit:'تغییر روی فرایند اعمال شد',renew:'قرارداد تمدید شد',ins:'بیمه فعال شد',acl:'تغییر نقش اعمال شد و در تاریخچه‌ی دسترسی‌ها ثبت شد'}[p.type]);
+  toast(p.type==='hrop'?asOpDone(p):{form:`پیش‌نویس فرم «${P.title}» ساخته شد`,fedit:'تغییر روی فرم اعمال شد',proc:`پیش‌نویس «${P.name}» در فرایندساز ساخته شد`,pedit:'تغییر روی فرایند اعمال شد',ivorder:'سفارش ثبت شد',tktask:'تسک اضافه شد',tkmove:'تسک جابجا شد',renew:'قرارداد تمدید شد',ins:'بیمه فعال شد',acl:'تغییر نقش اعمال شد و در تاریخچه‌ی دسترسی‌ها ثبت شد'}[p.type]);
 }
 function asAclSet(r,e,on){
   const upd=x=>{const i=x.emp.indexOf(e.id);if(on&&i<0)x.emp.push(e.id);if(!on&&i>=0)x.emp.splice(i,1)};
@@ -8335,6 +8682,8 @@ function asGo(p){if(!p)return;const P=p.payload;
   else if(p.type==='proc'||p.type==='pedit'){const id=p.result?.proc;if(!PBS().list.some(x=>x.id===id)){toast('این فرایند دیگر وجود ندارد');return}
     if(asM()==='proc'){pbGo(id)}else{addEventListener('hashchange',()=>{PBS().cur=id;pbReset();saveMods()},{once:true});location.hash='#proc'}}
   else if(p.type==='renew'||p.type==='ins'){location.hash='#list';setTimeout(()=>select(P.emp),50)}
+  else if(p.type==='tktask'||p.type==='tkmove'){const D=TK(),x=D.tasks.find(y=>y.id===(p.result&&p.result.task||P.task));if(!x)return;D.sel=x.project;const pj=D.projects.find(y=>y.id===x.project),g=pj&&D.groups.find(y=>y.id===pj.g);if(g)g.open=true;saveMods();if(asM()==='tasks'){renderTasks();modEl().querySelector(`[data-task="${x.id}"]`)?.focus()}else location.hash='#tasks'}
+  else if(p.type==='ivorder'){const D=IV(),st=D.stocks.find(x=>x.id===P.s);if(!st)return;D.fund=st.fund;ivSelect(D,st.id);D.tab='orders';saveMods();if(asM()==='invest')renderInvest();else location.hash='#invest'}
   else if(p.type==='hrop'){const ids=P.ids.filter(id=>byId(id));if(!ids.length){toast('این کارمندها دیگر در فهرست نیستند');return}location.hash='#list';setTimeout(()=>{if(ids.length===1)select(ids[0]);else{state.checked=new Set(ids);renderTable()}},60)}
   else{const A=ACL();A.tab='roles';A.sel.roles=P.role;aclKeep=true;saveMods();if(asM()==='acl'){aclKeep=false;renderAcl()}else location.hash='#acl'}
   asClose();
@@ -8359,7 +8708,5 @@ renderHead();renderPanel();applyView();
 })();
 window.addEventListener('resize',()=>{const e=byId(state.selectedId);if(e&&!$('#side').hidden)renderChart(e)});
 </script>
-
-
 
 </body></html>
